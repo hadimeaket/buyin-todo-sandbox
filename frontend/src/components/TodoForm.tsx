@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from "react";
+import type { FormEvent } from "react";
 
 interface TodoFormProps {
   onAdd: (title: string) => void;
@@ -6,17 +7,17 @@ interface TodoFormProps {
 }
 
 function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    
-    if (title.trim() === '') {
+
+    if (title.trim() === "") {
       return;
     }
 
     onAdd(title);
-    setTitle('');
+    setTitle("");
   };
 
   return (
