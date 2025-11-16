@@ -27,7 +27,10 @@ class InMemoryTodoRepository implements ITodoRepository {
     const todo: Todo = {
       id: uuidv4(),
       title: data.title,
+      description: data.description,
       completed: false,
+      priority: data.priority || 'medium',
+      dueDate: data.dueDate ? new Date(data.dueDate) : undefined,
       createdAt: now,
       updatedAt: now,
     };
@@ -42,6 +45,7 @@ class InMemoryTodoRepository implements ITodoRepository {
     const updatedTodo: Todo = {
       ...this.todos[index],
       ...data,
+      dueDate: data.dueDate ? new Date(data.dueDate) : this.todos[index].dueDate,
       updatedAt: new Date(),
     };
     this.todos[index] = updatedTodo;

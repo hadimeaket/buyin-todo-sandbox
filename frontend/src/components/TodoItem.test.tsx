@@ -8,16 +8,18 @@ describe('TodoItem', () => {
     id: '1',
     title: 'Test Todo',
     completed: false,
+    priority: 'medium',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
 
   const mockOnToggle = vi.fn();
   const mockOnDelete = vi.fn();
+  const mockOnViewDetails = vi.fn();
 
   it('renders todo title correctly', () => {
     render(
-      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
     expect(screen.getByText('Test Todo')).toBeDefined();
@@ -25,7 +27,7 @@ describe('TodoItem', () => {
 
   it('renders checkbox with correct checked state', () => {
     render(
-      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
     const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
@@ -36,7 +38,7 @@ describe('TodoItem', () => {
     const completedTodo = { ...mockTodo, completed: true };
     
     render(
-      <TodoItem todo={completedTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+      <TodoItem todo={completedTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
     const checkbox = screen.getByRole('checkbox') as HTMLInputElement;
@@ -45,7 +47,7 @@ describe('TodoItem', () => {
 
   it('calls onToggle when checkbox is clicked', () => {
     render(
-      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
     const checkbox = screen.getByRole('checkbox');
@@ -56,32 +58,32 @@ describe('TodoItem', () => {
 
   it('calls onDelete when delete button is clicked', () => {
     render(
-      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
-    const deleteButton = screen.getByText('Delete');
+    const deleteButton = screen.getByLabelText(/delete/i);
     fireEvent.click(deleteButton);
 
     expect(mockOnDelete).toHaveBeenCalledWith('1');
   });
 
-  it('applies line-through style when todo is completed', () => {
+  it('has completed class when todo is completed', () => {
     const completedTodo = { ...mockTodo, completed: true };
     
-    render(
-      <TodoItem todo={completedTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+    const { container } = render(
+      <TodoItem todo={completedTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
-    const title = screen.getByText('Test Todo');
-    expect(title.style.textDecoration).toBe('line-through');
+    const todoItem = container.querySelector('.todo-item');
+    expect(todoItem?.classList.contains('completed')).toBe(true);
   });
 
-  it('does not apply line-through style when todo is not completed', () => {
-    render(
-      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} />
+  it('does not have completed class when todo is not completed', () => {
+    const { container } = render(
+      <TodoItem todo={mockTodo} onToggle={mockOnToggle} onDelete={mockOnDelete} onViewDetails={mockOnViewDetails} />
     );
 
-    const title = screen.getByText('Test Todo');
-    expect(title.style.textDecoration).toBe('none');
+    const todoItem = container.querySelector('.todo-item');
+    expect(todoItem?.classList.contains('completed')).toBe(false);
   });
 });
