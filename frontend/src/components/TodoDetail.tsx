@@ -45,7 +45,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
         setRecurrence("none");
       }
     }
-  }, [dueDate, dueEndDate]);
+  }, [dueDate, dueEndDate, recurrence]);
 
   useEffect(() => {
     // Prevent body scroll when modal is open

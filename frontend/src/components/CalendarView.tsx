@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Todo } from "../types/todo";
+import type { Todo, UpdateTodoDto } from "../types/todo";
 import CalendarHeader from "./CalendarHeader";
 import MonthView from "./MonthView";
 import WeekView from "./WeekView";
@@ -17,7 +17,7 @@ import "../styles/CalendarView.scss";
 
 interface CalendarViewProps {
   todos: Todo[];
-  onUpdateTodo: (id: string, data: any) => Promise<void>;
+  onUpdateTodo: (id: string, data: UpdateTodoDto) => Promise<void>;
   onTodoClick: (todo: Todo) => void;
 }
 

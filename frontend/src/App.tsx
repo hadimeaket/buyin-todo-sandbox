@@ -43,12 +43,17 @@ function App() {
       setError(null);
       const newTodo = await todoApi.createTodo(data);
       setTodos((prev) => [...prev, newTodo]);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      if (err.response?.status === 409) {
-        setError(
-          "A todo with this title already exists. Please use a different title."
-        );
+      if (err && typeof err === 'object' && 'response' in err) {
+        const error = err as { response?: { status?: number } };
+        if (error.response?.status === 409) {
+          setError(
+            "A todo with this title already exists. Please use a different title."
+          );
+        } else {
+          setError("Failed to add todo. Please try again.");
+        }
       } else {
         setError("Failed to add todo. Please try again.");
       }

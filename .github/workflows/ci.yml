@@ -48,7 +48,12 @@ jobs:
 
       - name: Run ESLint
         working-directory: ./${{ matrix.service }}
-        run: npm run lint || echo "⚠️  Linting issues found"
+        run: |
+          if [ -f "package.json" ] && grep -q '"lint"' package.json; then
+            npm run lint || echo "⚠️  Linting issues found"
+          else
+            echo "ℹ️  No lint script found, skipping ESLint"
+          fi
         continue-on-error: true
 
       - name: Check TypeScript types

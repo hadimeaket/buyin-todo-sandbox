@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import type { CreateTodoDto } from "../types/todo";
 import DatePicker from "./ui/DatePicker";
@@ -25,16 +25,9 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
   >("none");
   const [showAdvanced, setShowAdvanced] = useState(false);
 
-  // Auto-set all-day when date range is selected and disable recurrence
-  useEffect(() => {
-    if (dueDate && dueEndDate && dueDate !== dueEndDate) {
-      setIsAllDay(true);
-      // Can't have both multi-day range and recurrence
-      if (recurrence !== "none") {
-        setRecurrence("none");
-      }
-    }
-  }, [dueDate, dueEndDate]);
+  // Automatically set all-day to true when multi-day range is selected
+  const isMultiDay = dueDate && dueEndDate && dueDate !== dueEndDate;
+  const effectiveIsAllDay = isMultiDay || isAllDay;
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -44,7 +37,7 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
     }
 
     // Validate time: end time must be after start time
-    if (!isAllDay && startTime && endTime) {
+    if (!effectiveIsAllDay && startTime && endTime) {
       const [startHour, startMin] = startTime.split(":").map(Number);
       const [endHour, endMin] = endTime.split(":").map(Number);
       const startMinutes = startHour * 60 + startMin;
@@ -62,10 +55,10 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
       priority,
       dueDate: dueDate || undefined,
       dueEndDate: dueEndDate || undefined,
-      isAllDay,
-      startTime: !isAllDay && startTime ? startTime : undefined,
-      endTime: !isAllDay && endTime ? endTime : undefined,
-      recurrence,
+      isAllDay: effectiveIsAllDay,
+      startTime: !effectiveIsAllDay && startTime ? startTime : undefined,
+      endTime: !effectiveIsAllDay && endTime ? endTime : undefined,
+      recurrence: isMultiDay ? "none" : recurrence,
     });
 
     // Reset form
@@ -190,7 +183,7 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
                 <div className="todo-form__time-config">
                   <Checkbox
                     id="isAllDay"
-                    checked={isAllDay}
+                    checked={effectiveIsAllDay}
                     onChange={(e) => setIsAllDay(e.target.checked)}
                     disabled={
                       disabled ||
@@ -199,7 +192,7 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
                     label="All-day event"
                   />
 
-                  {!isAllDay && (!dueEndDate || dueDate === dueEndDate) && (
+                  {!effectiveIsAllDay && (!dueEndDate || dueDate === dueEndDate) && (
                     <div className="todo-form__grid">
                       <TimePicker
                         id="startTime"
