@@ -30,6 +30,7 @@ A **zero-configuration** CI pipeline that runs automatically on every push!
 Go to: **https://github.com/hadimeaket/buyin-todo-sandbox/actions**
 
 You'll see your workflow runs with:
+
 - ✅ Green checkmarks = passed
 - ❌ Red X = failed
 - ⏸️ Yellow circle = running
@@ -68,6 +69,7 @@ git push origin main
 ### Download Reports
 
 After pipeline runs:
+
 1. Click on a workflow run
 2. Scroll to **Artifacts** section
 3. Download:
@@ -80,18 +82,22 @@ After pipeline runs:
 ## 🐛 If Something Fails
 
 ### ❌ Code Quality Failed
+
 **Problem:** TypeScript errors or linting issues
 **Fix:** Check the logs, fix the errors, push again
 
 ### ❌ Tests Failed
+
 **Problem:** Unit tests are failing
 **Fix:** Run `npm test` locally, fix tests, push
 
 ### ❌ Build Failed
+
 **Problem:** Code won't compile
 **Fix:** Run `npm run build` locally, fix errors
 
 ### ⚠️ Security Warnings
+
 **Problem:** Vulnerable dependencies
 **Fix:** Run `npm audit fix` and push
 
@@ -108,22 +114,29 @@ After pipeline runs:
 ## ⚡ Quick Commands
 
 \`\`\`bash
+
 # Run tests locally before pushing
+
 npm test
 
 # Check for type errors
+
 npx tsc --noEmit
 
 # Check for vulnerabilities
+
 npm audit
 
 # Build the app
+
 npm run build
 
 # View recent pipeline runs
+
 gh run list
 
 # Watch live pipeline run
+
 gh run watch
 \`\`\`
 
@@ -166,17 +179,21 @@ gh run watch
 Everything works out of the box, but if you want to customize:
 
 ### Skip Pipeline for Docs
+
 \`\`\`bash
 git commit -m "docs: update README [skip ci]"
 \`\`\`
 
 ### Run Pipeline Manually
+
 1. Go to Actions tab
 2. Click "CI Pipeline (Solo Dev)"
 3. Click "Run workflow" → Select branch → Run
 
 ### Adjust Settings
+
 Edit `.github/workflows/ci.yml` to:
+
 - Change Node version
 - Adjust test timeout
 - Change security threshold
@@ -190,6 +207,7 @@ Edit `.github/workflows/ci.yml` to:
 **After:** Simple CI focused on code quality, security, and tests
 
 **You now have:**
+
 - ✅ Automatic code quality checks
 - ✅ Security vulnerability scanning
 - ✅ Automated testing with coverage

@@ -45,7 +45,7 @@ function App() {
       setTodos((prev) => [...prev, newTodo]);
     } catch (err: unknown) {
       console.error(err);
-      if (err && typeof err === 'object' && 'response' in err) {
+      if (err && typeof err === "object" && "response" in err) {
         const error = err as { response?: { status?: number } };
         if (error.response?.status === 409) {
           setError(

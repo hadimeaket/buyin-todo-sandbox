@@ -192,25 +192,26 @@ function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
                     label="All-day event"
                   />
 
-                  {!effectiveIsAllDay && (!dueEndDate || dueDate === dueEndDate) && (
-                    <div className="todo-form__grid">
-                      <TimePicker
-                        id="startTime"
-                        label="Start time"
-                        value={startTime}
-                        onChange={setStartTime}
-                        disabled={disabled}
-                      />
+                  {!effectiveIsAllDay &&
+                    (!dueEndDate || dueDate === dueEndDate) && (
+                      <div className="todo-form__grid">
+                        <TimePicker
+                          id="startTime"
+                          label="Start time"
+                          value={startTime}
+                          onChange={setStartTime}
+                          disabled={disabled}
+                        />
 
-                      <TimePicker
-                        id="endTime"
-                        label="End time"
-                        value={endTime}
-                        onChange={setEndTime}
-                        disabled={disabled}
-                      />
-                    </div>
-                  )}
+                        <TimePicker
+                          id="endTime"
+                          label="End time"
+                          value={endTime}
+                          onChange={setEndTime}
+                          disabled={disabled}
+                        />
+                      </div>
+                    )}
                 </div>
               )}
 

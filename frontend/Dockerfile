@@ -20,8 +20,14 @@ WORKDIR /app
 # Copy package files for dependency installation
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --prefer-offline --no-audit
+# Install dependencies including optional packages
+RUN npm ci --include=optional --prefer-offline --no-audit
+
+# Verify sass-embedded installation (critical for SCSS compilation)
+RUN if [ ! -d "node_modules/sass-embedded" ]; then \
+      echo "sass-embedded not found, installing explicitly..."; \
+      npm install sass-embedded --save-dev; \
+    fi
 
 # Copy TypeScript config and source code
 COPY tsconfig*.json ./
