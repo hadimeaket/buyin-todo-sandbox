@@ -169,7 +169,16 @@ jobs:
 
       - name: Install dependencies
         working-directory: ./${{ matrix.service }}
-        run: npm ci
+        run: npm ci --include=optional
+
+      - name: Verify sass-embedded (Frontend only)
+        if: matrix.service == 'frontend'
+        working-directory: ./frontend
+        run: |
+          if [ ! -d "node_modules/sass-embedded" ]; then
+            echo "sass-embedded not found, reinstalling..."
+            npm install sass-embedded --save-dev
+          fi
 
       - name: Build application
         working-directory: ./${{ matrix.service }}
