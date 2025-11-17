@@ -12,25 +12,26 @@ global:
 
 scrape_configs:
   # Backend API metrics
-  - job_name: 'backend'
+  - job_name: "backend"
     static_configs:
-      - targets: ['backend:4000']
-    metrics_path: '/api/metrics'
-    
-  # Frontend nginx metrics  
-  - job_name: 'frontend'
+      - targets: ["backend:4000"]
+    metrics_path: "/api/metrics"
+
+  # Frontend nginx metrics
+  - job_name: "frontend"
     static_configs:
-      - targets: ['frontend:80']
-    
+      - targets: ["frontend:80"]
+
   # Node exporter for system metrics
-  - job_name: 'node'
+  - job_name: "node"
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: ["node-exporter:9100"]
 ```
 
 ### Key Performance Indicators (KPIs)
 
 #### Application Metrics
+
 ```
 # Request metrics
 http_requests_total                  # Total HTTP requests
@@ -49,6 +50,7 @@ active_users                        # Active users count
 ```
 
 #### Infrastructure Metrics
+
 ```
 # CPU
 process_cpu_seconds_total           # CPU time
@@ -86,7 +88,7 @@ groups:
         annotations:
           summary: "High error rate detected"
           description: "Error rate is {{ $value }}% (threshold: 5%)"
-          
+
       # High response time
       - alert: HighResponseTime
         expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 1
@@ -96,7 +98,7 @@ groups:
         annotations:
           summary: "High response time"
           description: "95th percentile response time is {{ $value }}s"
-          
+
       # Service down
       - alert: ServiceDown
         expr: up == 0
@@ -119,7 +121,7 @@ groups:
         annotations:
           summary: "High CPU usage"
           description: "CPU usage is {{ $value }}%"
-          
+
       # High memory usage
       - alert: HighMemoryUsage
         expr: node_memory_utilization > 85
@@ -129,7 +131,7 @@ groups:
         annotations:
           summary: "High memory usage"
           description: "Memory usage is {{ $value }}%"
-          
+
       # Low disk space
       - alert: LowDiskSpace
         expr: node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.1
@@ -171,11 +173,11 @@ groups:
 
 ### Log Retention
 
-| Environment | Retention | Storage |
-|------------|-----------|---------|
-| Development | 7 days | Local |
-| Staging | 30 days | Cloud storage |
-| Production | 90 days | Cloud storage + Archive |
+| Environment | Retention | Storage                 |
+| ----------- | --------- | ----------------------- |
+| Development | 7 days    | Local                   |
+| Staging     | 30 days   | Cloud storage           |
+| Production  | 90 days   | Cloud storage + Archive |
 
 ## Dashboard Configuration
 
@@ -184,6 +186,7 @@ groups:
 #### 1. Application Overview Dashboard
 
 **Panels:**
+
 - Request rate (req/s)
 - Error rate (%)
 - Response time (p50, p95, p99)
@@ -193,6 +196,7 @@ groups:
 #### 2. Infrastructure Dashboard
 
 **Panels:**
+
 - CPU usage (%)
 - Memory usage (%)
 - Disk I/O
@@ -202,6 +206,7 @@ groups:
 #### 3. Business Metrics Dashboard
 
 **Panels:**
+
 - Daily active users
 - Todo completion rate
 - User engagement metrics
@@ -252,21 +257,23 @@ groups:
 
 ```javascript
 // tracing.js
-const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
-const { Resource } = require('@opentelemetry/resources');
-const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
-const { BatchSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+const { Resource } = require("@opentelemetry/resources");
+const {
+  SemanticResourceAttributes,
+} = require("@opentelemetry/semantic-conventions");
+const { JaegerExporter } = require("@opentelemetry/exporter-jaeger");
+const { BatchSpanProcessor } = require("@opentelemetry/sdk-trace-base");
 
 const provider = new NodeTracerProvider({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'buyin-todo-backend',
-    [SemanticResourceAttributes.SERVICE_VERSION]: '1.0.0',
+    [SemanticResourceAttributes.SERVICE_NAME]: "buyin-todo-backend",
+    [SemanticResourceAttributes.SERVICE_VERSION]: "1.0.0",
   }),
 });
 
 const exporter = new JaegerExporter({
-  endpoint: process.env.JAEGER_ENDPOINT || 'http://jaeger:14268/api/traces',
+  endpoint: process.env.JAEGER_ENDPOINT || "http://jaeger:14268/api/traces",
 });
 
 provider.addSpanProcessor(new BatchSpanProcessor(exporter));
@@ -278,11 +285,13 @@ provider.register();
 ### External Monitoring Services
 
 1. **Pingdom**
+
    - Check interval: 1 minute
    - Locations: Multiple global regions
    - Alert channels: Email, SMS, Slack
 
 2. **UptimeRobot**
+
    - HTTP(s) monitoring
    - Keyword monitoring
    - SSL certificate monitoring
@@ -328,33 +337,37 @@ schedule:
 
 ### Incident Severity Levels
 
-| Severity | Description | Response Time | Examples |
-|----------|-------------|---------------|----------|
-| P0 (Critical) | Complete outage | 15 minutes | API down, database crash |
-| P1 (High) | Major degradation | 1 hour | High error rate, slow response |
-| P2 (Medium) | Partial degradation | 4 hours | Feature not working |
-| P3 (Low) | Minor issue | 1 business day | UI glitch, logging issue |
+| Severity      | Description         | Response Time  | Examples                       |
+| ------------- | ------------------- | -------------- | ------------------------------ |
+| P0 (Critical) | Complete outage     | 15 minutes     | API down, database crash       |
+| P1 (High)     | Major degradation   | 1 hour         | High error rate, slow response |
+| P2 (Medium)   | Partial degradation | 4 hours        | Feature not working            |
+| P3 (Low)      | Minor issue         | 1 business day | UI glitch, logging issue       |
 
 ### Incident Response Runbook
 
 1. **Detection** (0-5 min)
+
    - Alert triggered
    - On-call engineer paged
    - Acknowledge incident
 
 2. **Assessment** (5-15 min)
+
    - Check dashboards
    - Review logs
    - Determine severity
    - Update status page
 
 3. **Response** (15-60 min)
+
    - Execute mitigation steps
    - Rollback if needed
    - Communicate updates
    - Engage additional help if needed
 
 4. **Resolution** (varies)
+
    - Implement fix
    - Verify resolution
    - Update status page
@@ -375,16 +388,16 @@ slos:
   availability:
     target: 99.9%
     measurement_window: 30 days
-    
+
   latency:
     p50: < 100ms
     p95: < 500ms
     p99: < 1000ms
-    
+
   error_rate:
     target: < 0.1%
     measurement_window: 24 hours
-    
+
   throughput:
     target: > 1000 req/s
     measurement_window: 1 hour
@@ -393,7 +406,7 @@ slos:
 ### Service Level Agreements (SLAs)
 
 - **Uptime**: 99.9% monthly uptime guarantee
-- **Support Response**: 
+- **Support Response**:
   - P0: 15 minutes
   - P1: 1 hour
   - P2: 4 hours
@@ -415,7 +428,7 @@ budgets:
         action: email
       - threshold: 100%
         action: slack + email
-        
+
   monitoring:
     limit: $100
     alerts:
@@ -437,21 +450,23 @@ budgets:
 
 ```javascript
 // slack-notifier.js
-const axios = require('axios');
+const axios = require("axios");
 
 async function sendAlert(alert) {
   await axios.post(process.env.SLACK_WEBHOOK_URL, {
     text: `🚨 *${alert.severity}*: ${alert.title}`,
-    attachments: [{
-      color: alert.severity === 'critical' ? 'danger' : 'warning',
-      fields: [
-        { title: 'Service', value: alert.service, short: true },
-        { title: 'Environment', value: alert.environment, short: true },
-        { title: 'Description', value: alert.description },
-      ],
-      footer: 'BuyIn Todo Monitoring',
-      ts: Date.now() / 1000
-    }]
+    attachments: [
+      {
+        color: alert.severity === "critical" ? "danger" : "warning",
+        fields: [
+          { title: "Service", value: alert.service, short: true },
+          { title: "Environment", value: alert.environment, short: true },
+          { title: "Description", value: alert.description },
+        ],
+        footer: "BuyIn Todo Monitoring",
+        ts: Date.now() / 1000,
+      },
+    ],
   });
 }
 ```
@@ -460,22 +475,22 @@ async function sendAlert(alert) {
 
 ```javascript
 // datadog.js
-const StatsD = require('hot-shots');
+const StatsD = require("hot-shots");
 
 const dogstatsd = new StatsD({
-  host: process.env.DD_AGENT_HOST || 'localhost',
+  host: process.env.DD_AGENT_HOST || "localhost",
   port: 8125,
-  prefix: 'buyin.todo.',
+  prefix: "buyin.todo.",
   globalTags: {
     env: process.env.NODE_ENV,
-    service: 'backend'
-  }
+    service: "backend",
+  },
 });
 
 // Track metrics
-dogstatsd.increment('api.request');
-dogstatsd.histogram('api.response_time', responseTime);
-dogstatsd.gauge('api.active_connections', activeConnections);
+dogstatsd.increment("api.request");
+dogstatsd.histogram("api.response_time", responseTime);
+dogstatsd.gauge("api.active_connections", activeConnections);
 ```
 
 ## Security Monitoring
@@ -495,11 +510,11 @@ security_alerts:
   - name: BruteForceDetection
     condition: failed_login_attempts > 5 in 5 minutes
     action: block_ip, notify_security_team
-    
+
   - name: AnomalousTraffic
     condition: request_rate > 10x baseline
     action: enable_rate_limiting, investigate
-    
+
   - name: SuspiciousPayload
     condition: sql_injection_pattern detected
     action: block_request, log_incident
