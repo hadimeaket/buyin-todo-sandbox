@@ -1,0 +1,244 @@
+@import "../styles/variables";
+
+.todo-form {
+  &__container {
+    background-color: $bg-secondary; // #1A1A1D - Cards/sections
+    border: 1px solid rgba($bg-hover, 0.5);
+    border-radius: $radius-xl;
+    box-shadow: $shadow-md;
+    padding: $spacing-6;
+  }
+
+  &__main-row {
+    display: flex;
+    gap: $spacing-3;
+  }
+
+  &__input {
+    flex: 1;
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-size-base; // 16px
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-lg;
+    background-color: $bg-tertiary; // #202024 - Inputs REQUIRED
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+
+    &::placeholder {
+      color: $text-muted; // #909090 - Placeholder REQUIRED
+    }
+  }
+
+  &__toggle-btn {
+    padding: $spacing-3 $spacing-4;
+    color: $text-secondary; // #C7C7C7
+    border-radius: $radius-lg;
+    transition: all $transition-base;
+
+    &:hover:not(:disabled) {
+      color: $text-primary; // #F5F5F5
+      background-color: $bg-tertiary; // #202024
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__submit-btn {
+    padding: $spacing-3 $spacing-6;
+    background-color: $brand-red; // #FD3039 - PRIMARY ACTION REQUIRED
+    color: white;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium; // 500 for UI
+    border-radius: $radius-lg;
+    border: none;
+    transition: all $transition-base;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+      background-color: $brand-red-dark; // #B2232F
+    }
+
+    &:focus:not(:disabled) {
+      box-shadow: $focus-ring; // Brand red focus
+    }
+
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+
+  &__advanced {
+    margin-top: $spacing-6;
+    padding-top: $spacing-6;
+    border-top: 1px solid rgba($bg-hover, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-sm; // 12px
+    font-weight: $font-weight-medium; // 500 for labels/UI
+    color: $text-secondary; // #C7C7C7
+    margin-bottom: $spacing-2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    &-hint {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: $spacing-3 $spacing-4;
+    font-size: $font-size-base; // 16px
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-lg;
+    background-color: $bg-tertiary; // #202024 - Inputs REQUIRED
+    resize: none;
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      background-color: $bg-hover;
+    }
+
+    &::placeholder {
+      color: $text-muted; // #909090 - Placeholder REQUIRED
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4;
+  }
+
+  &__select {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 $spacing-4;
+    font-size: $font-size-base;
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-lg;
+    background-color: $bg-tertiary; // #202024
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      background-color: $bg-hover;
+    }
+  }
+
+  &__datetime-input {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 $spacing-4;
+    font-size: $font-size-base;
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-lg;
+    background-color: $bg-tertiary; // #202024
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      background-color: $bg-hover;
+    }
+
+    // Style for time inputs
+    &[type="time"] {
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+
+    // Style for date inputs
+    &[type="date"] {
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        opacity: 0.7;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__time-config {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    padding: $spacing-4;
+    background-color: rgba($bg-hover, 0.3);
+    border-radius: $radius-lg;
+  }
+
+  &__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+      width: 1.125rem;
+      height: 1.125rem;
+      cursor: pointer;
+      accent-color: $brand-red; // #FD3039
+    }
+
+    span {
+      font-size: $font-size-base; // 16px
+      font-weight: $font-weight-medium; // 500
+      color: $text-primary; // #F5F5F5
+    }
+  }
+}

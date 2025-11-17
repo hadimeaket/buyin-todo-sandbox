@@ -1,0 +1,300 @@
+@import "../styles/variables";
+
+.todo-detail {
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7); // Strong backdrop
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-6;
+    z-index: 50;
+    backdrop-filter: blur(4px);
+  }
+
+  &__modal {
+    max-width: 42rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: $bg-secondary; // #1A1A1D - Cards REQUIRED
+    border-radius: 16px; // EXACT from spec
+    box-shadow: $shadow-modal; // Strong but soft blur
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-6;
+    border-bottom: 1px solid $bg-hover;
+    position: sticky;
+    top: 0;
+    background-color: $bg-secondary;
+    z-index: 10;
+  }
+
+  &__title {
+    font-size: $font-size-xl; // 20px
+    font-weight: $font-weight-semibold; // 600
+    color: $text-primary; // #F5F5F5
+  }
+
+  &__close-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $radius-md;
+    color: $text-secondary; // #C7C7C7
+    transition: all $transition-base;
+    border: none;
+    background: transparent;
+
+    &:hover {
+      background-color: $bg-tertiary; // #202024
+      color: $text-primary; // #F5F5F5
+    }
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &__form {
+    padding: $spacing-6;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    display: block;
+    font-size: $font-size-sm; // 12px
+    font-weight: $font-weight-medium; // 500 for labels/UI
+    color: $text-secondary; // #C7C7C7
+    margin-bottom: $spacing-2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: $spacing-2 $spacing-3;
+    font-size: $font-size-base;
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-md;
+    background-color: $bg-tertiary; // #202024
+    resize: none;
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      background-color: $bg-hover;
+    }
+
+    &::placeholder {
+      color: $text-muted; // #909090
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4;
+  }
+
+  &__select {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 $spacing-3;
+    font-size: $font-size-base;
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-md;
+    background-color: $bg-tertiary; // #202024
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      background-color: $bg-hover;
+    }
+  }
+
+  &__datetime-input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 $spacing-3;
+    font-size: $font-size-base;
+    color: $text-primary; // #F5F5F5
+    border: 1px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-md;
+    background-color: $bg-tertiary; // #202024
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      background-color: $bg-hover;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-3;
+    padding-top: $spacing-4;
+    border-top: 1px solid $bg-hover; // #2A2A2F
+  }
+
+  &__content {
+    padding: $spacing-6;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-6;
+  }
+
+  &__task-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__task-title {
+    font-size: $font-size-2xl; // 24px
+    font-weight: $font-weight-bold; // 900
+    color: $text-primary; // #F5F5F5 - WHITE TEXT REQUIRED
+    margin-bottom: $spacing-2;
+  }
+
+  &__completed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    font-size: $font-size-sm;
+    padding: 4px 10px; // EXACT from spec
+    border-radius: 9999px; // Full rounded
+    background-color: $accent-green; // #C9FFD8 - Completed REQUIRED
+    color: $text-invert; // #000000 - Black text on light badge
+    font-weight: $font-weight-medium; // 500
+    width: fit-content; // Only use width needed
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__section-title {
+    font-size: $font-size-sm; // 12px
+    font-weight: $font-weight-medium; // 500 for labels
+    color: $text-secondary; // #C7C7C7
+    margin-bottom: $spacing-2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__description {
+    font-size: $font-size-base; // 16px
+    color: $text-primary; // #F5F5F5 - WHITE TEXT
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  &__metadata {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4;
+  }
+
+  &__due-date {
+    font-size: $font-size-base; // 16px
+    color: $text-primary; // #F5F5F5 - WHITE TEXT
+  }
+
+  &__timestamps {
+    padding-top: $spacing-4;
+    border-top: 1px solid $bg-hover; // #2A2A2F
+  }
+
+  &__timestamps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4;
+    font-size: $font-size-sm;
+  }
+
+  &__timestamp-label {
+    color: $text-secondary; // #C7C7C7
+    font-weight: $font-weight-medium; // 500
+  }
+
+  &__timestamp-value {
+    color: $text-primary; // #F5F5F5 - WHITE TEXT
+    margin-top: $spacing-1;
+  }
+
+  &__edit-section {
+    padding-top: $spacing-4;
+    border-top: 1px solid $bg-hover; // #2A2A2F
+  }
+
+  &__time-config {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    padding: $spacing-4;
+    background-color: rgba($bg-hover, 0.3);
+    border-radius: $radius-lg;
+  }
+
+  &__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+      width: 1.125rem;
+      height: 1.125rem;
+      cursor: pointer;
+      accent-color: $brand-red; // #FD3039
+    }
+
+    span {
+      font-size: $font-size-base; // 16px
+      font-weight: $font-weight-medium; // 500
+      color: $text-primary; // #F5F5F5
+    }
+  }
+}

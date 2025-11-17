@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+.card {
+  background-color: $bg-secondary; // #1A1A1D - Cards/sections REQUIRED
+  border: 1px solid rgba($bg-hover, 0.5);
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+  padding: $spacing-6; // 20-28px range
+}

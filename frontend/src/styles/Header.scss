@@ -1,0 +1,73 @@
+@import "../styles/variables";
+
+.header {
+  background-color: $bg-secondary; // #1A1A1D - Cards/sections REQUIRED
+  border-radius: $radius-3xl;
+  box-shadow: $shadow-lg;
+  padding: $spacing-6;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: $spacing-8;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-6;
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-3xl; // 32px
+    font-weight: $font-weight-bold; // 900
+    color: $text-primary; // #F5F5F5
+    margin: 0;
+  }
+
+  &__stats {
+    display: flex;
+    align-items: center;
+    gap: $spacing-8;
+
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+      justify-content: space-between;
+      gap: $spacing-4;
+    }
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__stat-label {
+    font-size: $font-size-sm; // 12px
+    font-weight: $font-weight-medium; // 500 for labels
+    color: $text-secondary; // #C7C7C7
+  }
+
+  &__stat-value {
+    font-size: $font-size-xl; // 20px
+    font-weight: $font-weight-bold; // 900
+    margin-top: $spacing-1;
+
+    &--total {
+      color: $text-primary; // #F5F5F5
+    }
+
+    &--active {
+      color: $brand-red; // #FD3039 - Stats use brand red
+    }
+
+    &--completed {
+      color: $accent-green; // #C9FFD8
+    }
+  }
+}

@@ -43,6 +43,20 @@ export const createTodo = async (
       res.status(400).json({ message: "Title is required" });
       return;
     }
+
+    // Check for duplicate
+    const duplicate = await todoRepository.findDuplicate(
+      data.title,
+      data.description
+    );
+    if (duplicate) {
+      res.status(409).json({
+        message: "A todo with this title already exists",
+        existingTodo: duplicate,
+      });
+      return;
+    }
+
     const todo = await todoRepository.create(data);
     res.status(201).json(todo);
   } catch (error) {

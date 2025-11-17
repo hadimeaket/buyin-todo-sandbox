@@ -1,0 +1,31 @@
+@import "../styles/variables";
+
+.tabs {
+  display: flex;
+  gap: $spacing-2;
+
+  &__tab {
+    padding: $spacing-3 $spacing-5;
+    border-radius: $radius-lg;
+    font-weight: $font-weight-medium; // 500 for UI elements
+    font-size: $font-size-base; // 16px
+    transition: all $transition-base;
+    border: none;
+
+    // ACTIVE tabs - BRAND RED DARK (#B2232F) REQUIRED
+    &--active {
+      background-color: $brand-red-dark; // #B2232F REQUIRED
+      color: white; // White text REQUIRED
+    }
+
+    &--inactive {
+      background-color: transparent;
+      color: $text-secondary; // #C7C7C7
+
+      &:hover {
+        color: $text-primary; // #F5F5F5
+        background-color: $bg-tertiary; // #202024
+      }
+    }
+  }
+}

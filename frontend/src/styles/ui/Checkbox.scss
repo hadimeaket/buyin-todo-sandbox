@@ -1,0 +1,79 @@
+@import "../../styles/variables";
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2; // Gap between checkbox and label
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; // Prevent checkbox from shrinking
+  }
+
+  &__input {
+    width: 1.25rem;
+    height: 1.25rem;
+    appearance: none;
+    border: 2px solid $bg-hover; // #2A2A2F
+    border-radius: $radius-sm;
+    background-color: $bg-tertiary; // #202024 - Inputs
+    cursor: pointer;
+    transition: all $transition-base;
+    flex-shrink: 0; // Prevent checkbox from shrinking
+    display: block;
+    margin: 0; // Remove any default margins
+
+    &:checked {
+      background-color: $brand-red; // #FD3039 when checked
+      border-color: $brand-red;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.875rem; // Slightly larger for better visibility
+    height: 0.875rem;
+    color: white;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .checkbox__input:checked ~ & {
+      opacity: 1;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  &__label {
+    font-size: $font-size-base; // 16px
+    color: $text-primary; // #F5F5F5
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.5; // Match typical text line-height
+    display: flex;
+    align-items: center;
+  }
+}

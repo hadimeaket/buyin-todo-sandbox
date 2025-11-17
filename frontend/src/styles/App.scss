@@ -1,0 +1,205 @@
+@import "../styles/variables";
+
+.app {
+  min-height: 100vh;
+  background-color: $bg-primary; // #0F0F10 - Main background REQUIRED
+
+  &--calendar {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  &__container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: $spacing-10 $spacing-6;
+
+    @media (min-width: $breakpoint-sm) {
+      padding-left: $spacing-8;
+      padding-right: $spacing-8;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      padding-left: $spacing-12;
+      padding-right: $spacing-12;
+    }
+  }
+
+  &__main-card {
+    background-color: $bg-secondary; // #1A1A1D - Cards/sections REQUIRED
+    border-radius: $radius-2xl;
+    box-shadow: $shadow-lg;
+    overflow: hidden;
+    margin-top: $spacing-6;
+    border: 1px solid rgba($bg-hover, 0.5);
+  }
+}
+
+// View Toggle Segmented Control
+.section--view-toggle {
+  padding: $spacing-4 $spacing-6;
+  display: flex;
+  justify-content: center;
+}
+
+.view-toggle {
+  display: inline-flex;
+  background-color: $bg-tertiary;
+  border-radius: $radius-lg;
+  padding: 4px;
+  gap: 4px;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-4;
+    background-color: transparent;
+    color: $text-secondary;
+    border: none;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+
+    svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      stroke-width: 2;
+    }
+
+    &:hover {
+      color: $text-primary;
+      background-color: rgba($bg-hover, 0.5);
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+    }
+
+    &--active {
+      background-color: $bg-hover;
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+
+      &:hover {
+        background-color: $bg-hover;
+      }
+    }
+  }
+}
+
+// Calendar content section
+.section--calendar {
+  padding: 0;
+  min-height: 600px;
+
+  .calendar-view {
+    height: 100%;
+  }
+}
+
+.error-alert {
+  background-color: rgba($brand-red, 0.15); // #FD3039
+  border-bottom: 1px solid rgba($brand-red, 0.3);
+  padding: $spacing-4 $spacing-6;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-3;
+
+  @media (min-width: $breakpoint-md) {
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    padding-left: $spacing-10;
+    padding-right: $spacing-10;
+  }
+
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: $brand-red; // #FD3039
+    flex-shrink: 0;
+  }
+
+  &__message {
+    flex: 1;
+    font-size: $font-size-sm;
+    color: $text-primary; // #F5F5F5
+    font-weight: $font-weight-medium; // 500
+  }
+
+  &__close {
+    color: $brand-red; // #FD3039
+    font-size: $font-size-xl;
+    line-height: 1;
+    padding: $spacing-1;
+    border-radius: $radius-sm;
+    transition: all $transition-base;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+      background-color: rgba($brand-red, 0.3);
+    }
+  }
+}
+
+.section {
+  padding: $spacing-8 $spacing-6;
+
+  @media (min-width: $breakpoint-md) {
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    padding-left: $spacing-10;
+    padding-right: $spacing-10;
+  }
+
+  &--bordered {
+    border-bottom: 1px solid rgba($bg-hover, 0.5);
+  }
+
+  &--tabs {
+    padding-top: $spacing-6;
+    padding-bottom: $spacing-6;
+  }
+
+  &--search {
+    padding-top: $spacing-6;
+    padding-bottom: $spacing-6;
+  }
+
+  &--list {
+    @media (min-width: $breakpoint-md) {
+      padding-top: $spacing-10;
+      padding-bottom: $spacing-10;
+    }
+  }
+}
+
+.loading {
+  padding: $spacing-16 0;
+  text-align: center;
+
+  &__spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid $bg-hover;
+    border-top-color: $brand-red; // #FD3039
+    border-radius: $radius-full;
+    margin: 0 auto $spacing-3;
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $text-secondary; // #C7C7C7
+  }
+}

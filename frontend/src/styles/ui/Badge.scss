@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px; // EXACT from spec
+  border-radius: 9999px; // Full rounded REQUIRED
+  font-size: $font-size-sm; // 12px
+  font-weight: $font-weight-medium; // 500 for labels/UI
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content; // Only use width needed
+
+  // HIGH priority - BRAND RED (#FD3039) REQUIRED
+  &--high {
+    background-color: $brand-red; // #FD3039
+    color: $text-invert; // #000000 - Black text on light badges
+  }
+
+  // MEDIUM priority - YELLOW (#FCD589) REQUIRED
+  &--medium {
+    background-color: $accent-yellow; // #FCD589
+    color: $text-invert; // #000000 - Black text on light badges
+  }
+
+  // LOW priority - GREEN (#C9FFD8) REQUIRED
+  &--low {
+    background-color: $accent-green; // #C9FFD8
+    color: $text-invert; // #000000 - Black text on light badges
+  }
+
+  // Completed - GREEN (#C9FFD8) REQUIRED
+  &--completed {
+    background-color: $accent-green; // #C9FFD8
+    color: $text-invert; // #000000
+  }
+
+  // Default - Subtle
+  &--default {
+    background-color: $bg-tertiary; // #202024
+    color: $text-secondary; // #C7C7C7
+  }
+}

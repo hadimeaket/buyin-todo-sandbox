@@ -1,0 +1,114 @@
+@import "../styles/variables";
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 $spacing-6;
+  background-color: $bg-secondary; // #1A1A1D
+  border-bottom: 1px solid rgba($bg-hover, 0.5);
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__nav-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: $text-secondary;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover {
+      background-color: $bg-hover;
+      color: $text-primary;
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+    }
+  }
+
+  &__today-btn {
+    padding: $spacing-2 $spacing-4;
+    background-color: $bg-tertiary;
+    color: $text-primary;
+    border: 1px solid $bg-hover;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background-color: $bg-hover;
+      border-color: $text-muted;
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-2xl; // 24px
+    font-weight: $font-weight-bold; // 900
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__view-toggle {
+    display: flex;
+    background-color: $bg-tertiary;
+    border-radius: $radius-md;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  &__toggle-btn {
+    padding: $spacing-2 $spacing-4;
+    background: none;
+    border: none;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: -2px;
+    }
+
+    &--active {
+      background-color: $bg-hover;
+      color: $text-primary;
+    }
+  }
+}

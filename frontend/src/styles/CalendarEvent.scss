@@ -1,0 +1,97 @@
+@import "../styles/variables";
+
+.calendar-event {
+  border-radius: 6px;
+  padding: $spacing-2 $spacing-3;
+  margin-bottom: $spacing-1;
+  cursor: pointer;
+  transition: all $transition-fast;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:focus {
+    outline: 2px solid $brand-red;
+    outline-offset: 2px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  &__time {
+    font-size: $font-size-xs;
+    opacity: 0.9;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Priority-based colors
+  &--high {
+    background-color: $brand-red; // #FD3039
+    color: white;
+  }
+
+  &--medium {
+    background-color: $accent-yellow; // #FCD589
+    color: $text-invert; // #000000
+  }
+
+  &--low {
+    background-color: $accent-green; // #C9FFD8
+    color: $text-invert; // #000000
+  }
+
+  &--completed {
+    background-color: rgba($text-muted, 0.2);
+    color: $text-muted;
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  // Variant-specific styles
+  &--month {
+    font-size: $font-size-xs;
+    padding: 2px $spacing-2;
+  }
+
+  &--week,
+  &--day {
+    padding: $spacing-2 $spacing-3;
+    white-space: normal;
+    min-height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &--day {
+    min-height: 3rem;
+
+    .calendar-event__content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-1;
+    }
+
+    .calendar-event__title {
+      white-space: normal;
+      word-break: break-word;
+    }
+  }
+}
