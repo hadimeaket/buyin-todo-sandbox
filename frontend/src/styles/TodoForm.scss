@@ -2,11 +2,12 @@
 
 .todo-form {
   &__container {
-    background-color: $bg-secondary; // #1A1A1D - Cards/sections
-    border: 1px solid rgba($bg-hover, 0.5);
+    background-color: var(--theme-bg-secondary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-xl;
     box-shadow: $shadow-md;
     padding: $spacing-6;
+    transition: background-color $transition-base, border-color $transition-base;
   }
 
   &__main-row {
@@ -18,10 +19,10 @@
     flex: 1;
     padding: $spacing-3 $spacing-5;
     font-size: $font-size-base; // 16px
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-lg;
-    background-color: $bg-tertiary; // #202024 - Inputs REQUIRED
+    background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
 
     &:focus {
@@ -35,19 +36,19 @@
     }
 
     &::placeholder {
-      color: $text-muted; // #909090 - Placeholder REQUIRED
+      color: var(--theme-text-muted);
     }
   }
 
   &__toggle-btn {
     padding: $spacing-3 $spacing-4;
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     border-radius: $radius-lg;
     transition: all $transition-base;
 
     &:hover:not(:disabled) {
-      color: $text-primary; // #F5F5F5
-      background-color: $bg-tertiary; // #202024
+      color: var(--theme-text-primary);
+      background-color: var(--theme-bg-tertiary);
     }
 
     &:disabled {
@@ -119,10 +120,10 @@
     width: 100%;
     padding: $spacing-3 $spacing-4;
     font-size: $font-size-base; // 16px
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-lg;
-    background-color: $bg-tertiary; // #202024 - Inputs REQUIRED
+    background-color: var(--theme-bg-tertiary);
     resize: none;
     transition: all $transition-base;
 
@@ -134,11 +135,11 @@
 
     &:disabled {
       opacity: 0.4;
-      background-color: $bg-hover;
+      background-color: var(--theme-bg-hover);
     }
 
     &::placeholder {
-      color: $text-muted; // #909090 - Placeholder REQUIRED
+      color: var(--theme-text-muted);
     }
   }
 
@@ -153,10 +154,10 @@
     height: 2.75rem;
     padding: 0 $spacing-4;
     font-size: $font-size-base;
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-lg;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
 
     &:focus {
@@ -167,7 +168,7 @@
 
     &:disabled {
       opacity: 0.4;
-      background-color: $bg-hover;
+      background-color: var(--theme-bg-hover);
     }
   }
 
@@ -176,10 +177,10 @@
     height: 2.75rem;
     padding: 0 $spacing-4;
     font-size: $font-size-base;
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-lg;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
 
     &:focus {

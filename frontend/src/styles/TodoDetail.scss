@@ -18,9 +18,10 @@
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    background-color: $bg-secondary; // #1A1A1D - Cards REQUIRED
+    background-color: var(--theme-bg-secondary);
     border-radius: 16px; // EXACT from spec
     box-shadow: $shadow-modal; // Strong but soft blur
+    transition: background-color $transition-base;
   }
 
   &__header {
@@ -28,17 +29,17 @@
     align-items: center;
     justify-content: space-between;
     padding: $spacing-6;
-    border-bottom: 1px solid $bg-hover;
+    border-bottom: 1px solid var(--theme-border);
     position: sticky;
     top: 0;
-    background-color: $bg-secondary;
+    background-color: var(--theme-bg-secondary);
     z-index: 10;
   }
 
   &__title {
     font-size: $font-size-xl; // 20px
     font-weight: $font-weight-semibold; // 600
-    color: $text-primary; // #F5F5F5
+    color: var(--theme-text-primary);
   }
 
   &__close-btn {
@@ -48,14 +49,14 @@
     align-items: center;
     justify-content: center;
     border-radius: $radius-md;
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     transition: all $transition-base;
     border: none;
     background: transparent;
 
     &:hover {
-      background-color: $bg-tertiary; // #202024
-      color: $text-primary; // #F5F5F5
+      background-color: var(--theme-bg-tertiary);
+      color: var(--theme-text-primary);
     }
 
     svg {
@@ -80,7 +81,7 @@
     display: block;
     font-size: $font-size-sm; // 12px
     font-weight: $font-weight-medium; // 500 for labels/UI
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     margin-bottom: $spacing-2;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -90,10 +91,10 @@
     width: 100%;
     padding: $spacing-2 $spacing-3;
     font-size: $font-size-base;
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-md;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
     resize: none;
     transition: all $transition-base;
 
@@ -105,11 +106,11 @@
 
     &:disabled {
       opacity: 0.5;
-      background-color: $bg-hover;
+      background-color: var(--theme-bg-hover);
     }
 
     &::placeholder {
-      color: $text-muted; // #909090
+      color: var(--theme-text-muted);
     }
   }
 
@@ -124,10 +125,10 @@
     height: 2.5rem;
     padding: 0 $spacing-3;
     font-size: $font-size-base;
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-md;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
 
     &:focus {
@@ -138,7 +139,7 @@
 
     &:disabled {
       opacity: 0.5;
-      background-color: $bg-hover;
+      background-color: var(--theme-bg-hover);
     }
   }
 
@@ -147,10 +148,10 @@
     height: 2.5rem;
     padding: 0 $spacing-3;
     font-size: $font-size-base;
-    color: $text-primary; // #F5F5F5
-    border: 1px solid $bg-hover; // #2A2A2F
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-md;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
 
     &:focus {
@@ -161,7 +162,7 @@
 
     &:disabled {
       opacity: 0.5;
-      background-color: $bg-hover;
+      background-color: var(--theme-bg-hover);
     }
   }
 
@@ -169,7 +170,7 @@
     display: flex;
     gap: $spacing-3;
     padding-top: $spacing-4;
-    border-top: 1px solid $bg-hover; // #2A2A2F
+    border-top: 1px solid var(--theme-border);
   }
 
   &__content {
@@ -187,7 +188,7 @@
   &__task-title {
     font-size: $font-size-2xl; // 24px
     font-weight: $font-weight-bold; // 900
-    color: $text-primary; // #F5F5F5 - WHITE TEXT REQUIRED
+    color: var(--theme-text-primary);
     margin-bottom: $spacing-2;
   }
 
@@ -217,7 +218,7 @@
   &__section-title {
     font-size: $font-size-sm; // 12px
     font-weight: $font-weight-medium; // 500 for labels
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     margin-bottom: $spacing-2;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -225,7 +226,7 @@
 
   &__description {
     font-size: $font-size-base; // 16px
-    color: $text-primary; // #F5F5F5 - WHITE TEXT
+    color: var(--theme-text-primary);
     white-space: pre-wrap;
     line-height: 1.6;
   }
@@ -238,12 +239,12 @@
 
   &__due-date {
     font-size: $font-size-base; // 16px
-    color: $text-primary; // #F5F5F5 - WHITE TEXT
+    color: var(--theme-text-primary);
   }
 
   &__timestamps {
     padding-top: $spacing-4;
-    border-top: 1px solid $bg-hover; // #2A2A2F
+    border-top: 1px solid var(--theme-border);
   }
 
   &__timestamps-grid {
@@ -254,18 +255,18 @@
   }
 
   &__timestamp-label {
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     font-weight: $font-weight-medium; // 500
   }
 
   &__timestamp-value {
-    color: $text-primary; // #F5F5F5 - WHITE TEXT
+    color: var(--theme-text-primary);
     margin-top: $spacing-1;
   }
 
   &__edit-section {
     padding-top: $spacing-4;
-    border-top: 1px solid $bg-hover; // #2A2A2F
+    border-top: 1px solid var(--theme-border);
   }
 
   &__time-config {
@@ -273,7 +274,7 @@
     flex-direction: column;
     gap: $spacing-4;
     padding: $spacing-4;
-    background-color: rgba($bg-hover, 0.3);
+    background-color: var(--theme-bg-secondary);
     border-radius: $radius-lg;
   }
 
@@ -294,7 +295,7 @@
     span {
       font-size: $font-size-base; // 16px
       font-weight: $font-weight-medium; // 500
-      color: $text-primary; // #F5F5F5
+      color: var(--theme-text-primary);
     }
   }
 }

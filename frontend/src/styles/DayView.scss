@@ -4,14 +4,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: $bg-primary;
+  background-color: var(--theme-bg-primary);
 
   &__all-day-section {
     display: flex;
     gap: $spacing-4;
     padding: $spacing-4;
-    background-color: $bg-secondary;
-    border-bottom: 1px solid rgba($bg-hover, 0.5);
+    background-color: var(--theme-bg-secondary);
+    border-bottom: 1px solid var(--theme-border);
   }
 
   &__all-day-label {
@@ -19,7 +19,7 @@
     flex-shrink: 0;
     font-size: $font-size-xs;
     font-weight: $font-weight-semibold;
-    color: $text-secondary;
+    color: var(--theme-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding-top: $spacing-1;
@@ -45,7 +45,7 @@
   }
 
   &__time-gutter {
-    border-right: 1px solid rgba($bg-hover, 0.3);
+    border-right: 1px solid var(--theme-border);
   }
 
   &__time-slot {
@@ -60,7 +60,7 @@
 
   &__time-label {
     font-size: $font-size-sm;
-    color: $text-muted;
+    color: var(--theme-text-muted);
     font-weight: $font-weight-medium;
   }
 
@@ -70,13 +70,13 @@
     right: 0;
     left: $spacing-3;
     height: 1px;
-    background-color: rgba($bg-hover, 0.2);
+    background-color: var(--theme-border);
   }
 
   &__events-column {
     position: relative;
     min-height: calc(80px * 24); // 24 hours
-    border-left: 1px solid rgba($bg-hover, 0.3);
+    border-left: 1px solid var(--theme-border);
 
     // Grid lines for hours
     &::before {
@@ -90,8 +90,8 @@
         to bottom,
         transparent,
         transparent 79px,
-        rgba($bg-hover, 0.2) 79px,
-        rgba($bg-hover, 0.2) 80px
+        var(--theme-border) 79px,
+        var(--theme-border) 80px
       );
       pointer-events: none;
     }

@@ -5,7 +5,7 @@
     display: block;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     margin-bottom: $spacing-2;
   }
 
@@ -24,19 +24,19 @@
     align-items: center;
     gap: $spacing-2;
     padding: $spacing-3 $spacing-4;
-    background-color: rgba($bg-tertiary, 0.6);
+    background-color: var(--theme-bg-tertiary);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba($bg-hover, 0.5);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-md;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     font-size: $font-size-base;
     cursor: pointer;
     transition: all $transition-fast;
     text-align: left;
 
     &:hover:not(:disabled) {
-      border-color: $text-muted;
-      background-color: rgba($bg-hover, 0.7);
+      border-color: var(--theme-text-muted);
+      background-color: var(--theme-bg-hover);
     }
 
     &:focus {
@@ -51,18 +51,18 @@
 
     &--open {
       border-color: $brand-red;
-      background-color: rgba($bg-hover, 0.8);
+      background-color: var(--theme-bg-hover);
     }
 
     &--has-value {
-      color: $text-primary;
+      color: var(--theme-text-primary);
     }
   }
 
   &__icon {
     width: 1.25rem;
     height: 1.25rem;
-    color: $text-secondary;
+    color: var(--theme-text-secondary);
     flex-shrink: 0;
   }
 
@@ -77,7 +77,7 @@
     padding: 0;
     border: none;
     background: none;
-    color: $text-muted;
+    color: var(--theme-text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -86,7 +86,7 @@
     flex-shrink: 0;
 
     &:hover {
-      color: $text-primary;
+      color: var(--theme-text-primary);
     }
 
     svg {
@@ -98,7 +98,7 @@
   &__chevron {
     width: 1.125rem;
     height: 1.125rem;
-    color: $text-muted;
+    color: var(--theme-text-muted);
     flex-shrink: 0;
     transition: transform $transition-fast;
 
@@ -112,9 +112,9 @@
     top: calc(100% + 4px);
     left: 0;
     z-index: 100;
-    background-color: rgba($bg-secondary, 0.5);
+    background-color: var(--theme-bg-secondary);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba($bg-hover, 0.6);
+    border: 1px solid var(--theme-border);
     border-radius: $radius-lg;
     box-shadow: $shadow-xl;
     padding: $spacing-2;
@@ -138,12 +138,12 @@
   &__column-header {
     font-size: $font-size-xs;
     font-weight: $font-weight-semibold;
-    color: $text-secondary;
+    color: var(--theme-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: $spacing-2;
     text-align: center;
-    border-bottom: 1px solid $bg-hover;
+    border-bottom: 1px solid var(--theme-border);
     margin-bottom: $spacing-1;
   }
 
@@ -160,16 +160,16 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: $bg-tertiary;
+      background: var(--theme-bg-tertiary);
       border-radius: 3px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $bg-hover;
+      background: var(--theme-bg-hover);
       border-radius: 3px;
 
       &:hover {
-        background: $text-muted;
+        background: var(--theme-text-muted);
       }
     }
   }
@@ -178,7 +178,7 @@
     padding: $spacing-2 $spacing-3;
     border: none;
     background: transparent;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     font-size: $font-size-sm;
     font-family: "Geologica", system-ui, sans-serif;
     text-align: center;
@@ -190,7 +190,7 @@
     &:hover {
       background-color: rgba($brand-red, 0.15);
       backdrop-filter: blur(8px);
-      color: $text-primary;
+      color: var(--theme-text-primary);
     }
 
     &--selected,

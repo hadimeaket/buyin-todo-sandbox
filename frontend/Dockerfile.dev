@@ -7,8 +7,14 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies including optional packages
+RUN npm install --include=optional
+
+# Verify sass-embedded installation (critical for SCSS in dev mode)
+RUN if [ ! -d "node_modules/sass-embedded" ]; then \
+      echo "sass-embedded not found, installing explicitly..."; \
+      npm install sass-embedded --save-dev; \
+    fi
 
 # Copy source code
 COPY . .

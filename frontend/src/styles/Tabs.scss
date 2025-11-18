@@ -20,11 +20,11 @@
 
     &--inactive {
       background-color: transparent;
-      color: $text-secondary; // #C7C7C7
+      color: var(--theme-text-secondary);
 
       &:hover {
-        color: $text-primary; // #F5F5F5
-        background-color: $bg-tertiary; // #202024
+        color: var(--theme-text-primary);
+        background-color: var(--theme-bg-tertiary);
       }
     }
   }

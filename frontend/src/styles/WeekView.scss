@@ -4,20 +4,20 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: $bg-primary;
+  background-color: var(--theme-bg-primary);
 
   &__header {
     display: grid;
     grid-template-columns: 60px repeat(7, 1fr);
-    background-color: $bg-secondary;
-    border-bottom: 1px solid rgba($bg-hover, 0.5);
+    background-color: var(--theme-bg-secondary);
+    border-bottom: 1px solid var(--theme-border);
     position: sticky;
     top: 0;
     z-index: 10;
   }
 
   &__time-gutter {
-    border-right: 1px solid rgba($bg-hover, 0.3);
+    border-right: 1px solid var(--theme-border);
   }
 
   &__day-header {
@@ -27,7 +27,7 @@
     flex-direction: column;
     align-items: center;
     gap: $spacing-1;
-    border-right: 1px solid rgba($bg-hover, 0.3);
+    border-right: 1px solid var(--theme-border);
 
     &:last-child {
       border-right: none;
@@ -41,7 +41,7 @@
   &__day-label {
     font-size: $font-size-xs;
     font-weight: $font-weight-semibold;
-    color: $text-secondary;
+    color: var(--theme-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -54,7 +54,7 @@
     justify-content: center;
     font-size: $font-size-base;
     font-weight: $font-weight-medium;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     border-radius: 50%;
 
     &--today {
@@ -77,7 +77,7 @@
 
   &__time-slot {
     height: 60px;
-    border-bottom: 1px solid rgba($bg-hover, 0.2);
+    border-bottom: 1px solid var(--theme-border);
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
@@ -87,12 +87,12 @@
 
   &__time-label {
     font-size: $font-size-xs;
-    color: $text-muted;
+    color: var(--theme-text-muted);
   }
 
   &__day-column {
     position: relative;
-    border-right: 1px solid rgba($bg-hover, 0.3);
+    border-right: 1px solid var(--theme-border);
     min-height: calc(60px * 24); // 24 hours
 
     &:last-child {
@@ -115,8 +115,8 @@
         to bottom,
         transparent,
         transparent 59px,
-        rgba($bg-hover, 0.2) 59px,
-        rgba($bg-hover, 0.2) 60px
+        var(--theme-border) 59px,
+        var(--theme-border) 60px
       );
       pointer-events: none;
     }
@@ -126,8 +126,8 @@
     position: relative;
     z-index: 2;
     padding: $spacing-2;
-    background-color: rgba($bg-secondary, 0.5);
-    border-bottom: 1px solid rgba($bg-hover, 0.3);
+    background-color: var(--theme-bg-secondary);
+    border-bottom: 1px solid var(--theme-border);
   }
 
   &__timed-events {

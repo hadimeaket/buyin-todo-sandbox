@@ -1,8 +1,8 @@
 @use "../styles/variables" as *;
 
 .todo-item {
-  background-color: $bg-secondary; // #1A1A1D - Cards/sections REQUIRED
-  border: 1px solid rgba($bg-hover, 0.5);
+  background-color: var(--theme-bg-secondary);
+  border: 1px solid var(--theme-border);
   border-radius: $radius-xl;
   box-shadow: $shadow-md;
   padding: $spacing-5;
@@ -10,7 +10,7 @@
   transition: all $transition-base;
 
   &:hover {
-    background-color: $bg-hover; // #2A2A2F - Hover state
+    background-color: var(--theme-bg-hover);
     box-shadow: $shadow-lg;
 
     .todo-item__delete-btn {
@@ -54,17 +54,17 @@
     font-size: $font-size-md; // 16px
     font-weight: $font-weight-semibold; // 600
     line-height: 1.5;
-    color: $text-primary; // #F5F5F5 - Main readable text
+    color: var(--theme-text-primary);
 
     &--completed {
       text-decoration: line-through;
-      color: $text-secondary; // #C7C7C7
+      color: var(--theme-text-secondary);
     }
   }
 
   &__description {
     font-size: $font-size-sm; // 12px
-    color: $text-secondary; // #C7C7C7 - Labels, supporting text
+    color: var(--theme-text-secondary);
     line-height: 1.6;
     overflow: hidden;
     display: -webkit-box;
@@ -117,8 +117,8 @@
     }
 
     &--default {
-      background-color: $bg-tertiary; // #202024
-      color: $text-secondary; // #C7C7C7
+      background-color: var(--theme-bg-tertiary);
+      color: var(--theme-text-secondary);
     }
   }
 
@@ -128,12 +128,12 @@
     gap: $spacing-2;
     padding: $spacing-2 $spacing-3;
     border-radius: $radius-md;
-    background-color: $bg-tertiary; // #202024
+    background-color: var(--theme-bg-tertiary);
 
     svg {
       width: 0.875rem;
       height: 0.875rem;
-      color: $text-secondary; // #C7C7C7
+      color: var(--theme-text-secondary);
       flex-shrink: 0;
     }
 
@@ -149,7 +149,7 @@
 
   &__due-date-text {
     font-size: $font-size-sm; // 12px
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     font-weight: $font-weight-medium; // 500 for UI
     white-space: nowrap;
 
@@ -171,14 +171,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
     border-radius: $radius-md;
     transition: all $transition-base;
     border: none;
 
     &:hover {
-      background-color: $bg-tertiary; // #202024
-      color: $text-primary; // #F5F5F5
+      background-color: var(--theme-bg-tertiary);
+      color: var(--theme-text-primary);
     }
 
     svg {

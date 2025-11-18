@@ -3,9 +3,10 @@
 .calendar-view {
   display: flex;
   flex-direction: column;
-  background-color: $bg-secondary;
+  background-color: var(--theme-bg-secondary);
   min-height: 600px;
   max-height: 800px;
+  transition: background-color $transition-base;
 
   &__content {
     flex: 1;

@@ -4,13 +4,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: $bg-primary;
+  background-color: var(--theme-bg-primary);
+  transition: background-color $transition-base;
 
   &__header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background-color: $bg-secondary;
-    border-bottom: 1px solid rgba($bg-hover, 0.5);
+    background-color: var(--theme-bg-secondary);
+    border-bottom: 1px solid var(--theme-border);
   }
 
   &__weekday {
@@ -18,7 +19,7 @@
     text-align: center;
     font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
-    color: $text-secondary;
+    color: var(--theme-text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -41,12 +42,12 @@
   }
 
   &__cell {
-    border-right: 1px solid rgba($bg-hover, 0.3);
+    border-right: 1px solid var(--theme-border);
     padding: $spacing-2;
     min-height: 100px;
     display: flex;
     flex-direction: column;
-    background-color: $bg-primary;
+    background-color: var(--theme-bg-primary);
     transition: background-color $transition-fast;
 
     &:last-child {
@@ -54,7 +55,7 @@
     }
 
     &:hover {
-      background-color: rgba($bg-secondary, 0.5);
+      background-color: var(--theme-bg-secondary);
     }
 
     &--today {
@@ -70,7 +71,7 @@
       opacity: 0.4;
 
       .month-view__date {
-        color: $text-muted;
+        color: var(--theme-text-muted);
       }
     }
   }
@@ -83,7 +84,7 @@
     justify-content: center;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     border-radius: 50%;
     margin-bottom: $spacing-2;
   }

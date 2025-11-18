@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
 import { todoApi } from "./services/todoApi";
+import AppBar from "./components/AppBar";
 import Header from "./components/Header";
 import TodoForm from "./components/TodoForm";
 import Tabs from "./components/Tabs";
@@ -147,6 +148,7 @@ function App() {
 
   return (
     <div className="app">
+      <AppBar />
       <div className="app__container">
         <Header
           totalCount={stats.total}

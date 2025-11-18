@@ -14,7 +14,7 @@
     left: 12px;
     width: 20px;
     height: 20px;
-    color: $text-muted;
+    color: var(--theme-text-muted);
     pointer-events: none;
     z-index: 1;
   }
@@ -22,27 +22,27 @@
   &__field {
     width: 100%;
     padding: 10px 40px 10px 40px;
-    background: rgba($bg-tertiary, 0.6);
+    background: var(--theme-bg-tertiary);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba($text-muted, 0.1);
+    border: 1px solid var(--theme-border);
     border-radius: 8px;
-    color: $text-primary;
+    color: var(--theme-text-primary);
     font-size: 14px;
     line-height: 1.5;
     transition: all 0.15s ease;
 
     &::placeholder {
-      color: $text-muted;
+      color: var(--theme-text-muted);
     }
 
     &:hover:not(:disabled) {
-      background: rgba($bg-tertiary, 0.8);
-      border-color: rgba($text-muted, 0.2);
+      background: var(--theme-bg-hover);
+      border-color: var(--theme-border);
     }
 
     &:focus {
       outline: none;
-      background: rgba($bg-tertiary, 0.9);
+      background: var(--theme-bg-tertiary);
       border-color: rgba($brand-red, 0.5);
       box-shadow: 0 0 0 3px rgba($brand-red, 0.1);
     }
@@ -65,7 +65,7 @@
     background: transparent;
     border: none;
     border-radius: 6px;
-    color: $text-muted;
+    color: var(--theme-text-muted);
     cursor: pointer;
     transition: all 0.15s ease;
 
@@ -75,8 +75,8 @@
     }
 
     &:hover:not(:disabled) {
-      background: rgba($text-muted, 0.1);
-      color: $text-primary;
+      background: var(--theme-bg-hover);
+      color: var(--theme-text-primary);
     }
 
     &:active:not(:disabled) {

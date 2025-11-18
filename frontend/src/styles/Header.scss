@@ -1,10 +1,11 @@
 @use "../styles/variables" as *;
 
 .header {
-  background-color: $bg-secondary; // #1A1A1D - Cards/sections REQUIRED
+  background-color: var(--theme-bg-secondary);
   border-radius: $radius-3xl;
   box-shadow: $shadow-lg;
   padding: $spacing-6;
+  transition: background-color $transition-base;
 
   @media (min-width: $breakpoint-sm) {
     padding: $spacing-8;
@@ -25,7 +26,7 @@
   &__title {
     font-size: $font-size-3xl; // 32px
     font-weight: $font-weight-bold; // 900
-    color: $text-primary; // #F5F5F5
+    color: var(--theme-text-primary);
     margin: 0;
   }
 
@@ -50,7 +51,7 @@
   &__stat-label {
     font-size: $font-size-sm; // 12px
     font-weight: $font-weight-medium; // 500 for labels
-    color: $text-secondary; // #C7C7C7
+    color: var(--theme-text-secondary);
   }
 
   &__stat-value {
@@ -59,7 +60,7 @@
     margin-top: $spacing-1;
 
     &--total {
-      color: $text-primary; // #F5F5F5
+      color: var(--theme-text-primary);
     }
 
     &--active {
@@ -67,7 +68,17 @@
     }
 
     &--completed {
-      color: $accent-green; // #C9FFD8
+      // Use darker green in light mode, lighter in dark mode
+      [data-theme="light"] & {
+        color: #16a34a; // Darker green for light mode visibility
+      }
+
+      [data-theme="dark"] & {
+        color: $accent-green; // #C9FFD8 - Light green for dark mode
+      }
+
+      // Fallback for when theme attribute isn't set yet
+      color: $accent-green;
     }
   }
 }
