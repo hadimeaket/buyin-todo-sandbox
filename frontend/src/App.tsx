@@ -4,8 +4,8 @@ import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
 import { todoApi } from "./services/todoApi";
 import AppBar from "./components/AppBar";
-import Header from "./components/Header";
-import TodoForm from "./components/TodoForm";
+import Drawer from "./components/Drawer";
+import AddTaskModal from "./components/AddTaskModal";
 import Tabs from "./components/Tabs";
 import TodoList from "./components/TodoList";
 import TodoDetail from "./components/TodoDetail";
@@ -20,6 +20,7 @@ function App() {
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
@@ -44,6 +45,7 @@ function App() {
       setError(null);
       const newTodo = await todoApi.createTodo(data);
       setTodos((prev) => [...prev, newTodo]);
+      setIsAddTaskModalOpen(false); // Close modal on success
     } catch (err: unknown) {
       console.error(err);
       if (err && typeof err === "object" && "response" in err) {
@@ -149,13 +151,13 @@ function App() {
   return (
     <div className="app">
       <AppBar />
+      <Drawer
+        totalCount={stats.total}
+        activeCount={stats.active}
+        completedCount={stats.completed}
+        onAddTask={() => setIsAddTaskModalOpen(true)}
+      />
       <div className="app__container">
-        <Header
-          totalCount={stats.total}
-          activeCount={stats.active}
-          completedCount={stats.completed}
-        />
-
         <main className="app__main-card">
           {error && (
             <div className="error-alert">
@@ -180,29 +182,6 @@ function App() {
               </button>
             </div>
           )}
-
-          <section className="section section--bordered">
-            <TodoForm onAdd={handleAddTodo} disabled={loading} />
-          </section>
-
-          <section className="section section--search section--bordered">
-            <SearchInput
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder="Search tasks..."
-              disabled={loading}
-            />
-          </section>
-
-          <section className="section section--tabs section--bordered">
-            <Tabs
-              tabs={tabsData}
-              activeTab={filter}
-              onTabChange={(tabId) =>
-                setFilter(tabId as "all" | "active" | "completed")
-              }
-            />
-          </section>
 
           {/* View Mode Segmented Control */}
           <section className="section section--view-toggle section--bordered">
@@ -246,21 +225,42 @@ function App() {
 
           {/* Conditional Content Rendering */}
           {viewMode === "list" ? (
-            <section className="section section--list">
-              {loading ? (
-                <div className="loading">
-                  <div className="loading__spinner animate-spin" />
-                  <p className="loading__text">Loading tasks...</p>
-                </div>
-              ) : (
-                <TodoList
-                  todos={filteredTodos}
-                  onToggle={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                  onViewDetails={handleViewDetails}
+            <>
+              <section className="section section--search section--bordered">
+                <SearchInput
+                  value={searchQuery}
+                  onChange={setSearchQuery}
+                  placeholder="Search tasks..."
+                  disabled={loading}
                 />
-              )}
-            </section>
+              </section>
+
+              <section className="section section--tabs section--bordered">
+                <Tabs
+                  tabs={tabsData}
+                  activeTab={filter}
+                  onTabChange={(tabId) =>
+                    setFilter(tabId as "all" | "active" | "completed")
+                  }
+                />
+              </section>
+
+              <section className="section section--list">
+                {loading ? (
+                  <div className="loading">
+                    <div className="loading__spinner animate-spin" />
+                    <p className="loading__text">Loading tasks...</p>
+                  </div>
+                ) : (
+                  <TodoList
+                    todos={filteredTodos}
+                    onToggle={handleToggleTodo}
+                    onDelete={handleDeleteTodo}
+                    onViewDetails={handleViewDetails}
+                  />
+                )}
+              </section>
+            </>
           ) : (
             <section className="section section--calendar">
               <CalendarView
@@ -277,6 +277,15 @@ function App() {
             todo={selectedTodo}
             onClose={() => setSelectedTodo(null)}
             onUpdate={handleUpdateTodo}
+          />
+        )}
+
+        {isAddTaskModalOpen && (
+          <AddTaskModal
+            onClose={() => setIsAddTaskModalOpen(false)}
+            onAdd={handleAddTodo}
+            disabled={loading}
+            existingTodos={todos}
           />
         )}
       </div>

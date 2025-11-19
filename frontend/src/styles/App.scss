@@ -15,15 +15,21 @@
     max-width: 1152px;
     margin: 0 auto;
     padding: $spacing-10 $spacing-6;
+    padding-right: calc($spacing-6 + 64px); // Add drawer width to right padding
+    transition: padding-right $transition-base;
 
     @media (min-width: $breakpoint-sm) {
       padding-left: $spacing-8;
-      padding-right: $spacing-8;
+      padding-right: calc($spacing-8 + 64px); // Account for drawer
     }
 
     @media (min-width: $breakpoint-lg) {
       padding-left: $spacing-12;
-      padding-right: $spacing-12;
+      padding-right: calc($spacing-12 + 64px); // Account for drawer
+    }
+
+    @media (max-width: 768px) {
+      padding-right: calc($spacing-6 + 56px); // Smaller drawer on mobile
     }
   }
 

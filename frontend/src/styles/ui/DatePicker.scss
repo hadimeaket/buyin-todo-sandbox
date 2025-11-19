@@ -27,7 +27,7 @@
     background-color: var(--theme-bg-tertiary);
     backdrop-filter: blur(8px);
     border: 1px solid var(--theme-border);
-    border-radius: $radius-md;
+    border-radius: $radius-lg;
     color: var(--theme-text-primary);
     font-size: $font-size-base;
     cursor: pointer;
@@ -108,18 +108,27 @@
   }
 
   &__dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    z-index: 100;
-    background-color: var(--theme-bg-secondary);
+    position: fixed; // Changed from absolute to fixed for better viewport control
+    z-index: 150;
+    top: 30%;
+    left: 65%;
+    background-color: rgba(var(--theme-bg-secondary-rgb), 0.5);
     backdrop-filter: blur(12px);
-    border: 1px solid var(--theme-border);
+    border: 1px solid rgba(var(--theme-border-rgb), 0.3);
     border-radius: $radius-lg;
     box-shadow: $shadow-xl;
     padding: $spacing-4;
     min-width: 320px;
-    animation: slideDown 0.15s ease-out;
+    max-width: 90vw;
+    overflow-y: auto;
+
+    &--bottom {
+      animation: slideDown 0.15s ease-out;
+    }
+
+    &--top {
+      animation: slideUp 0.15s ease-out;
+    }
   }
 
   &__header {
@@ -271,6 +280,17 @@
   from {
     opacity: 0;
     transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;

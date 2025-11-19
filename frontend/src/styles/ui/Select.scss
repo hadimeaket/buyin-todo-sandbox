@@ -1,6 +1,6 @@
 @use "../../styles/variables" as *;
 
-.time-picker {
+.select {
   &__label {
     display: block;
     font-size: $font-size-sm;
@@ -22,6 +22,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: $spacing-2;
     padding: $spacing-3 $spacing-4;
     background-color: var(--theme-bg-tertiary);
@@ -30,6 +31,7 @@
     border-radius: $radius-lg;
     color: var(--theme-text-primary);
     font-size: $font-size-base;
+    font-family: "Geologica", system-ui, sans-serif;
     cursor: pointer;
     transition: all $transition-fast;
     text-align: left;
@@ -59,40 +61,10 @@
     }
   }
 
-  &__icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--theme-text-secondary);
-    flex-shrink: 0;
-  }
-
   &__value {
     flex: 1;
     color: inherit;
-  }
-
-  &__clear {
-    width: 1.125rem;
-    height: 1.125rem;
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--theme-text-muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: color $transition-fast;
-    flex-shrink: 0;
-
-    &:hover {
-      color: var(--theme-text-primary);
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
+    font-weight: $font-weight-medium;
   }
 
   &__chevron {
@@ -102,63 +74,26 @@
     flex-shrink: 0;
     transition: transform $transition-fast;
 
-    .time-picker__input--open & {
+    .select__input--open & {
       transform: rotate(180deg);
     }
   }
 
   &__dropdown {
-    position: fixed; // Changed from absolute to fixed for better viewport control
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
     z-index: 150;
-    background-color: rgba(var(--theme-bg-secondary-rgb), 0.5);
+    background-color: rgba(var(--theme-bg-secondary-rgb), 0.15);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(var(--theme-border-rgb), 0.3);
     border-radius: $radius-lg;
     box-shadow: $shadow-xl;
     padding: $spacing-2;
-    min-width: 240px;
-    max-width: 90vw;
-
-    &--bottom {
-      animation: slideDown 0.15s ease-out;
-    }
-
-    &--top {
-      animation: slideUp 0.15s ease-out;
-    }
-  }
-
-  &__columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-2;
-  }
-
-  &__column {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  &__column-header {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    color: var(--theme-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: $spacing-2;
-    text-align: center;
-    border-bottom: 1px solid var(--theme-border);
-    margin-bottom: $spacing-1;
-  }
-
-  &__options {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    overflow-y: auto;
     max-height: 240px;
-    padding: $spacing-1;
+    overflow-y: auto;
+    animation: slideDown 0.15s ease-out;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -180,17 +115,22 @@
   }
 
   &__option {
-    padding: $spacing-2 $spacing-3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-3;
     border: none;
     background: transparent;
     color: var(--theme-text-primary);
-    font-size: $font-size-sm;
+    font-size: $font-size-base;
     font-family: "Geologica", system-ui, sans-serif;
-    text-align: center;
+    font-weight: $font-weight-medium;
+    text-align: left;
     cursor: pointer;
-    border-radius: $radius-sm;
+    border-radius: $radius-md;
     transition: all $transition-fast;
-    white-space: nowrap;
 
     &:hover {
       background-color: rgba($brand-red, 0.15);
@@ -198,8 +138,7 @@
       color: var(--theme-text-primary);
     }
 
-    &--selected,
-    &--current {
+    &--selected {
       background-color: rgba($brand-red, 0.9);
       backdrop-filter: blur(8px);
       color: white;
@@ -211,24 +150,10 @@
     }
   }
 
-  &__error {
-    display: flex;
-    align-items: center;
-    gap: $spacing-2;
-    padding: $spacing-3;
-    background-color: rgba($brand-red, 0.15);
-    border: 1px solid rgba($brand-red, 0.4);
-    border-radius: $radius-md;
-    color: $brand-red;
-    font-size: $font-size-sm;
-    margin-top: $spacing-2;
-    animation: slideIn 0.2s ease-out;
-
-    svg {
-      width: 1.125rem;
-      height: 1.125rem;
-      flex-shrink: 0;
-    }
+  &__check {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
   }
 }
 
@@ -240,27 +165,5 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }

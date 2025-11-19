@@ -55,10 +55,13 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
     };
   }, []);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const isFormValid = (): boolean => {
+    // Check title
+    if (!title.trim()) {
+      return false;
+    }
 
-    // Validate time: end time must be after start time
+    // Check time validation if not all-day
     if (!isAllDay && startTime && endTime) {
       const [startHour, startMin] = startTime.split(":").map(Number);
       const [endHour, endMin] = endTime.split(":").map(Number);
@@ -66,10 +69,15 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
       const endMinutes = endHour * 60 + endMin;
 
       if (endMinutes <= startMinutes) {
-        alert("End time must be after start time");
-        return;
+        return false;
       }
     }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
     setIsSaving(true);
 
@@ -85,9 +93,11 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
         endTime: !isAllDay && endTime ? endTime : undefined,
         recurrence,
       });
+
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to update todo:", error);
+      // Error is handled by parent component
     } finally {
       setIsSaving(false);
     }
@@ -330,7 +340,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
               <Button
                 type="submit"
                 variant="primary"
-                disabled={isSaving || !title.trim()}
+                disabled={isSaving || !isFormValid()}
               >
                 {isSaving ? "Saving..." : "Save changes"}
               </Button>

@@ -8,6 +8,7 @@ interface TimePickerProps {
   id?: string;
   label?: string;
   required?: boolean;
+  position?: "start" | "end"; // To differentiate start time vs end time
 }
 
 function TimePicker({
@@ -17,11 +18,16 @@ function TimePicker({
   id,
   label,
   required = false,
+  position = "start",
 }: TimePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedHour, setSelectedHour] = useState<number | null>(null);
   const [showError, setShowError] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState<"bottom" | "top">(
+    "bottom"
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Parse current value
   const currentHour = value ? parseInt(value.split(":")[0], 10) : null;
@@ -32,6 +38,47 @@ function TimePicker({
 
   // Generate minutes in 5-minute intervals (00, 05, 10, ..., 55)
   const minutes = Array.from({ length: 12 }, (_, i) => i * 5);
+
+  // Calculate dropdown position based on available space
+  useEffect(() => {
+    if (isOpen && wrapperRef.current && dropdownRef.current) {
+      const rect = wrapperRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+      const dropdown = dropdownRef.current;
+
+      // Use percentage-based positioning
+      const topPercent = 60; // 60% from top
+      let leftPercent: number;
+
+      // Horizontal positioning based on position prop
+      if (position === "start") {
+        // Start time - position at 38%
+        leftPercent = 38;
+      } else {
+        // End time - position at 68%
+        leftPercent = 68;
+      }
+
+      const topPosition = (viewportHeight * topPercent) / 100;
+      const leftPosition = (viewportWidth * leftPercent) / 100;
+
+      // Calculate max height (35% of viewport height)
+      const maxHeight = Math.min(320, viewportHeight * 0.35);
+
+      // Determine visual position for animation
+      if (topPosition < rect.top) {
+        setDropdownPosition("top");
+      } else {
+        setDropdownPosition("bottom");
+      }
+
+      dropdown.style.top = `${topPosition}px`;
+      dropdown.style.left = `${leftPosition}px`;
+      dropdown.style.bottom = "auto";
+      dropdown.style.maxHeight = `${maxHeight}px`;
+    }
+  }, [isOpen, position]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -95,7 +142,7 @@ function TimePicker({
         </label>
       )}
 
-      <div className="time-picker__wrapper">
+      <div className="time-picker__wrapper" ref={wrapperRef}>
         <button
           id={id}
           type="button"
@@ -154,7 +201,10 @@ function TimePicker({
         </button>
 
         {isOpen && (
-          <div className="time-picker__dropdown">
+          <div
+            className={`time-picker__dropdown time-picker__dropdown--${dropdownPosition} time-picker__dropdown--${position}`}
+            ref={dropdownRef}
+          >
             <div className="time-picker__columns">
               {/* Hour Column */}
               <div className="time-picker__column">

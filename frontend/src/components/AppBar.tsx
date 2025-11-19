@@ -1,13 +1,11 @@
 import "./AppBar.scss";
 import whiteLogoWhiteFont from "../assets/white-logo-white-font.png";
-import ThemeToggle from "./ThemeToggle";
 
 /**
  * AppBar Component
  *
  * Fixed header with BuyIn branding gradient and logo.
  * Matches the design system from the BuyIn brand identity.
- * Includes theme toggle for light/dark mode switching.
  */
 export default function AppBar() {
   return (
@@ -20,7 +18,6 @@ export default function AppBar() {
             className="app-bar__logo"
           />
         </div>
-        <ThemeToggle />
       </div>
     </header>
   );

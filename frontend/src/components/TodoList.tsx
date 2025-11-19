@@ -9,6 +9,12 @@ interface TodoListProps {
   onViewDetails: (todo: Todo) => void;
 }
 
+interface GroupedTodos {
+  date: string;
+  displayDate: string;
+  todos: Todo[];
+}
+
 function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
   if (todos.length === 0) {
     return (
@@ -34,16 +40,86 @@ function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
     );
   }
 
+  // Group todos by date
+  const groupedTodos: GroupedTodos[] = todos.reduce(
+    (groups: GroupedTodos[], todo) => {
+      const dueDate = todo.dueDate ? new Date(todo.dueDate) : null;
+      const dateKey = dueDate ? dueDate.toISOString().split("T")[0] : "no-date";
+
+      // Format display date
+      let displayDate = "No Due Date";
+      if (dueDate) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const taskDate = new Date(dueDate);
+        taskDate.setHours(0, 0, 0, 0);
+
+        if (taskDate.getTime() === today.getTime()) {
+          displayDate = "Today";
+        } else if (taskDate.getTime() === tomorrow.getTime()) {
+          displayDate = "Tomorrow";
+        } else if (taskDate.getTime() < today.getTime()) {
+          displayDate = "Overdue";
+        } else {
+          displayDate = dueDate.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "short",
+            day: "numeric",
+          });
+        }
+      }
+
+      const existingGroup = groups.find((g) => g.date === dateKey);
+      if (existingGroup) {
+        existingGroup.todos.push(todo);
+      } else {
+        groups.push({
+          date: dateKey,
+          displayDate,
+          todos: [todo],
+        });
+      }
+
+      return groups;
+    },
+    []
+  );
+
+  // Sort groups by date (earliest first, no-date last)
+  groupedTodos.sort((a, b) => {
+    if (a.date === "no-date") return 1;
+    if (b.date === "no-date") return -1;
+    return a.date.localeCompare(b.date);
+  });
+
+  // Sort todos within each group by time
+  groupedTodos.forEach((group) => {
+    group.todos.sort((a, b) => {
+      const timeA = a.startTime || "00:00";
+      const timeB = b.startTime || "00:00";
+      return timeA.localeCompare(timeB);
+    });
+  });
+
   return (
     <div className="todo-list">
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggle={onToggle}
-          onDelete={onDelete}
-          onViewDetails={onViewDetails}
-        />
+      {groupedTodos.map((group) => (
+        <div key={group.date} className="todo-list__group">
+          <div className="todo-list__group-title">{group.displayDate}</div>
+          <div className="todo-list__group-items">
+            {group.todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                onToggle={onToggle}
+                onDelete={onDelete}
+                onViewDetails={onViewDetails}
+              />
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );

@@ -24,6 +24,13 @@
     background-color: $brand-red; // #FD3039
     color: white;
 
+    &:disabled {
+      background-color: #8b0000; // Darker red when disabled
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: auto;
+    }
+
     &:hover:not(:disabled) {
       background-color: $brand-red-dark; // #B2232F
     }

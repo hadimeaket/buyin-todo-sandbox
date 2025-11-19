@@ -1,6 +1,33 @@
 @use "../styles/variables" as *;
 
 .todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-6;
+  padding-bottom: $spacing-4;
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+
+  &__group-title {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: var(--theme-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: $spacing-1 0;
+    margin-bottom: $spacing-2;
+  }
+
+  &__group-items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+
   &__empty {
     display: flex;
     flex-direction: column;

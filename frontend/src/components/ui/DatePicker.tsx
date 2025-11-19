@@ -25,7 +25,44 @@ function DatePicker({
   const [isOpen, setIsOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [rangeStart, setRangeStart] = useState<string | null>(null);
+  const [dropdownPosition, setDropdownPosition] = useState<"bottom" | "top">(
+    "bottom"
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Calculate dropdown position based on available space
+  useEffect(() => {
+    if (isOpen && wrapperRef.current && dropdownRef.current) {
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+      const dropdown = dropdownRef.current;
+
+      // Use percentage-based positioning for better flexibility
+      // Center the calendar with slight offset to the right
+      const topPercent = 20; // 20% from top
+      const leftPercent = 60; // 60% from left
+
+      const topPosition = (viewportHeight * topPercent) / 100;
+      const leftPosition = (viewportWidth * leftPercent) / 100;
+
+      // Calculate max height (60% of viewport height)
+      const maxHeight = Math.min(480, viewportHeight * 0.6);
+
+      // Determine visual position for animation
+      const rect = wrapperRef.current.getBoundingClientRect();
+      if (topPosition < rect.top) {
+        setDropdownPosition("top");
+      } else {
+        setDropdownPosition("bottom");
+      }
+
+      dropdown.style.top = `${topPosition}px`;
+      dropdown.style.left = `${leftPosition}px`;
+      dropdown.style.bottom = "auto";
+      dropdown.style.maxHeight = `${maxHeight}px`;
+    }
+  }, [isOpen]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -216,7 +253,7 @@ function DatePicker({
         </label>
       )}
 
-      <div className="date-picker__wrapper">
+      <div className="date-picker__wrapper" ref={wrapperRef}>
         <button
           id={id}
           type="button"
@@ -275,7 +312,9 @@ function DatePicker({
         </button>
 
         {isOpen && (
-          <div className="date-picker__dropdown">
+          <div
+            className={`date-picker__dropdown date-picker__dropdown--${dropdownPosition}`}
+          >
             {/* Calendar Header */}
             <div className="date-picker__header">
               <button
