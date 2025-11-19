@@ -1,7 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import AddTaskModal from "./AddTaskModal";
-import type { CreateTodoDto } from "../types/todo";
 
 describe("AddTaskModal - Edge Cases", () => {
   const mockOnClose = vi.fn();
