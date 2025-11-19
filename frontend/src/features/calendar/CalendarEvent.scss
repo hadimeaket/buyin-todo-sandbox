@@ -66,8 +66,28 @@
 
   // Variant-specific styles
   &--month {
+    position: relative;
     font-size: $font-size-xs;
     padding: 2px $spacing-2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+
+    .calendar-event__content {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+    }
+
+    .calendar-event__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+    }
   }
 
   &--week,
@@ -139,12 +159,5 @@
     color: var(--theme-text-muted);
     font-size: $font-size-xs;
     text-transform: capitalize;
-  }
-
-  // Make month variant relative for tooltip positioning
-  &--month {
-    position: relative;
-    font-size: $font-size-xs;
-    padding: 2px $spacing-2;
   }
 }
