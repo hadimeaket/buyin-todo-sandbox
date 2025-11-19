@@ -94,4 +94,57 @@
       word-break: break-word;
     }
   }
+
+  // Tooltip styles for month view
+  &__tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: $spacing-1;
+    padding: $spacing-3;
+    background-color: var(--theme-bg-tertiary);
+    border: 1px solid var(--theme-border);
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    z-index: 1000;
+    min-width: 200px;
+    max-width: 300px;
+    white-space: normal;
+    word-wrap: break-word;
+    animation: fadeIn 0.15s ease-out;
+    pointer-events: none;
+  }
+
+  &__tooltip-title {
+    font-weight: $font-weight-semibold;
+    color: var(--theme-text-primary);
+    margin-bottom: $spacing-2;
+    font-size: $font-size-sm;
+  }
+
+  &__tooltip-description {
+    color: var(--theme-text-secondary);
+    font-size: $font-size-xs;
+    margin-bottom: $spacing-2;
+    line-height: 1.4;
+  }
+
+  &__tooltip-time {
+    color: var(--theme-text-muted);
+    font-size: $font-size-xs;
+    margin-bottom: $spacing-1;
+  }
+
+  &__tooltip-priority {
+    color: var(--theme-text-muted);
+    font-size: $font-size-xs;
+    text-transform: capitalize;
+  }
+
+  // Make month variant relative for tooltip positioning
+  &--month {
+    position: relative;
+    font-size: $font-size-xs;
+    padding: 2px $spacing-2;
+  }
 }

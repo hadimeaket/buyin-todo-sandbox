@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Todo } from "../../types/todo";
 import "./CalendarEvent.scss";
 
@@ -12,6 +13,8 @@ function CalendarEvent({
   onClick,
   variant = "month",
 }: CalendarEventProps) {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onClick(todo);
@@ -83,6 +86,8 @@ function CalendarEvent({
       className={getEventClassName()}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
       role="button"
       tabIndex={0}
       aria-label={getAriaLabel()}
@@ -93,6 +98,22 @@ function CalendarEvent({
         )}
         <span className="calendar-event__title">{todo.title}</span>
       </div>
+      {showTooltip && variant === "month" && (
+        <div className="calendar-event__tooltip">
+          <div className="calendar-event__tooltip-title">{todo.title}</div>
+          {todo.description && (
+            <div className="calendar-event__tooltip-description">
+              {todo.description}
+            </div>
+          )}
+          {time && (
+            <div className="calendar-event__tooltip-time">{time}</div>
+          )}
+          <div className="calendar-event__tooltip-priority">
+            Priority: {todo.priority}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
