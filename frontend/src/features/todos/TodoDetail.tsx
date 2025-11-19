@@ -445,7 +445,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                 type="button"
                 variant="primary"
                 onClick={() => setIsEditing(true)}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               >
                 Edit task
               </Button>
