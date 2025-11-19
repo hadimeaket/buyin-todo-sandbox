@@ -40,45 +40,51 @@ frontend/src/
 ## Design Principles
 
 ### 1. **Feature-Based Organization**
+
 - Related components are grouped by feature (todos, calendar)
 - Each feature is self-contained with its components, styles, and tests
 - Makes it easy to find and maintain feature-specific code
 
 ### 2. **Component Hierarchy**
+
 - **ui/**: Primitive, reusable UI components (Button, Input, Select, etc.)
 - **common/**: Shared business components (Tabs, ThemeToggle)
 - **layout/**: App structure components (AppBar, Drawer)
 - **features/**: Domain-specific feature modules
 
 ### 3. **Co-located Styles**
+
 - Styles are placed next to their components
 - Makes it easier to find and update component styles
 - Reduces cognitive load when working on a feature
 
 ### 4. **Barrel Exports**
+
 - Each directory has an `index.ts` file for clean imports
 - Example: `import { TodoList, AddTaskModal } from './features/todos'`
 
 ## Import Patterns
 
 ### Good ✅
+
 ```typescript
 // Feature imports
-import { TodoList, AddTaskModal } from './features/todos';
-import { CalendarView } from './features/calendar';
+import { TodoList, AddTaskModal } from "./features/todos";
+import { CalendarView } from "./features/calendar";
 
 // Layout imports
-import { AppBar, Drawer } from './components/layout';
+import { AppBar, Drawer } from "./components/layout";
 
 // UI imports
-import { Button, DatePicker } from './components/ui';
+import { Button, DatePicker } from "./components/ui";
 ```
 
 ### Avoid ❌
+
 ```typescript
 // Don't use deep imports
-import TodoList from './features/todos/TodoList';
-import Button from './components/ui/Button';
+import TodoList from "./features/todos/TodoList";
+import Button from "./components/ui/Button";
 ```
 
 ## File Naming Conventions
@@ -97,6 +103,7 @@ import Button from './components/ui/Button';
 4. Update imports in consuming components
 
 Example:
+
 ```
 features/
 └── myFeature/
