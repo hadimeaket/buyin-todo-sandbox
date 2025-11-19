@@ -3,14 +3,11 @@ import { useState, useEffect } from "react";
 import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
 import { todoApi } from "./services/todoApi";
-import AppBar from "./components/AppBar";
-import Drawer from "./components/Drawer";
-import AddTaskModal from "./components/AddTaskModal";
-import Tabs from "./components/Tabs";
-import TodoList from "./components/TodoList";
-import TodoDetail from "./components/TodoDetail";
-import CalendarView from "./components/CalendarView";
-import SearchInput from "./components/ui/SearchInput";
+import { AppBar, Drawer } from "./components/layout";
+import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
+import { Tabs } from "./components/common";
+import { CalendarView } from "./features/calendar";
+import { SearchInput } from "./components/ui";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);

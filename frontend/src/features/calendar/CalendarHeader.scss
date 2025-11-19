@@ -1,0 +1,115 @@
+@use "../../styles/variables" as *;
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-4 $spacing-6;
+  background-color: var(--theme-bg-secondary);
+  border-bottom: 1px solid var(--theme-border);
+  transition: background-color $transition-base, border-color $transition-base;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__nav-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--theme-text-secondary);
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover {
+      background-color: var(--theme-bg-hover);
+      color: var(--theme-text-primary);
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+    }
+  }
+
+  &__today-btn {
+    padding: $spacing-2 $spacing-4;
+    background-color: var(--theme-bg-tertiary);
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background-color: var(--theme-bg-hover);
+      border-color: var(--theme-text-muted);
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-2xl; // 24px
+    font-weight: $font-weight-bold; // 900
+    color: var(--theme-text-primary);
+    margin: 0;
+  }
+
+  &__view-toggle {
+    display: flex;
+    background-color: var(--theme-bg-tertiary);
+    border-radius: $radius-md;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  &__toggle-btn {
+    padding: $spacing-2 $spacing-4;
+    background: none;
+    border: none;
+    color: var(--theme-text-secondary);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: var(--theme-text-primary);
+    }
+
+    &:focus {
+      outline: 2px solid $brand-red;
+      outline-offset: -2px;
+    }
+
+    &--active {
+      background-color: var(--theme-bg-hover);
+      color: var(--theme-text-primary);
+    }
+  }
+}

@@ -1,0 +1,211 @@
+@use "../../styles/variables" as *;
+
+.todo-item {
+  background-color: var(--theme-bg-secondary);
+  border: 1px solid var(--theme-border);
+  border-radius: $radius-xl;
+  box-shadow: $shadow-md;
+  padding: $spacing-5;
+  margin-bottom: $spacing-4;
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: var(--theme-bg-hover);
+    box-shadow: $shadow-lg;
+
+    .todo-item__delete-btn {
+      opacity: 1;
+    }
+  }
+
+  &--completed {
+    opacity: 0.6;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-5;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__checkbox-wrapper {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+  }
+
+  &__title {
+    font-size: $font-size-md; // 16px
+    font-weight: $font-weight-semibold; // 600
+    line-height: 1.5;
+    color: var(--theme-text-primary);
+
+    &--completed {
+      text-decoration: line-through;
+      color: var(--theme-text-secondary);
+    }
+  }
+
+  &__description {
+    font-size: $font-size-sm; // 12px
+    color: var(--theme-text-secondary);
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    flex-shrink: 0;
+  }
+
+  &__metadata {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+
+  &__priority-badge {
+    display: inline-flex; // Only take width needed
+    align-items: center;
+    padding: 4px 10px; // EXACT from spec
+    border-radius: 9999px; // Full rounded REQUIRED
+    font-size: $font-size-sm; // 12px
+    font-weight: $font-weight-medium; // 500 for labels/UI
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: fit-content; // Only use width needed
+
+    // HIGH - BRAND RED (#FD3039) REQUIRED
+    &--high {
+      background-color: $brand-red; // #FD3039
+      color: $text-invert; // #000000 - Black text on light badges
+    }
+
+    // MEDIUM - YELLOW (#FCD589) REQUIRED
+    &--medium {
+      background-color: $accent-yellow; // #FCD589
+      color: $text-invert; // #000000
+    }
+
+    // LOW - GREEN (#C9FFD8) REQUIRED
+    &--low {
+      background-color: $accent-green; // #C9FFD8
+      color: $text-invert; // #000000
+    }
+
+    &--default {
+      background-color: var(--theme-bg-tertiary);
+      color: var(--theme-text-secondary);
+    }
+  }
+
+  &__due-date {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-md;
+    background-color: var(--theme-bg-tertiary);
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      color: var(--theme-text-secondary);
+      flex-shrink: 0;
+    }
+
+    &--overdue {
+      background-color: rgba($brand-red, 0.2);
+      border: 1px solid rgba($brand-red, 0.4);
+
+      svg {
+        color: #ff758f; // Lighter red for visibility
+      }
+    }
+  }
+
+  &__due-date-text {
+    font-size: $font-size-sm; // 12px
+    color: var(--theme-text-secondary);
+    font-weight: $font-weight-medium; // 500 for UI
+    white-space: nowrap;
+
+    &--overdue {
+      color: $brand-red; // #FD3039
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  &__edit-btn,
+  &__delete-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--theme-text-secondary);
+    border-radius: $radius-md;
+    transition: all $transition-base;
+    border: none;
+
+    &:hover {
+      background-color: var(--theme-bg-tertiary);
+      color: var(--theme-text-primary);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &__edit-btn {
+    opacity: 1; // Always visible
+
+    &:hover {
+      color: white;
+      background-color: rgba($brand-red-dark, 0.3);
+    }
+  }
+
+  &__delete-btn {
+    opacity: 0; // Hidden by default
+
+    .todo-item:hover & {
+      opacity: 1;
+    }
+
+    &:hover {
+      color: white;
+      background-color: rgba($brand-red, 0.3);
+    }
+  }
+}
