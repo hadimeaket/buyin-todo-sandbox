@@ -8,27 +8,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-6;
-    z-index: 50;
+    padding: $spacing-4;
+    z-index: 100;
     backdrop-filter: blur(4px);
   }
 
   &__modal {
     max-width: 42rem;
     width: 100%;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
     background-color: var(--theme-bg-secondary);
     border-radius: 16px; // EXACT from spec
     box-shadow: $shadow-modal; // Strong but soft blur
     transition: background-color $transition-base;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--theme-bg-tertiary);
+      border-radius: $radius-sm;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--theme-bg-hover);
+      border-radius: $radius-sm;
+
+      &:hover {
+        background: var(--theme-text-muted);
+      }
+    }
   }
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $spacing-6;
+    padding: $spacing-4;
     border-bottom: 1px solid var(--theme-border);
     position: sticky;
     top: 0;
@@ -40,6 +59,10 @@
     font-size: $font-size-xl; // 20px
     font-weight: $font-weight-semibold; // 600
     color: var(--theme-text-primary);
+
+    @include desktop {
+      font-size: $font-size-lg;
+    }
   }
 
   &__close-btn {
@@ -53,6 +76,7 @@
     transition: all $transition-base;
     border: none;
     background: transparent;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--theme-bg-tertiary);
@@ -62,14 +86,19 @@
     svg {
       width: 1.25rem;
       height: 1.25rem;
+
+      @include desktop {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
     }
   }
 
   &__form {
-    padding: $spacing-6;
+    padding: $spacing-4;
     display: flex;
     flex-direction: column;
-    gap: $spacing-4;
+    gap: $spacing-2;
   }
 
   &__field {
@@ -82,9 +111,36 @@
     font-size: $font-size-sm; // 12px
     font-weight: $font-weight-medium; // 500 for labels/UI
     color: var(--theme-text-secondary);
-    margin-bottom: $spacing-2;
+    margin-bottom: $spacing-1;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  &__input {
+    width: 100%;
+    height: 2.25rem;
+    padding: $spacing-2 $spacing-3;
+    font-size: $font-size-base;
+    color: var(--theme-text-primary);
+    border: 1px solid var(--theme-border);
+    border-radius: $radius-md;
+    background-color: var(--theme-bg-tertiary);
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      box-shadow: $focus-ring; // Brand red focus
+      border-color: $brand-red; // #FD3039
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      background-color: var(--theme-bg-hover);
+    }
+
+    &::placeholder {
+      color: var(--theme-text-muted);
+    }
   }
 
   &__textarea {
@@ -117,12 +173,12 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-4;
+    gap: $spacing-2;
   }
 
   &__select {
     width: 100%;
-    height: 2.5rem;
+    height: 2.25rem;
     padding: 0 $spacing-3;
     font-size: $font-size-base;
     color: var(--theme-text-primary);
@@ -130,6 +186,12 @@
     border-radius: $radius-md;
     background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
+
+    @include below-laptop {
+      height: 2.25rem;
+      padding: 0 $spacing-2;
+      font-size: $font-size-sm;
+    }
 
     &:focus {
       outline: none;
@@ -145,7 +207,7 @@
 
   &__datetime-input {
     width: 100%;
-    height: 2.5rem;
+    height: 2.25rem;
     padding: 0 $spacing-3;
     font-size: $font-size-base;
     color: var(--theme-text-primary);
@@ -153,6 +215,12 @@
     border-radius: $radius-md;
     background-color: var(--theme-bg-tertiary);
     transition: all $transition-base;
+
+    @include below-laptop {
+      height: 2.25rem;
+      padding: 0 $spacing-2;
+      font-size: $font-size-sm;
+    }
 
     &:focus {
       outline: none;
@@ -168,8 +236,8 @@
 
   &__actions {
     display: flex;
-    gap: $spacing-3;
-    padding-top: $spacing-4;
+    gap: $spacing-2;
+    padding-top: $spacing-2;
     border-top: 1px solid var(--theme-border);
   }
 
@@ -178,6 +246,11 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-6;
+
+    @include desktop {
+      padding: $spacing-4 $spacing-5;
+      gap: $spacing-4;
+    }
   }
 
   &__task-header {
@@ -272,8 +345,8 @@
   &__time-config {
     display: flex;
     flex-direction: column;
-    gap: $spacing-4;
-    padding: $spacing-4;
+    gap: $spacing-2;
+    padding: $spacing-2;
     background-color: var(--theme-bg-secondary);
     border-radius: $radius-lg;
   }

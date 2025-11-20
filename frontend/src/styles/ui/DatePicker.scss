@@ -7,6 +7,11 @@
     font-weight: $font-weight-medium;
     color: $text-primary;
     margin-bottom: $spacing-2;
+
+    @include below-laptop {
+      font-size: $font-size-xs;
+      margin-bottom: $spacing-1;
+    }
   }
 
   &__required {
@@ -33,6 +38,12 @@
     cursor: pointer;
     transition: all $transition-fast;
     text-align: left;
+
+    @include below-laptop {
+      padding: $spacing-2 $spacing-3;
+      font-size: $font-size-sm;
+      gap: $spacing-1;
+    }
 
     &:hover:not(:disabled) {
       border-color: var(--theme-border);

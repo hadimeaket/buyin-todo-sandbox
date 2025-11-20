@@ -92,11 +92,63 @@ $font-weight-medium: 500; // Labels, UI elements (Geologica Medium)
 $font-weight-semibold: 600; // Subheadings H4, H5 (Geologica SemiBold)
 $font-weight-bold: 900; // Headings H1, H2, H3 (Geologica Black)
 
-// Breakpoints
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
+// Breakpoints (Mobile-first approach)
+$breakpoint-mobile: 360px; // Mobile portrait
+$breakpoint-sm: 480px; // Small phones landscape
+$breakpoint-md: 640px; // Tablets
+$breakpoint-lg: 1024px; // Laptops/Desktops
+$breakpoint-xl: 1280px; // Standard laptops
+$breakpoint-2xl: 1536px; // Ultrawide
+
+// Responsive Mixins (Mobile-first with min-width)
+@mixin mobile {
+  @media (min-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin small-phone {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin ultrawide {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+// Desktop-first mixins (max-width) for specific cases
+@mixin below-laptop {
+  @media (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin below-tablet {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
 
 // Transitions
 $transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);

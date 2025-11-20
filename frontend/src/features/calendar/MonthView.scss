@@ -49,6 +49,7 @@
     flex-direction: column;
     background-color: var(--theme-bg-primary);
     transition: background-color $transition-fast;
+    overflow: hidden;
 
     &:last-child {
       border-right: none;

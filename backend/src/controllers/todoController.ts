@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { todoRepository } from "../repositories/TodoRepository";
+import { todoService } from "../services/TodoService";
 import { CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 
 export const getAllTodos = async (
@@ -8,7 +8,7 @@ export const getAllTodos = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todos = await todoRepository.findAll();
+    const todos = await todoService.getAllTodos();
     res.status(200).json(todos);
   } catch (error) {
     next(error);
@@ -21,7 +21,7 @@ export const getTodoById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoRepository.findById(req.params.id);
+    const todo = await todoService.getTodoById(req.params.id);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -39,26 +39,18 @@ export const createTodo = async (
 ): Promise<void> => {
   try {
     const data: CreateTodoDto = req.body;
-    if (!data.title || data.title.trim() === "") {
-      res.status(400).json({ message: "Title is required" });
-      return;
+    try {
+      const todo = await todoService.createTodo(data);
+      res.status(201).json(todo);
+    } catch (err: any) {
+      if (err.message === "Title is required") {
+        res.status(400).json({ message: err.message });
+      } else if (err.message === "A todo with this title already exists") {
+        res.status(409).json({ message: err.message });
+      } else {
+        throw err;
+      }
     }
-
-    // Check for duplicate
-    const duplicate = await todoRepository.findDuplicate(
-      data.title,
-      data.description
-    );
-    if (duplicate) {
-      res.status(409).json({
-        message: "A todo with this title already exists",
-        existingTodo: duplicate,
-      });
-      return;
-    }
-
-    const todo = await todoRepository.create(data);
-    res.status(201).json(todo);
   } catch (error) {
     next(error);
   }
@@ -71,7 +63,7 @@ export const updateTodo = async (
 ): Promise<void> => {
   try {
     const data: UpdateTodoDto = req.body;
-    const todo = await todoRepository.update(req.params.id, data);
+    const todo = await todoService.updateTodo(req.params.id, data);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -88,7 +80,7 @@ export const toggleTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoRepository.toggle(req.params.id);
+    const todo = await todoService.toggleTodo(req.params.id);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -105,7 +97,7 @@ export const deleteTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const deleted = await todoRepository.delete(req.params.id);
+    const deleted = await todoService.deleteTodo(req.params.id);
     if (!deleted) {
       res.status(404).json({ message: "Todo not found" });
       return;

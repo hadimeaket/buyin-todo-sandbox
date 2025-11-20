@@ -8,18 +8,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: $spacing-6;
-    z-index: 50;
+    padding: $spacing-4;
+    z-index: 100;
     backdrop-filter: blur(4px);
   }
 
   &__modal {
     max-width: 42rem;
     width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
     background-color: var(--theme-bg-secondary);
     border-radius: 16px;
     box-shadow: $shadow-modal;
     transition: background-color $transition-base;
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--theme-bg-tertiary);
+      border-radius: $radius-sm;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--theme-bg-hover);
+      border-radius: $radius-sm;
+
+      &:hover {
+        background: var(--theme-text-muted);
+      }
+    }
   }
 
   &__header {
@@ -30,12 +51,21 @@
     border-bottom: 1px solid var(--theme-border);
     background-color: var(--theme-bg-secondary);
     border-radius: 16px 16px 0 0;
+
+    // Compact header for laptops and below
+    @include below-laptop {
+      padding: $spacing-4 $spacing-5;
+    }
   }
 
   &__title {
     font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
     color: var(--theme-text-primary);
+
+    @include below-laptop {
+      font-size: $font-size-lg;
+    }
   }
 
   &__close-btn {
@@ -59,6 +89,11 @@
     svg {
       width: 1.25rem;
       height: 1.25rem;
+
+      @include below-laptop {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
     }
   }
 
@@ -67,6 +102,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $spacing-4;
+
+    // Compact spacing for laptops and below
+    @include below-laptop {
+      padding: $spacing-4 $spacing-5;
+      gap: $spacing-3;
+    }
 
     // Full width items
     > .add-task-modal__field--full-width {
@@ -150,6 +191,11 @@
     margin-bottom: $spacing-2;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+
+    @include below-laptop {
+      font-size: $font-size-xs;
+      margin-bottom: $spacing-1;
+    }
   }
 
   &__required {
@@ -167,6 +213,11 @@
     background-color: var(--theme-bg-tertiary);
     backdrop-filter: blur(8px);
     transition: all $transition-base;
+
+    @include below-laptop {
+      padding: $spacing-2 $spacing-3;
+      font-size: $font-size-sm;
+    }
 
     &:focus {
       outline: none;
@@ -233,6 +284,10 @@
   &__textarea {
     resize: vertical;
     min-height: 80px;
+
+    @include below-laptop {
+      min-height: 60px;
+    }
   }
 
   &__checkbox-label {
@@ -285,6 +340,11 @@
     padding-top: $spacing-4;
     border-top: 1px solid var(--theme-border);
     justify-content: flex-end;
+
+    @include below-laptop {
+      padding-top: $spacing-3;
+      gap: $spacing-2;
+    }
   }
 
   &__button {

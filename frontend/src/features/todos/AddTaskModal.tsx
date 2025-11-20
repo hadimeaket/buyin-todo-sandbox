@@ -26,6 +26,9 @@ export default function AddTaskModal({
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [isAllDay, setIsAllDay] = useState(false);
+  const [recurrence, setRecurrence] = useState<
+    "none" | "daily" | "weekly" | "monthly" | "yearly"
+  >("none");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
@@ -57,6 +60,7 @@ export default function AddTaskModal({
     setIsAllDay(todo.isAllDay ?? false);
     setStartTime(todo.startTime || "");
     setEndTime(todo.endTime || "");
+    setRecurrence(todo.recurrence || "none");
     setShowSuggestions(false);
     setFilteredSuggestions([]);
   };
@@ -83,6 +87,10 @@ export default function AddTaskModal({
     // Automatically set to all-day when a date range is selected
     if (end && end !== start) {
       setIsAllDay(true);
+      // Can't have both multi-day range and recurrence
+      if (recurrence !== "none") {
+        setRecurrence("none");
+      }
     }
   };
 
@@ -145,6 +153,7 @@ export default function AddTaskModal({
         isAllDay,
         startTime: !isAllDay && startTime ? startTime : undefined,
         endTime: !isAllDay && endTime ? endTime : undefined,
+        recurrence,
       };
 
       await onAdd(todoData);
@@ -317,6 +326,37 @@ export default function AddTaskModal({
               </div>
             </div>
           )}
+
+          {/* Recurrence - Full Width */}
+          <div className="add-task-modal__field add-task-modal__field--full-width">
+            <Select
+              id="recurrence"
+              label="Recurrence"
+              value={recurrence}
+              onChange={(value) =>
+                setRecurrence(
+                  value as "none" | "daily" | "weekly" | "monthly" | "yearly"
+                )
+              }
+              options={[
+                { value: "none", label: "Does not repeat" },
+                { value: "daily", label: "Daily" },
+                { value: "weekly", label: "Weekly" },
+                { value: "monthly", label: "Monthly" },
+                { value: "yearly", label: "Yearly" },
+              ]}
+              disabled={
+                disabled ||
+                isSubmitting ||
+                !!(dueDate && dueEndDate && dueDate !== dueEndDate)
+              }
+              hint={
+                dueDate && dueEndDate && dueDate !== dueEndDate
+                  ? "Disabled for date ranges"
+                  : undefined
+              }
+            />
+          </div>
 
           {/* Actions */}
           <div className="add-task-modal__actions">
