@@ -69,24 +69,28 @@
     position: relative;
     font-size: $font-size-xs;
     padding: 2px $spacing-2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     max-width: 100%;
-    display: block;
-
+    
+    // Critical: Override flex display to allow ellipsis to work
     .calendar-event__content {
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      display: block;
+      width: 100%;
     }
 
     .calendar-event__title {
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      display: block;
+      width: 100%;
+    }
+
+    // Prevent hover transform from breaking layout
+    &:hover {
+      transform: none;
     }
   }
 
