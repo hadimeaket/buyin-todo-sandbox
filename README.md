@@ -306,6 +306,14 @@ Run tests with UI:
 npm run test:ui
 ```
 
+## Automated Evaluation & CI
+
+- Run `node evaluation/run.js` from the repo root to execute backend/frontend linting, unit tests, and Playwright E2E suites in one shot. The runner enforces `CI=1`, truncates noisy logs, and writes machine-readable results to `evaluation/result.json` plus a human summary in `evaluation/result.md`.
+- Generated test reports (`backend/test-results.json`, `frontend/test-results.json`) provide detailed failure diagnostics and are automatically refreshed whenever the evaluation script runs.
+- GitHub Actions workflow `.github/workflows/vibe-challenge-evaluation.yml` executes the same script on every push and pull request targeting `main`, ensuring the Vibe Challenge checks remain reproducible in CI. The workflow uploads the evaluation artifacts so failures can be inspected without rerunning locally.
+- Current automation coverage and the latest run status (including any intentionally failing suites) are tracked in `EVALUATION_AUTOMATION_STATUS.md`.
+- Legacy component regression suites (DatePicker, TimePicker, AddTaskModal, TodoItem, TodoList) are skipped by default to match the sandbox UI; set `RUN_LEGACY_UI_SPECS=true` before running Vitest if you need to exercise them locally.
+
 ## Architecture Notes
 
 ### Backend Architecture

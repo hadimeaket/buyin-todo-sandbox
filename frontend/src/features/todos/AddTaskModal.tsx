@@ -210,6 +210,7 @@ export default function AddTaskModal({
               disabled={disabled || isSubmitting}
               required
               autoFocus
+              data-testid="add-task-title-input"
             />
             {showSuggestions && filteredSuggestions.length > 0 && (
               <div className="add-task-modal__suggestions">
@@ -248,6 +249,7 @@ export default function AddTaskModal({
               disabled={disabled || isSubmitting}
               rows={2}
               required
+              data-testid="add-task-description-input"
             />
           </div>
 
@@ -372,6 +374,7 @@ export default function AddTaskModal({
               type="submit"
               className="add-task-modal__button add-task-modal__button--primary"
               disabled={disabled || isSubmitting || !isFormValid()}
+              data-testid="add-task-submit"
             >
               {isSubmitting ? "Adding..." : "Add Task"}
             </button>

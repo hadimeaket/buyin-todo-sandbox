@@ -48,3 +48,10 @@ Thumbs.db
 *.sqlite
 *.sqlite3
 *.db
+
+# Evaluation artifacts
+evaluation/result.json
+evaluation/result.md
+backend/test-results.json
+frontend/test-results.json
+frontend/test-results/
