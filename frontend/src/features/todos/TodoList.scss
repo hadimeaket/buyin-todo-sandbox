@@ -5,6 +5,10 @@
   flex-direction: column;
   gap: $spacing-6;
   padding-bottom: $spacing-4;
+  
+  // Performance optimizations
+  contain: layout style paint;
+  will-change: scroll-position;
 
   &__group {
     display: flex;
@@ -65,5 +69,19 @@
   &__empty-subtitle {
     font-size: $font-size-base; // 16px
     color: var(--theme-text-secondary);
+  }
+
+  // Virtualized list specific styles
+  &--virtualized {
+    position: relative;
+    contain: strict;
+    will-change: scroll-position;
+
+    .todo-list__group-title {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: $spacing-2 0;
+    }
   }
 }

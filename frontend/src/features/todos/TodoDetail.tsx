@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Todo, UpdateTodoDto } from "../../types/todo";
+import type { Category } from "../../types/category";
 import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import Badge from "../../components/ui/Badge";
@@ -11,16 +12,18 @@ import "./TodoDetail.scss";
 
 interface TodoDetailProps {
   todo: Todo;
+  categories?: Category[];
   onClose: () => void;
   onUpdate: (id: string, data: UpdateTodoDto) => Promise<void>;
 }
 
-function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
+function TodoDetail({ todo, categories = [], onClose, onUpdate }: TodoDetailProps) {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description || "");
   const [priority, setPriority] = useState<"low" | "medium" | "high">(
     todo.priority
   );
+  const [categoryId, setCategoryId] = useState(todo.categoryId || "");
   const [dueDate, setDueDate] = useState(
     todo.dueDate ? todo.dueDate.substring(0, 10) : ""
   );
@@ -86,6 +89,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
         title: title.trim(),
         description: description.trim() || undefined,
         priority,
+        categoryId: categoryId || undefined,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
         isAllDay,
@@ -107,6 +111,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
     setTitle(todo.title);
     setDescription(todo.description || "");
     setPriority(todo.priority);
+    setCategoryId(todo.categoryId || "");
     setDueDate(todo.dueDate ? todo.dueDate.substring(0, 10) : "");
     setDueEndDate(todo.dueEndDate ? todo.dueEndDate.substring(0, 10) : "");
     setIsAllDay(todo.isAllDay ?? true);
@@ -218,7 +223,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
               />
             </div>
 
-            {/* Priority and Due Date Grid */}
+            {/* Priority, Category and Due Date Grid */}
             <div className="todo-detail__grid">
               <div className="todo-detail__field">
                 <label htmlFor="edit-priority" className="todo-detail__label">
@@ -236,6 +241,29 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
                   <option value="high">High</option>
+                </select>
+              </div>
+
+              <div className="todo-detail__field">
+                <label htmlFor="edit-category" className="todo-detail__label">
+                  Category
+                </label>
+                <select
+                  id="edit-category"
+                  className="todo-detail__select"
+                  value={categoryId}
+                  onChange={(e) => {
+                    console.log('Category selected:', e.target.value);
+                    setCategoryId(e.target.value);
+                  }}
+                  disabled={isSaving}
+                >
+                  <option value="">None</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -382,6 +410,26 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                     todo.priority.slice(1)}
                 </Badge>
               </div>
+
+              {todo.categoryId && categories.length > 0 && (
+                <div className="todo-detail__section">
+                  <h4 className="todo-detail__section-title">Category</h4>
+                  {(() => {
+                    const category = categories.find((c) => c.id === todo.categoryId);
+                    return category ? (
+                      <Badge
+                        style={{
+                          backgroundColor: `${category.color}20`,
+                          color: category.color,
+                          borderColor: category.color,
+                        }}
+                      >
+                        {category.name}
+                      </Badge>
+                    ) : null;
+                  })()}
+                </div>
+              )}
 
               <div className="todo-detail__section">
                 <h4 className="todo-detail__section-title">Due date</h4>

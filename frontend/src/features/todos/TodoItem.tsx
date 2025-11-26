@@ -1,15 +1,18 @@
+import React from "react";
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import Checkbox from "../../components/ui/Checkbox";
 import "./TodoItem.scss";
 
 interface TodoItemProps {
   todo: Todo;
+  category?: Category;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onViewDetails: (todo: Todo) => void;
 }
 
-function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
+const TodoItem = React.memo(({ todo, category, onToggle, onDelete, onViewDetails }: TodoItemProps) => {
   const isOverdue = () => {
     if (!todo.dueDate || todo.completed) return false;
 
@@ -108,6 +111,9 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
   return (
     <div
       className={`todo-item ${todo.completed ? "todo-item--completed" : ""}`}
+      style={{
+        borderLeft: category ? `4px solid ${category.color}` : undefined,
+      }}
     >
       <div className="todo-item__container">
         {/* Left Side: Checkbox + Text Content */}
@@ -149,6 +155,20 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
         <div className="todo-item__right">
           {/* Metadata */}
           <div className="todo-item__metadata">
+            {/* Category Badge */}
+            {category && (
+              <span
+                className="todo-item__category-badge"
+                style={{
+                  backgroundColor: `${category.color}20`,
+                  color: category.color,
+                  borderColor: category.color,
+                }}
+              >
+                {category.name}
+              </span>
+            )}
+
             {/* Priority Badge */}
             <span
               className={`todo-item__priority-badge ${getPriorityClass(
@@ -234,6 +254,8 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
       </div>
     </div>
   );
-}
+});
+
+TodoItem.displayName = 'TodoItem';
 
 export default TodoItem;

@@ -5,7 +5,10 @@ export const logger = (
   _res: Response,
   next: NextFunction
 ): void => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] ${req.method} ${req.path}`);
+  // Skip logging for health check endpoint
+  if (req.path !== '/api/health') {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${req.method} ${req.path}`);
+  }
   next();
 };

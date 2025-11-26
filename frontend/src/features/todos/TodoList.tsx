@@ -1,9 +1,11 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import TodoItem from "./TodoItem";
 import "./TodoList.scss";
 
 interface TodoListProps {
   todos: Todo[];
+  categories: Category[];
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onViewDetails: (todo: Todo) => void;
@@ -15,7 +17,7 @@ interface GroupedTodos {
   todos: Todo[];
 }
 
-function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
+function TodoList({ todos, categories, onToggle, onDelete, onViewDetails }: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
@@ -109,15 +111,19 @@ function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
         <div key={group.date} className="todo-list__group">
           <div className="todo-list__group-title">{group.displayDate}</div>
           <div className="todo-list__group-items">
-            {group.todos.map((todo) => (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                onToggle={onToggle}
-                onDelete={onDelete}
-                onViewDetails={onViewDetails}
-              />
-            ))}
+            {group.todos.map((todo) => {
+              const category = categories.find((c) => c.id === todo.categoryId);
+              return (
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  category={category}
+                  onToggle={onToggle}
+                  onDelete={onDelete}
+                  onViewDetails={onViewDetails}
+                />
+              );
+            })}
           </div>
         </div>
       ))}

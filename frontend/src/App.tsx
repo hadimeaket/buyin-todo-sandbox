@@ -2,15 +2,19 @@
 import { useState, useEffect } from "react";
 import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
+import type { Category } from "./types/category";
 import { todoApi } from "./services/todoApi";
+import { categoryApi } from "./services/categoryApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { CategoryManager } from "./features/categories";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
@@ -18,9 +22,11 @@ function App() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
+  const [isCategoryManagerOpen, setIsCategoryManagerOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
+    fetchCategories();
   }, []);
 
   const fetchTodos = async () => {
@@ -34,6 +40,16 @@ function App() {
       setError("Failed to load todos. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const data = await categoryApi.getAllCategories();
+      setCategories(data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load categories. Please try again.");
     }
   };
 
@@ -154,6 +170,41 @@ function App() {
         completedCount={stats.completed}
         onAddTask={() => setIsAddTaskModalOpen(true)}
       />
+      
+      {/* Categories Button - Floating */}
+      <button
+        className="app__categories-btn"
+        onClick={() => setIsCategoryManagerOpen(true)}
+        title="Kategorien verwalten"
+      >
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+          />
+        </svg>
+      </button>
+
+      {/* Export ICS Button - Floating */}
+      <button
+        className="app__export-btn"
+        onClick={() => {
+          window.location.href = 'http://localhost:4000/api/todos/export/ics';
+        }}
+        title="Als Kalender exportieren (ICS)"
+      >
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+          />
+        </svg>
+      </button>
+      
       <div className="app__container">
         <main className="app__main-card">
           {error && (
@@ -251,6 +302,7 @@ function App() {
                 ) : (
                   <TodoList
                     todos={filteredTodos}
+                    categories={categories}
                     onToggle={handleToggleTodo}
                     onDelete={handleDeleteTodo}
                     onViewDetails={handleViewDetails}
@@ -272,6 +324,7 @@ function App() {
         {selectedTodo && (
           <TodoDetail
             todo={selectedTodo}
+            categories={categories}
             onClose={() => setSelectedTodo(null)}
             onUpdate={handleUpdateTodo}
           />
@@ -283,7 +336,21 @@ function App() {
             onAdd={handleAddTodo}
             disabled={loading}
             existingTodos={todos}
+            categories={categories}
           />
+        )}
+
+        {isCategoryManagerOpen && (
+          <div className="modal-overlay" onClick={() => setIsCategoryManagerOpen(false)}>
+            <div onClick={(e) => e.stopPropagation()}>
+              <CategoryManager
+                onClose={() => {
+                  setIsCategoryManagerOpen(false);
+                  fetchCategories();
+                }}
+              />
+            </div>
+          </div>
         )}
       </div>
     </div>

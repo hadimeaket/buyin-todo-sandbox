@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import routes from './routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './middleware/logger';
+import { categoryRepository } from './repositories/CategoryRepository';
 
 dotenv.config();
 
@@ -22,8 +23,20 @@ app.use('/api', routes);
 // Error handling
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    // Initialize default categories
+    await categoryRepository.initializeDefaultCategories();
+    
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+};
+
+startServer();
 
 export default app;
