@@ -15,6 +15,7 @@ interface SelectProps {
   label?: string;
   required?: boolean;
   placeholder?: string;
+  hint?: string;
 }
 
 function Select({
@@ -26,6 +27,7 @@ function Select({
   label,
   required = false,
   placeholder = "Select an option",
+  hint,
 }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -126,6 +128,8 @@ function Select({
           </div>
         )}
       </div>
+
+      {hint && <p className="select__hint">{hint}</p>}
     </div>
   );
 }

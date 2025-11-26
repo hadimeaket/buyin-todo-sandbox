@@ -18,6 +18,12 @@
     position: relative;
   }
 
+  &__hint {
+    margin-top: $spacing-2;
+    font-size: $font-size-sm;
+    color: var(--theme-text-muted);
+  }
+
   &__input {
     width: 100%;
     display: flex;

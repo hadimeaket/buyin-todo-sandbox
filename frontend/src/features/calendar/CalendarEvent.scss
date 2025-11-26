@@ -126,10 +126,19 @@
     text-transform: uppercase;
     padding: 2px 6px;
     border-radius: $radius-sm;
-    
-    &--high { color: $brand-red; background-color: rgba($brand-red, 0.1); }
-    &--medium { color: darken($accent-yellow, 20%); background-color: rgba($accent-yellow, 0.2); }
-    &--low { color: darken($accent-green, 40%); background-color: rgba($accent-green, 0.2); }
+
+    &--high {
+      color: $brand-red;
+      background-color: rgba($brand-red, 0.1);
+    }
+    &--medium {
+      color: darken($accent-yellow, 20%);
+      background-color: rgba($accent-yellow, 0.2);
+    }
+    &--low {
+      color: darken($accent-green, 40%);
+      background-color: rgba($accent-green, 0.2);
+    }
   }
 
   &__expand {
@@ -154,7 +163,7 @@
     padding: $spacing-3;
     cursor: pointer;
     transition: background-color $transition-fast;
-    
+
     &:hover {
       background-color: var(--theme-bg-hover);
     }
@@ -203,4 +212,3 @@
     white-space: normal;
   }
 }
-

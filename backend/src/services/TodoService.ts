@@ -20,7 +20,7 @@ export class TodoService {
       data.title,
       data.description
     );
-    
+
     if (duplicate) {
       throw new Error("A todo with this title already exists");
     }
