@@ -1,16 +1,16 @@
 # Evaluation Automation Status
 
-_Last updated: 2025-11-26 10:49 UTC (via `node evaluation/run.js`)_
+_Last updated: 2025-11-26 12:27 UTC (via `node evaluation/run.js`)_
 
 ## Coverage Overview
 
-| Check | Tooling | Status | Notes |
-| --- | --- | --- | --- |
-| Backend ESLint | `eslint src --ext .ts` | ✅ Passing | Lints all TypeScript sources with the shared flat config.
-| Backend Jest Suite | `jest --runInBand --json --outputFile=./test-results.json` | ✅ Passing | Repository + task-scoped regression suites all green; todo placeholders remain marked as `todo` tests.
-| Frontend ESLint | `eslint src --ext .ts,.tsx` | ✅ Passing | React + TypeScript lint rules run without autofix for deterministic output.
-| Frontend Vitest Suite | `vitest run --reporter=json --outputFile=./test-results.json` | ✅ Passing | Legacy UI specs (DatePicker/TimePicker/AddTaskModal/TodoItem/TodoList) are opt-in via `RUN_LEGACY_UI_SPECS=true` to keep default runs aligned with the current sandbox feature set.
-| Frontend Playwright E2E | `playwright test --reporter=line --workers=1` | ✅ Passing | Critical multi-day calendar and performance specs pass; 5 optional specs remain skipped by design.
+| Check                   | Tooling                                                       | Status     | Notes                                                                                                                                                                               |
+| ----------------------- | ------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backend ESLint          | `eslint src --ext .ts`                                        | ✅ Passing | Lints all TypeScript sources with the shared flat config.                                                                                                                           |
+| Backend Jest Suite      | `jest --runInBand --json --outputFile=./test-results.json`    | ✅ Passing | Repository + task-scoped regression suites all green; todo placeholders remain marked as `todo` tests.                                                                              |
+| Frontend ESLint         | `eslint src --ext .ts,.tsx`                                   | ✅ Passing | React + TypeScript lint rules run without autofix for deterministic output.                                                                                                         |
+| Frontend Vitest Suite   | `vitest run --reporter=json --outputFile=./test-results.json` | ✅ Passing | Legacy UI specs (DatePicker/TimePicker/AddTaskModal/TodoItem/TodoList) are opt-in via `RUN_LEGACY_UI_SPECS=true` to keep default runs aligned with the current sandbox feature set. |
+| Frontend Playwright E2E | `playwright test --reporter=line --workers=1`                 | ✅ Passing | Runs on an isolated port (`FRONTEND_PORT=4174`) to avoid dev-server clashes; 5 optional specs remain skipped by design.                                                             |
 
 ## Known Failures & Gaps
 

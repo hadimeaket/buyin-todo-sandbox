@@ -230,7 +230,7 @@ export default function Drawer({
           className="drawer__action drawer__action--add-task"
           onClick={onAddTask}
           title="Add task"
-           data-testid="drawer-add-task"
+          data-testid="drawer-add-task"
         >
           <svg
             width="20"

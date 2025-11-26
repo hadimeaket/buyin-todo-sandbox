@@ -1,9 +1,9 @@
-import { env } from "node:process";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { isLegacySuiteEnabled } from "../../test-utils/legacySuite";
 import TimePicker from "./TimePicker";
 
-const legacySuite = env.RUN_LEGACY_UI_SPECS === "true" ? describe : describe.skip;
+const legacySuite = isLegacySuiteEnabled ? describe : describe.skip;
 
 // TimePicker specs target historical UX flows (dropdown selections, validation rules) that the current sandbox
 // implementation does not ship. Guard them behind RUN_LEGACY_UI_SPECS to keep CI noise-free while preserving

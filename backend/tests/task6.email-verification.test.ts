@@ -5,11 +5,7 @@ describe("TASK6_EMAIL_VERIFICATION", () => {
     "creates a verification token during registration and logs the link to stdout"
   );
 
-  it.todo(
-    "rejects login attempts until the verification endpoint is called"
-  );
+  it.todo("rejects login attempts until the verification endpoint is called");
 
-  it.todo(
-    "expires verification tokens after 24 hours"
-  );
+  it.todo("expires verification tokens after 24 hours");
 });

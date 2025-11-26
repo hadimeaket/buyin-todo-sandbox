@@ -1,9 +1,9 @@
-import { env } from "node:process";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { isLegacySuiteEnabled } from "../../test-utils/legacySuite";
 import AddTaskModal from "./AddTaskModal";
 
-const legacySuite = env.RUN_LEGACY_UI_SPECS === "true" ? describe : describe.skip;
+const legacySuite = isLegacySuiteEnabled ? describe : describe.skip;
 
 // Legacy acceptance specs for a richer modal that is not part of the current sandbox UI.
 // They remain available behind RUN_LEGACY_UI_SPECS for historical context, but default runs skip them

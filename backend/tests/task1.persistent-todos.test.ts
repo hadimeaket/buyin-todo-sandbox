@@ -3,9 +3,9 @@ import { todoService } from "../src/services/TodoService";
 
 describe("TASK1_PERSISTENT_TODOS", () => {
   it("rejects todos without a title", async () => {
-    await expect(
-      todoService.createTodo({ title: "" })
-    ).rejects.toThrow("Title is required");
+    await expect(todoService.createTodo({ title: "" })).rejects.toThrow(
+      "Title is required"
+    );
   });
 
   it("creates todos that can be retrieved afterwards", async () => {

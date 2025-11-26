@@ -1,10 +1,10 @@
-import { env } from "node:process";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
+import { isLegacySuiteEnabled } from "../../test-utils/legacySuite";
 import TodoList from "./TodoList";
 import type { Todo } from "../../types/todo";
 
-const legacySuite = env.RUN_LEGACY_UI_SPECS === "true" ? describe : describe.skip;
+const legacySuite = isLegacySuiteEnabled ? describe : describe.skip;
 
 // The grouping/formatting behaviors asserted here refer to the original UI spec.
 // Keep the suite opt-in via RUN_LEGACY_UI_SPECS so we can revisit later without blocking CI.

@@ -1,142 +1,46 @@
-# Todo Application
+# BuyIn Todo Sandbox
 
-A full-stack todo application built with React, TypeScript, Node.js, and Express.
+This repository is the automation playground for the BuyIn bachelor thesis. It mirrors the “challenge” surface that students are evaluated against: a lightweight todo backend, an expressive React frontend, and an orchestration script that proves whether automation tasks (linting, regression tests, E2E flows) succeed.
 
-## Technology Stack
+## Purpose
 
-### Backend
+- **Benchmark real work** – Each backend or frontend task corresponds to a concrete business expectation (attachments, ICS export, multi-day calendar, etc.). Automated suites document what “done” means without a production deployment.
+- **Grade automatically** – `evaluation/run.js` stitches together ESLint, Jest, Vitest, and Playwright, then emits JSON/Markdown so instructors can verify deliverables quickly.
+- **Guide contributors** – The repo layout and docs keep bachelor candidates focused on the scenarios they must implement or debug, instead of reverse-engineering requirements from external slide decks.
 
-- **Runtime**: Node.js 20 LTS
-- **Language**: TypeScript
-- **Framework**: Express.js
-- **Testing**: Jest
-- **Dependencies**: CORS, dotenv, UUID
+## What to Know
 
-### Frontend
+| Area               | Why it matters for the bachelor                                                                                                               | Where to look                                                          |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Core todo domain   | Minimal Express API exposing CRUD plus task-specific hooks (file upload, recurring events, etc.). Task suites describe acceptance criteria.   | `backend/src`, `backend/tests`                                         |
+| Challenge UI       | React SPA showcasing modal creation, grouped lists (“Today”, “Tomorrow”, “Overdue”), multi-day calendar bars, and performance stressors.      | `frontend/src/features`, `frontend/src/components/ui`                  |
+| Automation harness | One command (`node evaluation/run.js`) drives lint/unit/E2E runs. GitHub Actions reuses the same script, so green locally equals green in CI. | `evaluation/run.js`, `.github/workflows/vibe-challenge-evaluation.yml` |
+| Status artifact    | Up-to-date pass/fail record plus coverage commentary for supervisors.                                                                         | `EVALUATION_AUTOMATION_STATUS.md`                                      |
 
-- **Framework**: React 19
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **HTTP Client**: Axios
-- **Testing**: Vitest + React Testing Library
-- **Deployment**: Nginx (in Docker)
-
-### DevOps
-
-- **Containerization**: Docker
-- **Orchestration**: Docker Compose
-
-## Repository Structure
-
-```
-.
-├── backend/                 # Node.js backend server
-│   ├── src/
-│   │   ├── controllers/     # Request handlers
-│   │   ├── middleware/      # Express middleware
-│   │   ├── models/          # Data models and DTOs
-│   │   ├── repositories/    # Data access layer
-│   │   ├── routes/          # API routes
-│   │   └── server.ts        # Application entry point
-│   ├── Dockerfile
-│   ├── package.json
-│   └── tsconfig.json
-├── frontend/                # React frontend application
-│   ├── src/
-│   │   ├── components/      # React components
-│   │   ├── services/        # API service layer
-│   │   ├── types/           # TypeScript type definitions
-│   │   ├── App.tsx          # Main application component
-│   │   └── main.tsx         # Application entry point
-│   ├── Dockerfile
-│   ├── nginx.conf           # Nginx configuration
-│   ├── package.json
-│   └── vite.config.ts
-├── docker-compose.yml       # Docker orchestration
-├── .gitignore
-└── README.md
-```
-
-## Running Locally (Without Docker)
-
-### Prerequisites
-
-- Node.js 20 or higher
-- npm or yarn
-
-### Backend Setup
-
-1. Navigate to the backend directory:
+## Daily Workflow
 
 ```bash
-cd backend
+npm ci --prefix backend
+npm ci --prefix frontend
+node evaluation/run.js
 ```
 
-2. Install dependencies:
+1. Install dependencies per workspace.
+2. Implement or debug the relevant challenge task (backend specs in `backend/tests`, UI/Vitest specs in `frontend/tests`, Playwright flows in `frontend/e2e`).
+3. Run `node evaluation/run.js` to generate `evaluation/result.json` and `evaluation/result.md`. The script forces `CI=1` and binds Playwright to an isolated port so it never clashes with local dev servers.
+4. Push your branch—GitHub Actions executes the exact same script and uploads the artifacts for review.
 
-```bash
-npm install
-```
+## Constraints & Tips
 
-3. Create a `.env` file (optional):
+- **Legacy UI suites** (DatePicker, TimePicker, AddTaskModal, TodoItem, TodoList) are opt-in via `RUN_LEGACY_UI_SPECS=true`. They capture historical flows but are not part of the bachelor baseline.
+- **Backend task specs** rely on in-memory repositories plus `test.todo` placeholders. Passing specs proves the contract; filling TODOs activates the assertions.
+- **Frontend E2E** focuses on Vibe Challenge scenarios (persistent todos, multi-day calendar bars, virtualization performance). Keep DOM hooks stable when iterating on UI.
+- **Evaluation artifacts** (`evaluation/result.*`, test-result JSON files) are generated—don’t hand-edit them.
 
-```bash
-cp .env.example .env
-```
+## Need More Detail?
 
-4. Run in development mode:
-
-```bash
-npm run dev
-```
-
-The backend will start on `http://localhost:4000`
-
-5. Run tests:
-
-```bash
-npm test
-```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-
-```bash
-npm install
-```
-
-3. Create a `.env` file (optional):
-
-```bash
-cp .env.example .env
-```
-
-4. Run in development mode (with hot reload):
-
-```bash
-npm run dev
-```
-
-The frontend will start on `http://localhost:5173` with hot reload enabled.
-
-5. Run tests:
-
-```bash
-npm test
-```
-
-## Running with Docker Compose
-
-### Prerequisites
-
-- Docker
+- Current pass/fail snapshot & coverage commentary: `EVALUATION_AUTOMATION_STATUS.md`.
+- Full repo tree, Docker scripts, and classic setup instructions exist in the Git history if ever required, but intentionally trimmed here to keep the bachelor documentation focused.
 - Docker Compose
 
 ### Development Mode (with Hot Reload)

@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require("node:child_process");
-const { mkdirSync, writeFileSync, existsSync, readFileSync } = require("node:fs");
+const {
+  mkdirSync,
+  writeFileSync,
+  existsSync,
+  readFileSync,
+} = require("node:fs");
 const path = require("node:path");
 
 const rootDir = path.resolve(__dirname, "..");
@@ -50,6 +55,7 @@ const checks = [
     command: "npm",
     args: ["run", "test:e2e", "--", "--reporter=line", "--workers=1"],
     type: "e2e",
+    env: { FRONTEND_PORT: "4174" },
   },
 ];
 
@@ -72,11 +78,11 @@ writeFileSync(mdPath, buildMarkdown(payload));
 
 printConsoleSummary(payload);
 
-function runCheck({ id, label, cwd, command, args, type, jsonReport }) {
+function runCheck({ id, label, cwd, command, args, type, jsonReport, env }) {
   const start = Date.now();
   const proc = spawnSync(command, args, {
     cwd: path.join(rootDir, cwd),
-    env: { ...process.env, CI: "1" },
+    env: { ...process.env, CI: "1", ...env },
     encoding: "utf-8",
     maxBuffer: 1024 * 1024 * 15,
     shell: false,
@@ -87,7 +93,9 @@ function runCheck({ id, label, cwd, command, args, type, jsonReport }) {
   const trimmedOutput = trimOutput(output);
   const reportPath = jsonReport ? path.join(rootDir, cwd, jsonReport) : null;
   const failureSummary =
-    proc.status !== 0 && reportPath ? extractTestFailureSummary(reportPath) : null;
+    proc.status !== 0 && reportPath
+      ? extractTestFailureSummary(reportPath)
+      : null;
 
   return {
     id,
@@ -136,11 +144,15 @@ function buildMarkdown(payload) {
   payload.checks.forEach((check) => {
     const durationSeconds = (check.durationMs / 1000).toFixed(1);
     lines.push(
-      `| ${check.label} | ${formatStatus(check.status)} | ${durationSeconds} | \`${check.command}\` |`
+      `| ${check.label} | ${formatStatus(
+        check.status
+      )} | ${durationSeconds} | \`${check.command}\` |`
     );
   });
 
-  const failedChecks = payload.checks.filter((check) => check.status === "failed");
+  const failedChecks = payload.checks.filter(
+    (check) => check.status === "failed"
+  );
   if (failedChecks.length) {
     lines.push("");
     lines.push("## Failure Details");
@@ -176,10 +188,17 @@ function printConsoleSummary(payload) {
   console.log("\n=== Vibe Challenge Evaluation Summary ===");
   payload.checks.forEach((check) => {
     const durationSeconds = (check.durationMs / 1000).toFixed(1);
-    console.log(` - ${check.label}: ${check.status.toUpperCase()} (${durationSeconds}s)`);
+    console.log(
+      ` - ${check.label}: ${check.status.toUpperCase()} (${durationSeconds}s)`
+    );
   });
   console.log(`Overall: ${payload.overallStatus.toUpperCase()}`);
-  console.log(`Results written to ${path.relative(rootDir, jsonPath)} and ${path.relative(rootDir, mdPath)}`);
+  console.log(
+    `Results written to ${path.relative(rootDir, jsonPath)} and ${path.relative(
+      rootDir,
+      mdPath
+    )}`
+  );
 }
 
 function extractTestFailureSummary(reportPath) {
@@ -195,7 +214,9 @@ function extractTestFailureSummary(reportPath) {
         if (assertion.status === "failed") {
           failingAssertions.push({
             name: assertion.fullName || buildAssertionName(suite, assertion),
-            message: sanitizeMessage((assertion.failureMessages || [])[0] || ""),
+            message: sanitizeMessage(
+              (assertion.failureMessages || [])[0] || ""
+            ),
           });
         }
       }
@@ -206,21 +227,28 @@ function extractTestFailureSummary(reportPath) {
     }
 
     const maxEntries = 5;
-    const summaryLines = failingAssertions.slice(0, maxEntries).map((entry, index) => {
-      const header = `${index + 1}. ${entry.name || "Unnamed test"}`;
-      if (!entry.message) {
-        return header;
-      }
-      const truncatedMessage = entry.message.length > 400 ? `${entry.message.slice(0, 400)}…` : entry.message;
-      const indented = truncatedMessage
-        .split("\n")
-        .map((line) => `   ${line}`)
-        .join("\n");
-      return `${header}\n${indented}`;
-    });
+    const summaryLines = failingAssertions
+      .slice(0, maxEntries)
+      .map((entry, index) => {
+        const header = `${index + 1}. ${entry.name || "Unnamed test"}`;
+        if (!entry.message) {
+          return header;
+        }
+        const truncatedMessage =
+          entry.message.length > 400
+            ? `${entry.message.slice(0, 400)}…`
+            : entry.message;
+        const indented = truncatedMessage
+          .split("\n")
+          .map((line) => `   ${line}`)
+          .join("\n");
+        return `${header}\n${indented}`;
+      });
 
     if (failingAssertions.length > maxEntries) {
-      summaryLines.push(`...and ${failingAssertions.length - maxEntries} more failing tests.`);
+      summaryLines.push(
+        `...and ${failingAssertions.length - maxEntries} more failing tests.`
+      );
     }
 
     return summaryLines.join("\n");

@@ -36,7 +36,9 @@ test.describe("TASK1_PERSISTENT_TODOS_E2E", () => {
     });
   });
 
-  test("requires mandatory fields before enabling submission", async ({ page }) => {
+  test("requires mandatory fields before enabling submission", async ({
+    page,
+  }) => {
     await page.goto("/");
     await page.getByTestId("drawer-add-task").click();
 
