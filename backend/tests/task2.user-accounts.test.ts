@@ -1,19 +1,23 @@
 import { describe, it } from "@jest/globals";
 
 describe("TASK2_USER_ACCOUNTS", () => {
-  it.todo(
-    "registers a new user and receives a 201 response from POST /api/auth/register"
-  );
+  it("registers a new user and receives a 201 response from POST /api/auth/register", () => {
+    throw new Error(
+      "NOT IMPLEMENTED: User registration feature not yet implemented"
+    );
+  });
 
-  it.todo(
-    "rejects passwords that are shorter than 8 characters with a validation error"
-  );
+  it("rejects passwords that are shorter than 8 characters with a validation error", () => {
+    throw new Error("NOT IMPLEMENTED: Password validation not yet implemented");
+  });
 
-  it.todo(
-    "authenticates a registered user and scopes GET /api/todos responses to that user"
-  );
+  it("authenticates a registered user and scopes GET /api/todos responses to that user", () => {
+    throw new Error(
+      "NOT IMPLEMENTED: User authentication and scoping not yet implemented"
+    );
+  });
 
-  it.todo(
-    "prevents access to protected endpoints when the session is missing or expired"
-  );
+  it("prevents access to protected endpoints when the session is missing or expired", () => {
+    throw new Error("NOT IMPLEMENTED: Session management not yet implemented");
+  });
 });
