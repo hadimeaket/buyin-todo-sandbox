@@ -1,0 +1,222 @@
+@import "../../styles/variables";
+
+.category-manager-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.category-manager {
+  background: var(--surface);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+
+    h2 {
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      font-size: 32px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      line-height: 1;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+}
+
+.category-form {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+
+  .form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+
+    .category-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 14px;
+      background: var(--background);
+      color: var(--text-primary);
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+    }
+
+    .color-picker {
+      width: 50px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .color-input {
+      width: 90px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: monospace;
+      background: var(--background);
+      color: var(--text-primary);
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &.btn-primary {
+        background: var(--primary);
+        color: white;
+
+        &:hover {
+          background: var(--primary-dark);
+        }
+      }
+
+      &.btn-secondary {
+        background: var(--background);
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+
+        &:hover {
+          background: var(--border);
+        }
+      }
+    }
+  }
+}
+
+.error-message {
+  padding: 12px 20px;
+  background: #fee;
+  color: #c33;
+  font-size: 14px;
+}
+
+.category-list {
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+
+  .empty-state {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px 20px;
+  }
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--surface-hover, rgba(0, 0, 0, 0.02));
+  }
+
+  .category-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .category-color {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .category-name {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+  }
+
+  .category-actions {
+    display: flex;
+    gap: 8px;
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &.btn-edit {
+        background: var(--primary);
+        color: white;
+
+        &:hover {
+          background: var(--primary-dark);
+        }
+      }
+
+      &.btn-delete {
+        background: #fee;
+        color: #c33;
+
+        &:hover {
+          background: #fdd;
+        }
+      }
+    }
+  }
+}

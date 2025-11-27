@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Todo, UpdateTodoDto } from "../../types/todo";
+import type { Attachment } from "../../types/attachment";
+import {
+  isValidMimeType,
+  isValidFileSize,
+  formatFileSize,
+  MAX_FILE_SIZE,
+  ALLOWED_MIME_TYPES,
+} from "../../types/attachment";
+import { todoApi } from "../../services/todoApi";
 import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import Badge from "../../components/ui/Badge";
@@ -36,6 +45,14 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Attachment state
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [isUploadingFile, setIsUploadingFile] = useState(false);
+  const [uploadError, setUploadError] = useState<string>("");
+  const [isDeletingAttachment, setIsDeletingAttachment] = useState<
+    string | null
+  >(null);
+
   // Auto-set all-day when date range is selected and disable recurrence
   useEffect(() => {
     if (dueDate && dueEndDate && dueDate !== dueEndDate) {
@@ -54,6 +71,19 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  // Load attachments
+  useEffect(() => {
+    const loadAttachments = async () => {
+      try {
+        const data = await todoApi.getAttachments(todo.id);
+        setAttachments(data);
+      } catch (error) {
+        console.error("Failed to load attachments:", error);
+      }
+    };
+    loadAttachments();
+  }, [todo.id]);
 
   const isFormValid = (): boolean => {
     // Check title
@@ -114,6 +144,68 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
     setEndTime(todo.endTime || "");
     setRecurrence(todo.recurrence || "none");
     setIsEditing(false);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Reset errors
+    setUploadError("");
+
+    // Validate file type
+    if (!isValidMimeType(file.type)) {
+      setUploadError(
+        `Invalid file type. Only ${ALLOWED_MIME_TYPES.join(", ")} are allowed.`
+      );
+      e.target.value = ""; // Reset file input
+      return;
+    }
+
+    // Validate file size
+    if (!isValidFileSize(file.size)) {
+      setUploadError(
+        `File too large. Maximum size is ${formatFileSize(MAX_FILE_SIZE)}.`
+      );
+      e.target.value = ""; // Reset file input
+      return;
+    }
+
+    setIsUploadingFile(true);
+    try {
+      const attachment = await todoApi.uploadAttachment(todo.id, file);
+      setAttachments((prev) => [...prev, attachment]);
+      e.target.value = ""; // Reset file input
+    } catch (error: any) {
+      console.error("Failed to upload attachment:", error);
+      setUploadError(
+        error.message || "Failed to upload file. Please try again."
+      );
+    } finally {
+      setIsUploadingFile(false);
+    }
+  };
+
+  const handleDeleteAttachment = async (attachmentId: string) => {
+    if (!confirm("Are you sure you want to delete this attachment?")) {
+      return;
+    }
+
+    setIsDeletingAttachment(attachmentId);
+    try {
+      await todoApi.deleteAttachment(attachmentId);
+      setAttachments((prev) => prev.filter((a) => a.id !== attachmentId));
+    } catch (error) {
+      console.error("Failed to delete attachment:", error);
+      alert("Failed to delete attachment. Please try again.");
+    } finally {
+      setIsDeletingAttachment(null);
+    }
+  };
+
+  const handleDownloadAttachment = (attachmentId: string) => {
+    const url = todoApi.getAttachmentDownloadUrl(attachmentId);
+    window.open(url, "_blank");
   };
 
   const formatDate = (
@@ -403,6 +495,101 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                     {formatRecurrence(todo.recurrence)}
                   </Badge>
                 </div>
+              )}
+            </div>
+
+            {/* Attachments Section */}
+            <div className="todo-detail__section">
+              <h4 className="todo-detail__section-title">Attachments</h4>
+
+              {/* Upload Section */}
+              <div className="todo-detail__upload-section">
+                <label
+                  htmlFor="file-upload"
+                  className="todo-detail__upload-label"
+                >
+                  <input
+                    id="file-upload"
+                    type="file"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onChange={handleFileUpload}
+                    disabled={isUploadingFile}
+                    style={{ display: "none" }}
+                  />
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    disabled={isUploadingFile}
+                    onClick={() =>
+                      document.getElementById("file-upload")?.click()
+                    }
+                  >
+                    {isUploadingFile ? "Uploading..." : "Upload File"}
+                  </Button>
+                </label>
+                <p className="todo-detail__upload-hint">
+                  PNG, JPG, PDF (max 5MB)
+                </p>
+              </div>
+
+              {/* Upload Error */}
+              {uploadError && (
+                <div className="todo-detail__upload-error">{uploadError}</div>
+              )}
+
+              {/* Attachments List */}
+              {attachments.length > 0 ? (
+                <ul className="todo-detail__attachments-list">
+                  {attachments.map((attachment) => (
+                    <li
+                      key={attachment.id}
+                      className="todo-detail__attachment-item"
+                    >
+                      <div className="todo-detail__attachment-info">
+                        <span className="todo-detail__attachment-icon">
+                          {attachment.mimeType.startsWith("image/")
+                            ? "🖼️"
+                            : "📄"}
+                        </span>
+                        <div className="todo-detail__attachment-details">
+                          <span className="todo-detail__attachment-name">
+                            {attachment.originalFilename}
+                          </span>
+                          <span className="todo-detail__attachment-size">
+                            {formatFileSize(attachment.fileSize)}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="todo-detail__attachment-actions">
+                        <button
+                          type="button"
+                          className="todo-detail__attachment-btn"
+                          onClick={() =>
+                            handleDownloadAttachment(attachment.id)
+                          }
+                          title="Download"
+                        >
+                          ⬇️
+                        </button>
+                        <button
+                          type="button"
+                          className="todo-detail__attachment-btn todo-detail__attachment-btn--delete"
+                          onClick={() => handleDeleteAttachment(attachment.id)}
+                          disabled={isDeletingAttachment === attachment.id}
+                          title="Delete"
+                        >
+                          {isDeletingAttachment === attachment.id
+                            ? "..."
+                            : "🗑️"}
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="todo-detail__no-attachments">
+                  No attachments yet
+                </p>
               )}
             </div>
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Todo, UpdateTodoDto } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarHeader from "./CalendarHeader";
 import MonthView from "./MonthView";
 import WeekView from "./WeekView";
@@ -17,11 +18,12 @@ import "./CalendarView.scss";
 
 interface CalendarViewProps {
   todos: Todo[];
+  categories: Category[];
   onUpdateTodo: (id: string, data: UpdateTodoDto) => Promise<void>;
   onTodoClick: (todo: Todo) => void;
 }
 
-function CalendarView({ todos, onTodoClick }: CalendarViewProps) {
+function CalendarView({ todos, categories, onTodoClick }: CalendarViewProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<"month" | "week" | "day">(
     "month"
@@ -93,6 +95,7 @@ function CalendarView({ todos, onTodoClick }: CalendarViewProps) {
           <MonthView
             currentDate={currentDate}
             todos={todos}
+            categories={categories}
             onTodoClick={onTodoClick}
           />
         )}
@@ -100,6 +103,7 @@ function CalendarView({ todos, onTodoClick }: CalendarViewProps) {
           <WeekView
             currentDate={currentDate}
             todos={todos}
+            categories={categories}
             onTodoClick={onTodoClick}
           />
         )}
@@ -107,6 +111,7 @@ function CalendarView({ todos, onTodoClick }: CalendarViewProps) {
           <DayView
             currentDate={currentDate}
             todos={todos}
+            categories={categories}
             onTodoClick={onTodoClick}
           />
         )}

@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarEvent from "./CalendarEvent";
 import {
   getTodosForDate,
@@ -14,6 +15,7 @@ import "./DayView.scss";
 interface DayViewProps {
   currentDate: Date;
   todos: Todo[];
+  categories: Category[];
   onTodoClick: (todo: Todo) => void;
 }
 

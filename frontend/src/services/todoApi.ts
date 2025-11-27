@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "../types/todo";
+import type { Attachment } from "../types/attachment";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -9,6 +10,15 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+// Add auth token to all requests
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("auth_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export class ApiError extends Error {
@@ -98,6 +108,91 @@ export const todoApi = {
       await api.delete(`/api/todos/${id}`);
     } catch (error) {
       throw handleApiError(error, `deleteTodo(${id})`);
+    }
+  },
+
+  // Get attachments for a todo
+  async getAttachments(todoId: string): Promise<Attachment[]> {
+    try {
+      const response = await api.get<Attachment[]>(
+        `/api/todos/${todoId}/attachments`
+      );
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error, `getAttachments(${todoId})`);
+    }
+  },
+
+  // Upload attachment
+  async uploadAttachment(todoId: string, file: File): Promise<Attachment> {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await api.post<Attachment>(
+        `/api/todos/${todoId}/attachments`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw handleApiError(error, `uploadAttachment(${todoId})`);
+    }
+  },
+
+  // Download attachment
+  getAttachmentDownloadUrl(attachmentId: string): string {
+    const token = localStorage.getItem("auth_token");
+    return `${API_BASE_URL}/api/attachments/${attachmentId}/download?token=${token}`;
+  },
+
+  // Delete attachment
+  async deleteAttachment(attachmentId: string): Promise<void> {
+    try {
+      await api.delete(`/api/attachments/${attachmentId}`);
+    } catch (error) {
+      throw handleApiError(error, `deleteAttachment(${attachmentId})`);
+    }
+  },
+
+  // Export todos as ICS file
+  async exportICS(): Promise<void> {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const response = await api.get("/api/ics/export", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        responseType: "blob",
+      });
+
+      // Create download link
+      const blob = new Blob([response.data], { type: "text/calendar" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+
+      // Extract filename from Content-Disposition header or use default
+      const contentDisposition = response.headers["content-disposition"];
+      let filename = "todos.ics";
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?(.+)"?/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      throw handleApiError(error, "exportICS");
     }
   },
 };

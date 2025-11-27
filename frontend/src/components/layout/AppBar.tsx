@@ -7,7 +7,11 @@ import whiteLogoWhiteFont from "../../assets/white-logo-white-font.png";
  * Fixed header with BuyIn branding gradient and logo.
  * Matches the design system from the BuyIn brand identity.
  */
-export default function AppBar() {
+interface AppBarProps {
+  onLogout?: () => void;
+}
+
+export default function AppBar({ onLogout }: AppBarProps) {
   return (
     <header className="app-bar">
       <div className="app-bar__toolbar">
@@ -18,6 +22,15 @@ export default function AppBar() {
             className="app-bar__logo"
           />
         </div>
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            className="app-bar__logout"
+            aria-label="Logout"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </header>
   );

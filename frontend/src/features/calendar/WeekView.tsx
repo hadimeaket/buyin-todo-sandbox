@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarEvent from "./CalendarEvent";
 import {
   buildWeekDays,
@@ -14,6 +15,7 @@ import "./WeekView.scss";
 interface WeekViewProps {
   currentDate: Date;
   todos: Todo[];
+  categories: Category[];
   onTodoClick: (todo: Todo) => void;
 }
 

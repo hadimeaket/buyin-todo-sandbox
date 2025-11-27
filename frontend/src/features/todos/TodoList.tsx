@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import TodoItem from "./TodoItem";
 import "./TodoList.scss";
 
@@ -7,6 +8,7 @@ interface TodoListProps {
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onViewDetails: (todo: Todo) => void;
+  categories?: Category[];
 }
 
 interface GroupedTodos {
@@ -15,7 +17,13 @@ interface GroupedTodos {
   todos: Todo[];
 }
 
-function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
+function TodoList({
+  todos,
+  onToggle,
+  onDelete,
+  onViewDetails,
+  categories = [],
+}: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
@@ -116,6 +124,7 @@ function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
                 onToggle={onToggle}
                 onDelete={onDelete}
                 onViewDetails={onViewDetails}
+                categories={categories}
               />
             ))}
           </div>

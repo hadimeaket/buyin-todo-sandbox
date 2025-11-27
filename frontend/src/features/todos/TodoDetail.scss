@@ -371,4 +371,133 @@
       color: var(--theme-text-primary);
     }
   }
+
+  // Attachments styling
+  &__upload-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    margin-bottom: $spacing-2;
+  }
+
+  &__upload-label {
+    display: inline-block;
+  }
+
+  &__upload-hint {
+    font-size: $font-size-sm;
+    color: var(--theme-text-muted);
+  }
+
+  &__upload-error {
+    padding: $spacing-2 $spacing-3;
+    background-color: rgba(253, 48, 57, 0.1);
+    border: 1px solid $brand-red;
+    border-radius: $radius-md;
+    color: $brand-red;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-2;
+  }
+
+  &__attachments-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+
+  &__attachment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-3;
+    background-color: var(--theme-bg-tertiary);
+    border: 1px solid var(--theme-border);
+    border-radius: $radius-md;
+    transition: all $transition-base;
+
+    &:hover {
+      background-color: var(--theme-bg-hover);
+    }
+  }
+
+  &__attachment-info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__attachment-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  &__attachment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  &__attachment-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: var(--theme-text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__attachment-size {
+    font-size: $font-size-sm;
+    color: var(--theme-text-muted);
+  }
+
+  &__attachment-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
+    flex-shrink: 0;
+  }
+
+  &__attachment-btn {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-size: 1.125rem;
+    transition: all $transition-base;
+
+    &:hover {
+      background-color: var(--theme-bg-secondary);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--delete:hover {
+      background-color: rgba(253, 48, 57, 0.1);
+    }
+  }
+
+  &__no-attachments {
+    font-size: $font-size-sm;
+    color: var(--theme-text-muted);
+    font-style: italic;
+    padding: $spacing-3;
+    text-align: center;
+    background-color: var(--theme-bg-tertiary);
+    border-radius: $radius-md;
+  }
 }

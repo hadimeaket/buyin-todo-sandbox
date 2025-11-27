@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import Checkbox from "../../components/ui/Checkbox";
 import "./TodoItem.scss";
 
@@ -7,9 +8,17 @@ interface TodoItemProps {
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onViewDetails: (todo: Todo) => void;
+  categories?: Category[];
 }
 
-function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
+function TodoItem({
+  todo,
+  onToggle,
+  onDelete,
+  onViewDetails,
+  categories = [],
+}: TodoItemProps) {
+  const category = categories.find((cat) => cat.id === todo.categoryId);
   const isOverdue = () => {
     if (!todo.dueDate || todo.completed) return false;
 
@@ -129,13 +138,22 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
             className="todo-item__content"
             onClick={() => onViewDetails(todo)}
           >
-            {/* Title */}
-            <div
-              className={`todo-item__title ${
-                todo.completed ? "todo-item__title--completed" : ""
-              }`}
-            >
-              {todo.title}
+            {/* Title with Category Badge */}
+            <div className="todo-item__title-row">
+              {category && (
+                <span
+                  className="todo-item__category-badge"
+                  style={{ backgroundColor: category.color }}
+                  title={category.name}
+                />
+              )}
+              <div
+                className={`todo-item__title ${
+                  todo.completed ? "todo-item__title--completed" : ""
+                }`}
+              >
+                {todo.title}
+              </div>
             </div>
 
             {/* Description */}
