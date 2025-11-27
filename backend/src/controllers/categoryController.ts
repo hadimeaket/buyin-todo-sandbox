@@ -67,7 +67,10 @@ export const updateCategory = async (
   try {
     const data: UpdateCategoryDto = req.body;
     try {
-      const category = await categoryService.updateCategory(req.params.id, data);
+      const category = await categoryService.updateCategory(
+        req.params.id,
+        data
+      );
       if (!category) {
         res.status(404).json({ message: "Category not found" });
         return;

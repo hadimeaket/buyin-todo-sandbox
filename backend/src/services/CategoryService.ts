@@ -1,5 +1,9 @@
 import { categoryRepository } from "../repositories/CategoryRepository";
-import { CreateCategoryDto, UpdateCategoryDto, Category } from "../models/Category";
+import {
+  CreateCategoryDto,
+  UpdateCategoryDto,
+  Category,
+} from "../models/Category";
 
 export class CategoryService {
   async getAllCategories(): Promise<Category[]> {
@@ -28,7 +32,10 @@ export class CategoryService {
     return await categoryRepository.create(data);
   }
 
-  async updateCategory(id: string, data: UpdateCategoryDto): Promise<Category | null> {
+  async updateCategory(
+    id: string,
+    data: UpdateCategoryDto
+  ): Promise<Category | null> {
     if (data.color && !this.isValidHexColor(data.color)) {
       throw new Error("Valid color in hex format is required (e.g., #FF5733)");
     }

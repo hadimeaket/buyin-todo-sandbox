@@ -22,7 +22,8 @@ function App() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
-  const [isCategoryManagerOpen, setIsCategoryManagerOpen] = useState<boolean>(false);
+  const [isCategoryManagerOpen, setIsCategoryManagerOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
@@ -170,7 +171,7 @@ function App() {
         completedCount={stats.completed}
         onAddTask={() => setIsAddTaskModalOpen(true)}
       />
-      
+
       {/* Categories Button - Floating */}
       <button
         className="app__categories-btn"
@@ -191,7 +192,7 @@ function App() {
       <button
         className="app__export-btn"
         onClick={() => {
-          window.location.href = 'http://localhost:4000/api/todos/export/ics';
+          window.location.href = "http://localhost:4000/api/todos/export/ics";
         }}
         title="Als Kalender exportieren (ICS)"
       >
@@ -204,7 +205,7 @@ function App() {
           />
         </svg>
       </button>
-      
+
       <div className="app__container">
         <main className="app__main-card">
           {error && (
@@ -341,7 +342,10 @@ function App() {
         )}
 
         {isCategoryManagerOpen && (
-          <div className="modal-overlay" onClick={() => setIsCategoryManagerOpen(false)}>
+          <div
+            className="modal-overlay"
+            onClick={() => setIsCategoryManagerOpen(false)}
+          >
             <div onClick={(e) => e.stopPropagation()}>
               <CategoryManager
                 onClose={() => {

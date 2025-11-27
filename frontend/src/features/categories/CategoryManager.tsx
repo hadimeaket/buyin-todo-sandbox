@@ -149,9 +149,7 @@ function CategoryManager({ onClose }: CategoryManagerProps) {
                       newCategory.color === color ? "active" : ""
                     }`}
                     style={{ backgroundColor: color }}
-                    onClick={() =>
-                      setNewCategory({ ...newCategory, color })
-                    }
+                    onClick={() => setNewCategory({ ...newCategory, color })}
                     title={color}
                   />
                 ))}

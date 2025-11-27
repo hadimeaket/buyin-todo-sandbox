@@ -17,7 +17,12 @@ interface TodoDetailProps {
   onUpdate: (id: string, data: UpdateTodoDto) => Promise<void>;
 }
 
-function TodoDetail({ todo, categories = [], onClose, onUpdate }: TodoDetailProps) {
+function TodoDetail({
+  todo,
+  categories = [],
+  onClose,
+  onUpdate,
+}: TodoDetailProps) {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description || "");
   const [priority, setPriority] = useState<"low" | "medium" | "high">(
@@ -253,7 +258,7 @@ function TodoDetail({ todo, categories = [], onClose, onUpdate }: TodoDetailProp
                   className="todo-detail__select"
                   value={categoryId}
                   onChange={(e) => {
-                    console.log('Category selected:', e.target.value);
+                    console.log("Category selected:", e.target.value);
                     setCategoryId(e.target.value);
                   }}
                   disabled={isSaving}
@@ -415,7 +420,9 @@ function TodoDetail({ todo, categories = [], onClose, onUpdate }: TodoDetailProp
                 <div className="todo-detail__section">
                   <h4 className="todo-detail__section-title">Category</h4>
                   {(() => {
-                    const category = categories.find((c) => c.id === todo.categoryId);
+                    const category = categories.find(
+                      (c) => c.id === todo.categoryId
+                    );
                     return category ? (
                       <Badge
                         style={{

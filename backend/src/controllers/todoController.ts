@@ -116,14 +116,14 @@ export const generateTestTodos = async (
   try {
     const count = parseInt(req.query.count as string) || 1000;
     const todos = [];
-    
+
     for (let i = 1; i <= count; i++) {
       const todo = await todoService.createTodo({
         title: `T${i}`,
       });
       todos.push(todo);
     }
-    
+
     res.json({ message: `Generated ${count} todos`, count: todos.length });
   } catch (error) {
     next(error);
@@ -137,9 +137,11 @@ export const assignCategoryToAllTodos = async (
 ): Promise<void> => {
   try {
     const { categoryName } = req.body;
-    const { categoryRepository } = await import("../repositories/CategoryRepository");
+    const { categoryRepository } = await import(
+      "../repositories/CategoryRepository"
+    );
     const { todoRepository } = await import("../repositories/TodoRepository");
-    
+
     // Find category by name
     const category = await categoryRepository.findByName(categoryName || "Gym");
     if (!category) {
@@ -149,7 +151,7 @@ export const assignCategoryToAllTodos = async (
 
     // Get all todos
     const todos = await todoRepository.findAll();
-    
+
     // Update all todos with the category
     let updatedCount = 0;
     for (const todo of todos) {
@@ -157,10 +159,10 @@ export const assignCategoryToAllTodos = async (
       updatedCount++;
     }
 
-    res.json({ 
+    res.json({
       message: `Assigned category "${category.name}" to ${updatedCount} todos`,
       categoryId: category.id,
-      updatedCount 
+      updatedCount,
     });
   } catch (error) {
     next(error);

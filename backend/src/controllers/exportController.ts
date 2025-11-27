@@ -26,7 +26,7 @@ export const exportTodosAsICS = async (
       if (!todo.dueDate) continue;
 
       const startDate = new Date(todo.dueDate);
-      
+
       // Handle end date
       let endDate: Date;
       if (todo.dueEndDate) {
@@ -57,7 +57,9 @@ export const exportTodosAsICS = async (
         summary: todo.title,
         description: todo.description || "",
         allDay: todo.isAllDay || false,
-        status: todo.completed ? ICalEventStatus.CONFIRMED : ICalEventStatus.TENTATIVE,
+        status: todo.completed
+          ? ICalEventStatus.CONFIRMED
+          : ICalEventStatus.TENTATIVE,
       });
 
       // Add category if exists
@@ -67,7 +69,9 @@ export const exportTodosAsICS = async (
 
       // Add custom properties
       if (todo.priority) {
-        event.priority(todo.priority === "high" ? 1 : todo.priority === "medium" ? 5 : 9);
+        event.priority(
+          todo.priority === "high" ? 1 : todo.priority === "medium" ? 5 : 9
+        );
       }
 
       // Add completion status

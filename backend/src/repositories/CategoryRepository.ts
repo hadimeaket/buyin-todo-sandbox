@@ -1,4 +1,8 @@
-import { Category, CreateCategoryDto, UpdateCategoryDto } from "../models/Category";
+import {
+  Category,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from "../models/Category";
 import { v4 as uuidv4 } from "uuid";
 
 export interface ICategoryRepository {
@@ -17,7 +21,7 @@ class InMemoryCategoryRepository implements ICategoryRepository {
 
   async initializeDefaultCategories(): Promise<void> {
     if (this.initialized) return;
-    
+
     const defaultCategories = [
       { name: "Gym", color: "#FF6B6B" },
       { name: "Work", color: "#4ECDC4" },
@@ -32,9 +36,11 @@ class InMemoryCategoryRepository implements ICategoryRepository {
         await this.create(cat);
       }
     }
-    
+
     this.initialized = true;
-    console.log(`[CategoryRepository] Initialized with ${this.categories.length} default categories`);
+    console.log(
+      `[CategoryRepository] Initialized with ${this.categories.length} default categories`
+    );
   }
 
   async findAll(): Promise<Category[]> {

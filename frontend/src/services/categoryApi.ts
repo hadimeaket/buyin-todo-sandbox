@@ -1,5 +1,9 @@
 import axios, { AxiosError } from "axios";
-import type { Category, CreateCategoryDto, UpdateCategoryDto } from "../types/category";
+import type {
+  Category,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from "../types/category";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";

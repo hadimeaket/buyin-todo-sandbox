@@ -17,7 +17,13 @@ interface GroupedTodos {
   todos: Todo[];
 }
 
-function TodoList({ todos, categories, onToggle, onDelete, onViewDetails }: TodoListProps) {
+function TodoList({
+  todos,
+  categories,
+  onToggle,
+  onDelete,
+  onViewDetails,
+}: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
