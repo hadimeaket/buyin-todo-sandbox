@@ -1,13 +1,21 @@
 import { describe, it } from "@jest/globals";
 
 describe("TASK4_FILE_ATTACHMENTS", () => {
-  it.todo(
-    "uploads a small PNG via POST /api/todos/:id/attachments and stores metadata"
+  it(
+    "uploads a small PNG via POST /api/todos/:id/attachments and stores metadata",
+    () => {
+      throw new Error("NOT IMPLEMENTED: File upload feature not yet implemented");
+    }
   );
 
-  it.todo("rejects files larger than 5MB with a descriptive error message");
+  it("rejects files larger than 5MB with a descriptive error message", () => {
+    throw new Error("NOT IMPLEMENTED: File size validation not yet implemented");
+  });
 
-  it.todo(
-    "downloads an attachment via GET /api/attachments/:id with correct headers"
+  it(
+    "downloads an attachment via GET /api/attachments/:id with correct headers",
+    () => {
+      throw new Error("NOT IMPLEMENTED: File download feature not yet implemented");
+    }
   );
 });
