@@ -279,23 +279,27 @@ After completing a Vibe Coding Challenge session:
 For complete analysis, ensure you have:
 
 1. **Chat Transcript**
+
    - Complete conversation history
    - Timestamps for each message
    - Tool invocation records
 
 2. **Test Results**
+
    - `backend/test-results.json`
    - `frontend/test-results.json`
    - Terminal output from test runs
    - E2E test results and screenshots/videos
 
 3. **Code State**
+
    - Git commit history: `git log --oneline --stat`
    - Full diff: `git diff main...<branch>`
    - Final file tree: `tree -L 3`
    - Key files: `server.ts`, `TodoRepository.ts`, test files
 
 4. **Context Information**
+
    - Session start/end times
    - Participant background (experience level, familiarity with stack)
    - Task assignment method (self-selected, random, sequential)
@@ -313,21 +317,22 @@ For complete analysis, ensure you have:
 
 ### Suggested Mapping
 
-| Thesis Section | Analysis Sections to Use |
-|----------------|--------------------------|
-| Introduction | Executive Summary, Task Overview |
-| Literature Review | Comparative Insights, Research Implications |
-| Methodology | Task Overview, Quantitative Metrics |
-| Results | Implementation Analysis, Technical Quality |
-| Discussion | AI-Human Interaction, Challenges, Success Factors |
-| Conclusion | Conclusion, Recommendations |
-| Appendices | Full code diffs, chat excerpts, test outputs |
+| Thesis Section    | Analysis Sections to Use                          |
+| ----------------- | ------------------------------------------------- |
+| Introduction      | Executive Summary, Task Overview                  |
+| Literature Review | Comparative Insights, Research Implications       |
+| Methodology       | Task Overview, Quantitative Metrics               |
+| Results           | Implementation Analysis, Technical Quality        |
+| Discussion        | AI-Human Interaction, Challenges, Success Factors |
+| Conclusion        | Conclusion, Recommendations                       |
+| Appendices        | Full code diffs, chat excerpts, test outputs      |
 
 ---
 
 ## Automation Opportunities
 
 Consider creating scripts to:
+
 - Extract chat logs automatically from VS Code Copilot
 - Parse test JSON results into analysis tables
 - Generate git diff summaries
@@ -339,15 +344,19 @@ Consider creating scripts to:
 ## Research Questions This Analysis Addresses
 
 1. **RQ1: Effectiveness** - How effectively can AI assistants complete software development tasks?
+
    - See: Implementation Analysis, Quantitative Metrics
 
 2. **RQ2: Interaction Patterns** - What patterns emerge in human-AI collaboration?
+
    - See: AI-Human Interaction Patterns, Workflow Efficiency
 
 3. **RQ3: Challenges** - What challenges arise in AI-assisted development?
+
    - See: Challenges and Obstacles, Technical Debt
 
 4. **RQ4: Code Quality** - What is the quality of AI-generated code?
+
    - See: Technical Quality Assessment
 
 5. **RQ5: Learning** - Do AI assistants adapt and learn within a session?
