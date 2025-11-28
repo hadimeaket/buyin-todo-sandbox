@@ -11,6 +11,10 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
+      - JWT_SECRET=your-secret-key-change-in-production
+      - DB_PATH=/app/data/todos.db
+    volumes:
+      - todo-data:/app/data
     networks:
       - todo-network
     restart: unless-stopped
@@ -40,3 +44,6 @@ services:
 networks:
   todo-network:
     driver: bridge
+
+volumes:
+  todo-data:

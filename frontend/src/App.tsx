@@ -8,8 +8,33 @@ import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { useAuth } from "./contexts/AuthContext";
+import { AuthForm } from "./features/auth";
 
 function App() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="app">
+        <div className="loading">
+          <div className="loading__spinner animate-spin" />
+          <p className="loading__text">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show auth form if not authenticated
+  if (!isAuthenticated) {
+    return <AuthForm />;
+  }
+
+  return <TodoApp />;
+}
+
+function TodoApp() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
