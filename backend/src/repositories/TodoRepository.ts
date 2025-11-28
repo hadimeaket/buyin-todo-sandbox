@@ -41,17 +41,58 @@ class SqliteTodoRepository implements ITodoRepository {
     `;
     this.db.exec(createUsersTableSQL);
 
+    // Create categories table
+    const createCategoriesTableSQL = `
+      CREATE TABLE IF NOT EXISTS categories (
+        id TEXT PRIMARY KEY,
+        userId TEXT NOT NULL,
+        name TEXT NOT NULL,
+        color TEXT NOT NULL,
+        createdAt TEXT NOT NULL,
+        updatedAt TEXT NOT NULL,
+        FOREIGN KEY (userId) REFERENCES users(id)
+      )
+    `;
+    this.db.exec(createCategoriesTableSQL);
+
+    // Create attachments table
+    const createAttachmentsTableSQL = `
+      CREATE TABLE IF NOT EXISTS attachments (
+        id TEXT PRIMARY KEY,
+        todoId TEXT NOT NULL,
+        userId TEXT NOT NULL,
+        filename TEXT NOT NULL,
+        originalName TEXT NOT NULL,
+        mimeType TEXT NOT NULL,
+        size INTEGER NOT NULL,
+        uploadedAt TEXT NOT NULL,
+        FOREIGN KEY (todoId) REFERENCES todos(id) ON DELETE CASCADE,
+        FOREIGN KEY (userId) REFERENCES users(id)
+      )
+    `;
+    this.db.exec(createAttachmentsTableSQL);
+
     // Check if todos table exists and has userId column
     const tableInfo = this.db
       .prepare("PRAGMA table_info(todos)")
       .all() as any[];
     const hasUserIdColumn = tableInfo.some((col: any) => col.name === "userId");
+    const hasCategoryIdColumn = tableInfo.some(
+      (col: any) => col.name === "categoryId"
+    );
 
     if (!hasUserIdColumn && tableInfo.length > 0) {
       // Table exists but doesn't have userId column - add it
       this.db.exec("ALTER TABLE todos ADD COLUMN userId TEXT");
-    } else if (tableInfo.length === 0) {
-      // Table doesn't exist - create it with userId
+    }
+
+    if (!hasCategoryIdColumn && tableInfo.length > 0) {
+      // Table exists but doesn't have categoryId column - add it
+      this.db.exec("ALTER TABLE todos ADD COLUMN categoryId TEXT");
+    }
+
+    if (tableInfo.length === 0) {
+      // Table doesn't exist - create it with userId and categoryId
       const createTodosTableSQL = `
         CREATE TABLE IF NOT EXISTS todos (
           id TEXT PRIMARY KEY,
@@ -60,6 +101,7 @@ class SqliteTodoRepository implements ITodoRepository {
           description TEXT,
           completed INTEGER NOT NULL DEFAULT 0,
           priority TEXT NOT NULL DEFAULT 'medium',
+          categoryId TEXT,
           dueDate TEXT,
           dueEndDate TEXT,
           isAllDay INTEGER DEFAULT 1,
@@ -68,7 +110,8 @@ class SqliteTodoRepository implements ITodoRepository {
           recurrence TEXT DEFAULT 'none',
           createdAt TEXT NOT NULL,
           updatedAt TEXT NOT NULL,
-          FOREIGN KEY (userId) REFERENCES users(id)
+          FOREIGN KEY (userId) REFERENCES users(id),
+          FOREIGN KEY (categoryId) REFERENCES categories(id)
         )
       `;
       this.db.exec(createTodosTableSQL);
@@ -86,6 +129,7 @@ class SqliteTodoRepository implements ITodoRepository {
       description: row.description || undefined,
       completed: Boolean(row.completed),
       priority: row.priority,
+      categoryId: row.categoryId || undefined,
       dueDate: row.dueDate ? new Date(row.dueDate) : undefined,
       dueEndDate: row.dueEndDate ? new Date(row.dueEndDate) : undefined,
       isAllDay: row.isAllDay !== null ? Boolean(row.isAllDay) : true,
@@ -156,6 +200,7 @@ class SqliteTodoRepository implements ITodoRepository {
       description: data.description,
       completed: false,
       priority: data.priority || "medium",
+      categoryId: data.categoryId,
       dueDate: data.dueDate ? new Date(data.dueDate) : undefined,
       dueEndDate: data.dueEndDate ? new Date(data.dueEndDate) : undefined,
       isAllDay: data.isAllDay ?? true,
@@ -168,10 +213,10 @@ class SqliteTodoRepository implements ITodoRepository {
 
     const stmt = this.db.prepare(`
       INSERT INTO todos (
-        id, userId, title, description, completed, priority,
+        id, userId, title, description, completed, priority, categoryId,
         dueDate, dueEndDate, isAllDay, startTime, endTime,
         recurrence, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -181,6 +226,7 @@ class SqliteTodoRepository implements ITodoRepository {
       todo.description || null,
       todo.completed ? 1 : 0,
       todo.priority,
+      todo.categoryId || null,
       todo.dueDate ? todo.dueDate.toISOString() : null,
       todo.dueEndDate ? todo.dueEndDate.toISOString() : null,
       todo.isAllDay ? 1 : 0,
@@ -228,7 +274,7 @@ class SqliteTodoRepository implements ITodoRepository {
 
     const stmt = this.db.prepare(`
       UPDATE todos SET
-        title = ?, description = ?, completed = ?, priority = ?,
+        title = ?, description = ?, completed = ?, priority = ?, categoryId = ?,
         dueDate = ?, dueEndDate = ?, isAllDay = ?, startTime = ?,
         endTime = ?, recurrence = ?, updatedAt = ?
       WHERE id = ?
@@ -239,6 +285,7 @@ class SqliteTodoRepository implements ITodoRepository {
       updatedTodo.description || null,
       updatedTodo.completed ? 1 : 0,
       updatedTodo.priority,
+      updatedTodo.categoryId || null,
       updatedTodo.dueDate ? updatedTodo.dueDate.toISOString() : null,
       updatedTodo.dueEndDate ? updatedTodo.dueEndDate.toISOString() : null,
       updatedTodo.isAllDay ? 1 : 0,

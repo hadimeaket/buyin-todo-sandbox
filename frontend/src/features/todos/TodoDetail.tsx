@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Todo, UpdateTodoDto } from "../../types/todo";
+import type { Attachment } from "../../types/attachment";
 import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import Badge from "../../components/ui/Badge";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Checkbox from "../../components/ui/Checkbox";
+import { AttachmentUpload } from "../attachments/AttachmentUpload";
+import { AttachmentList } from "../attachments/AttachmentList";
+import { attachmentApi } from "../../services/attachmentApi";
 import "./TodoDetail.scss";
 
 interface TodoDetailProps {
@@ -35,6 +39,8 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
   >(todo.recurrence || "none");
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [isLoadingAttachments, setIsLoadingAttachments] = useState(false);
 
   // Auto-set all-day when date range is selected and disable recurrence
   useEffect(() => {
@@ -54,6 +60,33 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
       document.body.style.overflow = "unset";
     };
   }, []);
+
+  // Load attachments when modal opens
+  useEffect(() => {
+    const loadAttachments = async () => {
+      setIsLoadingAttachments(true);
+      try {
+        const data = await attachmentApi.getAttachmentsByTodoId(todo.id);
+        setAttachments(data);
+      } catch (error) {
+        console.error("Failed to load attachments:", error);
+      } finally {
+        setIsLoadingAttachments(false);
+      }
+    };
+
+    loadAttachments();
+  }, [todo.id]);
+
+  const handleAttachmentChange = async () => {
+    // Reload attachments after upload or delete
+    try {
+      const data = await attachmentApi.getAttachmentsByTodoId(todo.id);
+      setAttachments(data);
+    } catch (error) {
+      console.error("Failed to reload attachments:", error);
+    }
+  };
 
   const isFormValid = (): boolean => {
     // Check title
@@ -437,6 +470,25 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Attachments */}
+            <div className="todo-detail__section">
+              <h4 className="todo-detail__section-title">Attachments</h4>
+              <AttachmentUpload
+                todoId={todo.id}
+                onUploadComplete={handleAttachmentChange}
+              />
+              {isLoadingAttachments ? (
+                <div className="todo-detail__loading">
+                  Loading attachments...
+                </div>
+              ) : (
+                <AttachmentList
+                  attachments={attachments}
+                  onDelete={handleAttachmentChange}
+                />
+              )}
             </div>
 
             {/* Edit Button */}

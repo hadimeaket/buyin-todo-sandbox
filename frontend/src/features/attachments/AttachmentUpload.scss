@@ -1,0 +1,62 @@
+.attachment-upload {
+  width: 100%;
+
+  &__dropzone {
+    border: 2px dashed var(--theme-border);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--theme-bg-primary);
+
+    &:hover {
+      border-color: var(--theme-primary);
+      background-color: var(--theme-bg-hover);
+    }
+
+    &--dragging {
+      border-color: var(--theme-primary);
+      background-color: var(--theme-bg-hover);
+      transform: scale(1.02);
+    }
+
+    &--uploading {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__text-primary {
+    color: var(--theme-text-primary);
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  &__text-secondary {
+    color: var(--theme-text-secondary);
+    font-size: 12px;
+  }
+
+  &__error {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #fee;
+    border: 1px solid #fcc;
+    border-radius: 4px;
+    color: #c33;
+    font-size: 13px;
+  }
+}
