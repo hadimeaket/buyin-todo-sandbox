@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authMiddleware } from "../middleware/auth";
+import { requireAuth } from "../middleware/auth";
 import { upload } from "../middleware/upload";
 import {
   uploadAttachment,
@@ -11,7 +11,7 @@ import {
 const router = Router();
 
 // All routes require authentication
-router.use(authMiddleware);
+router.use(requireAuth);
 
 // Upload attachment for a specific todo
 router.post(
