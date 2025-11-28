@@ -58,14 +58,18 @@ export const AttachmentList: React.FC<AttachmentListProps> = ({
         <div
           key={attachment.id}
           className={`attachment-list__item ${
-            deletingId === attachment.id ? "attachment-list__item--deleting" : ""
+            deletingId === attachment.id
+              ? "attachment-list__item--deleting"
+              : ""
           }`}
         >
           <div className="attachment-list__icon">
             {getFileIcon(attachment.mimeType)}
           </div>
           <div className="attachment-list__info">
-            <div className="attachment-list__name">{attachment.originalName}</div>
+            <div className="attachment-list__name">
+              {attachment.originalName}
+            </div>
             <div className="attachment-list__meta">
               {formatFileSize(attachment.size)} •{" "}
               {new Date(attachment.uploadedAt).toLocaleDateString()}

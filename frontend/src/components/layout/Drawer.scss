@@ -16,7 +16,7 @@
   overflow: hidden;
 
   &--expanded {
-    width: 240px; // Expanded width
+    width: 340px; // Expanded width - wider to accommodate category manager
     box-shadow: $shadow-lg;
   }
 
@@ -31,6 +31,17 @@
     gap: $spacing-2;
     padding: $spacing-4 $spacing-2;
     height: 100%;
+    overflow-y: auto;
+  }
+
+  &__category-section {
+    padding: 0 $spacing-2;
+    margin: $spacing-2 0;
+  }
+
+  &__action--active {
+    background-color: var(--theme-bg-hover);
+    color: var(--theme-text-primary);
   }
 
   &__stats {
@@ -244,7 +255,7 @@
 
     &--expanded,
     &--pinned {
-      width: 200px;
+      width: 280px;
     }
   }
 }

@@ -86,6 +86,19 @@
     gap: $spacing-3;
   }
 
+  &__category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+    width: fit-content;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
   &__priority-badge {
     display: inline-flex; // Only take width needed
     align-items: center;

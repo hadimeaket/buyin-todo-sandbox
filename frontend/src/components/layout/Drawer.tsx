@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
+import { CategoryManager } from "../../features/categories";
+import type { Category, CreateCategoryDto } from "../../types/category";
 import "./Drawer.scss";
 
 interface DrawerProps {
@@ -8,6 +10,12 @@ interface DrawerProps {
   activeCount: number;
   completedCount: number;
   onAddTask: () => void;
+  onManageCategories?: () => void;
+  showCategoryManager?: boolean;
+  categories?: Category[];
+  onCreateCategory?: (data: CreateCategoryDto) => Promise<void>;
+  onDeleteCategory?: (id: string) => Promise<void>;
+  isLoadingCategories?: boolean;
 }
 
 export default function Drawer({
@@ -16,9 +24,18 @@ export default function Drawer({
   activeCount,
   completedCount,
   onAddTask,
+  onManageCategories,
+  showCategoryManager = false,
+  categories = [],
+  onCreateCategory,
+  onDeleteCategory,
+  isLoadingCategories = false,
 }: DrawerProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  // Auto-expand when category manager is shown
+  const effectiveExpanded = isExpanded || showCategoryManager;
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -26,14 +43,16 @@ export default function Drawer({
 
   return (
     <div
-      className={`drawer ${isExpanded ? "drawer--expanded" : ""} ${className}`}
+      className={`drawer ${
+        effectiveExpanded ? "drawer--expanded" : ""
+      } ${className}`}
     >
       <div className="drawer__content">
         {/* Expand/Minimize Toggle */}
         <button
           className="drawer__action drawer__action--toggle"
           onClick={handleToggleExpand}
-          title={isExpanded ? "Minimize drawer" : "Expand drawer"}
+          title={effectiveExpanded ? "Minimize drawer" : "Expand drawer"}
         >
           <svg
             width="20"
@@ -45,7 +64,7 @@ export default function Drawer({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            {isExpanded ? (
+            {effectiveExpanded ? (
               // Minimize icon (chevrons right)
               <>
                 <polyline points="11 17 6 12 11 7" />
@@ -59,7 +78,7 @@ export default function Drawer({
               </>
             )}
           </svg>
-          {isExpanded && <span className="drawer__label">Minimize</span>}
+          {effectiveExpanded && <span className="drawer__label">Minimize</span>}
         </button>
 
         <div className="drawer__divider"></div>
@@ -125,6 +144,53 @@ export default function Drawer({
 
         <div className="drawer__divider"></div>
 
+        {/* Categories Button */}
+        {onManageCategories && (
+          <button
+            className={`drawer__action ${
+              showCategoryManager ? "drawer__action--active" : ""
+            }`}
+            onClick={onManageCategories}
+            title="Manage categories"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            {effectiveExpanded && (
+              <span className="drawer__label">Categories</span>
+            )}
+          </button>
+        )}
+
+        {/* Category Manager - Only show when expanded and showCategoryManager is true */}
+        {effectiveExpanded &&
+          showCategoryManager &&
+          onCreateCategory &&
+          onDeleteCategory && (
+            <div className="drawer__category-section">
+              <CategoryManager
+                categories={categories}
+                onCreateCategory={onCreateCategory}
+                onDeleteCategory={onDeleteCategory}
+                isLoading={isLoadingCategories}
+              />
+            </div>
+          )}
+
+        <div className="drawer__divider"></div>
+
         {/* Theme Toggle */}
         <button
           className="drawer__action"
@@ -170,7 +236,7 @@ export default function Drawer({
               <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
             </svg>
           )}
-          {isExpanded && (
+          {effectiveExpanded && (
             <span className="drawer__label">
               {theme === "dark" ? "Light" : "Dark"}
             </span>
@@ -196,7 +262,7 @@ export default function Drawer({
             <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
             <circle cx="12" cy="12" r="3" />
           </svg>
-          {isExpanded && <span className="drawer__label">Settings</span>}
+          {effectiveExpanded && <span className="drawer__label">Settings</span>}
         </button>
 
         {/* Help Button */}
@@ -219,7 +285,7 @@ export default function Drawer({
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
             <path d="M12 17h.01" />
           </svg>
-          {isExpanded && <span className="drawer__label">Help</span>}
+          {effectiveExpanded && <span className="drawer__label">Help</span>}
         </button>
 
         {/* Spacer to push Add Task button to bottom */}
@@ -245,7 +311,7 @@ export default function Drawer({
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
-          {isExpanded && <span className="drawer__label">Add Task</span>}
+          {effectiveExpanded && <span className="drawer__label">Add Task</span>}
         </button>
       </div>
     </div>

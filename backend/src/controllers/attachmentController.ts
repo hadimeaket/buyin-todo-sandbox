@@ -25,7 +25,10 @@ export const uploadAttachment = async (req: AuthRequest, res: Response) => {
     return res.status(201).json(attachment);
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message.includes("not found") || error.message.includes("access denied")) {
+      if (
+        error.message.includes("not found") ||
+        error.message.includes("access denied")
+      ) {
         return res.status(404).json({ error: error.message });
       }
       return res.status(400).json({ error: error.message });
@@ -34,7 +37,10 @@ export const uploadAttachment = async (req: AuthRequest, res: Response) => {
   }
 };
 
-export const getAttachmentsByTodoId = async (req: AuthRequest, res: Response) => {
+export const getAttachmentsByTodoId = async (
+  req: AuthRequest,
+  res: Response
+) => {
   try {
     const { todoId } = req.params;
     const userId = req.userId!;
@@ -47,7 +53,10 @@ export const getAttachmentsByTodoId = async (req: AuthRequest, res: Response) =>
     return res.json(attachments);
   } catch (error) {
     if (error instanceof Error) {
-      if (error.message.includes("not found") || error.message.includes("access denied")) {
+      if (
+        error.message.includes("not found") ||
+        error.message.includes("access denied")
+      ) {
         return res.status(404).json({ error: error.message });
       }
     }

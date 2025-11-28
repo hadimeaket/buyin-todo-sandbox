@@ -33,6 +33,23 @@
     }
   }
 
+  // Additional right padding when drawer is expanded (340px vs 64px)
+  &__container--drawer-expanded {
+    padding-right: calc($spacing-6 + 340px);
+
+    @media (min-width: $breakpoint-sm) {
+      padding-right: calc($spacing-8 + 340px);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      padding-right: calc($spacing-12 + 340px);
+    }
+
+    @media (max-width: 768px) {
+      padding-right: calc($spacing-6 + 280px);
+    }
+  }
+
   &__main-card {
     background-color: var(--theme-bg-secondary); // Theme-aware card background
     border-radius: $radius-2xl;

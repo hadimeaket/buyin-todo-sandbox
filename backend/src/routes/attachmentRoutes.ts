@@ -14,7 +14,11 @@ const router = Router();
 router.use(authMiddleware);
 
 // Upload attachment for a specific todo
-router.post("/todos/:todoId/attachments", upload.single("file"), uploadAttachment);
+router.post(
+  "/todos/:todoId/attachments",
+  upload.single("file"),
+  uploadAttachment
+);
 
 // Get all attachments for a todo
 router.get("/todos/:todoId/attachments", getAttachmentsByTodoId);

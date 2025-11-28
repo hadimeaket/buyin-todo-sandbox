@@ -2,9 +2,12 @@
 import { useState, useEffect } from "react";
 import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
+import type { Category, CreateCategoryDto } from "./types/category";
 import { todoApi } from "./services/todoApi";
+import { categoryApi } from "./services/categoryApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
+import { CategoryManager } from "./features/categories";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
@@ -36,6 +39,7 @@ function App() {
 
 function TodoApp() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
@@ -43,9 +47,12 @@ function TodoApp() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
+  const [showCategoryManager, setShowCategoryManager] =
+    useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
+    fetchCategories();
   }, []);
 
   const fetchTodos = async () => {
@@ -60,6 +67,28 @@ function TodoApp() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const data = await categoryApi.getAllCategories();
+      setCategories(data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to load categories. Please try again.");
+    }
+  };
+
+  const handleCreateCategory = async (data: CreateCategoryDto) => {
+    const newCategory = await categoryApi.createCategory(data);
+    setCategories((prev) => [...prev, newCategory]);
+  };
+
+  const handleDeleteCategory = async (id: string) => {
+    await categoryApi.deleteCategory(id);
+    setCategories((prev) => prev.filter((cat) => cat.id !== id));
+    // Refresh todos to reflect removed category
+    fetchTodos();
   };
 
   const handleAddTodo = async (data: CreateTodoDto) => {
@@ -178,6 +207,12 @@ function TodoApp() {
         activeCount={stats.active}
         completedCount={stats.completed}
         onAddTask={() => setIsAddTaskModalOpen(true)}
+        onManageCategories={() => setShowCategoryManager(!showCategoryManager)}
+        showCategoryManager={showCategoryManager}
+        categories={categories}
+        onCreateCategory={handleCreateCategory}
+        onDeleteCategory={handleDeleteCategory}
+        isLoadingCategories={loading}
       />
       <div className="app__container">
         <main className="app__main-card">
@@ -276,6 +311,7 @@ function TodoApp() {
                 ) : (
                   <TodoList
                     todos={filteredTodos}
+                    categories={categories}
                     onToggle={handleToggleTodo}
                     onDelete={handleDeleteTodo}
                     onViewDetails={handleViewDetails}
@@ -299,6 +335,7 @@ function TodoApp() {
             todo={selectedTodo}
             onClose={() => setSelectedTodo(null)}
             onUpdate={handleUpdateTodo}
+            categories={categories}
           />
         )}
 
@@ -308,6 +345,7 @@ function TodoApp() {
             onAdd={handleAddTodo}
             disabled={loading}
             existingTodos={todos}
+            categories={categories}
           />
         )}
       </div>

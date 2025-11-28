@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
@@ -10,6 +11,7 @@ interface AddTaskModalProps {
   onAdd: (data: CreateTodoDto) => Promise<void>;
   disabled?: boolean;
   existingTodos?: Todo[];
+  categories?: Category[];
 }
 
 export default function AddTaskModal({
@@ -17,10 +19,12 @@ export default function AddTaskModal({
   onAdd,
   disabled,
   existingTodos = [],
+  categories = [],
 }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [categoryId, setCategoryId] = useState<string>("");
   const [dueDate, setDueDate] = useState<string>("");
   const [dueEndDate, setDueEndDate] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
@@ -148,6 +152,7 @@ export default function AddTaskModal({
         title: title.trim(),
         description: description.trim() || undefined,
         priority,
+        categoryId: categoryId || undefined,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
         isAllDay,
@@ -266,6 +271,24 @@ export default function AddTaskModal({
                 { value: "low", label: "Low" },
                 { value: "medium", label: "Medium" },
                 { value: "high", label: "High" },
+              ]}
+              disabled={disabled || isSubmitting}
+            />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <Select
+              id="category"
+              label="Category"
+              value={categoryId}
+              onChange={(value) => setCategoryId(value)}
+              options={[
+                { value: "", label: "None" },
+                ...categories.map((cat) => ({
+                  value: cat.id,
+                  label: cat.name,
+                })),
               ]}
               disabled={disabled || isSubmitting}
             />

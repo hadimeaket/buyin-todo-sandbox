@@ -1,7 +1,8 @@
 import axios from "axios";
 import type { Attachment } from "../types/attachment";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 export const attachmentApi = {
   async uploadAttachment(todoId: string, file: File): Promise<Attachment> {
@@ -27,7 +28,10 @@ export const attachmentApi = {
     return response.data;
   },
 
-  async downloadAttachment(attachmentId: string, filename: string): Promise<void> {
+  async downloadAttachment(
+    attachmentId: string,
+    filename: string
+  ): Promise<void> {
     const response = await axios.get(
       `${API_BASE_URL}/attachments/${attachmentId}/download`,
       {
