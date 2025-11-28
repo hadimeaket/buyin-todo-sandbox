@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import './Auth.scss';
+import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import "./Auth.scss";
 
 interface AuthFormProps {
   onSuccess?: () => void;
@@ -8,30 +8,30 @@ interface AuthFormProps {
 
 export function AuthForm({ onSuccess }: AuthFormProps) {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { login, register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     // Validation
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
 
     if (!isLogin && password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
 
     if (password.length < 8) {
-      setError('Password must be at least 8 characters long');
+      setError("Password must be at least 8 characters long");
       return;
     }
 
@@ -45,7 +45,7 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
       }
       onSuccess?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -53,9 +53,9 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
 
   const toggleMode = () => {
     setIsLogin(!isLogin);
-    setError('');
-    setPassword('');
-    setConfirmPassword('');
+    setError("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -63,12 +63,12 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
       <div className="auth-card">
         <div className="auth-header">
           <h1 className="auth-title">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
+            {isLogin ? "Welcome Back" : "Create Account"}
           </h1>
           <p className="auth-subtitle">
             {isLogin
-              ? 'Sign in to access your todos'
-              : 'Register to start managing your tasks'}
+              ? "Sign in to access your todos"
+              : "Register to start managing your tasks"}
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
               className="form-input"
               placeholder="••••••••"
               disabled={isLoading}
-              autoComplete={isLogin ? 'current-password' : 'new-password'}
+              autoComplete={isLogin ? "current-password" : "new-password"}
               required
             />
           </div>
@@ -143,31 +143,27 @@ export function AuthForm({ onSuccess }: AuthFormProps) {
             </div>
           )}
 
-          <button
-            type="submit"
-            className="auth-submit"
-            disabled={isLoading}
-          >
+          <button type="submit" className="auth-submit" disabled={isLoading}>
             {isLoading ? (
               <span className="loading-spinner" />
             ) : isLogin ? (
-              'Sign In'
+              "Sign In"
             ) : (
-              'Create Account'
+              "Create Account"
             )}
           </button>
         </form>
 
         <div className="auth-footer">
           <p className="auth-switch">
-            {isLogin ? "Don't have an account?" : 'Already have an account?'}
+            {isLogin ? "Don't have an account?" : "Already have an account?"}
             <button
               type="button"
               onClick={toggleMode}
               className="auth-switch-button"
               disabled={isLoading}
             >
-              {isLogin ? 'Sign up' : 'Sign in'}
+              {isLogin ? "Sign up" : "Sign in"}
             </button>
           </p>
         </div>

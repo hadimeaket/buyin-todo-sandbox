@@ -5,9 +5,17 @@ import Database from "better-sqlite3";
 export interface ITodoRepository {
   findAll(userId?: string): Promise<Todo[]>;
   findById(id: string, userId?: string): Promise<Todo | null>;
-  findDuplicate(title: string, description?: string, userId?: string): Promise<Todo | null>;
+  findDuplicate(
+    title: string,
+    description?: string,
+    userId?: string
+  ): Promise<Todo | null>;
   create(data: CreateTodoDto, userId?: string): Promise<Todo>;
-  update(id: string, data: UpdateTodoDto, userId?: string): Promise<Todo | null>;
+  update(
+    id: string,
+    data: UpdateTodoDto,
+    userId?: string
+  ): Promise<Todo | null>;
   toggle(id: string, userId?: string): Promise<Todo | null>;
   delete(id: string, userId?: string): Promise<boolean>;
 }
@@ -34,7 +42,9 @@ class SqliteTodoRepository implements ITodoRepository {
     this.db.exec(createUsersTableSQL);
 
     // Check if todos table exists and has userId column
-    const tableInfo = this.db.prepare("PRAGMA table_info(todos)").all() as any[];
+    const tableInfo = this.db
+      .prepare("PRAGMA table_info(todos)")
+      .all() as any[];
     const hasUserIdColumn = tableInfo.some((col: any) => col.name === "userId");
 
     if (!hasUserIdColumn && tableInfo.length > 0) {
@@ -90,12 +100,12 @@ class SqliteTodoRepository implements ITodoRepository {
   async findAll(userId?: string): Promise<Todo[]> {
     let query = "SELECT * FROM todos";
     const params: any[] = [];
-    
+
     if (userId) {
       query += " WHERE userId = ?";
       params.push(userId);
     }
-    
+
     const rows = this.db.prepare(query).all(...params);
     return rows.map((row) => this.rowToTodo(row));
   }
@@ -103,12 +113,12 @@ class SqliteTodoRepository implements ITodoRepository {
   async findById(id: string, userId?: string): Promise<Todo | null> {
     let query = "SELECT * FROM todos WHERE id = ?";
     const params: any[] = [id];
-    
+
     if (userId) {
       query += " AND userId = ?";
       params.push(userId);
     }
-    
+
     const row = this.db.prepare(query).get(...params);
     return row ? this.rowToTodo(row) : null;
   }
@@ -128,7 +138,7 @@ class SqliteTodoRepository implements ITodoRepository {
       query += " AND LOWER(TRIM(description)) = ?";
       params.push(normalizedDesc);
     }
-    
+
     if (userId) {
       query += " AND userId = ?";
       params.push(userId);
@@ -184,7 +194,11 @@ class SqliteTodoRepository implements ITodoRepository {
     return todo;
   }
 
-  async update(id: string, data: UpdateTodoDto, userId?: string): Promise<Todo | null> {
+  async update(
+    id: string,
+    data: UpdateTodoDto,
+    userId?: string
+  ): Promise<Todo | null> {
     const existing = await this.findById(id, userId);
     if (!existing) return null;
 
@@ -204,7 +218,8 @@ class SqliteTodoRepository implements ITodoRepository {
             : undefined
           : existing.dueEndDate,
       isAllDay: data.isAllDay !== undefined ? data.isAllDay : existing.isAllDay,
-      startTime: data.startTime !== undefined ? data.startTime : existing.startTime,
+      startTime:
+        data.startTime !== undefined ? data.startTime : existing.startTime,
       endTime: data.endTime !== undefined ? data.endTime : existing.endTime,
       recurrence:
         data.recurrence !== undefined ? data.recurrence : existing.recurrence,
@@ -263,12 +278,12 @@ class SqliteTodoRepository implements ITodoRepository {
   async delete(id: string, userId?: string): Promise<boolean> {
     let query = "DELETE FROM todos WHERE id = ?";
     const params: any[] = [id];
-    
+
     if (userId) {
       query += " AND userId = ?";
       params.push(userId);
     }
-    
+
     const stmt = this.db.prepare(query);
     const result = stmt.run(...params);
     return result.changes > 0;

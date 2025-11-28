@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken";
 
 const SALT_ROUNDS = 10;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
 const JWT_EXPIRES_IN = "7d"; // Token expires in 7 days
 
 export interface AuthResponse extends UserResponse {
@@ -14,7 +15,9 @@ export interface AuthResponse extends UserResponse {
 
 export class AuthService {
   private generateToken(userId: string, email: string): string {
-    return jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+    return jwt.sign({ userId, email }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
   }
 
   async register(data: RegisterDto): Promise<AuthResponse> {
@@ -81,7 +84,10 @@ export class AuthService {
 
   verifyToken(token: string): { userId: string; email: string } {
     try {
-      const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string };
+      const decoded = jwt.verify(token, JWT_SECRET) as {
+        userId: string;
+        email: string;
+      };
       return decoded;
     } catch (error) {
       throw new Error("Invalid or expired token");

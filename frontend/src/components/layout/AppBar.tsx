@@ -21,7 +21,7 @@ export default function AppBar() {
             className="app-bar__logo"
           />
         </div>
-        
+
         <div className="app-bar__user-section">
           <span className="app-bar__user-email">{user?.email}</span>
           <button

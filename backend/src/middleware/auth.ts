@@ -14,7 +14,11 @@ export const requireAuth = (
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res.status(401).json({ error: "Authentication required. Please provide a valid token." });
+    res
+      .status(401)
+      .json({
+        error: "Authentication required. Please provide a valid token.",
+      });
     return;
   }
 
@@ -26,7 +30,9 @@ export const requireAuth = (
     req.userEmail = decoded.email;
     next();
   } catch (error) {
-    res.status(401).json({ error: "Invalid or expired token. Please log in again." });
+    res
+      .status(401)
+      .json({ error: "Invalid or expired token. Please log in again." });
     return;
   }
 };
