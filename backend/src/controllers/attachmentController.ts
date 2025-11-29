@@ -93,10 +93,8 @@ export const downloadAttachment = async (
     const userId = req.user!.id;
     const { id } = req.params;
 
-    const { attachment, filePath } = await attachmentService.getAttachmentForDownload(
-      userId,
-      id
-    );
+    const { attachment, filePath } =
+      await attachmentService.getAttachmentForDownload(userId, id);
 
     // Set headers for download
     res.setHeader("Content-Type", attachment.mimeType);

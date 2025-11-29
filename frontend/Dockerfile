@@ -56,6 +56,7 @@ FROM nginx:1.25-alpine AS production
 RUN apk upgrade --no-cache
 
 # Create non-root user
+
 RUN addgroup -g 1001 -S nginx-app && \
     adduser -S nginx-app -u 1001 -G nginx-app
 

@@ -14,7 +14,7 @@ interface AppBarProps {
 
 export default function AppBar({ onLogout }: AppBarProps) {
   const { user, isAuthenticated } = useAuth();
-  
+
   return (
     <header className="app-bar">
       <div className="app-bar__toolbar">
@@ -26,7 +26,14 @@ export default function AppBar({ onLogout }: AppBarProps) {
           />
         </div>
         {isAuthenticated && user && (
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginLeft: "auto" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+              marginLeft: "auto",
+            }}
+          >
             <span style={{ color: "white", fontSize: "0.875rem" }}>
               {user.name || user.email}
             </span>

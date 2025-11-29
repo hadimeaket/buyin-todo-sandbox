@@ -57,10 +57,7 @@ export class AttachmentService {
   /**
    * List all attachments for a todo
    */
-  async listAttachments(
-    userId: string,
-    todoId: string
-  ): Promise<Attachment[]> {
+  async listAttachments(userId: string, todoId: string): Promise<Attachment[]> {
     // Check if todo exists and belongs to user
     const todo = await todoRepository.findById(todoId, userId);
     if (!todo) {

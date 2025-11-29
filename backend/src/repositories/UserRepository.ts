@@ -3,21 +3,13 @@ import db from "../db/sqlite";
 import { v4 as uuidv4 } from "uuid";
 
 export interface IUserRepository {
-  create(data: {
-    email: string;
-    passwordHash: string;
-    name?: string;
-  }): User;
+  create(data: { email: string; passwordHash: string; name?: string }): User;
   findByEmail(email: string): User | null;
   findById(id: string): User | null;
 }
 
 class UserRepository implements IUserRepository {
-  create(data: {
-    email: string;
-    passwordHash: string;
-    name?: string;
-  }): User {
+  create(data: { email: string; passwordHash: string; name?: string }): User {
     const id = uuidv4();
     const now = new Date().toISOString();
 

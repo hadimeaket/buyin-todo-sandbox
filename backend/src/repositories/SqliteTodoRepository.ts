@@ -6,9 +6,7 @@ import db from "../db/sqlite";
 export class SqliteTodoRepository implements ITodoRepository {
   async findAll(userId: string): Promise<Todo[]> {
     const rows = db
-      .prepare(
-        "SELECT * FROM todos WHERE user_id = ? ORDER BY created_at DESC"
-      )
+      .prepare("SELECT * FROM todos WHERE user_id = ? ORDER BY created_at DESC")
       .all(userId);
     return rows.map(this.rowToTodo);
   }
@@ -149,20 +147,13 @@ export class SqliteTodoRepository implements ITodoRepository {
     const stmt = db.prepare(
       "UPDATE todos SET completed = ?, updated_at = ? WHERE id = ? AND user_id = ?"
     );
-    stmt.run(
-      existing.completed ? 0 : 1,
-      new Date().toISOString(),
-      id,
-      userId
-    );
+    stmt.run(existing.completed ? 0 : 1, new Date().toISOString(), id, userId);
 
     return await this.findById(id, userId);
   }
 
   async delete(id: string, userId: string): Promise<boolean> {
-    const stmt = db.prepare(
-      "DELETE FROM todos WHERE id = ? AND user_id = ?"
-    );
+    const stmt = db.prepare("DELETE FROM todos WHERE id = ? AND user_id = ?");
     const result = stmt.run(id, userId);
     return result.changes > 0;
   }

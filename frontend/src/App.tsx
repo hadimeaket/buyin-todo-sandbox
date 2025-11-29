@@ -159,7 +159,10 @@ function App() {
       <div className="app">
         <AppBar />
         <div className="app__container">
-          <main className="app__main-card" style={{ maxWidth: "500px", margin: "0 auto" }}>
+          <main
+            className="app__main-card"
+            style={{ maxWidth: "500px", margin: "0 auto" }}
+          >
             {authView === "login" ? (
               <LoginForm onSwitchToRegister={() => setAuthView("register")} />
             ) : (
