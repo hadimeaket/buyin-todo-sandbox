@@ -3,6 +3,9 @@
 # =============================================================================
 FROM node:20-alpine AS builder
 
+# Install build dependencies for native modules (better-sqlite3)
+RUN apk add --no-cache python3 make g++
+
 # Add build metadata
 ARG BUILD_DATE
 ARG VCS_REF
@@ -54,6 +57,9 @@ COPY package*.json ./
 # Copy built application from builder stage
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+
+# Create data directory for SQLite database
+RUN mkdir -p /app/data && chown -R nodejs:nodejs /app/data
 
 # Switch to non-root user
 USER nodejs

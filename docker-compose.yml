@@ -11,6 +11,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
+    volumes:
+      - todo-data:/app/data
+      - todo-uploads:/app/uploads
     networks:
       - todo-network
     restart: unless-stopped
@@ -40,3 +43,7 @@ services:
 networks:
   todo-network:
     driver: bridge
+
+volumes:
+  todo-data:
+  todo-uploads:

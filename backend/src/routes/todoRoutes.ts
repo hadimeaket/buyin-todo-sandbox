@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
   getAllTodos,
   getTodoById,
@@ -6,26 +6,30 @@ import {
   updateTodo,
   toggleTodo,
   deleteTodo,
-} from '../controllers/todoController';
+} from "../controllers/todoController";
+import { authenticate } from "../middleware/authenticate";
 
 const router = Router();
 
+// Protect all todo routes with authentication
+router.use(authenticate);
+
 // GET all todos
-router.get('/', getAllTodos);
+router.get("/", getAllTodos);
 
 // GET todo by id
-router.get('/:id', getTodoById);
+router.get("/:id", getTodoById);
 
 // POST create todo
-router.post('/', createTodo);
+router.post("/", createTodo);
 
 // PUT update todo
-router.put('/:id', updateTodo);
+router.put("/:id", updateTodo);
 
 // PATCH toggle todo completion
-router.patch('/:id/toggle', toggleTodo);
+router.patch("/:id/toggle", toggleTodo);
 
 // DELETE todo
-router.delete('/:id', deleteTodo);
+router.delete("/:id", deleteTodo);
 
 export default router;

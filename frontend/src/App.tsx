@@ -8,8 +8,12 @@ import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { useAuth } from "./contexts/AuthContext";
+import { LoginForm, RegisterForm } from "./features/auth";
 
 function App() {
+  const { isAuthenticated, logout } = useAuth();
+  const [authView, setAuthView] = useState<"login" | "register">("login");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +24,10 @@ function App() {
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (isAuthenticated) {
+      fetchTodos();
+    }
+  }, [isAuthenticated]);
 
   const fetchTodos = async () => {
     try {
@@ -45,9 +51,11 @@ function App() {
       setIsAddTaskModalOpen(false); // Close modal on success
     } catch (err: unknown) {
       console.error(err);
-      if (err && typeof err === "object" && "response" in err) {
-        const error = err as { response?: { status?: number } };
-        if (error.response?.status === 409) {
+      if (err && typeof err === "object" && "data" in err) {
+        const apiError = err as { data?: { error?: string }; status?: number };
+        if (apiError.data?.error === "TITLE_REQUIRED") {
+          setError("Title is required and cannot be empty.");
+        } else if (apiError.status === 409) {
           setError(
             "A todo with this title already exists. Please use a different title."
           );
@@ -145,9 +153,28 @@ function App() {
     { id: "completed", label: "Completed", count: stats.completed },
   ];
 
+  // Show auth forms if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="app">
+        <AppBar />
+        <div className="app__container">
+          <main className="app__main-card" style={{ maxWidth: "500px", margin: "0 auto" }}>
+            {authView === "login" ? (
+              <LoginForm onSwitchToRegister={() => setAuthView("register")} />
+            ) : (
+              <RegisterForm onSwitchToLogin={() => setAuthView("login")} />
+            )}
+          </main>
+        </div>
+      </div>
+    );
+  }
+
+  // Show main todo app when authenticated
   return (
     <div className="app">
-      <AppBar />
+      <AppBar onLogout={logout} />
       <Drawer
         totalCount={stats.total}
         activeCount={stats.active}

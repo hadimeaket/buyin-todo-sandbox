@@ -1,17 +1,17 @@
 import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todo";
-import { v4 as uuidv4 } from "uuid";
 
 export interface ITodoRepository {
-  findAll(): Promise<Todo[]>;
-  findById(id: string): Promise<Todo | null>;
-  findDuplicate(title: string, description?: string): Promise<Todo | null>;
-  create(data: CreateTodoDto): Promise<Todo>;
-  update(id: string, data: UpdateTodoDto): Promise<Todo | null>;
-  toggle(id: string): Promise<Todo | null>;
-  delete(id: string): Promise<boolean>;
+  findAll(userId: string): Promise<Todo[]>;
+  findById(id: string, userId: string): Promise<Todo | null>;
+  findDuplicate(userId: string, title: string, description?: string): Promise<Todo | null>;
+  create(userId: string, data: CreateTodoDto): Promise<Todo>;
+  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;
+  toggle(id: string, userId: string): Promise<Todo | null>;
+  delete(id: string, userId: string): Promise<boolean>;
 }
 
-class InMemoryTodoRepository implements ITodoRepository {
+// Deprecated: replaced by SqliteTodoRepository
+/* class InMemoryTodoRepository implements ITodoRepository {
   private todos: Todo[] = [];
 
   async findAll(): Promise<Todo[]> {
@@ -119,6 +119,8 @@ class InMemoryTodoRepository implements ITodoRepository {
     this.todos.splice(index, 1);
     return true;
   }
-}
+} */
 
-export const todoRepository = new InMemoryTodoRepository();
+// Switch to SQLite repository
+import { SqliteTodoRepository } from "./SqliteTodoRepository";
+export const todoRepository = new SqliteTodoRepository();
