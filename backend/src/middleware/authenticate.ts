@@ -19,7 +19,7 @@ export const authenticate = async (
   try {
     // Get token from Authorization header
     const authHeader = req.headers.authorization;
-    
+
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       res.status(401).json({ message: "Authentication required" });
       return;
@@ -29,14 +29,14 @@ export const authenticate = async (
 
     // Verify token and get user
     const user = await authService.verifyToken(token);
-    
+
     // Attach user to request
     req.user = user;
-    
+
     next();
   } catch (error: any) {
-    res.status(401).json({ 
-      message: error.message || "Invalid or expired token" 
+    res.status(401).json({
+      message: error.message || "Invalid or expired token",
     });
   }
 };

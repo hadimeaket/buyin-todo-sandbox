@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { authService } from "../services/AuthService";
-import { RegisterDto, LoginDto, GoogleAuthDto, AppleAuthDto } from "../models/User";
+import {
+  RegisterDto,
+  LoginDto,
+  GoogleAuthDto,
+  AppleAuthDto,
+} from "../models/User";
 
 export const register = async (
   req: Request,

@@ -36,7 +36,9 @@ class FileBasedUserRepository implements IUserRepository {
           createdAt: new Date(user.createdAt),
           updatedAt: new Date(user.updatedAt),
         }));
-        console.log(`Loaded ${this.users.length} users from persistent storage`);
+        console.log(
+          `Loaded ${this.users.length} users from persistent storage`
+        );
       }
     } catch (error) {
       console.error("Error loading users from file:", error);

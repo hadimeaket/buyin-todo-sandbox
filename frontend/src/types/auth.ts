@@ -2,7 +2,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  authProvider: 'email' | 'google' | 'apple';
+  authProvider: "email" | "google" | "apple";
 }
 
 export interface AuthResponse {

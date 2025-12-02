@@ -24,11 +24,7 @@ export default function AppBar() {
         {user && (
           <div className="app-bar__user">
             <span className="app-bar__user-name">{user.name}</span>
-            <button 
-              onClick={logout} 
-              className="app-bar__logout"
-              title="Logout"
-            >
+            <button onClick={logout} className="app-bar__logout" title="Logout">
               Logout
             </button>
           </div>

@@ -1,7 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import { authService } from '../services/authApi';
-import type { User, AuthResponse, LoginData, RegisterData } from '../types/auth';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import type { ReactNode } from "react";
+import { authService } from "../services/authApi";
+import type {
+  User,
+  AuthResponse,
+  LoginData,
+  RegisterData,
+} from "../types/auth";
 
 interface AuthContextType {
   user: User | null;
@@ -22,7 +27,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -39,16 +44,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     // Check for stored token on mount
-    const storedToken = localStorage.getItem('authToken');
-    const storedUser = localStorage.getItem('user');
+    const storedToken = localStorage.getItem("authToken");
+    const storedUser = localStorage.getItem("user");
 
     if (storedToken && storedUser) {
       try {
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
       } catch (err) {
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('user');
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("user");
       }
     }
     setIsLoading(false);
@@ -57,8 +62,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleAuthSuccess = (response: AuthResponse) => {
     setUser(response.user);
     setToken(response.token);
-    localStorage.setItem('authToken', response.token);
-    localStorage.setItem('user', JSON.stringify(response.user));
+    localStorage.setItem("authToken", response.token);
+    localStorage.setItem("user", JSON.stringify(response.user));
     setError(null);
   };
 
@@ -69,7 +74,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authService.login(data);
       handleAuthSuccess(response);
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Login failed';
+      const message = err.response?.data?.message || "Login failed";
       setError(message);
       throw new Error(message);
     } finally {
@@ -84,7 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authService.register(data);
       handleAuthSuccess(response);
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Registration failed';
+      const message = err.response?.data?.message || "Registration failed";
       setError(message);
       throw new Error(message);
     } finally {
@@ -99,7 +104,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authService.googleAuth(idToken);
       handleAuthSuccess(response);
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Google login failed';
+      const message = err.response?.data?.message || "Google login failed";
       setError(message);
       throw new Error(message);
     } finally {
@@ -114,7 +119,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const response = await authService.appleAuth(idToken, user);
       handleAuthSuccess(response);
     } catch (err: any) {
-      const message = err.response?.data?.message || 'Apple login failed';
+      const message = err.response?.data?.message || "Apple login failed";
       setError(message);
       throw new Error(message);
     } finally {

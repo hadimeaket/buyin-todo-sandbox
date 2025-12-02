@@ -1,4 +1,9 @@
-import { Todo, CreateTodoDto, UpdateTodoDto, TodoAttachment } from "../models/Todo";
+import {
+  Todo,
+  CreateTodoDto,
+  UpdateTodoDto,
+  TodoAttachment,
+} from "../models/Todo";
 import { v4 as uuidv4 } from "uuid";
 import * as fs from "fs";
 import * as path from "path";
@@ -6,13 +11,25 @@ import * as path from "path";
 export interface ITodoRepository {
   findAll(userId: string): Promise<Todo[]>;
   findById(id: string, userId: string): Promise<Todo | null>;
-  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;
+  findDuplicate(
+    title: string,
+    userId: string,
+    description?: string
+  ): Promise<Todo | null>;
   create(data: CreateTodoDto, userId: string): Promise<Todo>;
   update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;
   toggle(id: string, userId: string): Promise<Todo | null>;
   delete(id: string, userId: string): Promise<boolean>;
-  addAttachment(todoId: string, userId: string, attachment: TodoAttachment): Promise<Todo | null>;
-  removeAttachment(todoId: string, userId: string, attachmentId: string): Promise<Todo | null>;
+  addAttachment(
+    todoId: string,
+    userId: string,
+    attachment: TodoAttachment
+  ): Promise<Todo | null>;
+  removeAttachment(
+    todoId: string,
+    userId: string,
+    attachmentId: string
+  ): Promise<Todo | null>;
 }
 
 class InMemoryTodoRepository implements ITodoRepository {
@@ -46,7 +63,9 @@ class InMemoryTodoRepository implements ITodoRepository {
           createdAt: new Date(todo.createdAt),
           updatedAt: new Date(todo.updatedAt),
         }));
-        console.log(`Loaded ${this.todos.length} todos from persistent storage`);
+        console.log(
+          `Loaded ${this.todos.length} todos from persistent storage`
+        );
       }
     } catch (error) {
       console.error("Error loading todos from file:", error);
@@ -60,7 +79,11 @@ class InMemoryTodoRepository implements ITodoRepository {
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
       }
-      fs.writeFileSync(this.dataFilePath, JSON.stringify(this.todos, null, 2), "utf-8");
+      fs.writeFileSync(
+        this.dataFilePath,
+        JSON.stringify(this.todos, null, 2),
+        "utf-8"
+      );
     } catch (error) {
       console.error("Error saving todos to file:", error);
     }
@@ -118,8 +141,14 @@ class InMemoryTodoRepository implements ITodoRepository {
     return todo;
   }
 
-  async update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
-    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
+  async update(
+    id: string,
+    userId: string,
+    data: UpdateTodoDto
+  ): Promise<Todo | null> {
+    const index = this.todos.findIndex(
+      (t) => t.id === id && t.userId === userId
+    );
     if (index === -1) return null;
 
     const updatedTodo: Todo = {
@@ -159,7 +188,9 @@ class InMemoryTodoRepository implements ITodoRepository {
   }
 
   async toggle(id: string, userId: string): Promise<Todo | null> {
-    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
+    const index = this.todos.findIndex(
+      (t) => t.id === id && t.userId === userId
+    );
     if (index === -1) return null;
 
     const updatedTodo: Todo = {
@@ -173,7 +204,9 @@ class InMemoryTodoRepository implements ITodoRepository {
   }
 
   async delete(id: string, userId: string): Promise<boolean> {
-    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
+    const index = this.todos.findIndex(
+      (t) => t.id === id && t.userId === userId
+    );
     if (index === -1) return false;
 
     this.todos.splice(index, 1);

@@ -165,11 +165,11 @@ export class AuthService {
       // For Apple Sign-In, we would normally verify the identity token
       // This is a simplified implementation
       // In production, you would use apple-signin-auth or similar library
-      
+
       // Decode the JWT without verification (for demo purposes)
       // In production, you MUST verify the token signature
       const decoded = jwt.decode(data.idToken) as any;
-      
+
       if (!decoded || !decoded.email) {
         throw new Error("Invalid Apple token");
       }
@@ -216,7 +216,7 @@ export class AuthService {
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
       const user = await userRepository.findById(decoded.userId);
-      
+
       if (!user) {
         throw new Error("User not found");
       }

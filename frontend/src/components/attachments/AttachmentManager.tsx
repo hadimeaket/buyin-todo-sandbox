@@ -53,7 +53,8 @@ export default function AttachmentManager({
     } catch (err: any) {
       console.error("Upload error:", err);
       setError(
-        err.response?.data?.message || "Failed to upload file. Please try again."
+        err.response?.data?.message ||
+          "Failed to upload file. Please try again."
       );
     } finally {
       setUploading(false);
@@ -62,7 +63,11 @@ export default function AttachmentManager({
 
   const handleDownload = async (attachment: TodoAttachment) => {
     try {
-      await downloadAttachment(todo.id, attachment.id, attachment.originalFilename);
+      await downloadAttachment(
+        todo.id,
+        attachment.id,
+        attachment.originalFilename
+      );
     } catch (err) {
       console.error("Download error:", err);
       setError("Failed to download file");
@@ -79,9 +84,7 @@ export default function AttachmentManager({
       onUpdate(updatedTodo);
     } catch (err: any) {
       console.error("Delete error:", err);
-      setError(
-        err.response?.data?.message || "Failed to delete attachment"
-      );
+      setError(err.response?.data?.message || "Failed to delete attachment");
     }
   };
 

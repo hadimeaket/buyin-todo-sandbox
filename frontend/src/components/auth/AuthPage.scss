@@ -8,10 +8,10 @@
   background: $bg-primary;
   padding: $spacing-6;
   position: relative;
-  
+
   // BuyIn brand gradient overlay
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -155,7 +155,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     width: calc(50% - 60px);

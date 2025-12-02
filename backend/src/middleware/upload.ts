@@ -37,9 +37,7 @@ const fileFilter = (
     cb(null, true);
   } else {
     cb(
-      new Error(
-        "Invalid file type. Only PNG, JPEG, and PDF files are allowed."
-      )
+      new Error("Invalid file type. Only PNG, JPEG, and PDF files are allowed.")
     );
   }
 };
