@@ -3,12 +3,16 @@ import { todoService } from "../services/TodoService";
 import { CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 
 export const getAllTodos = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todos = await todoService.getAllTodos();
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
+    const todos = await todoService.getAllTodos(req.user.id);
     res.status(200).json(todos);
   } catch (error) {
     next(error);
@@ -21,7 +25,11 @@ export const getTodoById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoService.getTodoById(req.params.id);
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
+    const todo = await todoService.getTodoById(req.params.id, req.user.id);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -38,9 +46,13 @@ export const createTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
     const data: CreateTodoDto = req.body;
     try {
-      const todo = await todoService.createTodo(data);
+      const todo = await todoService.createTodo(data, req.user.id);
       res.status(201).json(todo);
     } catch (err: any) {
       if (err.message === "Title is required") {
@@ -62,8 +74,12 @@ export const updateTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
     const data: UpdateTodoDto = req.body;
-    const todo = await todoService.updateTodo(req.params.id, data);
+    const todo = await todoService.updateTodo(req.params.id, req.user.id, data);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -80,7 +96,11 @@ export const toggleTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoService.toggleTodo(req.params.id);
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
+    const todo = await todoService.toggleTodo(req.params.id, req.user.id);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -97,7 +117,11 @@ export const deleteTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const deleted = await todoService.deleteTodo(req.params.id);
+    if (!req.user) {
+      res.status(401).json({ message: "Authentication required" });
+      return;
+    }
+    const deleted = await todoService.deleteTodo(req.params.id, req.user.id);
     if (!deleted) {
       res.status(404).json({ message: "Todo not found" });
       return;

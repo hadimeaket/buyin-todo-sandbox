@@ -1,5 +1,6 @@
 import type { Todo } from "../../types/todo";
 import Checkbox from "../../components/ui/Checkbox";
+import { getCategoryConfig } from "../../utils/categoryUtils";
 import "./TodoItem.scss";
 
 interface TodoItemProps {
@@ -149,6 +150,19 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
         <div className="todo-item__right">
           {/* Metadata */}
           <div className="todo-item__metadata">
+            {/* Category Badge */}
+            {todo.category && (
+              <span
+                className="todo-item__category-badge"
+                style={{
+                  backgroundColor: getCategoryConfig(todo.category).bgColor,
+                  color: getCategoryConfig(todo.category).color,
+                }}
+              >
+                {todo.category}
+              </span>
+            )}
+
             {/* Priority Badge */}
             <span
               className={`todo-item__priority-badge ${getPriorityClass(

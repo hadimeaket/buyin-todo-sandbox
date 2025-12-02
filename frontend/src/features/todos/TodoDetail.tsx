@@ -7,6 +7,7 @@ import Badge from "../../components/ui/Badge";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Checkbox from "../../components/ui/Checkbox";
+import AttachmentManager from "../../components/attachments/AttachmentManager";
 import "./TodoDetail.scss";
 
 interface TodoDetailProps {
@@ -16,6 +17,7 @@ interface TodoDetailProps {
 }
 
 function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
+  const [currentTodo, setCurrentTodo] = useState(todo);
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description || "");
   const [priority, setPriority] = useState<"low" | "medium" | "high">(
@@ -35,6 +37,11 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
   >(todo.recurrence || "none");
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Update local state when todo prop changes
+  useEffect(() => {
+    setCurrentTodo(todo);
+  }, [todo]);
 
   // Auto-set all-day when date range is selected and disable recurrence
   useEffect(() => {
@@ -438,6 +445,13 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                 </div>
               </div>
             </div>
+
+            {/* Attachments */}
+            <AttachmentManager
+              todo={currentTodo}
+              onUpdate={setCurrentTodo}
+              disabled={false}
+            />
 
             {/* Edit Button */}
             <div className="todo-detail__edit-section">

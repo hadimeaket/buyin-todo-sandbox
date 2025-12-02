@@ -8,8 +8,11 @@ import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { AuthPage } from "./components/auth/AuthPage";
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
+  const { isAuthenticated, isLoading: authLoading, user, logout } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -144,6 +147,21 @@ function App() {
     { id: "active", label: "Active", count: stats.active },
     { id: "completed", label: "Completed", count: stats.completed },
   ];
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="app-loading">
+        <div className="loading__spinner animate-spin" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // Show auth page if not authenticated
+  if (!isAuthenticated) {
+    return <AuthPage />;
+  }
 
   return (
     <div className="app">

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { CreateTodoDto, Todo, TodoCategory } from "../../types/todo";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
+import { CATEGORY_CONFIG } from "../../utils/categoryUtils";
 import "./AddTaskModal.scss";
 
 interface AddTaskModalProps {
@@ -20,6 +21,7 @@ export default function AddTaskModal({
 }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState<TodoCategory>("task");
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
   const [dueDate, setDueDate] = useState<string>("");
   const [dueEndDate, setDueEndDate] = useState<string>("");
@@ -147,6 +149,7 @@ export default function AddTaskModal({
       const todoData: CreateTodoDto = {
         title: title.trim(),
         description: description.trim() || undefined,
+        category,
         priority,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
@@ -250,6 +253,22 @@ export default function AddTaskModal({
               rows={2}
               required
               data-testid="add-task-description-input"
+            />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <Select
+              id="category"
+              label="Category"
+              value={category}
+              onChange={(value) => setCategory(value as TodoCategory)}
+              options={[
+                { value: "task", label: "Task" },
+                { value: "idea", label: "Idea" },
+                { value: "action", label: "Action" },
+              ]}
+              disabled={disabled || isSubmitting}
             />
           </div>
 
