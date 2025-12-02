@@ -47,7 +47,9 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onClose }) => {
     }
 
     if (!validateHexColor(formData.color)) {
-      setColorError("Invalid hex color. Must be in format #RRGGBB (e.g., #3B82F6)");
+      setColorError(
+        "Invalid hex color. Must be in format #RRGGBB (e.g., #3B82F6)"
+      );
       return;
     }
 
@@ -73,7 +75,9 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onClose }) => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure? Todos with this category will have it removed.")) {
+    if (
+      !confirm("Are you sure? Todos with this category will have it removed.")
+    ) {
       return;
     }
 
@@ -127,7 +131,10 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onClose }) => {
             <div className="form-group">
               <label htmlFor="category-color">
                 Color (Hex)
-                <span className="color-preview" style={{ backgroundColor: formData.color }} />
+                <span
+                  className="color-preview"
+                  style={{ backgroundColor: formData.color }}
+                />
               </label>
               <div className="color-input-group">
                 <input
@@ -142,7 +149,9 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onClose }) => {
                 <input
                   type="color"
                   value={formData.color}
-                  onChange={(e) => setFormData({ ...formData, color: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, color: e.target.value })
+                  }
                   title="Pick a color"
                 />
               </div>
@@ -154,7 +163,11 @@ const CategoryManager: React.FC<CategoryManagerProps> = ({ onClose }) => {
 
           <div className="form-actions">
             {editingId && (
-              <button type="button" onClick={handleCancel} className="btn-secondary">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="btn-secondary"
+              >
                 Cancel
               </button>
             )}

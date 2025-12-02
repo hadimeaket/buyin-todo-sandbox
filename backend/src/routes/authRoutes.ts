@@ -17,6 +17,10 @@ router.post("/google", googleCallback as RequestHandler);
 router.post("/apple", appleCallback as RequestHandler);
 
 // Protected routes
-router.get("/me", authenticate as RequestHandler, getCurrentUser as RequestHandler);
+router.get(
+  "/me",
+  authenticate as RequestHandler,
+  getCurrentUser as RequestHandler
+);
 
 export default router;

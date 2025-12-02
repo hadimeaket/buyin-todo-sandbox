@@ -1,10 +1,10 @@
-import express, { Application } from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import routes from './routes';
-import { errorHandler } from './middleware/errorHandler';
-import { logger } from './middleware/logger';
-import { initializeDatabase } from './db/database';
+import express, { Application } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import routes from "./routes";
+import { errorHandler } from "./middleware/errorHandler";
+import { logger } from "./middleware/logger";
+import { initializeDatabase } from "./db/database";
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(logger);
 
 // Routes
-app.use('/api', routes);
+app.use("/api", routes);
 
 // Error handling
 app.use(errorHandler);

@@ -29,7 +29,11 @@ export class TodoService {
     return await todoRepository.create(data, userId);
   }
 
-  async updateTodo(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
+  async updateTodo(
+    id: string,
+    userId: string,
+    data: UpdateTodoDto
+  ): Promise<Todo | null> {
     return await todoRepository.update(id, userId, data);
   }
 

@@ -14,7 +14,7 @@ export function getDatabase(): Database.Database {
 
 export function initializeDatabase(): void {
   const db = getDatabase();
-  
+
   // Create users table
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (

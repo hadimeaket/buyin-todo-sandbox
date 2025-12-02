@@ -23,10 +23,11 @@ const Register: React.FC = () => {
     // Initialize Apple Sign-In
     if (window.AppleID) {
       window.AppleID.auth.init({
-        clientId: import.meta.env.VITE_APPLE_CLIENT_ID || 'com.example.app',
-        scope: 'name email',
-        redirectURI: import.meta.env.VITE_APPLE_REDIRECT_URI || window.location.origin,
-        usePopup: true
+        clientId: import.meta.env.VITE_APPLE_CLIENT_ID || "com.example.app",
+        scope: "name email",
+        redirectURI:
+          import.meta.env.VITE_APPLE_REDIRECT_URI || window.location.origin,
+        usePopup: true,
       });
     }
   }, []);
@@ -62,11 +63,13 @@ const Register: React.FC = () => {
   const handleGoogleSignup = async () => {
     setError("");
     setLoading(true);
-    
+
     try {
       if (window.google) {
         window.google.accounts.id.initialize({
-          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+          client_id:
+            import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+            "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
           callback: async (response: any) => {
             try {
               await loginWithGoogle(response.credential);
@@ -75,9 +78,9 @@ const Register: React.FC = () => {
               setError("Google sign-up failed. Please try again.");
               setLoading(false);
             }
-          }
+          },
         });
-        
+
         window.google.accounts.id.prompt();
       } else {
         setError("Google Sign-In is not available. Please try again later.");
@@ -92,7 +95,7 @@ const Register: React.FC = () => {
   const handleAppleSignup = async () => {
     setError("");
     setLoading(true);
-    
+
     try {
       if (window.AppleID) {
         const data = await window.AppleID.auth.signIn();
@@ -102,7 +105,7 @@ const Register: React.FC = () => {
         setError("Apple Sign-In is not available. Please try again later.");
       }
     } catch (err: any) {
-      if (err.error !== 'popup_closed_by_user') {
+      if (err.error !== "popup_closed_by_user") {
         setError("Apple sign-up failed. Please try again.");
       }
     } finally {
@@ -145,7 +148,9 @@ const Register: React.FC = () => {
               minLength={8}
             />
             <div className="error-message">
-              {password && password.length < 8 && "Password must be at least 8 characters"}
+              {password &&
+                password.length < 8 &&
+                "Password must be at least 8 characters"}
             </div>
           </div>
 
@@ -161,7 +166,9 @@ const Register: React.FC = () => {
               minLength={8}
             />
             <div className="error-message">
-              {confirmPassword && password !== confirmPassword && "Passwords do not match"}
+              {confirmPassword &&
+                password !== confirmPassword &&
+                "Passwords do not match"}
             </div>
           </div>
 
@@ -210,7 +217,13 @@ const Register: React.FC = () => {
 
         <div className="auth-footer">
           Already have an account?{" "}
-          <a href="/login" onClick={(e) => { e.preventDefault(); navigate("/login"); }}>
+          <a
+            href="/login"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/login");
+            }}
+          >
             Sign in
           </a>
         </div>

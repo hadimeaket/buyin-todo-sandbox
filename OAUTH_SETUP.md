@@ -25,6 +25,7 @@ To enable Google and Apple Sign-In, you need to configure OAuth credentials:
 ### 1. Google OAuth Setup
 
 1. **Create OAuth Credentials**:
+
    - Go to [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
    - Create a new project or select existing one
    - Enable "Google+ API"
@@ -34,6 +35,7 @@ To enable Google and Apple Sign-In, you need to configure OAuth credentials:
    - Add authorized redirect URIs: `http://localhost:5173` (and your production URL)
 
 2. **Configure Frontend**:
+
    - Copy your Client ID
    - Update `/frontend/.env`:
      ```
@@ -50,6 +52,7 @@ To enable Google and Apple Sign-In, you need to configure OAuth credentials:
 ### 2. Apple OAuth Setup
 
 1. **Create Service ID**:
+
    - Go to [Apple Developer Portal](https://developer.apple.com/account/resources/identifiers/list/serviceId)
    - Sign in with your Apple Developer account
    - Click "+" to create a new identifier
@@ -60,6 +63,7 @@ To enable Google and Apple Sign-In, you need to configure OAuth credentials:
      - Add return URLs: `http://localhost:5173` for development, your production URL
 
 2. **Configure Frontend**:
+
    - Update `/frontend/.env`:
      ```
      VITE_APPLE_CLIENT_ID=com.yourcompany.app
@@ -82,12 +86,14 @@ To enable Google and Apple Sign-In, you need to configure OAuth credentials:
 Once configured:
 
 1. **Restart the Application**:
+
    ```bash
    docker-compose down
    docker-compose up --build
    ```
 
 2. **Test Google Sign-In**:
+
    - Navigate to http://localhost:5173
    - Click "Sign in with Google"
    - A popup/redirect will appear with Google's OAuth consent screen
@@ -114,6 +120,7 @@ OAuth is an optional enhancement for user convenience.
 ### Frontend Flow
 
 1. **Google**: Uses Google Sign-In JavaScript SDK
+
    - Initializes with client ID
    - Shows Google One Tap UI
    - Returns JWT credential token
@@ -148,16 +155,19 @@ OAuth is an optional enhancement for user convenience.
 ## Troubleshooting
 
 **Google Sign-In not appearing**:
+
 - Check browser console for errors
 - Verify `VITE_GOOGLE_CLIENT_ID` is set correctly
 - Ensure domain is authorized in Google Cloud Console
 
 **Apple Sign-In not working**:
+
 - Apple requires HTTPS for production (use localhost for development)
 - Verify Service ID configuration in Apple Developer Portal
 - Check that domains and return URLs are correctly configured
 
 **Backend OAuth errors**:
+
 - Check backend logs: `docker-compose logs -f backend`
 - Verify environment variables are loaded
 - Test with email/password auth to isolate OAuth issues

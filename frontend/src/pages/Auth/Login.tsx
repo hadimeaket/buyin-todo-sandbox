@@ -22,10 +22,11 @@ const Login: React.FC = () => {
     // Initialize Apple Sign-In
     if (window.AppleID) {
       window.AppleID.auth.init({
-        clientId: import.meta.env.VITE_APPLE_CLIENT_ID || 'com.example.app',
-        scope: 'name email',
-        redirectURI: import.meta.env.VITE_APPLE_REDIRECT_URI || window.location.origin,
-        usePopup: true
+        clientId: import.meta.env.VITE_APPLE_CLIENT_ID || "com.example.app",
+        scope: "name email",
+        redirectURI:
+          import.meta.env.VITE_APPLE_REDIRECT_URI || window.location.origin,
+        usePopup: true,
       });
     }
   }, []);
@@ -39,7 +40,9 @@ const Login: React.FC = () => {
       await login({ email, password });
       navigate("/");
     } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to login. Please try again.");
+      setError(
+        err.response?.data?.message || "Failed to login. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -48,12 +51,14 @@ const Login: React.FC = () => {
   const handleGoogleLogin = async () => {
     setError("");
     setLoading(true);
-    
+
     try {
       // Use Google Sign-In with One Tap
       if (window.google) {
         window.google.accounts.id.initialize({
-          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+          client_id:
+            import.meta.env.VITE_GOOGLE_CLIENT_ID ||
+            "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
           callback: async (response: any) => {
             try {
               // Send the credential to backend
@@ -63,9 +68,9 @@ const Login: React.FC = () => {
               setError("Google sign-in failed. Please try again.");
               setLoading(false);
             }
-          }
+          },
         });
-        
+
         // Trigger the One Tap UI
         window.google.accounts.id.prompt();
       } else {
@@ -81,7 +86,7 @@ const Login: React.FC = () => {
   const handleAppleLogin = async () => {
     setError("");
     setLoading(true);
-    
+
     try {
       if (window.AppleID) {
         const data = await window.AppleID.auth.signIn();
@@ -93,7 +98,7 @@ const Login: React.FC = () => {
       }
     } catch (err: any) {
       // User cancelled or error occurred
-      if (err.error !== 'popup_closed_by_user') {
+      if (err.error !== "popup_closed_by_user") {
         setError("Apple sign-in failed. Please try again.");
       }
     } finally {
@@ -182,7 +187,13 @@ const Login: React.FC = () => {
 
         <div className="auth-footer">
           Don't have an account?{" "}
-          <a href="/register" onClick={(e) => { e.preventDefault(); navigate("/register"); }}>
+          <a
+            href="/register"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/register");
+            }}
+          >
             Sign up
           </a>
         </div>

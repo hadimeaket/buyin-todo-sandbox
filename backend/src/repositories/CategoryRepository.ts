@@ -1,5 +1,9 @@
 import { getDatabase } from "../db/database";
-import { Category, CreateCategoryDto, UpdateCategoryDto } from "../models/Category";
+import {
+  Category,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from "../models/Category";
 import { v4 as uuidv4 } from "uuid";
 
 export interface CategoryRepository {

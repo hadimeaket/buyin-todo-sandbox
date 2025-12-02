@@ -5,7 +5,11 @@ import { getDatabase } from "../db/database";
 export interface ITodoRepository {
   findAll(userId: string): Promise<Todo[]>;
   findById(id: string, userId: string): Promise<Todo | null>;
-  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;
+  findDuplicate(
+    title: string,
+    userId: string,
+    description?: string
+  ): Promise<Todo | null>;
   create(data: CreateTodoDto, userId: string): Promise<Todo>;
   update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;
   toggle(id: string, userId: string): Promise<Todo | null>;
@@ -53,7 +57,9 @@ function rowToTodo(row: TodoRow): Todo {
 class SqliteTodoRepository implements ITodoRepository {
   async findAll(userId: string): Promise<Todo[]> {
     const db = getDatabase();
-    const stmt = db.prepare("SELECT * FROM todos WHERE userId = ? ORDER BY createdAt DESC");
+    const stmt = db.prepare(
+      "SELECT * FROM todos WHERE userId = ? ORDER BY createdAt DESC"
+    );
     const rows = stmt.all(userId) as TodoRow[];
     return rows.map(rowToTodo);
   }
@@ -126,7 +132,11 @@ class SqliteTodoRepository implements ITodoRepository {
     return created;
   }
 
-  async update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
+  async update(
+    id: string,
+    userId: string,
+    data: UpdateTodoDto
+  ): Promise<Todo | null> {
     const existing = await this.findById(id, userId);
     if (!existing) return null;
 

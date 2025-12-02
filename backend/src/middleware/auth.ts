@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
 
 export interface AuthRequest extends Request {
   userId?: string;
@@ -31,7 +32,7 @@ export const authenticate = (
         userId: string;
         email: string;
       };
-      
+
       req.userId = decoded.userId;
       req.user = { id: decoded.userId, email: decoded.email };
       next();

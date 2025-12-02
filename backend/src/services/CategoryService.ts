@@ -1,5 +1,9 @@
 import { categoryRepository } from "../repositories/CategoryRepository";
-import { Category, CreateCategoryDto, UpdateCategoryDto } from "../models/Category";
+import {
+  Category,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from "../models/Category";
 
 class CategoryService {
   getAllCategories(userId: string): Category[] {
@@ -28,7 +32,11 @@ class CategoryService {
     return categoryRepository.create(data, userId);
   }
 
-  updateCategory(id: string, userId: string, data: UpdateCategoryDto): Category {
+  updateCategory(
+    id: string,
+    userId: string,
+    data: UpdateCategoryDto
+  ): Category {
     // Validate hex color if provided
     if (data.color && !this.isValidHexColor(data.color)) {
       throw new Error("Invalid hex color format. Must be in format #RRGGBB");

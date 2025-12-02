@@ -35,12 +35,17 @@ export const authApi = {
 
   async googleAuth(credential: string): Promise<AuthResponse> {
     // Decode JWT token to extract user info
-    const base64Url = credential.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    
+    const base64Url = credential.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
     const payload = JSON.parse(jsonPayload);
     const response = await api.post<AuthResponse>("/api/auth/google", {
       email: payload.email,
@@ -57,7 +62,9 @@ export const authApi = {
     const response = await api.post<AuthResponse>("/api/auth/apple", {
       email: user?.email,
       providerId: authorizationCode,
-      name: user?.name ? `${user.name.firstName || ''} ${user.name.lastName || ''}`.trim() : undefined,
+      name: user?.name
+        ? `${user.name.firstName || ""} ${user.name.lastName || ""}`.trim()
+        : undefined,
     });
     return response.data;
   },

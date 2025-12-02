@@ -1,4 +1,4 @@
-import { Router, RequestHandler } from 'express';
+import { Router, RequestHandler } from "express";
 import {
   getAllTodos,
   getTodoById,
@@ -6,8 +6,8 @@ import {
   updateTodo,
   toggleTodo,
   deleteTodo,
-} from '../controllers/todoController';
-import { authenticate } from '../middleware/auth';
+} from "../controllers/todoController";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 
@@ -15,21 +15,21 @@ const router = Router();
 router.use(authenticate as RequestHandler);
 
 // GET all todos
-router.get('/', getAllTodos as RequestHandler);
+router.get("/", getAllTodos as RequestHandler);
 
 // GET todo by id
-router.get('/:id', getTodoById as RequestHandler);
+router.get("/:id", getTodoById as RequestHandler);
 
 // POST create todo
-router.post('/', createTodo as RequestHandler);
+router.post("/", createTodo as RequestHandler);
 
 // PUT update todo
-router.put('/:id', updateTodo as RequestHandler);
+router.put("/:id", updateTodo as RequestHandler);
 
 // PATCH toggle todo completion
-router.patch('/:id/toggle', toggleTodo as RequestHandler);
+router.patch("/:id/toggle", toggleTodo as RequestHandler);
 
 // DELETE todo
-router.delete('/:id', deleteTodo as RequestHandler);
+router.delete("/:id", deleteTodo as RequestHandler);
 
 export default router;
