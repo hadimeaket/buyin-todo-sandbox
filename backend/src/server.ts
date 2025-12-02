@@ -4,8 +4,12 @@ import dotenv from 'dotenv';
 import routes from './routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './middleware/logger';
+import { initializeDatabase } from './db/database';
 
 dotenv.config();
+
+// Initialize database
+initializeDatabase();
 
 const app: Application = express();
 const PORT = process.env.PORT || 4000;

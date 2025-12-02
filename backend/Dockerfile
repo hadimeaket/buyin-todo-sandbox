@@ -14,6 +14,9 @@ LABEL org.opencontainers.image.created=$BUILD_DATE \
       org.opencontainers.image.description="Backend API for BuyIn Todo Application" \
       org.opencontainers.image.source="https://github.com/hadimeaket/buyin-todo-sandbox"
 
+# Install build dependencies for better-sqlite3
+RUN apk add --no-cache python3 make g++
+
 # Set working directory
 WORKDIR /app
 
@@ -54,6 +57,9 @@ COPY package*.json ./
 # Copy built application from builder stage
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+
+# Create data directory for SQLite database
+RUN mkdir -p /app/data && chown -R nodejs:nodejs /app/data
 
 # Switch to non-root user
 USER nodejs

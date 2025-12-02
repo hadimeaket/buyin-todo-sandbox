@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
+import CategoryManager from "../CategoryManager/CategoryManager";
 import "./Drawer.scss";
 
 interface DrawerProps {
@@ -18,6 +19,7 @@ export default function Drawer({
   onAddTask,
 }: DrawerProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showCategoryManager, setShowCategoryManager] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   const handleToggleExpand = () => {
@@ -124,6 +126,32 @@ export default function Drawer({
         </div>
 
         <div className="drawer__divider"></div>
+
+        {/* Categories Button */}
+        <button
+          className="drawer__action"
+          onClick={() => setShowCategoryManager(true)}
+          title="Manage categories"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          <span className="drawer__action-label">
+            {isExpanded && "Categories"}
+          </span>
+        </button>
 
         {/* Theme Toggle */}
         <button
@@ -248,6 +276,10 @@ export default function Drawer({
           {isExpanded && <span className="drawer__label">Add Task</span>}
         </button>
       </div>
+
+      {showCategoryManager && (
+        <CategoryManager onClose={() => setShowCategoryManager(false)} />
+      )}
     </div>
   );
 }

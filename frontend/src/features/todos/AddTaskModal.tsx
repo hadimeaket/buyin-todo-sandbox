@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
+import { categoryApi } from "../../services/categoryApi";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
@@ -20,6 +22,8 @@ export default function AddTaskModal({
 }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
   const [dueDate, setDueDate] = useState<string>("");
   const [dueEndDate, setDueEndDate] = useState<string>("");
@@ -33,6 +37,19 @@ export default function AddTaskModal({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryApi.getAll();
+        setCategories(data);
+      } catch (err) {
+        console.error("Failed to load categories:", err);
+      }
+    };
+    loadCategories();
+  }, []);
 
   // Handle title change with autocomplete
   const handleTitleChange = (value: string) => {
@@ -54,6 +71,7 @@ export default function AddTaskModal({
   const handleSelectSuggestion = (todo: Todo) => {
     setTitle(todo.title);
     setDescription(todo.description || "");
+    setCategoryId(todo.categoryId || "");
     setPriority(todo.priority);
     setDueDate(todo.dueDate ? todo.dueDate.substring(0, 10) : "");
     setDueEndDate(todo.dueEndDate ? todo.dueEndDate.substring(0, 10) : "");
@@ -147,6 +165,7 @@ export default function AddTaskModal({
       const todoData: CreateTodoDto = {
         title: title.trim(),
         description: description.trim() || undefined,
+        categoryId: categoryId || undefined,
         priority,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
@@ -266,6 +285,24 @@ export default function AddTaskModal({
                 { value: "low", label: "Low" },
                 { value: "medium", label: "Medium" },
                 { value: "high", label: "High" },
+              ]}
+              disabled={disabled || isSubmitting}
+            />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <Select
+              id="category"
+              label="Category"
+              value={categoryId}
+              onChange={(value) => setCategoryId(value)}
+              options={[
+                { value: "", label: "None" },
+                ...categories.map((cat) => ({
+                  value: cat.id,
+                  label: cat.name,
+                })),
               ]}
               disabled={disabled || isSubmitting}
             />
