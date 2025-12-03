@@ -254,16 +254,23 @@ function DatePicker({
       )}
 
       <div className="date-picker__wrapper" ref={wrapperRef}>
-        <button
+        <div
           id={id}
-          type="button"
           className={`date-picker__input ${
             isOpen ? "date-picker__input--open" : ""
           } ${value ? "date-picker__input--has-value" : ""}`}
           onClick={() => !disabled && setIsOpen(!isOpen)}
-          disabled={disabled}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              !disabled && setIsOpen(!isOpen);
+            }
+          }}
           aria-haspopup="dialog"
           aria-expanded={isOpen}
+          aria-disabled={disabled}
         >
           <svg
             className="date-picker__icon"
@@ -283,7 +290,10 @@ function DatePicker({
             <button
               type="button"
               className="date-picker__clear"
-              onClick={handleClear}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleClear(e);
+              }}
               aria-label="Clear date"
             >
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -309,7 +319,7 @@ function DatePicker({
               d="M19 9l-7 7-7-7"
             />
           </svg>
-        </button>
+        </div>
 
         {isOpen && (
           <div

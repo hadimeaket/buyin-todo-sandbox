@@ -8,8 +8,11 @@ import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { useAuth } from "./contexts/AuthContext";
+import { AuthForm } from "./components/auth/AuthForm";
 
 function App() {
+  const { user, loading: authLoading, logout } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +23,10 @@ function App() {
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (user) {
+      fetchTodos();
+    }
+  }, [user]);
 
   const fetchTodos = async () => {
     try {
@@ -144,6 +149,23 @@ function App() {
     { id: "active", label: "Active", count: stats.active },
     { id: "completed", label: "Completed", count: stats.completed },
   ];
+
+  // Show loading screen while checking authentication
+  if (authLoading) {
+    return (
+      <div className="app">
+        <div className="loading">
+          <div className="loading__spinner animate-spin" />
+          <p className="loading__text">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show login form if not authenticated
+  if (!user) {
+    return <AuthForm />;
+  }
 
   return (
     <div className="app">

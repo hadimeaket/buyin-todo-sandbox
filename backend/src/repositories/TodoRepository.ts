@@ -2,13 +2,21 @@ import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 import { v4 as uuidv4 } from "uuid";
 
 export interface ITodoRepository {
-  findAll(): Promise<Todo[]>;
-  findById(id: string): Promise<Todo | null>;
-  findDuplicate(title: string, description?: string): Promise<Todo | null>;
-  create(data: CreateTodoDto): Promise<Todo>;
-  update(id: string, data: UpdateTodoDto): Promise<Todo | null>;
-  toggle(id: string): Promise<Todo | null>;
-  delete(id: string): Promise<boolean>;
+  findAll(userId?: number): Promise<Todo[]>;
+  findById(id: string, userId?: number): Promise<Todo | null>;
+  findDuplicate(
+    title: string,
+    description?: string,
+    userId?: number
+  ): Promise<Todo | null>;
+  create(data: CreateTodoDto, userId?: number): Promise<Todo>;
+  update(
+    id: string,
+    data: UpdateTodoDto,
+    userId?: number
+  ): Promise<Todo | null>;
+  toggle(id: string, userId?: number): Promise<Todo | null>;
+  delete(id: string, userId?: number): Promise<boolean>;
 }
 
 class InMemoryTodoRepository implements ITodoRepository {

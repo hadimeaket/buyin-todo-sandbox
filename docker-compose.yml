@@ -11,6 +11,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
+      - DATABASE_PATH=/app/data/todos.db
+    volumes:
+      - ./data:/app/data
     networks:
       - todo-network
     restart: unless-stopped

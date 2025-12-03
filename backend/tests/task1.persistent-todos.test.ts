@@ -1,7 +1,14 @@
-import { describe, expect, it } from "@jest/globals";
+import { describe, expect, it, beforeEach } from "@jest/globals";
 import { todoService } from "../src/services/TodoService";
+import { getDatabase } from "../src/db/database";
 
 describe("TASK1_PERSISTENT_TODOS", () => {
+  beforeEach(async () => {
+    // Clear todos table before each test
+    const db = getDatabase();
+    db.exec("DELETE FROM todos");
+  });
+
   it("rejects todos without a title", async () => {
     await expect(todoService.createTodo({ title: "" })).rejects.toThrow(
       "Title is required"

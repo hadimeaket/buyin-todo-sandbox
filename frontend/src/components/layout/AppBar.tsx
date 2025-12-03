@@ -1,5 +1,6 @@
 import "./AppBar.scss";
 import whiteLogoWhiteFont from "../../assets/white-logo-white-font.png";
+import { useAuth } from "../../contexts/AuthContext";
 
 /**
  * AppBar Component
@@ -8,6 +9,16 @@ import whiteLogoWhiteFont from "../../assets/white-logo-white-font.png";
  * Matches the design system from the BuyIn brand identity.
  */
 export default function AppBar() {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <header className="app-bar">
       <div className="app-bar__toolbar">
@@ -18,6 +29,18 @@ export default function AppBar() {
             className="app-bar__logo"
           />
         </div>
+        {user && (
+          <div className="app-bar__user">
+            <span className="app-bar__user-email">{user.email}</span>
+            <button
+              onClick={handleLogout}
+              className="app-bar__logout-button"
+              aria-label="Logout"
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

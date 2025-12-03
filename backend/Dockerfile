@@ -52,11 +52,11 @@ WORKDIR /app
 COPY package*.json ./
 
 # Copy built application from builder stage
-COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
-COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
 
-# Switch to non-root user
-USER nodejs
+# Switch to non-root user (commented out for now due to volume permission issues)
+# USER nodejs
 
 # Expose the backend port
 EXPOSE 4000
