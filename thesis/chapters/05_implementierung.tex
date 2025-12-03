@@ -1,0 +1,186 @@
+\chapter{Implementierung der Sandbox und Datenerhebung}
+\label{chap:implementierung}
+
+Dieses Kapitel beschreibt die technische Grundlage der Studie sowie den Prozess der Datenerhebung. Während Kapitel~\ref{chap:methodik} die methodischen Schritte definiert, fokussiert dieses Kapitel auf die Implementierung der \textit{BuyIn Todo Sandbox}, die als standardisierte Brownfield-Umgebung dient. Im Gegensatz zu experimentellen Agentenvergleichen wird hier \emph{nicht} die Leistung verschiedener Tools untersucht, sondern die Interaktion unterschiedlicher Kompetenzgruppen mit demselben AI Coding Agent (GitHub Copilot).
+
+\section{Ziel der Sandbox}
+Die Sandbox erfüllt drei zentrale Ziele:
+
+\begin{enumerate}
+    \item sie stellt eine realitätsnahe, inkrementell erweiterbare Codebasis bereit, wie sie in Unternehmensprojekten typisch ist;
+    \item sie erlaubt es, Verhaltensunterschiede von No-/Low-/Mid-/High-Code-Entwicklerprofilen empirisch sichtbar zu machen;
+    \item sie minimiert externe Störvariablen, da alle Teilnehmenden dieselbe Codebasis, dieselbe Entwicklungsumgebung und denselben Agenten nutzen.
+\end{enumerate}
+
+Damit dient die Sandbox nicht als Leistungsvergleichssystem für Coding Agents, sondern als \emph{konstantes Umfeld}, innerhalb dessen menschliche Unterschiede messbar werden.
+
+\section{Technologischer Aufbau der Sandbox}
+
+Die Sandbox ist als vollständige Full-Stack-Anwendung aufgebaut und spiegelt zentrale Elemente typischer Unternehmenssoftware wider.
+
+\subsection{Backend}
+\begin{itemize}
+    \item \textbf{Node.js} und \textbf{Express} als REST-API-Grundlage,
+    \item \textbf{TypeScript} zur Unterstützung sicherer Typisierung,
+    \item modular strukturierte Controller-, Router- und Service-Layer.
+\end{itemize}
+
+Die Backendarchitektur wurde bewusst so gestaltet, dass:
+
+\begin{itemize}
+    \item logische Zusammenhänge klar ersichtlich sind,
+    \item bestehende Patterns erkannt und fortgeführt werden können,
+    \item typische Brownfield-Hürden (Legacy-Strukturen, Inkomplettheit, lose Kopplung) realistisch abgebildet werden.
+\end{itemize}
+
+\subsection{Frontend}
+\begin{itemize}
+    \item \textbf{React} für komponentenbasierte UI-Entwicklung,
+    \item \textbf{Vite} für schnelles Bundling und Live-Reloading,
+    \item \textbf{SCSS} für strukturierte Stylesheets.
+\end{itemize}
+
+Die UI ist intentionally minimalistisch gehalten, um Ablenkung zu minimieren und den Fokus der Teilnehmenden auf:
+
+\begin{itemize}
+    \item funktionale Anforderungen,
+    \item Architekturverständnis,
+    \item Copilot-Interaktionen
+\end{itemize}
+
+zu lenken.
+
+\subsection{Infrastruktur}
+Zur Sicherstellung der Reproduzierbarkeit wird die Sandbox containerisiert.
+
+\begin{itemize}
+    \item \textbf{Docker} zur Bereitstellung einer konsistenten Laufzeitumgebung,
+    \item \textbf{Docker Compose} zur optionalen Einbindung externer Dienste (z.\,B. späterer Datenbank).
+\end{itemize}
+
+Diese Infrastruktur reduziert Setup-Fehler und stellt sicher, dass Unterschiede im Ergebnis auf Kompetenz und Interaktion — nicht auf Umgebungsprobleme — zurückzuführen sind.
+
+\section{Technische Repräsentation der Aufgabenstellung}
+
+Alle Teilnehmenden bearbeiten die identische \emph{Vibe-Coding-Challenge}.  
+Diese ist in LaTeX definiert und besteht aus:
+
+\begin{itemize}
+    \item acht klar abgegrenzten Aufgaben,
+    \item jeweils mit einer \enquote{To Do}-Beschreibung,
+    \item sowie klar formulierten Erfolgskriterien (\enquote{Done when}).
+\end{itemize}
+
+Diese Struktur sorgt für:
+
+\begin{itemize}
+    \item Vergleichbarkeit,
+    \item transparente Bewertung,
+    \item Reduktion interpretativer Unschärfe.
+\end{itemize}
+
+\subsection*{Beispiel: Aufgabe \enquote{Persistente Todos}}
+
+Die Instruktion:
+
+\begin{itemize}
+    \item beschreibt die Zielsetzung (Persistenz statt In-Memory),
+    \item grenzt aber nicht vor, \emph{wie} die Teilnehmenden dies lösen sollen,
+    \item wodurch unterschiedliche Kompetenzstrategien sichtbar werden.
+\end{itemize}
+
+Im Gegensatz zu automatisierten Tests erfolgt die Bewertung hier nicht maschinell, sondern analytisch durch:
+
+\begin{itemize}
+    \item Codeinspektion,
+    \item UI-Funktionalitätsprüfung,
+    \item Nachvollziehen der Interaktionspfade.
+\end{itemize}
+
+\section{Mechanismen der Datenerhebung}
+
+Die Datenerhebung erfolgt nicht automatisiert über Tests, sondern über ein strukturiertes, multimodales Verfahren, das quantitative und qualitative Daten kombiniert.
+
+\subsection{1. Pre-Survey (Kompetenzkategorisierung)}
+
+Die Antworten des Pre-Surveys werden mithilfe eines Auswertungsskripts automatisch klassifiziert. Der Code analysiert:
+
+\begin{itemize}
+    \item Selbsteinschätzung,
+    \item Erfahrung,
+    \item Häufigkeit der Programmierung,
+    \item Webentwicklungskompetenz,
+    \item Architekturkenntnisse.
+\end{itemize}
+
+Daraus erfolgt eine eindeutige, reproduzierbare Zuordnung zu:
+
+\begin{itemize}
+    \item No-Code,
+    \item Low-Code,
+    \item Mid-Code,
+    \item High-Coder.
+\end{itemize}
+
+\subsection{2. Beobachtung während der Aufgabe}
+
+Während der 60-minütigen Challenge werden folgende Daten dokumentiert:
+
+\begin{itemize}
+    \item Anzahl angenommener Copilot-Vorschläge,
+    \item Anzahl verworfener Vorschläge,
+    \item Anzahl manueller Prompts,
+    \item Abweichungen von den Erfolgskriterien,
+    \item Navigationsverhalten im Code,
+    \item typische Fehler und Missverständnisse.
+\end{itemize}
+
+Diese Daten machen Unterschiede zwischen Kompetenzstufen sichtbar.
+
+\subsection{3. Follow-up-Survey}
+
+Der Follow-up-Survey erhebt subjektive Maße:
+
+\begin{itemize}
+    \item mentale Belastung,
+    \item wahrgenommenes Vertrauen in Copilot,
+    \item Zufriedenheit,
+    \item Selbsteinschätzung der eigenen Leistung,
+    \item wahrgenommene Schwierigkeit der Aufgabe.
+\end{itemize}
+
+Die Kombination aus objektiven und subjektiven Daten erlaubt robustere Interpretationen.
+
+\section{Datenaufbereitung}
+
+Die resultierenden Daten umfassen:
+
+\begin{itemize}
+    \item Survey-Daten (Pre und Post),
+    \item beobachtete Interaktionsdaten,
+    \item erzeugten Code,
+    \item annotierte Beobachtungsnotizen,
+    \item UI-Funktionsstatus der implementierten Features.
+\end{itemize}
+
+Diese Daten werden:
+
+\begin{itemize}
+    \item anonymisiert,
+    \item nach Kompetenzgruppen gruppiert,
+    \item in einem strukturierten Schema für die spätere Analyse vorbereitet.
+\end{itemize}
+
+\section{Zusammenfassung}
+
+Die Sandbox bildet eine kontrollierte, realitätsnahe Umgebung, die speziell darauf ausgelegt ist, Unterschiede in der Interaktion verschiedener Kompetenzprofile mit einem AI Coding Agent sichtbar zu machen. Durch die Kombination aus:
+
+\begin{itemize}
+    \item reproduzierbarer Infrastruktur,
+    \item standardisierten Aufgaben,
+    \item systematischer Beobachtung,
+    \item Survey-Daten,
+    \item und manueller Codebewertung
+\end{itemize}
+
+erfüllt das Setup die Anforderungen an eine robuste empirische Untersuchung in der Softwaretechnik.

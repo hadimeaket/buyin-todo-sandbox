@@ -1,0 +1,154 @@
+\chapter{Methodik}
+\label{chap:methodik}
+
+Dieses Kapitel beschreibt das methodische Vorgehen der Studie. Im Mittelpunkt steht die Frage, wie Personen mit unterschiedlichen Programmierkompetenzen mithilfe desselben AI Coding Agents (GitHub Copilot) Aufgaben in einer realitätsnahen Brownfield-Codebasis bearbeiten. Die Methodik folgt einem Mixed-Methods-Ansatz, der quantitative und qualitative Daten integriert, wie in der empirischen Softwaretechnik empfohlen wird \cite{wohlin2012experimentation, feldt2018validity}. Die Struktur der Messgrößen orientiert sich an etablierten Rahmenwerken wie GQM (\emph{Goal--Question--Metric}) \cite{kitchenham1996gqm} sowie dem SPACE-Framework zur Entwicklerproduktivität \cite{forsgren2021space}.
+
+\section{Überblick des methodischen Ansatzes}
+
+Die Untersuchung folgt einem Between-Subjects-Design, bei dem die einzige variiert werdende Größe die Kompetenzkategorie der Teilnehmenden ist (No-Code, Low-Code, Mid-Code, High-Coder). Alle anderen Faktoren bleiben konstant:
+
+\begin{itemize}
+    \item identisches Repository (\texttt{buyin-todo-sandbox}),
+    \item identischer Coding Agent (GitHub Copilot),
+    \item identische Entwicklungsumgebung (VS Code, Docker),
+    \item identische Bearbeitungszeit (\SI{60}{\minute}),
+    \item identische Aufgabenbeschreibung (Vibe-Coding-Challenge).
+\end{itemize}
+
+Die Methodik kombiniert:
+
+\begin{itemize}
+    \item \textbf{quantitative Daten:} Zeitbedarf, Anzahl der Iterationen, Erfolgsgrad der Aufgaben,
+    \item \textbf{qualitative Daten:} beobachtete Interaktionen, Entscheidungsqualität, Umgang mit Kontext, subjektive Wahrnehmungen.
+\end{itemize}
+
+\section{Messinstrumente und Datenerfassung}
+
+Die Erfassung erfolgt über drei zentrale Instrumente:
+
+\subsection{1. Pre-Survey}
+
+Der Pre-Survey dient der Ermittlung der Programmierkompetenzen. Er umfasst Fragen zu:
+
+\begin{itemize}
+    \item Programmiererfahrung,
+    \item Sicherheit im Lesen und Schreiben von Code,
+    \item Häufigkeit der Programmierung,
+    \item Webentwicklungserfahrung,
+    \item Softwaredesign-Kompetenz,
+    \item bisherigen Erfahrungen mit Coding Agents.
+\end{itemize}
+
+Die Antworten werden über ein automatisiertes Kategorisierungsskript in vier Kompetenzstufen überführt. Dadurch entsteht eine reproduzierbare Gruppenzuordnung.
+
+\subsection{2. Vibe-Coding-Challenge}
+
+Alle Teilnehmenden bearbeiten dasselbe Aufgabenblatt mit acht Brownfield-Aufgaben. Die Struktur \enquote{To Do} und \enquote{Done when} ermöglicht eine standardisierte Bewertung der funktionalen Erfüllung, unabhängig von der individuellen Erfahrung.
+
+Während der Aufgabe werden folgende Daten erhoben:
+
+\begin{itemize}
+    \item beobachtete Interaktionen mit GitHub Copilot,
+    \item Anzahl angenommener oder verworfener Vorschläge,
+    \item Anzahl neuer Prompts und Korrekturen,
+    \item Schwierigkeiten beim Verständnis der Codebasis.
+\end{itemize}
+
+\subsection{3. Follow-up-Survey}
+
+Nach der Bearbeitung werden subjektive Maße erhoben:
+
+\begin{itemize}
+    \item mentale Belastung,
+    \item wahrgenommene Unterstützung durch Copilot,
+    \item Vertrauen in die Vorschläge,
+    \item Zufriedenheit mit dem Ergebnis,
+    \item Einschätzung der eigenen Leistung.
+\end{itemize}
+
+Damit entsteht ein ganzheitliches Bild aus objektiven Ergebnissen und subjektiven Eindrücken.
+
+\section{Operationalisierung der Metriken}
+
+Da der Fokus der Studie nicht auf der Leistungsbewertung verschiedener Agents liegt, sondern auf der Frage, wie verschiedene Kompetenzgruppen mit demselben Agenten arbeiten, werden die Metriken entsprechend angepasst.
+
+\subsection{1. Funktionale Zielerreichung}
+
+Bewertet wird, ob die Kriterien \enquote{Done when} erfüllt sind:
+
+\begin{itemize}
+    \item Logik funktioniert technisch,
+    \item UI zeigt das erwartete Verhalten,
+    \item keine offensichtlichen Fehler oder Abstürze.
+\end{itemize}
+
+Diese Bewertung erfolgt manuell anhand des implementierten Codes und der UI-Funktionalität.
+
+\subsection{2. Effizienz und Interaktionsaufwand}
+
+Erhoben werden:
+
+\begin{itemize}
+    \item Zeit, die benötigt wurde, um eine Aufgabe zu lösen,
+    \item Anzahl der Interaktionen mit Copilot,
+    \item Häufigkeit von Korrekturen,
+    \item Anzahl der Situationen, in denen Copilot unpassende oder fehlerhafte Vorschläge lieferte.
+\end{itemize}
+
+Diese Daten erlauben Rückschlüsse auf Unterschiede zwischen Low- und High-Skill-Profilen.
+
+\subsection{3. Codequalität}
+
+Da kein automatisiertes Scoring-System eingesetzt wird, erfolgt die Bewertung qualitativ:
+
+\begin{itemize}
+    \item Einhaltung bestehender Patterns des Projekts,
+    \item Struktur und Lesbarkeit,
+    \item Umgang mit Edge Cases,
+    \item Integrationsqualität in die bestehende Architektur.
+\end{itemize}
+
+Diese Analyse orientiert sich an Prinzipien guter Softwarearchitektur und an Kriterien aus der empirischen Softwaretechnik.
+
+\subsection{4. Subjektive Wahrnehmung}
+
+Subjektive Metriken werden aus dem Follow-up-Survey erhoben und dienen dazu, die beobachteten Leistungsunterschiede einzuordnen.
+
+\section{Durchführungsablauf}
+
+Jede Teilnahme folgt einem standardisierten Ablauf:
+
+\begin{enumerate}
+    \item Ausfüllen des Pre-Surveys,
+    \item automatische Kategorisierung in No-/Low-/Mid-/High-Code,
+    \item Setup der Entwicklungsumgebung,
+    \item Bearbeitung der Aufgaben innerhalb von 60 Minuten,
+    \item Beobachtung und Dokumentation der Interaktionen,
+    \item Ausfüllen des Follow-up-Surveys,
+    \item Export des erzeugten Codes.
+\end{enumerate}
+
+Dieser Ablauf reduziert interne Störvariablen und schafft reproduzierbare Bedingungen.
+
+\section{Datenaufbereitung und Auswertung}
+
+Die Auswertung erfolgt in zwei Stufen:
+
+\subsection{1. Quantitative Auswertung}
+
+\begin{itemize}
+    \item Vergleich der funktionalen Erfüllung zwischen den Skillgruppen,
+    \item Analyse der benötigten Zeit und Interaktionshäufigkeit,
+    \item Ermittlung typischer Fehlerprofile je Kompetenzstufe.
+\end{itemize}
+
+\subsection{2. Qualitative Auswertung}
+
+\begin{itemize}
+    \item Analyse des erzeugten Codes,
+    \item Rekonstruktion der Interaktionsmuster,
+    \item Interpretation der subjektiven Wahrnehmungen im Kontext der objektiven Ergebnisse.
+\end{itemize}
+
+Die Kombination beider Ebenen ermöglicht eine robuste Interpretation der Skill-Differenzen.
+

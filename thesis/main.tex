@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{csquotes}
+
+\sisetup{
+  locale = DE,
+  per-mode = symbol
+}
+
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  maxcitenames=2,
+  maxbibnames=99,
+  doi=true,
+  url=true
+]{biblatex}
+
+\addbibresource{references.bib}
+
+\usepackage{amsthm}
+\newtheorem{hypothesis}{Hypothese}
+
+\usepackage{hyperref}
+
+\title{Bewertung von AI Coding Agents für Vibe-Coding\\
+in der Unternehmenssoftwareentwicklung:\\
+Vergleich und Integrationsstrategie am Beispiel BuyIn}
+\author{Cihad Gök}
+\date{Dezember 2025}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\input{chapters/01_einleitung}
+
+\input{chapters/02_hintergrund}
+\input{chapters/03_forschungsdesign}
+\input{chapters/04_methodik}
+\input{chapters/05_implementierung}
+
+\printbibliography
+
+\end{document}

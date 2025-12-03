@@ -1,0 +1,121 @@
+\chapter{Forschungsdesign und Evaluationsaufbau}
+\label{chap:forschungsdesign}
+
+Dieses Kapitel beschreibt das Forschungsdesign der Studie, in der untersucht wird, wie Personen mit unterschiedlichen Programmierkompetenzen mithilfe eines konsistenten AI Coding Agents (GitHub Copilot in Visual Studio Code) Aufgaben in einer realitätsnahen Brownfield-Codebasis lösen. Die Untersuchung orientiert sich an Standards empirischer Softwaretechnik und nutzt strukturierte Surveys, ein algorithmisches Kategorisierungsskript sowie eine standardisierte Coding Challenge als Testumgebung.
+
+\section{Grundidee des Forschungsdesigns}
+
+Ziel der Untersuchung ist nicht der Vergleich verschiedener AI Coding Agents, sondern die Analyse der Frage, wie sich unterschiedliche Kompetenzstufen auf die Fähigkeit auswirken, Copilot effektiv einzusetzen, funktionale Aufgaben zu lösen und qualitativ hochwertigen Code zu erzeugen.
+
+Damit folgt das Design einem klassischen Between-Subjects-Ansatz:
+\begin{itemize}
+    \item \textbf{UV (Unabhängige Variable):} Kompetenzkategorie der Teilnehmenden
+    \item \textbf{AV (Abhängige Variablen):} Qualität und Umfang der erzielten Softwareartefakte, Interaktionsmuster mit Copilot, benötigte Zeit, funktionale Erfüllung
+    \item \textbf{Konstant gehalten:} identischer Codebestand, identischer Agent, identische Aufgaben, identische Zeit, identisches Setup
+\end{itemize}
+
+\section{Kompetenzkategorien der Teilnehmenden}
+
+Die Einordnung der Proband:innen erfolgt auf Basis eines standardisierten Pre-Surveys, der Selbsteinschätzungen zu Erfahrung, Sicherheit und Häufigkeit des Programmierens abfragt. Der Survey enthält u.\,a. Fragen zu:
+\begin{itemize}
+    \item Programmiererfahrung,
+    \item Fähigkeit, Code zu lesen und zu verstehen,
+    \item Häufigkeit der Programmierung,
+    \item Webentwicklungserfahrung,
+    \item Sicherheit in Softwaredesign-Entscheidungen,
+    \item Vorerfahrung mit AI Coding Agents.
+\end{itemize}
+
+\subsection*{Algorithmische Klassifikation}
+
+Die Antworten werden über ein automatisiertes Kategorisierungsskript ausgewertet, das auf einem Punktesystem basiert (0--3 Punkte pro Item, je nach Antwort). Das Skript erzeugt automatisch eine Spalte \enquote{Kategorie} im Survey-Sheet.
+
+\begin{itemize}
+    \item \textbf{No-Code:} keinerlei Programmiererfahrung (absolute Bedingung)
+    \item \textbf{Low-Code:} Score ≤ 5
+    \item \textbf{Mid-Code:} Score 6–10
+    \item \textbf{High-Coder:} Score > 10
+\end{itemize}
+
+Damit entsteht eine klar reproduzierbare Gruppierung aller Teilnehmenden.
+
+\section{Testumgebung: Brownfield-Sandbox}
+
+Alle Proband:innen arbeiten im selben Repository (\texttt{buyin-todo-sandbox}), einer Brownfield-Webanwendung bestehend aus:
+\begin{itemize}
+    \item Node.js/Express-Backend,
+    \item React/Vite-Frontend,
+    \item CSS/SCSS-Komponenten,
+    \item geplanter SQLite-Persistenz,
+    \item Kalender-, Kategorie- und Upload-Logik.
+\end{itemize}
+
+Die Sandbox simuliert typische Herausforderungen industrieller Softwareentwicklung:
+bestehende Architektur, inkrementelle Erweiterungen und Multi-File-Abhängigkeiten.
+
+\section{Aufgabenstruktur (Vibe-Coding-Challenge)}
+
+Die Teilnehmenden bearbeiten eine standardisierte Challenge mit acht Aufgabenpaketen. Jede Aufgabe besitzt fest definierte \enquote{To do}- und \enquote{Done when}-Kriterien.
+
+\begin{enumerate}
+    \item Persistente Todos
+    \item Benutzerkonten und Authentifizierung
+    \item Todo-Kategorien (CRUD + Farbvalidierung)
+    \item Datei-Uploads (PNG/JPG/PDF)
+    \item Mehrtägige Kalenderansicht
+    \item E-Mail-Verifizierung
+    \item Performanceoptimierung für große Datenmengen
+    \item ICS-Export (Microsoft Teams kompatibel)
+\end{enumerate}
+
+Alle Gruppen bearbeiten dieselben Aufgaben unter denselben Bedingungen.
+
+\section{Abhängige Variablen und Messdimensionen}
+
+\subsection*{1. Funktionale Zielerreichung}
+\begin{itemize}
+    \item bestehen der Unit- und E2E-Tests,
+    \item korrekte UI-Funktionalität,
+    \item keine Regressionen.
+\end{itemize}
+
+\subsection*{2. Codequalität}
+\begin{itemize}
+    \item Anzahl an Lintingfehlern (ESLint),
+    \item Struktur und Wartbarkeit,
+    \item Einhaltung der Projektkonventionen.
+\end{itemize}
+
+\subsection*{3. Effizienz und Interaktion}
+\begin{itemize}
+    \item benötigte Zeit,
+    \item Anzahl Prompts und Korrekturen,
+    \item Umgang mit Copilot-Vorschlägen.
+\end{itemize}
+
+\subsection*{4. Subjektive Wahrnehmung}
+Erfasst über den Follow-up-Survey:
+\begin{itemize}
+    \item mentale Belastung,
+    \item wahrgenommener Nutzen,
+    \item Vertrauen in Copilot,
+    \item Bereitschaft zur weiteren Nutzung.
+\end{itemize}
+
+\section{Hypothesen}
+
+Die Hypothesen beziehen sich ausschließlich auf Unterschiede zwischen Kompetenzgruppen.
+
+\paragraph{H1:}
+High-Coder erzielen die höchsten funktionalen Erfüllungsgrade und die geringste Fehlerquote.
+
+\paragraph{H2:}
+Mid-Code-Teilnehmende profitieren am stärksten von GitHub Copilot, da ihre vorhandenen Kenntnisse optimal durch die KI ergänzt werden.
+
+\paragraph{H3:}
+Low-Code- und No-Code-Teilnehmende benötigen mehr Interaktionen, schaffen jedoch bei klar strukturierten Aufgaben ebenfalls funktionale Lösungen.
+
+\paragraph{H4:}
+Die Unterschiede zwischen den Gruppen verstärken sich bei komplexen Brownfield-Tasks, insbesondere bei solchen mit Architektur- und Persistenzbezug.
+
+Diese Hypothesen strukturieren die spätere Analyse in Kapitel~6.
