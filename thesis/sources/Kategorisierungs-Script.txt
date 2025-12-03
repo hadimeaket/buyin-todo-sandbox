@@ -1,0 +1,90 @@
+function categorize(e) {
+  const sheet = e.range.getSheet();
+  const row = e.range.getRow();
+
+  // komplette Zeile lesen
+  const data = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  // Spaltenzuordnung:
+  const name       = data[1];          // B: Vor- und Nachname (nur Info)
+  const exp        = data[2];          // C: Q1 Programmiererfahrung
+  const confidence = Number(data[3]);  // D: Q2 Code lesen/verstehen (1–5)
+  const freq       = data[4];          // E: Q3 Häufigkeit
+  const webdev     = data[5];          // F: Q4 Webentwicklung
+  const design     = Number(data[6]);  // G: Q5 Softwaredesign (1–5)
+  const agents     = data[7];          // H: Q6 Coding Agents (nur Info)
+
+  let score = 0;
+
+  // --- Programmiererfahrung (Q1) ---
+  if (exp && exp.includes("Mehr als 3 Jahre")) {
+    score += 3;
+  } else if (exp && exp.includes("1 bis 3 Jahre")) {
+    score += 2;
+  } else if (exp && exp.includes("Weniger als 1 Jahr")) {
+    score += 1;
+  } else {
+    // "Keine Erfahrung"
+    score += 0;
+  }
+
+  // --- Code lesen/verstehen (Q2; 1–5) ---
+  if (confidence >= 4) {
+    score += 2;
+  } else if (confidence === 3) {
+    score += 1;
+  }
+
+  // --- Häufigkeit Programmieren (Q3) ---
+  if (freq && freq.includes("Täglich")) {
+    score += 3;
+  } else if (freq && freq.includes("Mehrmals pro Woche")) {
+    score += 2;
+  } else if (freq && freq.includes("Seltener als einmal pro Woche")) {
+    score += 1;
+  }
+
+  // --- Webentwicklung (Q4) ---
+  if (webdev && webdev.startsWith("Experten")) {
+    score += 3;
+  } else if (webdev && webdev.startsWith("Praktische")) {
+    score += 2;
+  } else if (webdev && webdev.startsWith("Grundkenntnisse")) {
+    score += 1;
+  }
+
+  // --- Softwaredesign (Q5; 1–5) ---
+  if (design >= 4) {
+    score += 2;
+  } else if (design === 3) {
+    score += 1;
+  }
+
+  // --- Score → 4 Kategorien mappen ---
+  const noExperience = !exp || exp.includes("Keine Erfahrung");
+
+  let category;
+  if (noExperience) {
+    // wirklich komplett ohne Programmiererfahrung
+    category = "No-Code";
+  } else if (score <= 5) {
+    category = "Low-Code";
+  } else if (score <= 10) {
+    category = "Mid-Code";
+  } else {
+    category = "High-Coder";
+  }
+
+  // Kategorie-Spalte anhand des Headers finden oder neu anlegen
+  const headerRow = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  let categoryCol = headerRow.indexOf("Kategorie") + 1; // indexOf -> 0-basiert
+
+  if (categoryCol === 0) {
+    // noch keine "Kategorie"-Spalte vorhanden → neu anlegen
+    categoryCol = sheet.getLastColumn() + 1;
+    sheet.getRange(1, categoryCol).setValue("Kategorie");
+  }
+
+  // Kategorie für diese Zeile schreiben
+  sheet.getRange(row, categoryCol).setValue(category);
+}

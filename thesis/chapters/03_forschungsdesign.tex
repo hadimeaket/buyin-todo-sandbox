@@ -1,121 +1,77 @@
-\chapter{Forschungsdesign und Evaluationsaufbau}
+\chapter{Forschungsdesign und Hypothesenentwicklung}
 \label{chap:forschungsdesign}
 
-Dieses Kapitel beschreibt das Forschungsdesign der Studie, in der untersucht wird, wie Personen mit unterschiedlichen Programmierkompetenzen mithilfe eines konsistenten AI Coding Agents (GitHub Copilot in Visual Studio Code) Aufgaben in einer realitätsnahen Brownfield-Codebasis lösen. Die Untersuchung orientiert sich an Standards empirischer Softwaretechnik und nutzt strukturierte Surveys, ein algorithmisches Kategorisierungsskript sowie eine standardisierte Coding Challenge als Testumgebung.
+Dieses Kapitel leitet das empirische Design der Studie aus den in Kapitel~\ref{chap:hintergrund} vorgestellten Theorien ab. Ziel ist es, den Einfluss der unabhängigen Variable \emph{Kompetenz} auf die abhängigen Variablen \emph{Qualität}, \emph{Effizienz} und \emph{Interaktion} in einer kontrollierten Brownfield-Umgebung zu isolieren.
 
-\section{Grundidee des Forschungsdesigns}
+\section{Methodischer Ansatz: Between-Subjects Design}
 
-Ziel der Untersuchung ist nicht der Vergleich verschiedener AI Coding Agents, sondern die Analyse der Frage, wie sich unterschiedliche Kompetenzstufen auf die Fähigkeit auswirken, Copilot effektiv einzusetzen, funktionale Aufgaben zu lösen und qualitativ hochwertigen Code zu erzeugen.
-
-Damit folgt das Design einem klassischen Between-Subjects-Ansatz:
+Die Untersuchung folgt einem \emph{Between-Subjects Design}, bei dem Teilnehmende basierend auf ihrer Vorkenntnis in disjunkte Gruppen eingeteilt werden.
+\textbf{Begründung nach \textcite{wohlin2012experimentation}:}
 \begin{itemize}
-    \item \textbf{UV (Unabhängige Variable):} Kompetenzkategorie der Teilnehmenden
-    \item \textbf{AV (Abhängige Variablen):} Qualität und Umfang der erzielten Softwareartefakte, Interaktionsmuster mit Copilot, benötigte Zeit, funktionale Erfüllung
-    \item \textbf{Konstant gehalten:} identischer Codebestand, identischer Agent, identische Aufgaben, identische Zeit, identisches Setup
+    \item \textbf{Vermeidung von Lerneffekten (Carry-Over Effects):} Ein Within-Subjects Design (jede Person löst Aufgaben einmal mit, einmal ohne KI) wäre hier problematisch, da das Lösen einer Aufgabe Wissen für den zweiten Durchgang generiert.
+    \item \textbf{Isolierung der Kompetenzvariable:} Das Ziel ist der Vergleich der Interaktionsmuster zwischen verschiedenen Kompetenzniveaus (\enquote{Mensch A + Maschine} vs. \enquote{Mensch B + Maschine}), nicht der Vergleich des Tools an sich.
 \end{itemize}
 
-\section{Kompetenzkategorien der Teilnehmenden}
+\section{Theoretische Herleitung der Hypothesen}
 
-Die Einordnung der Proband:innen erfolgt auf Basis eines standardisierten Pre-Surveys, der Selbsteinschätzungen zu Erfahrung, Sicherheit und Häufigkeit des Programmierens abfragt. Der Survey enthält u.\,a. Fragen zu:
+Die Hypothesen werden direkt aus dem Dreyfus-Modell, der Dual-Process Theory und der Cognitive Load Theory (siehe Abschnitt~\ref{sec:competence-models} und \ref{sec:human-ai}) abgeleitet.
+
+\subsection{H1: Der \enquote{Sweet Spot} der KI-Unterstützung (Mid-Code)}
+\textbf{Theoretische Begründung:} Nach der Cognitive Load Theory profitieren Lernende am meisten, wenn \emph{Extraneous Load} (Syntax) reduziert wird, solange genug Schema-Wissen vorhanden ist, um den Output zu validieren. Mid-Coder befinden sich in einer Phase, in der sie Konzepte verstehen, aber die syntaktische Umsetzung noch kognitive Ressourcen bindet. Copilot übernimmt diese Last, wodurch \emph{Germane Load} für architektonische Entscheidungen frei wird.
+\textbf{Alternative Hypothese:} Die \enquote{Rising Tide}-Hypothese würde besagen, dass alle Gruppen gleichermaßen profitieren. Dies widerspricht jedoch der Theorie der \emph{Zone der nächsten Entwicklung}, da Novizen ohne Scaffolding überfordert sind.
+\begin{hypothesis}
+    \label{hyp:sweetspot}
+    Teilnehmende der Gruppe \textbf{Mid-Code} erzielen den höchsten relativen Produktivitätsgewinn und die ausgewogenste Balance aus Geschwindigkeit und Qualität. Sie besitzen genug Expertise, um \emph{Automation Bias} zu vermeiden, profitieren aber signifikant von der syntaktischen Entlastung.
+\end{hypothesis}
+
+\subsection{H2: Das Validierungs-Paradoxon (Low-Code)}
+\textbf{Theoretische Begründung:} Novizen und Advanced Beginners (Dreyfus Stufe 1--2) fehlt das mentale Modell, um subtile Fehler zu erkennen. Sie operieren primär im \emph{System 1} (intuitiv) und akzeptieren plausibel klingende Vorschläge unkritisch (\emph{Errors of Commission}). Da ihnen die Schemata fehlen, um den Code zu „parsen“, ist der \emph{Intrinsic Load} der Validierung zu hoch.
+\textbf{Empirische Stützung:} Studien von \textcite{vaithilingam2022codecompletion} zeigen, dass Nutzer oft Code akzeptieren, den sie nicht verstehen, was zu schwer findbaren Bugs führt.
+\begin{hypothesis}
+    \label{hyp:validation}
+    Teilnehmende der Gruppen \textbf{No-Code} und \textbf{Low-Code} erreichen zwar funktionale Lösungen (\enquote{es läuft}), weisen aber signifikant mehr Sicherheitslücken und Wartbarkeitsprobleme auf als höhere Gruppen, da sie Code unkritisch übernehmen (\emph{Overtrust}).
+\end{hypothesis}
+
+\subsection{H3: Skeptizismus und Qualitätsfokus (High-Code)}
+\textbf{Theoretische Begründung:} Experten (Dreyfus Stufe 4--5) haben starke mentale Modelle und vertrauen der Automation weniger. Sie aktivieren \emph{System 2} (analytisch) häufiger, um Vorschläge zu prüfen. Dies führt zu einem \emph{Distrust}-Verhalten, bei dem Zeitersparnisse durch manuelle Reviews teilweise negiert werden.
+\textbf{Alternative Sichtweise:} Man könnte annehmen, Experten seien am schnellsten. Die Theorie der \emph{Expertise Reversal Effect} (Kalyuga et al.) legt jedoch nahe, dass Hilfestellungen für Experten redundant und störend sein können.
+\begin{hypothesis}
+    \label{hyp:skepticism}
+    \textbf{High-Coder} nutzen den Agenten selektiver (weniger \enquote{Accept All}), was zu einer geringeren reinen Codier-Geschwindigkeit im Vergleich zu Mid-Codern führen kann, aber die höchste Codequalität (Wartbarkeit, Sicherheit) sicherstellt.
+\end{hypothesis}
+
+\section{Operationalisierung der Kompetenzstufen}
+
+Die Einteilung erfolgt nicht willkürlich, sondern basierend auf einem Scoring-Modell (0--13 Punkte), das die Dimensionen des Dreyfus-Modells abbildet.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|l|p{6cm}|}
+    \hline
+    \textbf{Gruppe} & \textbf{Dreyfus-Level} & \textbf{Score} & \textbf{Charakteristik} \\ \hline
+    No-Code & Novice & 0 & Kein mentales Modell von Programmierung. Verlässt sich zu 100\% auf KI als Black Box. \\ \hline
+    Low-Code & Advanced Beginner & 1--5 & Kennt Grundkonzepte, aber keine Architekturmuster. Hohes Risiko für \emph{Spaghetti-Code} und \emph{Automation Bias}. \\ \hline
+    Mid-Code & Competent & 6--10 & Versteht Zusammenhänge, plant Schritte. Kann KI-Fehler meist erkennen (\emph{System 2} Aktivierung möglich). \\ \hline
+    High-Code & Proficient/Expert & >10 & Intuitives Verständnis. Nutzt KI zur Beschleunigung von Boilerplate, nicht zur Lösungsfindung. \\ \hline
+    \end{tabular}
+    \caption{Mapping von Kompetenzgruppen auf das Dreyfus-Modell}
+    \label{tab:competence-mapping}
+\end{table}
+
+\section{Kontrolle von Störvariablen (Confounder)}
+Um die interne Validität zu sichern, wurden folgende Störvariablen kontrolliert:
 \begin{itemize}
-    \item Programmiererfahrung,
-    \item Fähigkeit, Code zu lesen und zu verstehen,
-    \item Häufigkeit der Programmierung,
-    \item Webentwicklungserfahrung,
-    \item Sicherheit in Softwaredesign-Entscheidungen,
-    \item Vorerfahrung mit AI Coding Agents.
+    \item \textbf{IDE-Familiarity:} Alle Teilnehmenden nutzten VS Code. Unterschiede in der Vertrautheit wurden im Pre-Survey erfasst.
+    \item \textbf{Domain Knowledge:} Das Todo-App-Szenario ist generisch genug, um kein spezifisches Domänenwissen (wie z.B. in der Medizin) vorauszusetzen.
+    \item \textbf{Englischkenntnisse:} Da Copilot primär auf englischem Code trainiert ist, wurden Grundkenntnisse vorausgesetzt.
 \end{itemize}
 
-\subsection*{Algorithmische Klassifikation}
+\section{Die Testumgebung als unabhängige Variable: Ecological Validity}
 
-Die Antworten werden über ein automatisiertes Kategorisierungsskript ausgewertet, das auf einem Punktesystem basiert (0--3 Punkte pro Item, je nach Antwort). Das Skript erzeugt automatisch eine Spalte \enquote{Kategorie} im Survey-Sheet.
-
+Die Wahl einer \textbf{Brownfield-Umgebung} (bestehender Code) statt Greenfield (leeres Blatt) ist essenziell für die \emph{ökologische Validität} der Studie.
+In der industriellen Praxis arbeiten Entwickler:innen zu ca. 90\% in bestehenden Systemen \parencite{brandtner2024brownfield}.
 \begin{itemize}
-    \item \textbf{No-Code:} keinerlei Programmiererfahrung (absolute Bedingung)
-    \item \textbf{Low-Code:} Score ≤ 5
-    \item \textbf{Mid-Code:} Score 6–10
-    \item \textbf{High-Coder:} Score > 10
+    \item \textbf{Kontext-Sensitivität (RAG-Test):} Der Agent muss den bestehenden Style (z.\,B. SCSS-Module, React Hooks) erkennen und adaptieren. Dies testet die Fähigkeit des Modells, Kontext zu nutzen, und die Fähigkeit des Nutzers, diesen Kontext bereitzustellen (z.B. durch Öffnen relevanter Dateien).
+    \item \textbf{Kognitive Belastung:} Die Teilnehmenden müssen sich in der Struktur zurechtfinden, was für Low-Coder eine zusätzliche Hürde darstellt (\emph{Intrinsic Load}). Greenfield-Aufgaben (z.B. LeetCode) würden diese Komplexität ausblenden und die Ergebnisse verzerren.
 \end{itemize}
-
-Damit entsteht eine klar reproduzierbare Gruppierung aller Teilnehmenden.
-
-\section{Testumgebung: Brownfield-Sandbox}
-
-Alle Proband:innen arbeiten im selben Repository (\texttt{buyin-todo-sandbox}), einer Brownfield-Webanwendung bestehend aus:
-\begin{itemize}
-    \item Node.js/Express-Backend,
-    \item React/Vite-Frontend,
-    \item CSS/SCSS-Komponenten,
-    \item geplanter SQLite-Persistenz,
-    \item Kalender-, Kategorie- und Upload-Logik.
-\end{itemize}
-
-Die Sandbox simuliert typische Herausforderungen industrieller Softwareentwicklung:
-bestehende Architektur, inkrementelle Erweiterungen und Multi-File-Abhängigkeiten.
-
-\section{Aufgabenstruktur (Vibe-Coding-Challenge)}
-
-Die Teilnehmenden bearbeiten eine standardisierte Challenge mit acht Aufgabenpaketen. Jede Aufgabe besitzt fest definierte \enquote{To do}- und \enquote{Done when}-Kriterien.
-
-\begin{enumerate}
-    \item Persistente Todos
-    \item Benutzerkonten und Authentifizierung
-    \item Todo-Kategorien (CRUD + Farbvalidierung)
-    \item Datei-Uploads (PNG/JPG/PDF)
-    \item Mehrtägige Kalenderansicht
-    \item E-Mail-Verifizierung
-    \item Performanceoptimierung für große Datenmengen
-    \item ICS-Export (Microsoft Teams kompatibel)
-\end{enumerate}
-
-Alle Gruppen bearbeiten dieselben Aufgaben unter denselben Bedingungen.
-
-\section{Abhängige Variablen und Messdimensionen}
-
-\subsection*{1. Funktionale Zielerreichung}
-\begin{itemize}
-    \item bestehen der Unit- und E2E-Tests,
-    \item korrekte UI-Funktionalität,
-    \item keine Regressionen.
-\end{itemize}
-
-\subsection*{2. Codequalität}
-\begin{itemize}
-    \item Anzahl an Lintingfehlern (ESLint),
-    \item Struktur und Wartbarkeit,
-    \item Einhaltung der Projektkonventionen.
-\end{itemize}
-
-\subsection*{3. Effizienz und Interaktion}
-\begin{itemize}
-    \item benötigte Zeit,
-    \item Anzahl Prompts und Korrekturen,
-    \item Umgang mit Copilot-Vorschlägen.
-\end{itemize}
-
-\subsection*{4. Subjektive Wahrnehmung}
-Erfasst über den Follow-up-Survey:
-\begin{itemize}
-    \item mentale Belastung,
-    \item wahrgenommener Nutzen,
-    \item Vertrauen in Copilot,
-    \item Bereitschaft zur weiteren Nutzung.
-\end{itemize}
-
-\section{Hypothesen}
-
-Die Hypothesen beziehen sich ausschließlich auf Unterschiede zwischen Kompetenzgruppen.
-
-\paragraph{H1:}
-High-Coder erzielen die höchsten funktionalen Erfüllungsgrade und die geringste Fehlerquote.
-
-\paragraph{H2:}
-Mid-Code-Teilnehmende profitieren am stärksten von GitHub Copilot, da ihre vorhandenen Kenntnisse optimal durch die KI ergänzt werden.
-
-\paragraph{H3:}
-Low-Code- und No-Code-Teilnehmende benötigen mehr Interaktionen, schaffen jedoch bei klar strukturierten Aufgaben ebenfalls funktionale Lösungen.
-
-\paragraph{H4:}
-Die Unterschiede zwischen den Gruppen verstärken sich bei komplexen Brownfield-Tasks, insbesondere bei solchen mit Architektur- und Persistenzbezug.
-
-Diese Hypothesen strukturieren die spätere Analyse in Kapitel~6.
+Dies stellt sicher, dass wir \emph{reale} Arbeitsbedingungen simulieren und nicht nur die Fähigkeit testen, isolierte Algorithmen zu generieren.

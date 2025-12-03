@@ -1,154 +1,104 @@
-\chapter{Methodik}
+\chapter{Durchführung und Methodik der Datenerhebung}
 \label{chap:methodik}
 
-Dieses Kapitel beschreibt das methodische Vorgehen der Studie. Im Mittelpunkt steht die Frage, wie Personen mit unterschiedlichen Programmierkompetenzen mithilfe desselben AI Coding Agents (GitHub Copilot) Aufgaben in einer realitätsnahen Brownfield-Codebasis bearbeiten. Die Methodik folgt einem Mixed-Methods-Ansatz, der quantitative und qualitative Daten integriert, wie in der empirischen Softwaretechnik empfohlen wird \cite{wohlin2012experimentation, feldt2018validity}. Die Struktur der Messgrößen orientiert sich an etablierten Rahmenwerken wie GQM (\emph{Goal--Question--Metric}) \cite{kitchenham1996gqm} sowie dem SPACE-Framework zur Entwicklerproduktivität \cite{forsgren2021space}.
+Während das vorangegangene Kapitel das Forschungsdesign und die Hypothesen definiert hat, beschreibt dieses Kapitel den konkreten Ablauf der Studie sowie die Operationalisierung der Messgrößen. Es wird detailliert dargelegt, wie die Datenerhebung organisiert wurde, um die interne Validität der Ergebnisse sicherzustellen.
 
-\section{Überblick des methodischen Ansatzes}
+\section{Ablauf der Untersuchung}
 
-Die Untersuchung folgt einem Between-Subjects-Design, bei dem die einzige variiert werdende Größe die Kompetenzkategorie der Teilnehmenden ist (No-Code, Low-Code, Mid-Code, High-Coder). Alle anderen Faktoren bleiben konstant:
+Die Studie wurde als kontrolliertes Experiment durchgeführt. Jede Sitzung folgte einem strikten Protokoll, um Störfaktoren zu minimieren. Der Ablauf gliederte sich in fünf Phasen:
 
-\begin{itemize}
-    \item identisches Repository (\texttt{buyin-todo-sandbox}),
-    \item identischer Coding Agent (GitHub Copilot),
-    \item identische Entwicklungsumgebung (VS Code, Docker),
-    \item identische Bearbeitungszeit (\SI{60}{\minute}),
-    \item identische Aufgabenbeschreibung (Vibe-Coding-Challenge).
-\end{itemize}
-
-Die Methodik kombiniert:
-
-\begin{itemize}
-    \item \textbf{quantitative Daten:} Zeitbedarf, Anzahl der Iterationen, Erfolgsgrad der Aufgaben,
-    \item \textbf{qualitative Daten:} beobachtete Interaktionen, Entscheidungsqualität, Umgang mit Kontext, subjektive Wahrnehmungen.
-\end{itemize}
-
-\section{Messinstrumente und Datenerfassung}
-
-Die Erfassung erfolgt über drei zentrale Instrumente:
-
-\subsection{1. Pre-Survey}
-
-Der Pre-Survey dient der Ermittlung der Programmierkompetenzen. Er umfasst Fragen zu:
-
-\begin{itemize}
-    \item Programmiererfahrung,
-    \item Sicherheit im Lesen und Schreiben von Code,
-    \item Häufigkeit der Programmierung,
-    \item Webentwicklungserfahrung,
-    \item Softwaredesign-Kompetenz,
-    \item bisherigen Erfahrungen mit Coding Agents.
-\end{itemize}
-
-Die Antworten werden über ein automatisiertes Kategorisierungsskript in vier Kompetenzstufen überführt. Dadurch entsteht eine reproduzierbare Gruppenzuordnung.
-
-\subsection{2. Vibe-Coding-Challenge}
-
-Alle Teilnehmenden bearbeiten dasselbe Aufgabenblatt mit acht Brownfield-Aufgaben. Die Struktur \enquote{To Do} und \enquote{Done when} ermöglicht eine standardisierte Bewertung der funktionalen Erfüllung, unabhängig von der individuellen Erfahrung.
-
-Während der Aufgabe werden folgende Daten erhoben:
-
-\begin{itemize}
-    \item beobachtete Interaktionen mit GitHub Copilot,
-    \item Anzahl angenommener oder verworfener Vorschläge,
-    \item Anzahl neuer Prompts und Korrekturen,
-    \item Schwierigkeiten beim Verständnis der Codebasis.
-\end{itemize}
-
-\subsection{3. Follow-up-Survey}
-
-Nach der Bearbeitung werden subjektive Maße erhoben:
-
-\begin{itemize}
-    \item mentale Belastung,
-    \item wahrgenommene Unterstützung durch Copilot,
-    \item Vertrauen in die Vorschläge,
-    \item Zufriedenheit mit dem Ergebnis,
-    \item Einschätzung der eigenen Leistung.
-\end{itemize}
-
-Damit entsteht ein ganzheitliches Bild aus objektiven Ergebnissen und subjektiven Eindrücken.
+\begin{enumerate}
+    \item \textbf{Onboarding (10 Min.):}
+    Die Teilnehmenden erhielten eine Einführung in das Szenario (\enquote{Sie sind neuer Entwickler im Team...}) und die Entwicklungsumgebung. Es wurde sichergestellt, dass GitHub Copilot aktiviert und funktionsfähig war.
+    
+    \item \textbf{Pre-Survey (5 Min.):}
+    Erfassung der demografischen Daten und Selbsteinschätzung zur Kompetenzeinstufung (siehe Kapitel~\ref{chap:forschungsdesign}).
+    
+    \item \textbf{Vibe-Coding-Challenge (60 Min.):}
+    Die Kernphase der Untersuchung. Die Teilnehmenden bearbeiteten die Aufgaben selbstständig. Eingriffe durch den Versuchsleiter erfolgten nur bei technischen Problemen (z.\,B. Absturz der IDE), nicht jedoch bei inhaltlichen Fragen.
+    \textbf{Begründung des Zeitlimits:} Die Begrenzung auf 60 Minuten dient nicht nur der organisatorischen Machbarkeit, sondern fungiert als Stressor. Zeitdruck erhöht die Wahrscheinlichkeit, dass Teilnehmende auf heuristische Strategien (\emph{System 1}) zurückgreifen, was den \emph{Automation Bias} verstärken kann. Dies simuliert realistische Deadline-Situationen.
+    
+    \item \textbf{Post-Survey (5 Min.):}
+    Unmittelbar nach Abschluss der Bearbeitung füllten die Teilnehmenden den Fragebogen zur subjektiven Wahrnehmung aus (NASA-TLX, TAM).
+    
+    \item \textbf{Debriefing (5 Min.):}
+    Kurzes Abschlussgespräch, um offene Fragen zu klären und qualitatives Feedback einzuholen, das im Survey nicht abgebildet werden konnte.
+\end{enumerate}
 
 \section{Operationalisierung der Metriken}
 
-Da der Fokus der Studie nicht auf der Leistungsbewertung verschiedener Agents liegt, sondern auf der Frage, wie verschiedene Kompetenzgruppen mit demselben Agenten arbeiten, werden die Metriken entsprechend angepasst.
+Um die Hypothesen zu prüfen, wurden die abstrakten Konzepte (Qualität, Effizienz, Interaktion) in messbare Indikatoren übersetzt.
 
-\subsection{1. Funktionale Zielerreichung}
-
-Bewertet wird, ob die Kriterien \enquote{Done when} erfüllt sind:
-
+\subsection{Funktionale Korrektheit (Effectiveness)}
+Die funktionale Korrektheit wird binär pro Aufgabe bewertet:
 \begin{itemize}
-    \item Logik funktioniert technisch,
-    \item UI zeigt das erwartete Verhalten,
-    \item keine offensichtlichen Fehler oder Abstürze.
+    \item \textbf{Erfüllt (1):} Alle Akzeptanzkriterien (\enquote{Done when}) sind erfüllt, Tests bestehen.
+    \item \textbf{Nicht erfüllt (0):} Feature fehlt, ist fehlerhaft oder Tests schlagen fehl.
+\end{itemize}
+Die Summe der erfüllten Aufgaben ergibt den \emph{Functional Score} (0--8).
+
+\subsection{Effizienz (Efficiency)}
+Da die Zeit auf 60 Minuten begrenzt war, wird Effizienz primär über den Fortschritt gemessen:
+\begin{equation}
+    E = \frac{\text{Anzahl erfüllter Aufgaben}}{\text{Benötigte Zeit (min)}}
+\end{equation}
+Für Teilnehmende, die alle Aufgaben vor Ablauf der Zeit lösten, steigt der Effizienzwert entsprechend.
+
+\subsection{Codequalität (Quality)}
+Die Qualität des erzeugten Codes wird anhand statischer Analyse und manuellem Review bewertet:
+\begin{itemize}
+    \item \textbf{Linting-Fehler:} Anzahl der Warnungen und Fehler durch ESLint (objektiv).
+    \item \textbf{Wartbarkeit:} Subjektive Bewertung der Lesbarkeit und Struktur (z.\,B. sinnvolle Variablennamen, Modularisierung) auf einer Likert-Skala (1--5). Um die Reliabilität zu sichern, orientiert sich die Bewertung an den Clean-Code-Prinzipien von \textcite{martin2009cleancode}.
 \end{itemize}
 
-Diese Bewertung erfolgt manuell anhand des implementierten Codes und der UI-Funktionalität.
-
-\subsection{2. Effizienz und Interaktionsaufwand}
-
-Erhoben werden:
-
+\subsection{Interaktionsqualität (Interaction Quality)}
+Die Interaktion mit dem Agenten wird durch quantitative Telemetrie und qualitative Beobachtung erfasst:
 \begin{itemize}
-    \item Zeit, die benötigt wurde, um eine Aufgabe zu lösen,
-    \item Anzahl der Interaktionen mit Copilot,
-    \item Häufigkeit von Korrekturen,
-    \item Anzahl der Situationen, in denen Copilot unpassende oder fehlerhafte Vorschläge lieferte.
+    \item \textbf{Acceptance Rate:} Das Verhältnis von akzeptierten zu angezeigten Vorschlägen (Ghost Text). Eine hohe Rate bei Low-Codern deutet auf \emph{Automation Bias} hin.
+    \item \textbf{Prompt Iterations:} Wie oft muss ein Prompt umformuliert werden, bis das Ergebnis passt? Dies misst die Fähigkeit zum \emph{Prompt Engineering}.
+    \item \textbf{Backtracking:} Wie oft wird akzeptierter Code wieder gelöscht? Ein Indikator für \emph{Trial \& Error}.
+    \item \textbf{Prompt-Typologie:} Unterscheidung zwischen \emph{Inline-Kommentaren} (Code-nahe Steuerung) und \emph{Chat-Panel} (konzeptionelle Fragen).
 \end{itemize}
 
-Diese Daten erlauben Rückschlüsse auf Unterschiede zwischen Low- und High-Skill-Profilen.
+\section{Güte der Untersuchung (Threats to Validity)}
 
-\subsection{3. Codequalität}
+Die Validität der Studie wird anhand der Kategorien von \textcite{cook1979quasi} diskutiert.
 
-Da kein automatisiertes Scoring-System eingesetzt wird, erfolgt die Bewertung qualitativ:
-
+\subsection{Konstruktvalidität (Construct Validity)}
+Messen wir wirklich das, was wir messen wollen?
 \begin{itemize}
-    \item Einhaltung bestehender Patterns des Projekts,
-    \item Struktur und Lesbarkeit,
-    \item Umgang mit Edge Cases,
-    \item Integrationsqualität in die bestehende Architektur.
+    \item \textbf{Problem:} \enquote{Kompetenz} ist schwer zu quantifizieren.
+    \item \textbf{Mitigation:} Triangulation der Kompetenzmessung durch Selbsteinschätzung (Pre-Survey), objektive Berufsjahre und qualitative Beobachtung während der Aufgaben.
 \end{itemize}
 
-Diese Analyse orientiert sich an Prinzipien guter Softwarearchitektur und an Kriterien aus der empirischen Softwaretechnik.
+\subsection{Interne Validität (Internal Validity)}
+Können die beobachteten Effekte eindeutig der unabhängigen Variable (Kompetenz) zugeschrieben werden?
+\begin{itemize}
+    \item \textbf{Selection Bias:} Die Zuteilung zu den Gruppen basierte auf Selbsteinschätzung. Um dies zu mitigieren, wurde der Algorithmus zur Klassifizierung strikt angewendet.
+    \item \textbf{Experimenter Bias (Rosenthal-Effekt):} Die Erwartungshaltung des Versuchsleiters könnte die Teilnehmenden beeinflussen. \textbf{Gegenmaßnahme:} Standardisierte Instruktionen und minimale Interaktion während der Coding-Phase.
+    \item \textbf{Compensatory Rivalry (John Henry Effect):} Wenn eine Gruppe sich benachteiligt fühlt, könnte sie sich mehr anstrengen. Da alle Gruppen Copilot nutzten, ist dieses Risiko gering, jedoch könnten High-Coder versuchen, „besser als die KI“ zu sein \parencite{saretsky1972johnhenry}.
+\end{itemize}
 
-\subsection{4. Subjektive Wahrnehmung}
+\subsection{Externe Validität (External Validity)}
+Sind die Ergebnisse verallgemeinerbar?
+\begin{itemize}
+    \item \textbf{Hawthorne-Effekt:} Das Wissen, beobachtet zu werden, verändert das Verhalten. Dies ist in Laborstudien unvermeidbar, wurde aber durch die realistische Aufgabenstellung (Flow-Erleben) abgemildert.
+    \item \textbf{Ecological Validity:} Die Nutzung einer Brownfield-Umgebung erhöht die Übertragbarkeit auf Unternehmenskontexte im Vergleich zu synthetischen LeetCode-Aufgaben massiv.
+\end{itemize}
 
-Subjektive Metriken werden aus dem Follow-up-Survey erhoben und dienen dazu, die beobachteten Leistungsunterschiede einzuordnen.
+\subsection{Reliabilität (Reliability)}
+Sind die Ergebnisse reproduzierbar?
+\begin{itemize}
+    \item \textbf{Inter-Rater Reliability:} Die Bewertung der Codequalität (Wartbarkeit) unterliegt einer gewissen Subjektivität. Durch die Verwendung eines standardisierten Kriterienkatalogs (basierend auf ISO 25010) wird versucht, die Varianz zu minimieren.
+\end{itemize}
 
-\section{Durchführungsablauf}
+\section{Datenanalyse-Strategie}
 
-Jede Teilnahme folgt einem standardisierten Ablauf:
+Die Auswertung erfolgt mittels eines \emph{Mixed-Methods}-Ansatzes:
 
 \begin{enumerate}
-    \item Ausfüllen des Pre-Surveys,
-    \item automatische Kategorisierung in No-/Low-/Mid-/High-Code,
-    \item Setup der Entwicklungsumgebung,
-    \item Bearbeitung der Aufgaben innerhalb von 60 Minuten,
-    \item Beobachtung und Dokumentation der Interaktionen,
-    \item Ausfüllen des Follow-up-Surveys,
-    \item Export des erzeugten Codes.
+    \item \textbf{Quantitative Analyse:} Vergleich der Mittelwerte von Functional Score und Effizienz zwischen den vier Gruppen. Aufgrund der kleinen Stichprobe werden deskriptive Statistiken und Visualisierungen (Boxplots) bevorzugt.
+    \item \textbf{Qualitative Analyse:} Inhaltsanalyse der Screen-Recordings und des Codes, um Verhaltensmuster zu identifizieren (z.\,B. \enquote{Trial \& Error} bei Low-Codern vs. \enquote{Review \& Refine} bei High-Codern).
 \end{enumerate}
 
-Dieser Ablauf reduziert interne Störvariablen und schafft reproduzierbare Bedingungen.
-
-\section{Datenaufbereitung und Auswertung}
-
-Die Auswertung erfolgt in zwei Stufen:
-
-\subsection{1. Quantitative Auswertung}
-
-\begin{itemize}
-    \item Vergleich der funktionalen Erfüllung zwischen den Skillgruppen,
-    \item Analyse der benötigten Zeit und Interaktionshäufigkeit,
-    \item Ermittlung typischer Fehlerprofile je Kompetenzstufe.
-\end{itemize}
-
-\subsection{2. Qualitative Auswertung}
-
-\begin{itemize}
-    \item Analyse des erzeugten Codes,
-    \item Rekonstruktion der Interaktionsmuster,
-    \item Interpretation der subjektiven Wahrnehmungen im Kontext der objektiven Ergebnisse.
-\end{itemize}
-
-Die Kombination beider Ebenen ermöglicht eine robuste Interpretation der Skill-Differenzen.
-
+Dieser methodische Aufbau stellt sicher, dass nicht nur das \emph{Ergebnis} (Code), sondern auch der \emph{Prozess} (Interaktion) beleuchtet wird.

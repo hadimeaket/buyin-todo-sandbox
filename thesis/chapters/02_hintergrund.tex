@@ -1,180 +1,128 @@
-\section{Hintergrund und Stand der Forschung}
-\label{sec:background}
+\chapter{Theoretischer Hintergrund und Stand der Forschung}
+\label{chap:hintergrund}
 
-In diesem Kapitel werden die zentralen Konzepte und theoretischen Grundlagen eingeführt, die für die Bewertung von \emph{AI Coding Agents} im Rahmen von Vibe-Coding in der Unternehmenssoftwareentwicklung relevant sind. Zunächst werden AI Coding Agents definiert und von generischen LLM-basierten Chatbots abgegrenzt (Abschnitt~\ref{sec:definition-agents}). Danach werden Modelle zu Softwarequalität und Produktivität erläutert (Abschnitt~\ref{sec:quality-productivity}), gefolgt von zentralen Konzepten der Human-AI-Collaboration und der Usability (Abschnitt~\ref{sec:human-ai}). Abschnitt~\ref{sec:governance} behandelt Enterprise-Governance-Aspekte wie Sicherheit, Datenschutz und Auditierbarkeit. Abschließend gibt Abschnitt~\ref{sec:related-work} einen Überblick über den Stand der Forschung und verwandte Arbeiten zu konkreten Werkzeugen wie GitHub Copilot, Cursor, Codeium, Plandex und Google Cloud Code/Duet~AI.
+Dieses Kapitel legt das theoretische Fundament für die Untersuchung der Interaktion zwischen menschlicher Kompetenz und KI-gestützter Code-Generierung. Es definiert zunächst das Konzept der \emph{AI Coding Agents} und grenzt den neuartigen Arbeitsmodus des \emph{Vibe-Codings} von klassischer Softwareentwicklung ab (Abschnitt~\ref{sec:definition-agents}). Darauf aufbauend wird ein Kompetenzmodell eingeführt, das auf dem Dreyfus-Modell der Expertise basiert, jedoch kritisch um moderne kognitive Architekturen wie ACT-R erweitert wird (Abschnitt~\ref{sec:competence-models}). Anschließend werden kognitionspsychologische Aspekte der Mensch-Maschine-Interaktion – insbesondere \emph{Dual-Process Theory}, \emph{Cognitive Load} und \emph{Automation Bias} – beleuchtet, die erklären, warum unterschiedliche Kompetenzstufen unterschiedlich stark von KI profitieren (Abschnitt~\ref{sec:human-ai}). Abschließend werden Qualitäts- und Produktivitätsmodelle (ISO 25010, SPACE) vorgestellt, die als Messinstrumente dienen (Abschnitt~\ref{sec:quality-productivity}).
 
-\subsection{Definition: AI Coding Agents}
+\section{AI Coding Agents und das Paradigma des Vibe-Codings}
 \label{sec:definition-agents}
 
-\emph{AI Coding Agents} sind spezialisierte KI-gestützte Werkzeuge, die Softwareentwicklerinnen und -entwickler bei typischen Programmieraufgaben unterstützen, indem sie auf Basis von Quelltext, Projektkontext und natürsprachlichen Eingaben (\emph{Prompts}) Codevorschläge generieren, bestehenden Code analysieren und teilweise eigenständig Änderungen durchführen. Technisch basieren sie überwiegend auf \emph{Large Language Models (LLMs)}, die auf umfangreichen Mengen von Quelltext und technischer Dokumentation trainiert wurden.
+Die Integration von \emph{Large Language Models (LLMs)} in die Softwareentwicklung markiert einen Paradigmenwechsel. Während klassische IDE-Features wie IntelliSense deterministisch und syntaktisch operieren, arbeiten AI Coding Agents probabilistisch und semantisch.
 
-Wesentlich ist die Abgrenzung zu generischen LLM-basierten \emph{Chatbots} (z.\,B. allgemein nutzbare Chat-Assistenten): Ein Chatbot kann zwar ebenfalls Code erzeugen, agiert jedoch primär in einer dialogischen Oberfläche und ist meist nicht tief in Entwicklungswerkzeuge integriert. AI Coding Agents hingegen sind so gestaltet, dass sie direkt in den Entwicklungsworkflow eingebettet sind, etwa als Erweiterung einer integrierten Entwicklungsumgebung (\emph{Integrated Development Environment, IDE}) oder als Kommandozeilen-Werkzeug, das auf das Projektverzeichnis zugreift. Sie sind zudem explizit auf Programmieraufgaben optimiert, etwa durch spezielle Trainingsdaten, Anpassungen der Eingabe-/Ausgabestruktur und Zusatzfunktionen wie Testgenerierung oder Refaktorierung.
+\subsection{Technologische Grundlagen: Transformer und In-Context Learning}
+Moderne AI Coding Agents wie \textbf{GitHub Copilot} basieren auf der Transformer-Architektur \parencite{vaswani2017attention}, die es ermöglicht, Abhängigkeiten in Sequenzen über lange Distanzen zu modellieren. Technisch relevant für die Interaktion ist das \emph{Fill-In-The-Middle (FIM)} Paradigma \parencite{bavarian2022efficient}. Das Modell sagt nicht nur das nächste Token voraus, sondern berücksichtigt den Kontext \emph{vor} und \emph{nach} der Cursor-Position.
 
-In der Praxis lassen sich drei grobe Varianten unterscheiden:
+Zusätzlich nutzen diese Systeme \emph{Retrieval-Augmented Generation (RAG)}-ähnliche Mechanismen. Der Agent scannt den lokalen Kontext (geöffnete Tabs, importierte Module) und injiziert relevante Code-Snippets in den Prompt, ohne dass der Nutzer dies explizit steuert. Dies reduziert die Notwendigkeit für manuelles Prompt Engineering, erhöht aber die Abhängigkeit von einer sauberen Projektstruktur, da der Agent nur so gut ist wie der Kontext, den er „sieht“ \parencite{witte2023context}.
 
+\subsection{Definition: Vibe-Coding als System-1-Aktivität}
+Der Begriff \emph{Vibe-Coding} beschreibt einen emergenten Entwicklungsstil, bei dem der Fokus von der imperativen Syntax-Erstellung zur deklarativen Intentions-Beschreibung verschiebt. Ich definiere Vibe-Coding für diese Arbeit als:
+\begin{quote}
+    \enquote{Einen iterativen Prozess der Softwareerstellung, bei dem der Mensch primär als Architekt und Reviewer agiert, während die KI die Implementierungsdetails auf Basis von natürlichsprachlichen oder kontextuellen \enquote{Vibes} (Intentionen) generiert.}
+\end{quote}
+
+Dieser Modus lässt sich durch die \emph{Dual-Process Theory} von Kahneman \parencite{kahneman2011thinking} erklären:
 \begin{itemize}
-  \item \textbf{IDE-gebundene Agenten:} Diese Tools integrieren sich als Plugin oder Erweiterung in bestehende IDEs wie Visual Studio Code, JetBrains-IDE-Familie oder Visual Studio. Beispiele sind GitHub Copilot, Codeium oder Tabnine. Die Interaktion erfolgt typischerweise inline im Editor: Während der Eingabe werden Codezeilen oder ganze Blöcke vorgeschlagen; ergänzend stehen häufig Chat-Panels zur Verfügung, in denen Entwicklerinnen und Entwickler natürlichsprachliche Fragen stellen können. 
-  \item \textbf{CLI-basierte Agenten:} Hier erfolgt die Interaktion über eine \emph{Command Line Interface} (Kommandozeile). Ein Beispiel ist Plandex, ein terminalbasierter Agent, der umfangreiche Aufgaben in Form von mehrstufigen Plänen abarbeitet. Entwickler formulieren Aufgaben auf hoher Abstraktionsebene, woraufhin der Agent Änderungen in mehreren Dateien erzeugt und diese oftmals als Diffs zur Prüfung präsentiert.
-  \item \textbf{Hybride Systeme:} Hybride Systeme kombinieren Chat-Funktionalität, kontextuelle Codebearbeitung und teils eigene Editoroberflächen. Cursor etwa stellt einen AI-first-Codeeditor dar, in dem ein integrierter Agent auf Projektebene agiert und über einen Chat-ähnlichen Dialog umfangreiche Refaktorierungen oder Featurerealisierungen ausführen kann.
+    \item \textbf{System 1 (Schnelles Denken):} Vibe-Coding appelliert an die Intuition. Der Entwickler tippt einen Funktionsnamen, der Agent schlägt den Body vor. Die Akzeptanz erfolgt oft heuristisch („Sieht gut aus“).
+    \item \textbf{System 2 (Langsames Denken):} Die Validierung des Codes erfordert analytische Anstrengung. Hier liegt die Gefahr: Wenn der Agent (System 1) zu gut wirkt, wird System 2 nicht aktiviert, was zu Fehlern führt.
 \end{itemize}
 
-Im Kontext dieser Arbeit werden AI Coding Agents als \emph{„KI-Paarprogrammierer“} verstanden: Sie unterstützen nicht nur bei der Vervollständigung einzelner Codezeilen, sondern übernehmen auch Teile der Problemanalyse, der Lösungsstrukturierung und der Dokumentation. Das Konzept des \emph{Vibe-Coding} beschreibt dabei einen Entwicklungsstil, in dem Entwicklerinnen und Entwickler auf höherer Abstraktionsebene in natürlicher Sprache arbeiten, während die KI die detaillierte Umsetzung in ausführbaren Code übernimmt. Die Verantwortung für die fachliche und technische Korrektheit verbleibt jedoch beim Menschen, der die Vorschläge prüft, ausführt und gegebenenfalls verwirft.
-
-\subsection{Softwarequalität \& Produktivität}
-\label{sec:quality-productivity}
-
-Die Einführung von AI Coding Agents wirft unmittelbar die Frage auf, wie sich diese Werkzeuge auf die Qualität der erstellten Software sowie auf die Produktivität der beteiligten Personen auswirken. In diesem Abschnitt werden zunächst etablierte Qualitätsmodelle vorgestellt, bevor Konzepte der Entwicklerproduktivität erläutert und empirische Befunde zum Einfluss von AI Coding Agents diskutiert werden.
-
-\subsubsection*{Softwarequalität: ISO/IEC~25010 und Qualitätsdimensionen}
-
-Ein verbreiteter internationaler Standard zur Beschreibung von Softwarequalität ist ISO/IEC~25010:2011. Der Standard definiert acht Hauptmerkmale der Produktqualität: \emph{funktionale Eignung}, \emph{Zuverlässigkeit}, \emph{Performance-Effizienz}, \emph{Kompatibilität}, \emph{Benutzbarkeit}, \emph{Sicherheit}, \emph{Wartbarkeit} und \emph{Übertragbarkeit}.\cite{iso25010} Jedes dieser Merkmale ist weiter in Submerkmale untergliedert (z.\,B. umfasst Benutzbarkeit Aspekte wie Erlernbarkeit, Bedienbarkeit und Zufriedenstellung).
-
-Für den Einsatz von AI Coding Agents sind insbesondere folgende Dimensionen relevant:
-
+Dieser Shift verändert die Anforderungen fundamental:
 \begin{itemize}
-  \item \textbf{Wartbarkeit:} KI-generierter Code kann sowohl positiv als auch negativ auf die Wartbarkeit wirken. Positiv, wenn der Agent konsistente Patterns, klare Strukturierung und ausführliche Kommentare erzeugt; negativ, wenn Vorschläge redundant, unübersichtlich oder inkonsistent sind. Studien zeigen, dass Entwickler KI-Vorschläge teilweise als „Boilerplate-Automat“ einsetzen, was zu konsistenteren Standardstrukturen führen kann, zugleich aber auch das Risiko birgt, unverständliche Codefragmente zu erzeugen, wenn der Kontext nicht korrekt erfasst wird.\cite{nadi2022humaicollab}
-  \item \textbf{Sicherheit:} Untersuchungen zu GitHub Copilot weisen darauf hin, dass generierter Code sicherheitsrelevante Schwachstellen enthalten kann, wenn der Agent etwa unsichere Bibliotheken oder Patterns vorschlägt.\cite{pearce2022asleep} Unternehmen müssen daher zusätzliche Sicherheitsmechanismen (Code-Reviews, Security-Scans) einplanen.
-  \item \textbf{Benutzbarkeit:} Die Benutzbarkeit der durch KI erzeugten Artefakte (z.\,B. Dokumentation, Tests) sowie die Benutzbarkeit des Tools selbst beeinflussen, ob Entwickler:innen die Vorschläge akzeptieren und effizient nutzen können. ISO/IEC~25010 versteht Usability als Grad, zu dem ein Produkt von bestimmten Benutzern in einem bestimmten Kontext effektiv, effizient und zufriedenstellend verwendet werden kann.\cite{iso25010}
+    \item \textbf{Shift from Writing to Reading:} Der Anteil des Code-Lesens und -Verstehens steigt massiv an.
+    \item \textbf{Shift from Syntax to Semantics:} Entwickler:innen müssen weniger wissen, \emph{wie} eine Schleife syntaktisch korrekt ist, aber präziser verstehen, \emph{was} sie logisch bewirken soll.
 \end{itemize}
 
-Damit wird deutlich, dass eine Bewertung von AI Coding Agents nicht nur auf die syntaktische Korrektheit der generierten Lösungen abstellen darf, sondern auch auf deren Auswirkungen auf Wartbarkeit, Sicherheit und Usability.
+\subsection{Theoretische Einordnung in die HCI-Forschung}
+In der Human-Computer Interaction (HCI) lässt sich Vibe-Coding als eine Form der \emph{End-User Development} (EUD) verstehen, bei der die Barriere zur Code-Erstellung gesenkt wird. Es weist Parallelen zum \emph{Natural Language Programming} auf, unterscheidet sich jedoch durch den \emph{Mixed-Initiative}-Charakter \parencite{horvitz1999mixed}: Nicht nur der Mensch gibt Befehle, sondern die KI schlägt proaktiv Lösungen vor (\emph{Ghost Text}). Dies erfordert eine ständige Synchronisation der mentalen Modelle zwischen Mensch und Maschine.
 
-\subsubsection*{Produktivität: Begriffe und Messansätze}
+\section{Kompetenzmodelle: Vom Dreyfus-Modell zu kognitiven Architekturen}
+\label{sec:competence-models}
 
-Produktivität in der Softwareentwicklung lässt sich allgemein als Verhältnis von Output (z.\,B. implementierte Features, gelöste Tickets) zu Input (v.\,a. eingesetzte Zeit und Personalressourcen) auffassen. Klassische Kennzahlen wie „Lines of Code pro Tag“ wurden in der Literatur umfangreich kritisiert, da sie Qualitätsaspekte und Kontextfaktoren ausblenden.\cite{forsgren2021space} 
+Um den Einfluss der menschlichen Kompetenz zu messen, ist eine fundierte Klassifizierung notwendig.
 
-Aktuelle Ansätze betonen daher einen multidimensionalen Produktivitätsbegriff. Das \emph{SPACE-Framework} von Forsgren et al.\ beschreibt fünf Dimensionen: \emph{Satisfaction and Well-being}, \emph{Performance}, \emph{Activity}, \emph{Communication and Collaboration} sowie \emph{Efficiency and Flow}.\cite{forsgren2021space} Für AI Coding Agents ist insbesondere relevant, inwieweit sie:
+\subsection{Das Dreyfus-Modell der Expertise}
+Das \emph{Dreyfus-Modell der Expertise} \parencite{dreyfus1986mind} beschreibt den Erwerb von Fähigkeiten in fünf Stufen, von der strikten Regelbefolgung bis zur intuitiven Meisterschaft. Für diese Arbeit werden vier Stufen adaptiert:
 
+\begin{enumerate}
+    \item \textbf{Novice (No-Code):} Befolgt strikte Regeln, hat kein kontextuelles Verständnis. Verlässt sich vollständig auf die KI als „Black Box“.
+    \item \textbf{Advanced Beginner (Low-Code):} Kann einfache Aufgaben lösen, erkennt aber keine übergeordneten Muster. Kann KI-Vorschläge syntaktisch, aber oft nicht semantisch bewerten.
+    \item \textbf{Competent (Mid-Code):} Arbeitet zielorientiert und kann Probleme in Teilprobleme zerlegen. Nutzt KI als Werkzeug zur Beschleunigung, besitzt aber genug Modellverständnis zur Validierung.
+    \item \textbf{Proficient/Expert (High-Code):} Handelt intuitiv und erkennt Abweichungen sofort. Nutzt KI zur Automatisierung von Boilerplate, ist aber skeptisch gegenüber komplexer Logik.
+\end{enumerate}
+
+\subsection{Kritik und Erweiterung: ACT-R und Adaptive Expertise}
+Das Dreyfus-Modell wird oft als zu linear kritisiert. Es vernachlässigt die \emph{adaptive Expertise} (Hatano \& Inagaki), also die Fähigkeit, Wissen auf neue Domänen zu übertragen.
+Hier bietet die kognitive Architektur \textbf{ACT-R} (Adaptive Control of Thought-Rational) von \textcite{anderson1996act} eine tiefere Erklärung:
 \begin{itemize}
-  \item die Bearbeitungszeit für typische Aufgaben reduzieren (\emph{Efficiency}),
-  \item die wahrgenommene Arbeitsbelastung senken und damit Wohlbefinden und Zufriedenheit steigern (\emph{Satisfaction}),
-  \item die Zusammenarbeit im Team beeinflussen, etwa indem mehr Zeit für konzeptionelle Diskussionen bleibt (\emph{Communication and Collaboration}).
+    \item \textbf{Deklaratives Wissen:} Faktenwissen („Was ist eine Schleife?“). Novizen müssen dieses Wissen mühsam abrufen.
+    \item \textbf{Prozedurales Wissen:} Handlungswissen („Wie schreibe ich eine Schleife?“). Experten haben dies in „Produktionsregeln“ kompiliert, die schnell und mühelos ablaufen.
+\end{itemize}
+\textbf{Relevanz für Copilot:} Der Agent liefert \emph{prozedurale Chunks} (fertigen Code). Für Novizen, die nur über deklaratives Wissen verfügen, wirkt dies wie eine „Prothese“, die fehlende Produktionsregeln ersetzt. Für Experten ist es eine Beschleunigung bereits vorhandener Regeln.
+
+\subsection{Situated Learning und Cognitive Apprenticeship}
+Ergänzend bietet der Ansatz des \emph{Situated Learning} \parencite{lave1991situated} und \emph{Cognitive Apprenticeship} \parencite{collins1989cognitive} eine Perspektive auf das Lernen mit KI.
+\begin{itemize}
+    \item \textbf{Scaffolding:} Der Agent dient als „Gerüst“ (Scaffold), das es Lernenden ermöglicht, Aufgaben zu lösen, die knapp über ihrem aktuellen Kompetenzniveau liegen (Zone der nächsten Entwicklung).
+    \item \textbf{Legitimate Peripheral Participation:} Novizen können durch KI-Unterstützung früher an produktiven Prozessen teilnehmen, auch wenn sie die volle Komplexität noch nicht durchdringen.
 \end{itemize}
 
-Mehrere empirische Studien deuten darauf hin, dass AI Coding Agents die Aufgabendauer signifikant reduzieren können. So zeigte eine kontrollierte Studie, dass Entwickler:innen mit GitHub Copilot bestimmte Programmieraufgaben deutlich schneller bearbeiten konnten als eine Vergleichsgruppe ohne KI-Unterstützung.\cite{peng2023copilot} Eine groß angelegte Feldstudie in Industrieunternehmen berichtete, dass Entwickler:innen mit kontinuierlichem Zugang zu Copilot im Mittel mehr Aufgaben pro Zeiteinheit abschließen konnten, ohne dass sich die Fehlerdichte in der Produktion erhöhte.\cite{cui2025fieldstudy} Gleichzeitig betonen die Autor:innen, dass solcher Produktivitätsgewinn nur dann nachhaltig ist, wenn bestehende Qualitätspraktiken (Tests, Reviews) beibehalten werden.
-
-Subjektive Befragungen unter Entwickler:innen ergänzen diese Befunde: Viele berichten, dass KI-Tools vor allem Routineaufgaben (Boilerplate, einfache Datenzugriffe, Standard-Tests) beschleunigen und monotone Tätigkeiten verringern.\cite{bakal2024zoominfo} Dadurch bleibt mehr Zeit für konzeptionelle Arbeit und Architekturentscheidungen, was wiederum positive Effekte auf Motivation und wahrgenommene Autonomie haben kann.
-
-\subsection{Human--AI Collaboration \& Usability}
+\section{Kognitionspsychologische Aspekte der Human-AI Interaction}
 \label{sec:human-ai}
 
-Die Wirksamkeit von AI Coding Agents hängt nicht allein von der Modellqualität ab, sondern maßgeblich von der Art und Weise, wie Menschen mit diesen Werkzeugen interagieren. In der Forschung zu Human--AI Collaboration, Usability und Mensch–Automations-Interaktion sind verschiedene theoretische Modelle etabliert, die auch für die Bewertung von Coding Agents relevant sind.
+Der Erfolg von AI Coding Agents hängt maßgeblich von der menschlichen Komponente ab. Theorien der Mensch-Maschine-Interaktion erklären, warum Nutzende unterschiedlich auf KI-Vorschläge reagieren.
 
-\subsubsection*{Technology Acceptance Model (TAM)}
-
-Das \emph{Technology Acceptance Model (TAM)} nach Davis erklärt die Nutzungsbereitschaft neuer Technologien im Wesentlichen über zwei Wahrnehmungsdimensionen: die \emph{wahrgenommene Nützlichkeit} (\emph{Perceived Usefulness}) und die \emph{wahrgenommene Einfachheit der Nutzung} (\emph{Perceived Ease of Use}).\cite{davis1989tam} Übertragen auf AI Coding Agents bedeutet dies: 
-
+\subsection{Automation Bias und Vertrauen}
+Ein zentrales Phänomen ist der \emph{Automation Bias} \parencite{parasuraman2010complacency}: Die Tendenz, automatisierten Systemen mehr zu vertrauen als der eigenen Urteilskraft. Dies manifestiert sich in zwei Fehlerarten:
 \begin{itemize}
-  \item Je stärker Entwickler:innen das Gefühl haben, dass ein KI-Assistent ihre Arbeit spürbar verbessert (z.\,B. durch Zeitersparnis, Fehlerreduktion, bessere Codequalität), desto höher ist die Nutzungsbereitschaft.
-  \item Je einfacher das Tool in bestehende Arbeitsabläufe integrierbar ist (z.\,B. reibungslose IDE-Integration, intuitive Shortcuts, geringe Einarbeitungszeit), desto geringer sind Nutzungsbarrieren.
+    \item \textbf{Errors of Commission:} Der Nutzer akzeptiert einen falschen Vorschlag der KI (häufig bei Low-Code).
+    \item \textbf{Errors of Omission:} Der Nutzer übersieht einen Fehler, weil das System keine Warnung ausgibt.
+\end{itemize}
+Das Vertrauen (\emph{Trust}) muss kalibriert sein \parencite{leesee2004trust}. \emph{Overtrust} führt zu unkritischer Übernahme, \emph{Distrust} (oft bei Experten) zu ineffizienter manueller Überprüfung.
+
+\subsection{Cognitive Load Theory (CLT)}
+Die \emph{Cognitive Load Theory} \parencite{sweller1988clt} unterscheidet drei Arten der kognitiven Belastung:
+\begin{itemize}
+    \item \textbf{Intrinsic Load:} Die inhärente Komplexität der Aufgabe (z.B. Rekursion verstehen).
+    \item \textbf{Extraneous Load:} Belastung durch die Darstellung oder das Werkzeug (z.B. komplexe IDE-Menüs).
+    \item \textbf{Germane Load:} Die kognitive Kapazität, die für das Lernen und Schema-Bildung genutzt wird.
 \end{itemize}
 
-Erweiterte TAM-Varianten (z.\,B. TAM2 oder UTAUT) berücksichtigen zusätzlich soziale Einflüsse und organisatorische Rahmenbedingungen. In Teams, in denen der Einsatz von AI Coding Agents aktiv empfohlen wird oder positive Erfahrungsberichte kursieren, steigt typischerweise die Bereitschaft, diese Werkzeuge auszuprobieren und langfristig zu nutzen.
+AI Coding Agents haben das Potenzial, den \emph{Extraneous Load} (Syntax-Details) massiv zu senken. Dies setzt jedoch \emph{Germane Load} frei, die für die Validierung genutzt werden muss. Wenn Novizen keine mentalen Modelle (Schemata) haben, können sie diese freigewordene Kapazität nicht nutzen, und der \emph{Intrinsic Load} der Validierung überfordert sie.
+\textbf{Kritik:} Die CLT ist schwer in Echtzeit zu messen. Dennoch bietet sie ein robustes Erklärungsmodell für die Überforderung von Novizen trotz KI-Hilfe.
 
-\subsubsection*{Cognitive Load Theory und kognitive Belastung}
+\subsection{Mixed-Initiative Interaction}
+Die Interaktion mit Copilot ist ein Beispiel für \emph{Mixed-Initiative Interaction} \parencite{horvitz1999mixed}. Beide Parteien (Mensch und Agent) können die Initiative ergreifen. Der Agent schlägt proaktiv Code vor (Ghost Text), der Mensch kann diesen annehmen, ablehnen oder durch Weitertippen modifizieren. Die Effizienz dieser Kollaboration hängt davon ab, wie gut der Mensch die Intention des Agenten vorhersagen und steuern kann (\emph{Theory of Mind} für die KI).
 
-Die \emph{Cognitive Load Theory} (CLT) unterscheidet zwischen intrinsischer, extrinsischer und lernbezogener (\emph{germane}) kognitiver Last.\cite{sweller1988clt} AI Coding Agents sollten idealerweise die \emph{extrinsische} Last verringern, etwa indem sie lästige Detailarbeit (Boilerplate, repetitive Strukturen, einfache Transformationsaufgaben) übernehmen und so die mentalen Ressourcen der Entwickler:innen für die eigentliche Problemlösung (intrinsische Last) freisetzen.
-
-Empirische Studien und Erfahrungsberichte deuten darauf hin, dass Entwickler:innen die Arbeit mit KI-Assistenz häufig als entlastend erleben, sofern die Vorschläge relevant und zuverlässig sind.\cite{peng2023copilot,bakal2024zoominfo} Gleichzeitig kann eine schlecht gestaltete Interaktion die kognitive Last erhöhen: Wenn Vorschläge häufig unpassend sind, die Bedienung kompliziert ist oder die KI unerwartete Veränderungen vornimmt, entsteht zusätzlicher Prüf- und Korrekturaufwand. Für die Gestaltung von Vibe-Coding-Szenarien ist daher wichtig, Nutzeroberflächen und Interaktionsmuster so zu entwerfen, dass sie kognitive Belastung minimieren (z.\,B. durch klare Vorschlagsvisualisierung, einfache Möglichkeiten zum Akzeptieren/Ablehnen und konsistente Reaktionen des Systems).
-
-\subsubsection*{Vertrauen in Automation}
-
-In der Forschung zur Mensch–Automations-Interaktion wird \emph{Vertrauen} als zentrale Größe betrachtet.\cite{leesee2004trust,hoffman2018trust} Ein angemessenes Vertrauen in ein automatisiertes System bedeutet, dass Nutzer weder blind vertrauen (\emph{Overtrust}) noch die Automation grundsätzlich ignorieren (\emph{Distrust}), sondern die Fähigkeiten und Grenzen realistisch einschätzen.
-
-Auf AI Coding Agents übertragen heißt dies:
-
+\section{Empirische Studien zu KI-Assistenz}
+Aktuelle Studien bestätigen die theoretischen Annahmen teilweise, zeigen aber auch neue Phänomene:
 \begin{itemize}
-  \item \textbf{Zu hohes Vertrauen} kann dazu führen, dass Entwickler:innen KI-Vorschläge unkritisch übernehmen und etwa Sicherheitsaspekte oder Randfälle nicht ausreichend prüfen.
-  \item \textbf{Zu geringes Vertrauen} führt dazu, dass das Tool kaum genutzt wird und sein Potenzial ungenutzt bleibt.
+    \item \textbf{Grounded Copilot:} \textcite{barke2023grounded} identifizierten zwei Modi der Interaktion: \emph{Acceleration} (schnelleres Tippen bekannter Logik) und \emph{Exploration} (Nutzen der KI, um neue APIs zu entdecken).
+    \item \textbf{Reading Between the Lines:} \textcite{mozannar2022reading} zeigten, dass das Modifizieren von KI-Code oft kognitiv teurer ist als das Selbstschreiben, wenn der Vorschlag subtile Fehler enthält.
 \end{itemize}
 
-Vertrauen wird durch Faktoren wie Transparenz, Zuverlässigkeit und Vorhersagbarkeit geprägt. In Studien zu Copilot und ähnlichen Tools zeigt sich, dass Entwickler:innen das Vertrauen in das Tool schrittweise anpassen: Positive Erfahrungen (z.\,B. gelungene Implementierungen, verlässliche Vorschläge) erhöhen das Vertrauen, während auffällige Fehler oder „zu selbstbewusste“ falsche Antworten es senken.\cite{nadi2022humaicollab} Für die Gestaltung von AI Coding Agents bedeutet dies, dass Mechanismen zur Vertrauenskalibrierung sinnvoll sind, etwa durch Anzeige von Unsicherheiten, klare Grenzen des Einsatzbereichs und die einfache Möglichkeit, Vorschläge zurückzuweisen.
+\section{Softwarequalität und Produktivität}
+\label{sec:quality-productivity}
 
-\subsubsection*{Usability eines AI Coding Agents}
+Die Bewertung der Arbeit mit AI Coding Agents erfordert klare Kriterien für Qualität und Produktivität.
 
-Neben den kognitiven und sozialen Aspekten spielt die allgemeine Usability des Tools eine zentrale Rolle. Aufbauend auf ISO/IEC~25010 umfasst Usability u.\,a. Erlernbarkeit, Effizienz, Fehlerrobustheit und Zufriedenstellung.\cite{iso25010} Für AI Coding Agents sind insbesondere folgende Fragen relevant:
-
+\subsection{Softwarequalität nach ISO/IEC 25010}
+Der Standard ISO/IEC 25010 definiert Softwarequalität über acht Hauptmerkmale \parencite{iso25010}. Für die Bewertung von KI-generiertem Code sind insbesondere relevant:
 \begin{itemize}
-  \item Wie leicht ist das Tool zu installieren und zu konfigurieren (z.\,B. IDE-Plugin, Authentifizierung, Projektkonfiguration)?
-  \item Wie intuitiv ist die Interaktion (Shortcuts, UI-Design, Sichtbarkeit der Vorschläge)?
-  \item In welchem Maß stört oder unterstützt das Tool den \emph{Flow} der Entwickler:innen?
+    \item \textbf{Funktionale Eignung:} Erfüllt der generierte Code die fachlichen Anforderungen korrekt?
+    \item \textbf{Wartbarkeit:} Ist der Code modular, verständlich und konsistent strukturiert? Studien zeigen, dass KI-Tools dazu verleiten können, Code zu duplizieren statt zu abstrahieren, was die Wartbarkeit langfristig gefährdet \parencite{nadi2022humaicollab}.
+    \item \textbf{Sicherheit:} Enthält der Code Schwachstellen? Da LLMs auf öffentlichen Daten trainiert sind, können sie unsichere Muster reproduzieren \parencite{pearce2022asleep}.
 \end{itemize}
 
-Feldberichte, etwa aus der Einführung von Copilot in Unternehmen, zeigen, dass Entwickler:innen das Tool insbesondere dann positiv bewerten, wenn die Integration in die bestehende Tool-Landschaft reibungslos verläuft und die Vorschläge kontextuell passend sind.\cite{bakal2024zoominfo} Übermäßige oder irrelevante Autovervollständigungen werden hingegen als störend empfunden und können dazu führen, dass die Funktion deaktiviert wird.
-
-\subsection{Enterprise-Governance: Sicherheit, Datenschutz und Integration}
-\label{sec:governance}
-
-Während einzelne Entwickler:innen AI Coding Agents relativ frei erproben können, ist der Einsatz in Unternehmensumgebungen durch Governance-Anforderungen geprägt. Zu den wichtigsten Themen gehören Informationssicherheit, Datenschutz (insbesondere DSGVO), Auditierbarkeit und Integration in bestehende Prozesse und Werkzeuge.
-
-\subsubsection*{Sicherheit und Codequalität}
-
-Aus Security-Perspektive stellen AI Coding Agents eine zweifache Herausforderung dar: Einerseits kann der generierte Code selbst Sicherheitslücken enthalten, andererseits kann das Werkzeug zum ungewollten Abfluss sensibler Informationen führen.
-
-Studien zu Copilot zeigen, dass generierte Codefragmente in sicherheitskritischen Szenarien eine erhöhte Wahrscheinlichkeit aufweisen, bekannte Schwachstellen zu enthalten, etwa unsichere Standardkonfigurationen oder fehlerhafte Eingabevalidierung.\cite{pearce2022asleep} Deshalb empfehlen zahlreiche Autoren, KI-generierten Code grundsätzlich denselben Sicherheitsprüfungen (Code-Review, automatisierte Security-Scans, Penetrationstests) zu unterziehen wie manuell geschriebenen Code.\cite{nadi2022humaicollab}
-
-Zudem müssen Unternehmen verhindern, dass vertrauliche Informationen (z.\,B. Geschäftslogik, API-Schlüssel, personenbezogene Daten) über KI-Services nach außen gelangen. Einige Anbieter bieten dafür spezifische Enterprise-Varianten an, in denen zugesichert wird, dass Prompts und Code nicht für Trainingszwecke verwendet und nur kurzfristig verarbeitet werden.\cite{githubcopilottrust} Andere Tools wie Codeium werben damit, dass sie mit selbst-hostbaren Varianten vollständig im Rechenzentrum des Kunden betrieben werden können und Trainingsdaten ausschließlich aus permissiven Open-Source-Projekten stammen, um Lizenz- und Datenschutzrisiken zu minimieren.\cite{ramel2023codeium}
-
-\subsubsection*{Datenschutz und DSGVO-Compliance}
-
-Die europäische Datenschutz-Grundverordnung (DSGVO) verlangt bei der Verarbeitung personenbezogener Daten strenge Regeln hinsichtlich Rechtsgrundlage, Zweckbindung, Transparenz und Datensicherheit. Enthält der übermittel­te Kontext personenbezogene Daten oder lassen sich aus dem Code Rückschlüsse auf Individuen ziehen, fungiert ein Cloud-basierter AI Coding Agent als Auftragsverarbeiter im Sinne der DSGVO. Unternehmen müssen dann prüfen:
-
+\subsection{Produktivität: Das SPACE-Framework}
+Produktivität in der Softwareentwicklung ist mehrdimensional. Das SPACE-Framework \parencite{forsgren2021space} unterscheidet fünf Dimensionen, die auch für den Einsatz von Copilot zentral sind:
 \begin{itemize}
-  \item In welche Länder werden die Daten übertragen?
-  \item Welche Speicherfristen gelten?
-  \item Werden Daten zu Trainingszwecken wiederverwendet?
+    \item \textbf{S (Satisfaction):} Steigert das Tool die Zufriedenheit und reduziert es Frustration?
+    \item \textbf{P (Performance):} Führt der Einsatz zu qualitativ besseren Ergebnissen?
+    \item \textbf{A (Activity):} Wie viele Aufgaben können in einer bestimmten Zeit abgeschlossen werden?
+    \item \textbf{C (Communication):} Wie verändert sich die Zusammenarbeit (hier: Mensch-Maschine-Interaktion)?
+    \item \textbf{E (Efficiency \& Flow):} Wird der Arbeitsfluss durch unterbrechungsfreie Vorschläge gefördert?
 \end{itemize}
 
-Viele Anbieter stellen hierfür Verträge zur Auftragsverarbeitung bereit und heben Zertifizierungen (z.\,B. ISO~27001) hervor. Dennoch bevorzugen einige Organisationen On-Premises- oder Self-Hosted-Lösungen, um maximale Kontrolle über die Datenflüsse zu behalten.\cite{ramel2023codeium}
-
-Ein weiterer Governance-Aspekt betrifft Lizenz-Compliance: Falls KI-Modelle auf nicht-permissiven Open-Source-Lizenzen (z.\,B. GPL) trainiert wurden, kann nicht ausgeschlossen werden, dass generierte Codefragmente lizenzrechtlich problematisch sind.\cite{vaithilingam2022codecompletion} Einige Anbieter adressieren dies explizit, indem sie solche Lizenzen aus den Trainingsdaten ausschließen oder Ausgaben filtern.
-
-\subsubsection*{Auditierbarkeit und Nachvollziehbarkeit}
-
-In regulierten Branchen besteht häufig die Pflicht, Entwicklungsprozesse nachvollziehbar zu dokumentieren. Wenn AI Coding Agents zum Einsatz kommen, stellt sich die Frage, wie deren Beitrag zum Code historisiert werden kann. 
-
-Mögliche Maßnahmen umfassen:
-
-\begin{itemize}
-  \item Logging von Prompts und Antworten in internen Systemen,
-  \item Kennzeichnung von KI-generiertem Code in Commit-Messages oder Pull-Requests,
-  \item spezielle Review-Regeln für Code, der überwiegend aus KI-Vorschlägen stammt.
-\end{itemize}
-
-Einige Enterprise-Angebote von AI Coding Agents stellen erweiterte Audit-Logs und Administrationsfunktionen bereit, mit denen Nutzungsstatistiken, Aktivitätsmuster und Konfigurationen zentral verwaltet werden können. Dies dient sowohl der Compliance als auch der Steuerung der Toolnutzung (z.\,B. schrittweise Rollouts, Lizenzverwaltung).
-
-\subsubsection*{Integration in bestehende Toolchains und Prozesse}
-
-Damit AI Coding Agents in einem Unternehmen wirksam eingesetzt werden können, müssen sie in bestehende Toolchains (z.\,B. Versionsverwaltung, CI/CD-Pipelines, Issue-Tracker) integriert werden. Typische Anforderungen sind:
-
-\begin{itemize}
-  \item Unterstützung gängiger IDEs und Editor-Umgebungen,
-  \item Single-Sign-On (SSO) und zentrale Benutzerverwaltung,
-  \item Konfigurierbarkeit hinsichtlich Sprachen, Frameworks und unternehmensspezifischer Konventionen,
-  \item Option, interne Codebasen als Wissensquelle für die KI zu nutzen (z.\,B. für projektspezifische Patterns).
-\end{itemize}
-
-Beispiele hierfür sind GitHub Copilot~Enterprise und Googles Duet~AI, die sich explizit an Unternehmenskunden richten und Funktionen wie SSO, erweiterte Administration, Telemetrie und (teilweise) Anpassung an unternehmensspezifische Repositories bieten.\cite{githubcopilottrust,googleduetai} Für ein Unternehmen wie BuyIn ist entscheidend, dass ein gewählter AI Coding Agent sich in bereits etablierte Werkzeuge integrieren lässt und Governance-Vorgaben (z.\,B. Sicherheitsrichtlinien, Freigabeprozesse) nicht unterläuft, sondern idealerweise unterstützt.
-
-\subsection{Related Work: KI-gestützte Softwareentwicklung und aktuelle Tools}
+\section{Zusammenfassung und Forschungslücke}
 \label{sec:related-work}
 
-In den letzten Jahren ist eine wachsende Zahl wissenschaftlicher Publikationen und Praxisberichte zur KI-unterstützten Softwareentwicklung erschienen. Dieser Abschnitt gibt einen Überblick über zentrale Arbeiten mit Bezug auf AI Coding Agents und Vibe-Coding.
-
-\subsubsection*{Empirische Studien zu GitHub Copilot}
-
-GitHub Copilot als eines der ersten und bekanntesten Produkte in diesem Bereich ist Gegenstand mehrerer empirischer Untersuchungen. \textcite{peng2023copilot} zeigen in einem kontrollierten Experiment, dass Entwickler:innen mit Copilot deutlich schneller Aufgaben bearbeiten können als ohne, wobei die Qualität der Lösungen weitgehend vergleichbar bleibt. \textcite{cui2025fieldstudy} untersuchen Copilot in einer groß angelegten Feldstudie in mehreren Unternehmen und berichten von signifikanten Produktivitätsgewinnen, insbesondere bei weniger erfahrenen Entwickler:innen. \textcite{pearce2022asleep} analysieren demgegenüber die Sicherheitsaspekte und finden, dass ein nicht unerheblicher Anteil der von Copilot vorgeschlagenen Lösungen in sicherheitskritischen Szenarien Schwachstellen enthält.
-
-\textcite{vaithilingam2022codecompletion} sowie \textcite{nadi2022humaicollab} untersuchen die Interaktion zwischen Entwickler:innen und modernen Codevervollständigungswerkzeugen und beschreiben Muster von Vertrauen, Misstrauen und Strategien zur Fehlerkorrektur. Sie zeigen u.\,a., dass Entwickler:innen KI-Vorschläge eher akzeptieren, wenn sie als Ergänzung zu bestehendem Code dienen, während Vorschläge, die größere Strukturänderungen betreffen, skeptischer betrachtet werden.
-
-\subsubsection*{Praxisberichte und Fallstudien}
-
-Neben den klassischen Forschungspublikationen gewinnt „graue Literatur“ in Form von technischen Whitepapern und Unternehmensberichten an Bedeutung. GitHub veröffentlichte mehrere Berichte zur Einführung von Copilot in Organisationen, die von hoher wahrgenommener Produktivität und Zufriedenheit berichten, aber auch Grenzen und Risiken benennen.\cite{githubcopilottrust} \textcite{bakal2024zoominfo} beschreiben etwa die Einführung von Copilot bei ZoomInfo mit mehreren hundert Entwickler:innen. Sie dokumentieren Annahmequoten von rund einem Drittel der Vorschläge und schätzen, dass dadurch etwa 20\,\% der Entwicklungszeit eingespart werden konnten.
-
-Codeium positioniert sich in Whitepapern als datenschutzfreundliche Alternative zu Copilot, die sich besonders für Unternehmen eignet: Zum einen durch den Verzicht auf nicht-permissive Open-Source-Lizenzen im Training, zum anderen durch die Möglichkeit des Self-Hostings.\cite{ramel2023codeium} Plandex wird in Entwicklerblogs als experimenteller Agent für große Aufgaben beschrieben, der projek­tweite Änderungen über die Kommandozeile orchestriert, allerdings bislang ohne formale Evaluation in industriellen Kontexten.
-
-\subsubsection*{Human--AI Collaboration in der Softwareentwicklung}
-
-Über konkrete Tools hinaus existiert eine Reihe von Arbeiten, die die Zusammenarbeit zwischen Menschen und KI allgemein untersuchen. \textcite{nadi2022humaicollab} geben einen Überblick über Patterns der Mensch--KI-Kollaboration in der Softwareentwicklung und identifizieren typische Herausforderungen wie mangelnde Transparenz, Vertrauen und Verantwortungsteilung. \textcite{forsgren2021space} und andere Produktivitätsstudien liefern theoretische Rahmen, um Effekte von KI-Werkzeugen über reine Zeitmessungen hinaus einzuordnen.
-
-Insgesamt lässt sich festhalten, dass AI Coding Agents erhebliches Potenzial besitzen, die Produktivität und Entwicklererfahrung zu verbessern, gleichzeitig aber offene Fragen hinsichtlich Qualität, Sicherheit, Governance und langfristiger Kompetenzentwicklung aufwerfen. Die vorliegende Arbeit knüpft an diese Forschung an, indem sie eine vergleichende Bewertung mehrerer AI Coding Agents im Kontext von Vibe-Coding und Unternehmenssoftwareentwicklung vornimmt und eine Integrationsstrategie am Beispiel von BuyIn ableitet.
+Bisherige Studien konzentrierten sich oft auf die technische Leistungsfähigkeit von Modellen oder allgemeine Produktivitätsgewinne \parencite{peng2023copilot}. Es fehlt jedoch an einer differenzierten Betrachtung, wie die \emph{individuelle Kompetenz} (operationalisiert durch das Dreyfus-Modell und ACT-R) die Interaktion mit dem Agenten moderiert. Insbesondere die Frage, ob KI als „Equalizer“ wirkt (Novizen auf Experten-Niveau hebt) oder die Kluft vergrößert („Rich get richer“), ist ungeklärt. Diese Arbeit adressiert diese Lücke durch ein experimentelles Design, das kognitive Theorien (Dual-Process, CLT) mit empirischen Software-Engineering-Metriken verbindet.
