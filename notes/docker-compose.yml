@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  mongodb-notes:
+    build: .
+    container_name: notes-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: notes_db
+    ports:
+      - "27018:27017" # Port 27018 auf Host, um Konflikte zu vermeiden
+    volumes:
+      - notes_data:/data/db
+      - notes_config:/data/configdb
+    networks:
+      - notes-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # Optional: MongoDB Express als Web-UI
+  mongo-express:
+    image: mongo-express:latest
+    container_name: notes-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:admin123@mongodb-notes:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+    depends_on:
+      mongodb-notes:
+        condition: service_healthy
+    networks:
+      - notes-network
+
+volumes:
+  notes_data:
+    driver: local
+  notes_config:
+    driver: local
+
+networks:
+  notes-network:
+    driver: bridge

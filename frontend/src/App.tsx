@@ -40,20 +40,39 @@ function App() {
   const handleAddTodo = async (data: CreateTodoDto) => {
     try {
       setError(null);
+
+      // Client-side validation: Check for empty title
+      if (!data.title || data.title.trim() === "") {
+        setError("Title is required. Please enter a title for your todo.");
+        return;
+      }
+
       const newTodo = await todoApi.createTodo(data);
       setTodos((prev) => [...prev, newTodo]);
       setIsAddTaskModalOpen(false); // Close modal on success
     } catch (err: unknown) {
       console.error(err);
       if (err && typeof err === "object" && "response" in err) {
-        const error = err as { response?: { status?: number } };
+        const error = err as {
+          response?: { status?: number; data?: { message?: string } };
+        };
+
+        // Handle specific error cases
         if (error.response?.status === 409) {
           setError(
             "A todo with this title already exists. Please use a different title."
           );
+        } else if (error.response?.status === 400) {
+          // Handle validation errors from backend
+          const message =
+            error.response.data?.message ||
+            "Invalid input. Please check your data.";
+          setError(message);
         } else {
           setError("Failed to add todo. Please try again.");
         }
+      } else if (err && typeof err === "object" && "message" in err) {
+        setError((err as Error).message);
       } else {
         setError("Failed to add todo. Please try again.");
       }
