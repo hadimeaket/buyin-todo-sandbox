@@ -2,19 +2,26 @@ import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 import { v4 as uuidv4 } from "uuid";
 
 export interface ITodoRepository {
-  findAll(): Promise<Todo[]>;
+  findAll(userId?: string): Promise<Todo[]>;
   findById(id: string): Promise<Todo | null>;
   findDuplicate(title: string, description?: string): Promise<Todo | null>;
-  create(data: CreateTodoDto): Promise<Todo>;
+  create(data: CreateTodoDto, userId: string): Promise<Todo>;
   update(id: string, data: UpdateTodoDto): Promise<Todo | null>;
   toggle(id: string): Promise<Todo | null>;
   delete(id: string): Promise<boolean>;
 }
 
-class InMemoryTodoRepository implements ITodoRepository {
+/**
+ * InMemoryTodoRepository - Kept for testing purposes
+ * Use MongoDBTodoRepository for production
+ */
+export class InMemoryTodoRepository implements ITodoRepository {
   private todos: Todo[] = [];
 
-  async findAll(): Promise<Todo[]> {
+  async findAll(userId?: string): Promise<Todo[]> {
+    if (userId) {
+      return this.todos.filter((t) => t.userId === userId);
+    }
     return [...this.todos];
   }
 
@@ -39,10 +46,11 @@ class InMemoryTodoRepository implements ITodoRepository {
     return duplicate || null;
   }
 
-  async create(data: CreateTodoDto): Promise<Todo> {
+  async create(data: CreateTodoDto, userId: string): Promise<Todo> {
     const now = new Date();
     const todo: Todo = {
       id: uuidv4(),
+      userId,
       title: data.title,
       description: data.description,
       completed: false,
@@ -121,4 +129,8 @@ class InMemoryTodoRepository implements ITodoRepository {
   }
 }
 
-export const todoRepository = new InMemoryTodoRepository();
+// Import MongoDB Repository
+import { MongoDBTodoRepository } from "./MongoDBTodoRepository";
+
+// Use MongoDB Repository (replace InMemoryTodoRepository)
+export const todoRepository = new MongoDBTodoRepository();

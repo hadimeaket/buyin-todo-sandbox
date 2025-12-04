@@ -55,6 +55,9 @@ COPY package*.json ./
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
 
+# Create uploads directory with proper permissions
+RUN mkdir -p uploads && chown -R nodejs:nodejs uploads
+
 # Switch to non-root user
 USER nodejs
 
