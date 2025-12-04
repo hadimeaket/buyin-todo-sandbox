@@ -26,7 +26,7 @@ export class UserRepository implements IUserRepository {
       INSERT INTO users (id, email, passwordHash, createdAt, updatedAt)
       VALUES (?, ?, ?, ?, ?)
     `);
-    
+
     stmt.run(
       user.id,
       user.email,
@@ -34,7 +34,7 @@ export class UserRepository implements IUserRepository {
       user.createdAt.toISOString(),
       user.updatedAt.toISOString()
     );
-    
+
     return user;
   }
 

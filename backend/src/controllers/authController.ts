@@ -19,11 +19,11 @@ export const register = async (
           reject(err);
           return;
         }
-        
+
         // Set session data
         req.session.userId = user.id;
         req.session.email = user.email;
-        
+
         // Save the session
         req.session.save((saveErr) => {
           if (saveErr) {
@@ -72,11 +72,11 @@ export const login = async (
           reject(err);
           return;
         }
-        
+
         // Set session data
         req.session.userId = user.id;
         req.session.email = user.email;
-        
+
         // Save the session
         req.session.save((saveErr) => {
           if (saveErr) {

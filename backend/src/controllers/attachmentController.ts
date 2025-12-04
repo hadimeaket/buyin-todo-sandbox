@@ -23,7 +23,7 @@ export const uploadAttachment = async (
     }
 
     const todoId = req.params.id;
-    
+
     // Check if todo exists and belongs to user
     const todo = await todoRepository.findById(todoId, userId);
     if (!todo) {
@@ -43,8 +43,9 @@ export const uploadAttachment = async (
     if (!ALLOWED_MIME_TYPES.includes(file.mimetype)) {
       // Delete uploaded file
       fs.unlinkSync(file.path);
-      res.status(400).json({ 
-        message: "Invalid file format. Only PNG, JPG, and PDF files are allowed" 
+      res.status(400).json({
+        message:
+          "Invalid file format. Only PNG, JPG, and PDF files are allowed",
       });
       return;
     }
@@ -53,8 +54,8 @@ export const uploadAttachment = async (
     if (file.size > MAX_FILE_SIZE) {
       // Delete uploaded file
       fs.unlinkSync(file.path);
-      res.status(400).json({ 
-        message: "File too large. Maximum file size is 5MB" 
+      res.status(400).json({
+        message: "File too large. Maximum file size is 5MB",
       });
       return;
     }
@@ -87,7 +88,7 @@ export const downloadAttachment = async (
     }
 
     const attachmentId = req.params.attachmentId;
-    
+
     // Get attachment from database
     const attachment = await attachmentRepository.findById(attachmentId);
     if (!attachment) {
@@ -134,7 +135,7 @@ export const getAttachments = async (
     }
 
     const todoId = req.params.id;
-    
+
     // Check if todo exists and belongs to user
     const todo = await todoRepository.findById(todoId, userId);
     if (!todo) {
@@ -162,7 +163,7 @@ export const deleteAttachment = async (
     }
 
     const attachmentId = req.params.attachmentId;
-    
+
     // Get attachment from database
     const attachment = await attachmentRepository.findById(attachmentId);
     if (!attachment) {
