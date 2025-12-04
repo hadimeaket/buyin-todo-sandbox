@@ -1,7 +1,18 @@
 export type RecurrenceType = "none" | "daily" | "weekly" | "monthly" | "yearly";
 
+export interface Attachment {
+  id: string;
+  todoId: string;
+  filename: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+  createdAt: Date;
+}
+
 export interface Todo {
   id: string;
+  userId: string;
   title: string;
   description?: string;
   completed: boolean;
@@ -12,6 +23,8 @@ export interface Todo {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  categoryId?: string;
+  attachments?: Attachment[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +39,7 @@ export interface CreateTodoDto {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  categoryId?: string;
 }
 
 export interface UpdateTodoDto {
@@ -39,4 +53,5 @@ export interface UpdateTodoDto {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  categoryId?: string;
 }

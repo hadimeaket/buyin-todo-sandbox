@@ -55,6 +55,9 @@ COPY package*.json ./
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
 
+# Create data directory for SQLite database with correct permissions
+RUN mkdir -p /app/data && chown -R nodejs:nodejs /app/data
+
 # Switch to non-root user
 USER nodejs
 

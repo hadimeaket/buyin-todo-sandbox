@@ -8,8 +8,11 @@ import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { useAuth } from "./contexts/AuthContext";
+import AuthPage from "./features/auth/AuthPage";
 
 function App() {
+  const { user, loading: authLoading, logout } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +23,10 @@ function App() {
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (user) {
+      fetchTodos();
+    }
+  }, [user]);
 
   const fetchTodos = async () => {
     try {
@@ -45,14 +50,13 @@ function App() {
       setIsAddTaskModalOpen(false); // Close modal on success
     } catch (err: unknown) {
       console.error(err);
-      if (err && typeof err === "object" && "response" in err) {
-        const error = err as { response?: { status?: number } };
-        if (error.response?.status === 409) {
-          setError(
-            "A todo with this title already exists. Please use a different title."
-          );
+      if (err && typeof err === "object" && "message" in err) {
+        const error = err as { message?: string; status?: number };
+        // Use the server error message if available
+        if (error.status === 400 || error.status === 409) {
+          setError(error.message || "Failed to add todo. Please try again.");
         } else {
-          setError("Failed to add todo. Please try again.");
+          setError(error.message || "Failed to add todo. Please try again.");
         }
       } else {
         setError("Failed to add todo. Please try again.");
@@ -145,9 +149,23 @@ function App() {
     { id: "completed", label: "Completed", count: stats.completed },
   ];
 
+  // Show auth page if not logged in
+  if (authLoading) {
+    return (
+      <div className="loading">
+        <div className="loading__spinner animate-spin" />
+        <p className="loading__text">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AuthPage />;
+  }
+
   return (
     <div className="app">
-      <AppBar />
+      <AppBar onLogout={logout} userEmail={user.email} />
       <Drawer
         totalCount={stats.total}
         activeCount={stats.active}

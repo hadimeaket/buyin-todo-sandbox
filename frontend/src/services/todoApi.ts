@@ -9,6 +9,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true, // Important for cookies/sessions
 });
 
 export class ApiError extends Error {
