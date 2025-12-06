@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarEvent from "./CalendarEvent";
 import {
   buildWeekDays,
@@ -15,12 +16,13 @@ interface WeekViewProps {
   currentDate: Date;
   todos: Todo[];
   onTodoClick: (todo: Todo) => void;
+  categories?: Category[];
 }
 
 const HOUR_HEIGHT = 60; // pixels per hour
 const WEEKDAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-function WeekView({ currentDate, todos, onTodoClick }: WeekViewProps) {
+function WeekView({ currentDate, todos, onTodoClick, categories = [] }: WeekViewProps) {
   const weekDays = buildWeekDays(currentDate);
   const timeSlots = generateTimeSlots();
   const today = new Date();
@@ -62,6 +64,7 @@ function WeekView({ currentDate, todos, onTodoClick }: WeekViewProps) {
                 todo={todo}
                 onClick={onTodoClick}
                 variant="week"
+                categories={categories}
               />
             ))}
           </div>
@@ -96,6 +99,7 @@ function WeekView({ currentDate, todos, onTodoClick }: WeekViewProps) {
                   todo={todo}
                   onClick={onTodoClick}
                   variant="week"
+                  categories={categories}
                 />
               </div>
             );

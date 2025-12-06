@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import type { Todo, UpdateTodoDto } from "../../types/todo";
+import type { Category } from "../../types/category";
 import Card from "../../components/ui/Card";
 import Button from "../../components/ui/Button";
 import Badge from "../../components/ui/Badge";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Checkbox from "../../components/ui/Checkbox";
+import AttachmentManager from "../../components/attachments/AttachmentManager";
 import "./TodoDetail.scss";
 
 interface TodoDetailProps {
   todo: Todo;
   onClose: () => void;
   onUpdate: (id: string, data: UpdateTodoDto) => Promise<void>;
+  categories?: Category[];
 }
 
-function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
+function TodoDetail({ todo, onClose, onUpdate, categories = [] }: TodoDetailProps) {
   const [title, setTitle] = useState(todo.title);
   const [description, setDescription] = useState(todo.description || "");
   const [priority, setPriority] = useState<"low" | "medium" | "high">(
     todo.priority
   );
+  const [categoryId, setCategoryId] = useState(todo.categoryId || "");
   const [dueDate, setDueDate] = useState(
     todo.dueDate ? todo.dueDate.substring(0, 10) : ""
   );
@@ -86,6 +90,7 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
         title: title.trim(),
         description: description.trim() || undefined,
         priority,
+        categoryId: categoryId || undefined,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
         isAllDay,
@@ -239,6 +244,28 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                 </select>
               </div>
 
+              {categories.length > 0 && (
+                <div className="todo-detail__field">
+                  <label htmlFor="edit-category" className="todo-detail__label">
+                    Category
+                  </label>
+                  <select
+                    id="edit-category"
+                    className="todo-detail__select"
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    disabled={isSaving}
+                  >
+                    <option value="">No Category</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               <DatePicker
                 id="edit-dueDate"
                 label="Due date"
@@ -327,6 +354,9 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
               </select>
             </div>
 
+            {/* Attachments */}
+            <AttachmentManager todoId={todo.id} />
+
             {/* Action Buttons */}
             <div className="todo-detail__actions">
               <Button
@@ -383,6 +413,28 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                 </Badge>
               </div>
 
+              {todo.categoryId && categories.length > 0 && (() => {
+                const category = categories.find(c => c.id === todo.categoryId);
+                return category ? (
+                  <div className="todo-detail__section">
+                    <h4 className="todo-detail__section-title">Category</h4>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span
+                        style={{
+                          display: 'inline-block',
+                          width: '16px',
+                          height: '16px',
+                          borderRadius: '4px',
+                          backgroundColor: category.color,
+                          border: '2px solid rgba(0, 0, 0, 0.1)',
+                        }}
+                      />
+                      <span>{category.name}</span>
+                    </div>
+                  </div>
+                ) : null;
+              })()}
+
               <div className="todo-detail__section">
                 <h4 className="todo-detail__section-title">Due date</h4>
                 <p className="todo-detail__due-date">
@@ -405,6 +457,9 @@ function TodoDetail({ todo, onClose, onUpdate }: TodoDetailProps) {
                 </div>
               )}
             </div>
+
+            {/* Attachments */}
+            <AttachmentManager todoId={todo.id} />
 
             {/* Timestamps */}
             <div className="todo-detail__timestamps">

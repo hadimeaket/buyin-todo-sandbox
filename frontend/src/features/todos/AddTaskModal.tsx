@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
@@ -10,6 +11,7 @@ interface AddTaskModalProps {
   onAdd: (data: CreateTodoDto) => Promise<void>;
   disabled?: boolean;
   existingTodos?: Todo[];
+  categories?: Category[];
 }
 
 export default function AddTaskModal({
@@ -17,6 +19,7 @@ export default function AddTaskModal({
   onAdd,
   disabled,
   existingTodos = [],
+  categories = [],
 }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -26,6 +29,7 @@ export default function AddTaskModal({
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
   const [isAllDay, setIsAllDay] = useState(false);
+  const [categoryId, setCategoryId] = useState<string>("");
   const [recurrence, setRecurrence] = useState<
     "none" | "daily" | "weekly" | "monthly" | "yearly"
   >("none");
@@ -154,6 +158,7 @@ export default function AddTaskModal({
         startTime: !isAllDay && startTime ? startTime : undefined,
         endTime: !isAllDay && endTime ? endTime : undefined,
         recurrence,
+        categoryId: categoryId || undefined,
       };
 
       await onAdd(todoData);
@@ -270,6 +275,26 @@ export default function AddTaskModal({
               disabled={disabled || isSubmitting}
             />
           </div>
+
+          {/* Category */}
+          {categories.length > 0 && (
+            <div className="add-task-modal__field">
+              <Select
+                id="category"
+                label="Category"
+                value={categoryId}
+                onChange={(value) => setCategoryId(value)}
+                options={[
+                  { value: "", label: "No Category" },
+                  ...categories.map((cat) => ({
+                    value: cat.id,
+                    label: cat.name,
+                  })),
+                ]}
+                disabled={disabled || isSubmitting}
+              />
+            </div>
+          )}
 
           {/* Due Date */}
           <div className="add-task-modal__field">

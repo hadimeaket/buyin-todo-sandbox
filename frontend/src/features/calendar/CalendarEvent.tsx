@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import "./CalendarEvent.scss";
 
 interface CalendarEventProps {
   todo: Todo;
   onClick: (todo: Todo) => void;
   variant?: "month" | "week" | "day";
+  categories?: Category[];
 }
 
 function CalendarEvent({
   todo,
   onClick,
   variant = "month",
+  categories = [],
 }: CalendarEventProps) {
   const [showCard, setShowCard] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(
@@ -131,11 +134,24 @@ function CalendarEvent({
 
   const time = formatTime();
 
+  // Get category color if available
+  const getCategoryStyle = () => {
+    if (!todo.categoryId) return {};
+    const category = categories.find(c => c.id === todo.categoryId);
+    if (!category) return {};
+    
+    return {
+      backgroundColor: category.color,
+      borderColor: category.color,
+    };
+  };
+
   return (
     <>
       <div
         ref={eventRef}
         className={getEventClassName()}
+        style={getCategoryStyle()}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}

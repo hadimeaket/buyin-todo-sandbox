@@ -8,6 +8,7 @@ interface DrawerProps {
   activeCount: number;
   completedCount: number;
   onAddTask: () => void;
+  onManageCategories: () => void;
 }
 
 export default function Drawer({
@@ -16,6 +17,7 @@ export default function Drawer({
   activeCount,
   completedCount,
   onAddTask,
+  onManageCategories,
 }: DrawerProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -175,6 +177,30 @@ export default function Drawer({
               {theme === "dark" ? "Light" : "Dark"}
             </span>
           )}
+        </button>
+
+        {/* Settings Button */}
+        <button
+          className="drawer__action"
+          onClick={onManageCategories}
+          title="Manage Categories"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 3h7v7H3z" />
+            <path d="M14 3h7v7h-7z" />
+            <path d="M14 14h7v7h-7z" />
+            <path d="M3 14h7v7H3z" />
+          </svg>
+          {isExpanded && <span className="drawer__label">Categories</span>}
         </button>
 
         {/* Settings Button */}

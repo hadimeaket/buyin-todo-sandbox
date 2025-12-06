@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarEvent from "./CalendarEvent";
 import {
   getTodosForDate,
@@ -15,11 +16,12 @@ interface DayViewProps {
   currentDate: Date;
   todos: Todo[];
   onTodoClick: (todo: Todo) => void;
+  categories?: Category[];
 }
 
 const HOUR_HEIGHT = 80; // pixels per hour (taller for day view)
 
-function DayView({ currentDate, todos, onTodoClick }: DayViewProps) {
+function DayView({ currentDate, todos, onTodoClick, categories = [] }: DayViewProps) {
   // Expand recurring todos for the day view
   const dayStart = startOfDay(currentDate);
   const dayEnd = endOfDay(currentDate);
@@ -54,6 +56,7 @@ function DayView({ currentDate, todos, onTodoClick }: DayViewProps) {
                 todo={todo}
                 onClick={onTodoClick}
                 variant="day"
+                categories={categories}
               />
             ))}
           </div>
@@ -95,6 +98,7 @@ function DayView({ currentDate, todos, onTodoClick }: DayViewProps) {
                     todo={todo}
                     onClick={onTodoClick}
                     variant="day"
+                    categories={categories}
                   />
                 </div>
               );

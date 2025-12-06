@@ -2,15 +2,23 @@
 import { useState, useEffect } from "react";
 import "./styles/App.scss";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
+import type { Category } from "./types/category";
 import { todoApi } from "./services/todoApi";
+import { categoryApi } from "./services/categoryApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { Login, Register } from "./components/auth";
+import { CategoryManager } from "./components/categories";
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
+  const { isAuthenticated, isLoading: authLoading, setUser } = useAuth();
+  const [authView, setAuthView] = useState<"login" | "register">("login");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
@@ -18,10 +26,59 @@ function App() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
+  const [isCategoryManagerOpen, setIsCategoryManagerOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (isAuthenticated) {
+      fetchTodos();
+      fetchCategories();
+    } else {
+      setLoading(false);
+    }
+  }, [isAuthenticated]);
+
+  const fetchCategories = async () => {
+    try {
+      const data = await categoryApi.getAllCategories();
+      setCategories(data);
+    } catch (err) {
+      console.error("Failed to load categories:", err);
+    }
+  };
+
+  const handleAuthSuccess = () => {
+    const storedUser = JSON.parse(localStorage.getItem("auth_user") || "null");
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  };
+
+  // Show loading spinner while checking authentication
+  if (authLoading) {
+    return (
+      <div className="app">
+        <div className="loading">
+          <div className="loading__spinner animate-spin" />
+          <p className="loading__text">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show auth screens if not authenticated
+  if (!isAuthenticated) {
+    return authView === "login" ? (
+      <Login
+        onSuccess={handleAuthSuccess}
+        onSwitchToRegister={() => setAuthView("register")}
+      />
+    ) : (
+      <Register
+        onSuccess={handleAuthSuccess}
+        onSwitchToLogin={() => setAuthView("login")}
+      />
+    );
+  }
 
   const fetchTodos = async () => {
     try {
@@ -153,6 +210,7 @@ function App() {
         activeCount={stats.active}
         completedCount={stats.completed}
         onAddTask={() => setIsAddTaskModalOpen(true)}
+        onManageCategories={() => setIsCategoryManagerOpen(true)}
       />
       <div className="app__container">
         <main className="app__main-card">
@@ -264,6 +322,7 @@ function App() {
                 todos={filteredTodos}
                 onUpdateTodo={handleUpdateTodo}
                 onTodoClick={handleViewDetails}
+                categories={categories}
               />
             </section>
           )}
@@ -274,6 +333,7 @@ function App() {
             todo={selectedTodo}
             onClose={() => setSelectedTodo(null)}
             onUpdate={handleUpdateTodo}
+            categories={categories}
           />
         )}
 
@@ -283,6 +343,15 @@ function App() {
             onAdd={handleAddTodo}
             disabled={loading}
             existingTodos={todos}
+            categories={categories}
+          />
+        )}
+
+        {isCategoryManagerOpen && (
+          <CategoryManager
+            onClose={() => setIsCategoryManagerOpen(false)}
+            onCategoryChange={fetchCategories}
+            categories={categories}
           />
         )}
       </div>

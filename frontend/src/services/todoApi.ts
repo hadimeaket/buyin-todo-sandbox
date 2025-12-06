@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import type { Todo, CreateTodoDto, UpdateTodoDto } from "../types/todo";
+import { tokenStorage } from "./authApi";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -10,6 +11,34 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+// Add request interceptor to attach JWT token
+api.interceptors.request.use(
+  (config) => {
+    const token = tokenStorage.getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor to handle 401 errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid, clear storage
+      tokenStorage.clear();
+      // Reload page to show login
+      window.location.reload();
+    }
+    return Promise.reject(error);
+  }
+);
 
 export class ApiError extends Error {
   public status?: number;

@@ -1,4 +1,5 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import CalendarEvent from "./CalendarEvent";
 import {
   buildMonthMatrix,
@@ -13,12 +14,13 @@ interface MonthViewProps {
   currentDate: Date;
   todos: Todo[];
   onTodoClick: (todo: Todo) => void;
+  categories?: Category[];
 }
 
 const WEEKDAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MAX_VISIBLE_EVENTS = 3;
 
-function MonthView({ currentDate, todos, onTodoClick }: MonthViewProps) {
+function MonthView({ currentDate, todos, onTodoClick, categories = [] }: MonthViewProps) {
   const monthMatrix = buildMonthMatrix(currentDate);
   const today = new Date();
 
@@ -48,6 +50,7 @@ function MonthView({ currentDate, todos, onTodoClick }: MonthViewProps) {
               todo={todo}
               onClick={onTodoClick}
               variant="month"
+              categories={categories}
             />
           ))}
           {remainingCount > 0 && (

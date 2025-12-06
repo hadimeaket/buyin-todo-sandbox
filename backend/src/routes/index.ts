@@ -1,10 +1,36 @@
 import { Router } from 'express';
 import healthRoutes from './healthRoutes';
 import todoRoutes from './todoRoutes';
+import authRoutes from './authRoutes';
+import { createCategoryRoutes } from './categoryRoutes';
+import { createAttachmentRoutes } from './attachmentRoutes';
+import { CategoryController } from '../controllers/categoryController';
+import { CategoryService } from '../services/CategoryService';
+import { SQLiteCategoryRepository } from '../repositories/CategoryRepository';
+import { AttachmentService } from '../services/AttachmentService';
+import { SqliteAttachmentRepository } from '../repositories/AttachmentRepository';
 
-const router = Router();
+export function createRoutes(db: any): Router {
+  const router = Router();
 
-router.use('/health', healthRoutes);
-router.use('/todos', todoRoutes);
+  // Initialize category dependencies
+  const categoryRepository = new SQLiteCategoryRepository(db);
+  const categoryService = new CategoryService(categoryRepository);
+  const categoryController = new CategoryController(categoryService);
+  const categoryRoutes = createCategoryRoutes(categoryController);
 
-export default router;
+  // Initialize attachment dependencies
+  const attachmentRepository = new SqliteAttachmentRepository(db);
+  const attachmentService = new AttachmentService(attachmentRepository);
+  const attachmentRoutes = createAttachmentRoutes(attachmentService);
+
+  router.use('/health', healthRoutes);
+  router.use('/auth', authRoutes);
+  router.use('/todos', todoRoutes);
+  router.use('/categories', categoryRoutes);
+  router.use('/attachments', attachmentRoutes);
+
+  return router;
+}
+
+export default createRoutes;
