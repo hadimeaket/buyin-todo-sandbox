@@ -280,3 +280,70 @@ function getNextOccurrence(
 
   return next;
 }
+
+// Calculate which days a multi-day todo spans in a week row
+export function getTodoSpanInWeek<
+  T extends { dueDate?: string; dueEndDate?: string; id: string }
+>(todo: T, weekDays: Date[]): { startIndex: number; spanDays: number } | null {
+  if (!todo.dueDate) return null;
+
+  const todoStart = startOfDay(new Date(todo.dueDate));
+  const todoEnd = todo.dueEndDate
+    ? startOfDay(new Date(todo.dueEndDate))
+    : todoStart;
+
+  const weekStart = startOfDay(weekDays[0]);
+  const weekEnd = startOfDay(weekDays[weekDays.length - 1]);
+
+  // Check if todo overlaps with this week
+  if (todoEnd < weekStart || todoStart > weekEnd) {
+    return null;
+  }
+
+  // Find start index in this week
+  let startIndex = 0;
+  for (let i = 0; i < weekDays.length; i++) {
+    const day = startOfDay(weekDays[i]);
+    if (day >= todoStart) {
+      startIndex = i;
+      break;
+    }
+  }
+
+  // Calculate span days in this week
+  let spanDays = 1;
+  for (let i = startIndex + 1; i < weekDays.length; i++) {
+    const day = startOfDay(weekDays[i]);
+    if (day <= todoEnd) {
+      spanDays++;
+    } else {
+      break;
+    }
+  }
+
+  return { startIndex, spanDays };
+}
+
+// Get all multi-day todos that should render in a specific week
+export function getMultiDayTodosForWeek<
+  T extends { dueDate?: string; dueEndDate?: string; id: string }
+>(todos: T[], weekDays: Date[]): T[] {
+  return todos.filter((todo) => {
+    const span = getTodoSpanInWeek(todo, weekDays);
+    return span !== null && span.spanDays > 1;
+  });
+}
+
+// Get single-day todos for a specific date (excludes multi-day)
+export function getSingleDayTodosForDate<
+  T extends { dueDate?: string; dueEndDate?: string }
+>(todos: T[], date: Date): T[] {
+  return getTodosForDate(todos, date).filter((todo) => {
+    if (!todo.dueDate) return false;
+    const todoStart = startOfDay(new Date(todo.dueDate));
+    const todoEnd = todo.dueEndDate
+      ? startOfDay(new Date(todo.dueEndDate))
+      : todoStart;
+    return isSameDay(todoStart, todoEnd);
+  });
+}

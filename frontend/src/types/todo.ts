@@ -12,6 +12,7 @@ export interface Todo {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  category_id?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -26,6 +27,7 @@ export interface CreateTodoDto {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  category_id?: string;
 }
 
 export interface UpdateTodoDto {
@@ -39,4 +41,5 @@ export interface UpdateTodoDto {
   startTime?: string;
   endTime?: string;
   recurrence?: RecurrenceType;
+  category_id?: string;
 }

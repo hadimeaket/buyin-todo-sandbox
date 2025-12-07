@@ -93,6 +93,7 @@ function CalendarView({ todos, onTodoClick }: CalendarViewProps) {
           <MonthView
             currentDate={currentDate}
             todos={todos}
+            categories={[]}
             onTodoClick={onTodoClick}
           />
         )}

@@ -7,8 +7,12 @@ import {
   toggleTodo,
   deleteTodo,
 } from '../controllers/todoController';
+import { authenticate } from '../middleware/authenticate';
 
 const router = Router();
+
+// All todo routes require authentication
+router.use(authenticate);
 
 // GET all todos
 router.get('/', getAllTodos);

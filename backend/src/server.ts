@@ -4,8 +4,12 @@ import dotenv from 'dotenv';
 import routes from './routes';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './middleware/logger';
+import { initializeDatabase, closeDatabase } from './database/init';
 
 dotenv.config();
+
+// Initialize database before starting server
+initializeDatabase();
 
 const app: Application = express();
 const PORT = process.env.PORT || 4000;
@@ -24,6 +28,19 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+  console.log('\nShutting down gracefully...');
+  closeDatabase();
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  console.log('\nShutting down gracefully...');
+  closeDatabase();
+  process.exit(0);
 });
 
 export default app;
