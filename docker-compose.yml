@@ -11,6 +11,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
+    volumes:
+      - todo-data:/app/data
     networks:
       - todo-network
     restart: unless-stopped
@@ -36,6 +38,9 @@ services:
     restart: unless-stopped
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+volumes:
+  todo-data:
 
 networks:
   todo-network:

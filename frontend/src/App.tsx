@@ -46,8 +46,13 @@ function App() {
     } catch (err: unknown) {
       console.error(err);
       if (err && typeof err === "object" && "response" in err) {
-        const error = err as { response?: { status?: number } };
-        if (error.response?.status === 409) {
+        const error = err as { response?: { status?: number; data?: { message?: string } } };
+        if (error.response?.status === 400) {
+          // Validation error (z.B. leerer Titel)
+          setError(
+            error.response.data?.message || "Please check your input and try again."
+          );
+        } else if (error.response?.status === 409) {
           setError(
             "A todo with this title already exists. Please use a different title."
           );
@@ -57,6 +62,7 @@ function App() {
       } else {
         setError("Failed to add todo. Please try again.");
       }
+      throw err; // Re-throw damit Modal offen bleibt
     }
   };
 

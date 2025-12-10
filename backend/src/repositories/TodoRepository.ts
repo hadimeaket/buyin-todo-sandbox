@@ -1,5 +1,7 @@
 import { Todo, CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 import { v4 as uuidv4 } from "uuid";
+import DatabaseConnection from "../database/connection";
+import type Database from "better-sqlite3";
 
 export interface ITodoRepository {
   findAll(): Promise<Todo[]>;
@@ -11,7 +13,160 @@ export interface ITodoRepository {
   delete(id: string): Promise<boolean>;
 }
 
-class InMemoryTodoRepository implements ITodoRepository {
+/**
+ * SQLiteTodoRepository - Persistente Speicherung mit SQLite
+ * 
+ * Verwendet Prepared Statements für SQL Injection Prevention
+ */
+class SQLiteTodoRepository implements ITodoRepository {
+  private get db(): Database.Database {
+    return DatabaseConnection.getConnection();
+  }
+
+  /**
+   * Konvertiert DB-Row zu Todo-Objekt mit korrekten Datentypen
+   */
+  private rowToTodo(row: any): Todo {
+    return {
+      id: row.id,
+      title: row.title,
+      description: row.description || undefined,
+      completed: row.completed === 1,
+      priority: row.priority as "low" | "medium" | "high",
+      dueDate: row.dueDate ? new Date(row.dueDate) : undefined,
+      dueEndDate: row.dueEndDate ? new Date(row.dueEndDate) : undefined,
+      isAllDay: row.isAllDay === 1,
+      startTime: row.startTime || undefined,
+      endTime: row.endTime || undefined,
+      recurrence: row.recurrence as any,
+      createdAt: new Date(row.createdAt),
+      updatedAt: new Date(row.updatedAt),
+    };
+  }
+
+  async findAll(): Promise<Todo[]> {
+    const stmt = this.db.prepare("SELECT * FROM todos ORDER BY createdAt DESC");
+    const rows = stmt.all();
+    return rows.map((row) => this.rowToTodo(row));
+  }
+
+  async findById(id: string): Promise<Todo | null> {
+    const stmt = this.db.prepare("SELECT * FROM todos WHERE id = ?");
+    const row = stmt.get(id);
+    return row ? this.rowToTodo(row) : null;
+  }
+
+  async findDuplicate(
+    title: string,
+    description?: string
+  ): Promise<Todo | null> {
+    const stmt = this.db.prepare(`
+      SELECT * FROM todos 
+      WHERE LOWER(TRIM(title)) = LOWER(TRIM(?))
+      AND (? IS NULL OR LOWER(TRIM(description)) = LOWER(TRIM(?)))
+      LIMIT 1
+    `);
+    const row = stmt.get(title, description || null, description || null);
+    return row ? this.rowToTodo(row) : null;
+  }
+
+  async create(data: CreateTodoDto): Promise<Todo> {
+    const now = new Date().toISOString();
+    const id = uuidv4();
+
+    const stmt = this.db.prepare(`
+      INSERT INTO todos (
+        id, title, description, completed, priority,
+        dueDate, dueEndDate, isAllDay, startTime, endTime,
+        recurrence, createdAt, updatedAt
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    stmt.run(
+      id,
+      data.title,
+      data.description || null,
+      0,
+      data.priority || "medium",
+      data.dueDate || null,
+      data.dueEndDate || null,
+      data.isAllDay !== undefined ? (data.isAllDay ? 1 : 0) : 1,
+      data.startTime || null,
+      data.endTime || null,
+      data.recurrence || "none",
+      now,
+      now
+    );
+
+    const created = await this.findById(id);
+    if (!created) {
+      throw new Error("Failed to create todo");
+    }
+    return created;
+  }
+
+  async update(id: string, data: UpdateTodoDto): Promise<Todo | null> {
+    const existing = await this.findById(id);
+    if (!existing) return null;
+
+    const now = new Date().toISOString();
+
+    const stmt = this.db.prepare(`
+      UPDATE todos SET
+        title = COALESCE(?, title),
+        description = CASE WHEN ? = 1 THEN ? ELSE description END,
+        completed = COALESCE(?, completed),
+        priority = COALESCE(?, priority),
+        dueDate = CASE WHEN ? = 1 THEN ? ELSE dueDate END,
+        dueEndDate = CASE WHEN ? = 1 THEN ? ELSE dueEndDate END,
+        isAllDay = COALESCE(?, isAllDay),
+        startTime = CASE WHEN ? = 1 THEN ? ELSE startTime END,
+        endTime = CASE WHEN ? = 1 THEN ? ELSE endTime END,
+        recurrence = COALESCE(?, recurrence),
+        updatedAt = ?
+      WHERE id = ?
+    `);
+
+    stmt.run(
+      data.title || null,
+      data.description !== undefined ? 1 : 0, data.description || null,
+      data.completed !== undefined ? (data.completed ? 1 : 0) : null,
+      data.priority || null,
+      data.dueDate !== undefined ? 1 : 0, data.dueDate || null,
+      data.dueEndDate !== undefined ? 1 : 0, data.dueEndDate || null,
+      data.isAllDay !== undefined ? (data.isAllDay ? 1 : 0) : null,
+      data.startTime !== undefined ? 1 : 0, data.startTime || null,
+      data.endTime !== undefined ? 1 : 0, data.endTime || null,
+      data.recurrence || null,
+      now,
+      id
+    );
+
+    return await this.findById(id);
+  }
+
+  async toggle(id: string): Promise<Todo | null> {
+    const existing = await this.findById(id);
+    if (!existing) return null;
+
+    const now = new Date().toISOString();
+    const stmt = this.db.prepare(`
+      UPDATE todos SET completed = ?, updatedAt = ? WHERE id = ?
+    `);
+
+    stmt.run(existing.completed ? 0 : 1, now, id);
+    return await this.findById(id);
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const stmt = this.db.prepare("DELETE FROM todos WHERE id = ?");
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
+}
+
+// InMemory Repository für Tests falls benötigt
+export class InMemoryTodoRepository implements ITodoRepository {
   private todos: Todo[] = [];
 
   async findAll(): Promise<Todo[]> {
@@ -121,4 +276,5 @@ class InMemoryTodoRepository implements ITodoRepository {
   }
 }
 
-export const todoRepository = new InMemoryTodoRepository();
+// Verwende SQLite-Repository für persistente Speicherung
+export const todoRepository = new SQLiteTodoRepository();
