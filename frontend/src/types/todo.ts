@@ -2,6 +2,7 @@ export type RecurrenceType = "none" | "daily" | "weekly" | "monthly" | "yearly";
 
 export interface Todo {
   id: string;
+  userId: string;
   title: string;
   description?: string;
   completed: boolean;

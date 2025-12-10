@@ -4,13 +4,13 @@ import DatabaseConnection from "../database/connection";
 import type Database from "better-sqlite3";
 
 export interface ITodoRepository {
-  findAll(): Promise<Todo[]>;
-  findById(id: string): Promise<Todo | null>;
-  findDuplicate(title: string, description?: string): Promise<Todo | null>;
-  create(data: CreateTodoDto): Promise<Todo>;
-  update(id: string, data: UpdateTodoDto): Promise<Todo | null>;
-  toggle(id: string): Promise<Todo | null>;
-  delete(id: string): Promise<boolean>;
+  findAll(userId: string): Promise<Todo[]>;
+  findById(id: string, userId: string): Promise<Todo | null>;
+  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;
+  create(data: CreateTodoDto, userId: string): Promise<Todo>;
+  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;
+  toggle(id: string, userId: string): Promise<Todo | null>;
+  delete(id: string, userId: string): Promise<boolean>;
 }
 
 /**
@@ -29,6 +29,7 @@ class SQLiteTodoRepository implements ITodoRepository {
   private rowToTodo(row: any): Todo {
     return {
       id: row.id,
+      userId: row.userId,
       title: row.title,
       description: row.description || undefined,
       completed: row.completed === 1,
@@ -44,46 +45,49 @@ class SQLiteTodoRepository implements ITodoRepository {
     };
   }
 
-  async findAll(): Promise<Todo[]> {
-    const stmt = this.db.prepare("SELECT * FROM todos ORDER BY createdAt DESC");
-    const rows = stmt.all();
+  async findAll(userId: string): Promise<Todo[]> {
+    const stmt = this.db.prepare("SELECT * FROM todos WHERE userId = ? ORDER BY createdAt DESC");
+    const rows = stmt.all(userId);
     return rows.map((row) => this.rowToTodo(row));
   }
 
-  async findById(id: string): Promise<Todo | null> {
-    const stmt = this.db.prepare("SELECT * FROM todos WHERE id = ?");
-    const row = stmt.get(id);
+  async findById(id: string, userId: string): Promise<Todo | null> {
+    const stmt = this.db.prepare("SELECT * FROM todos WHERE id = ? AND userId = ?");
+    const row = stmt.get(id, userId);
     return row ? this.rowToTodo(row) : null;
   }
 
   async findDuplicate(
     title: string,
+    userId: string,
     description?: string
   ): Promise<Todo | null> {
     const stmt = this.db.prepare(`
       SELECT * FROM todos 
-      WHERE LOWER(TRIM(title)) = LOWER(TRIM(?))
+      WHERE userId = ?
+      AND LOWER(TRIM(title)) = LOWER(TRIM(?))
       AND (? IS NULL OR LOWER(TRIM(description)) = LOWER(TRIM(?)))
       LIMIT 1
     `);
-    const row = stmt.get(title, description || null, description || null);
+    const row = stmt.get(userId, title, description || null, description || null);
     return row ? this.rowToTodo(row) : null;
   }
 
-  async create(data: CreateTodoDto): Promise<Todo> {
+  async create(data: CreateTodoDto, userId: string): Promise<Todo> {
     const now = new Date().toISOString();
     const id = uuidv4();
 
     const stmt = this.db.prepare(`
       INSERT INTO todos (
-        id, title, description, completed, priority,
+        id, userId, title, description, completed, priority,
         dueDate, dueEndDate, isAllDay, startTime, endTime,
         recurrence, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
       id,
+      userId,
       data.title,
       data.description || null,
       0,
@@ -98,15 +102,15 @@ class SQLiteTodoRepository implements ITodoRepository {
       now
     );
 
-    const created = await this.findById(id);
+    const created = await this.findById(id, userId);
     if (!created) {
       throw new Error("Failed to create todo");
     }
     return created;
   }
 
-  async update(id: string, data: UpdateTodoDto): Promise<Todo | null> {
-    const existing = await this.findById(id);
+  async update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
+    const existing = await this.findById(id, userId);
     if (!existing) return null;
 
     const now = new Date().toISOString();
@@ -124,7 +128,7 @@ class SQLiteTodoRepository implements ITodoRepository {
         endTime = CASE WHEN ? = 1 THEN ? ELSE endTime END,
         recurrence = COALESCE(?, recurrence),
         updatedAt = ?
-      WHERE id = ?
+      WHERE id = ? AND userId = ?
     `);
 
     stmt.run(
@@ -139,28 +143,29 @@ class SQLiteTodoRepository implements ITodoRepository {
       data.endTime !== undefined ? 1 : 0, data.endTime || null,
       data.recurrence || null,
       now,
-      id
+      id,
+      userId
     );
 
-    return await this.findById(id);
+    return await this.findById(id, userId);
   }
 
-  async toggle(id: string): Promise<Todo | null> {
-    const existing = await this.findById(id);
+  async toggle(id: string, userId: string): Promise<Todo | null> {
+    const existing = await this.findById(id, userId);
     if (!existing) return null;
 
     const now = new Date().toISOString();
     const stmt = this.db.prepare(`
-      UPDATE todos SET completed = ?, updatedAt = ? WHERE id = ?
+      UPDATE todos SET completed = ?, updatedAt = ? WHERE id = ? AND userId = ?
     `);
 
-    stmt.run(existing.completed ? 0 : 1, now, id);
-    return await this.findById(id);
+    stmt.run(existing.completed ? 0 : 1, now, id, userId);
+    return await this.findById(id, userId);
   }
 
-  async delete(id: string): Promise<boolean> {
-    const stmt = this.db.prepare("DELETE FROM todos WHERE id = ?");
-    const result = stmt.run(id);
+  async delete(id: string, userId: string): Promise<boolean> {
+    const stmt = this.db.prepare("DELETE FROM todos WHERE id = ? AND userId = ?");
+    const result = stmt.run(id, userId);
     return result.changes > 0;
   }
 }
@@ -169,35 +174,38 @@ class SQLiteTodoRepository implements ITodoRepository {
 export class InMemoryTodoRepository implements ITodoRepository {
   private todos: Todo[] = [];
 
-  async findAll(): Promise<Todo[]> {
-    return [...this.todos];
+  async findAll(userId: string): Promise<Todo[]> {
+    return this.todos.filter(t => t.userId === userId);
   }
 
-  async findById(id: string): Promise<Todo | null> {
-    const todo = this.todos.find((t) => t.id === id);
+  async findById(id: string, userId: string): Promise<Todo | null> {
+    const todo = this.todos.find((t) => t.id === id && t.userId === userId);
     return todo || null;
   }
 
   async findDuplicate(
     title: string,
+    userId: string,
     description?: string
   ): Promise<Todo | null> {
     const duplicate = this.todos.find((t) => {
+      const userMatch = t.userId === userId;
       const titleMatch =
         t.title.toLowerCase().trim() === title.toLowerCase().trim();
       const descMatch =
         !description ||
         t.description?.toLowerCase().trim() ===
           description.toLowerCase().trim();
-      return titleMatch && descMatch;
+      return userMatch && titleMatch && descMatch;
     });
     return duplicate || null;
   }
 
-  async create(data: CreateTodoDto): Promise<Todo> {
+  async create(data: CreateTodoDto, userId: string): Promise<Todo> {
     const now = new Date();
     const todo: Todo = {
       id: uuidv4(),
+      userId,
       title: data.title,
       description: data.description,
       completed: false,
@@ -215,8 +223,8 @@ export class InMemoryTodoRepository implements ITodoRepository {
     return todo;
   }
 
-  async update(id: string, data: UpdateTodoDto): Promise<Todo | null> {
-    const index = this.todos.findIndex((t) => t.id === id);
+  async update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
+    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
     if (index === -1) return null;
 
     const updatedTodo: Todo = {
@@ -254,8 +262,8 @@ export class InMemoryTodoRepository implements ITodoRepository {
     return updatedTodo;
   }
 
-  async toggle(id: string): Promise<Todo | null> {
-    const index = this.todos.findIndex((t) => t.id === id);
+  async toggle(id: string, userId: string): Promise<Todo | null> {
+    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
     if (index === -1) return null;
 
     const updatedTodo: Todo = {
@@ -267,8 +275,8 @@ export class InMemoryTodoRepository implements ITodoRepository {
     return updatedTodo;
   }
 
-  async delete(id: string): Promise<boolean> {
-    const index = this.todos.findIndex((t) => t.id === id);
+  async delete(id: string, userId: string): Promise<boolean> {
+    const index = this.todos.findIndex((t) => t.id === id && t.userId === userId);
     if (index === -1) return false;
 
     this.todos.splice(index, 1);

@@ -3,12 +3,13 @@ import { todoService } from "../services/TodoService";
 import { CreateTodoDto, UpdateTodoDto } from "../models/Todo";
 
 export const getAllTodos = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todos = await todoService.getAllTodos();
+    const userId = req.userId!;
+    const todos = await todoService.getAllTodos(userId);
     res.status(200).json(todos);
   } catch (error) {
     next(error);
@@ -21,7 +22,8 @@ export const getTodoById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoService.getTodoById(req.params.id);
+    const userId = req.userId!;
+    const todo = await todoService.getTodoById(req.params.id, userId);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -38,9 +40,10 @@ export const createTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    const userId = req.userId!;
     const data: CreateTodoDto = req.body;
     try {
-      const todo = await todoService.createTodo(data);
+      const todo = await todoService.createTodo(data, userId);
       res.status(201).json(todo);
     } catch (err: any) {
       if (err.message === "Title is required") {
@@ -62,8 +65,9 @@ export const updateTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+    const userId = req.userId!;
     const data: UpdateTodoDto = req.body;
-    const todo = await todoService.updateTodo(req.params.id, data);
+    const todo = await todoService.updateTodo(req.params.id, userId, data);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -80,7 +84,8 @@ export const toggleTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const todo = await todoService.toggleTodo(req.params.id);
+    const userId = req.userId!;
+    const todo = await todoService.toggleTodo(req.params.id, userId);
     if (!todo) {
       res.status(404).json({ message: "Todo not found" });
       return;
@@ -97,7 +102,8 @@ export const deleteTodo = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const deleted = await todoService.deleteTodo(req.params.id);
+    const userId = req.userId!;
+    const deleted = await todoService.deleteTodo(req.params.id, userId);
     if (!deleted) {
       res.status(404).json({ message: "Todo not found" });
       return;

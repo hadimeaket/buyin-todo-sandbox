@@ -8,10 +8,23 @@ import DatabaseConnection from "./connection";
 export function initializeSchema(): void {
   const db = DatabaseConnection.getConnection();
 
-  // Erstelle TODOs Tabelle
+  // Erstelle Users Tabelle
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS users (
+      id TEXT PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE,
+      passwordHash TEXT NOT NULL,
+      name TEXT,
+      createdAt TEXT NOT NULL,
+      updatedAt TEXT NOT NULL
+    )
+  `);
+
+  // Erstelle TODOs Tabelle mit userId
   db.exec(`
     CREATE TABLE IF NOT EXISTS todos (
       id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL,
       title TEXT NOT NULL,
       description TEXT,
       completed INTEGER NOT NULL DEFAULT 0,
@@ -24,6 +37,7 @@ export function initializeSchema(): void {
       recurrence TEXT DEFAULT 'none',
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
       CHECK (completed IN (0, 1)),
       CHECK (priority IN ('low', 'medium', 'high')),
       CHECK (recurrence IN ('none', 'daily', 'weekly', 'monthly', 'yearly')),
@@ -40,6 +54,7 @@ export function initializeSchema(): void {
 export function clearDatabase(): void {
   const db = DatabaseConnection.getConnection();
   db.exec("DELETE FROM todos");
+  db.exec("DELETE FROM users");
   console.log("🗑️  Database cleared");
 }
 
@@ -49,6 +64,7 @@ export function clearDatabase(): void {
 export function resetDatabase(): void {
   const db = DatabaseConnection.getConnection();
   db.exec("DROP TABLE IF EXISTS todos");
+  db.exec("DROP TABLE IF EXISTS users");
   initializeSchema();
   console.log("🔄 Database reset complete");
 }
