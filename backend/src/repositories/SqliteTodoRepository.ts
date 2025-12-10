@@ -5,7 +5,9 @@ import { ITodoRepository } from "./TodoRepository";
 
 export class SqliteTodoRepository implements ITodoRepository {
   async findAll(userId: string): Promise<Todo[]> {
-    const stmt = db.prepare("SELECT * FROM todos WHERE userId = ? ORDER BY createdAt DESC");
+    const stmt = db.prepare(
+      "SELECT * FROM todos WHERE userId = ? ORDER BY createdAt DESC"
+    );
     const rows = stmt.all(userId) as any[];
     return rows.map(this.mapRowToTodo);
   }
@@ -44,6 +46,7 @@ export class SqliteTodoRepository implements ITodoRepository {
     const todo: Todo = {
       id: uuidv4(),
       userId,
+      categoryId: data.categoryId,
       title: data.title,
       description: data.description,
       completed: false,
@@ -60,15 +63,16 @@ export class SqliteTodoRepository implements ITodoRepository {
 
     const stmt = db.prepare(`
       INSERT INTO todos (
-        id, userId, title, description, completed, priority,
+        id, userId, categoryId, title, description, completed, priority,
         dueDate, dueEndDate, isAllDay, startTime, endTime,
         recurrence, createdAt, updatedAt
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
       todo.id,
       todo.userId,
+      todo.categoryId || null,
       todo.title,
       todo.description || null,
       todo.completed ? 1 : 0,
@@ -86,7 +90,11 @@ export class SqliteTodoRepository implements ITodoRepository {
     return todo;
   }
 
-  async update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null> {
+  async update(
+    id: string,
+    userId: string,
+    data: UpdateTodoDto
+  ): Promise<Todo | null> {
     const existing = await this.findById(id, userId);
     if (!existing) return null;
 
@@ -105,8 +113,7 @@ export class SqliteTodoRepository implements ITodoRepository {
             ? new Date(data.dueEndDate)
             : undefined
           : existing.dueEndDate,
-      isAllDay:
-        data.isAllDay !== undefined ? data.isAllDay : existing.isAllDay,
+      isAllDay: data.isAllDay !== undefined ? data.isAllDay : existing.isAllDay,
       startTime:
         data.startTime !== undefined ? data.startTime : existing.startTime,
       endTime: data.endTime !== undefined ? data.endTime : existing.endTime,
@@ -117,6 +124,7 @@ export class SqliteTodoRepository implements ITodoRepository {
 
     const stmt = db.prepare(`
       UPDATE todos SET
+        categoryId = ?,
         title = ?,
         description = ?,
         completed = ?,
@@ -132,6 +140,7 @@ export class SqliteTodoRepository implements ITodoRepository {
     `);
 
     stmt.run(
+      updatedTodo.categoryId || null,
       updatedTodo.title,
       updatedTodo.description || null,
       updatedTodo.completed ? 1 : 0,
@@ -171,7 +180,12 @@ export class SqliteTodoRepository implements ITodoRepository {
       WHERE id = ? AND userId = ?
     `);
 
-    stmt.run(updatedTodo.completed ? 1 : 0, updatedTodo.updatedAt.toISOString(), id, userId);
+    stmt.run(
+      updatedTodo.completed ? 1 : 0,
+      updatedTodo.updatedAt.toISOString(),
+      id,
+      userId
+    );
 
     return updatedTodo;
   }
@@ -186,6 +200,7 @@ export class SqliteTodoRepository implements ITodoRepository {
     return {
       id: row.id,
       userId: row.userId,
+      categoryId: row.categoryId || undefined,
       title: row.title,
       description: row.description || undefined,
       completed: row.completed === 1,

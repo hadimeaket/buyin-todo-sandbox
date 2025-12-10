@@ -1,9 +1,29 @@
 export type RecurrenceType = "none" | "daily" | "weekly" | "monthly" | "yearly";
 
+export interface Category {
+  id: string;
+  userId: string;
+  name: string;
+  color: string; // HEX format: #RRGGBB
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateCategoryDto {
+  name: string;
+  color: string;
+}
+
+export interface UpdateCategoryDto {
+  name?: string;
+  color?: string;
+}
+
 export interface Todo {
   id: string;
   title: string;
   description?: string;
+  categoryId?: string;
   completed: boolean;
   priority: "low" | "medium" | "high";
   dueDate?: string;
@@ -19,6 +39,7 @@ export interface Todo {
 export interface CreateTodoDto {
   title: string;
   description?: string;
+  categoryId?: string;
   priority?: "low" | "medium" | "high";
   dueDate?: string;
   dueEndDate?: string;
@@ -31,6 +52,7 @@ export interface CreateTodoDto {
 export interface UpdateTodoDto {
   title?: string;
   description?: string;
+  categoryId?: string;
   completed?: boolean;
   priority?: "low" | "medium" | "high";
   dueDate?: string;

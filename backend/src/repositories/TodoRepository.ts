@@ -4,7 +4,11 @@ import { SqliteTodoRepository } from "./SqliteTodoRepository";
 export interface ITodoRepository {
   findAll(userId: string): Promise<Todo[]>;
   findById(id: string, userId: string): Promise<Todo | null>;
-  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;
+  findDuplicate(
+    title: string,
+    userId: string,
+    description?: string
+  ): Promise<Todo | null>;
   create(data: CreateTodoDto, userId: string): Promise<Todo>;
   update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;
   toggle(id: string, userId: string): Promise<Todo | null>;

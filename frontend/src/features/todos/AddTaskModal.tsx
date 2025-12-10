@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { CreateTodoDto, Todo, Category } from "../../types/todo";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
+import { categoryApi } from "../../services/categoryApi";
+import { CategoryBadge } from "../../components/ui";
 import "./AddTaskModal.scss";
 
 interface AddTaskModalProps {
@@ -10,6 +12,7 @@ interface AddTaskModalProps {
   onAdd: (data: CreateTodoDto) => Promise<void>;
   disabled?: boolean;
   existingTodos?: Todo[];
+  onManageCategories?: () => void;
 }
 
 export default function AddTaskModal({
@@ -17,10 +20,13 @@ export default function AddTaskModal({
   onAdd,
   disabled,
   existingTodos = [],
+  onManageCategories,
 }: AddTaskModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
   const [dueDate, setDueDate] = useState<string>("");
   const [dueEndDate, setDueEndDate] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
@@ -34,6 +40,19 @@ export default function AddTaskModal({
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
   const [validationError, setValidationError] = useState<string>("");
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await categoryApi.getAllCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   // Handle title change with autocomplete
   const handleTitleChange = (value: string) => {
@@ -155,6 +174,7 @@ export default function AddTaskModal({
       const todoData: CreateTodoDto = {
         title: title.trim(),
         description: description.trim() || undefined,
+        categoryId: categoryId || undefined,
         priority,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
@@ -288,6 +308,49 @@ export default function AddTaskModal({
               ]}
               disabled={disabled || isSubmitting}
             />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <label htmlFor="category" className="add-task-modal__label">
+              Category
+            </label>
+            <div className="add-task-modal__category-select">
+              <select
+                id="category"
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+                className="add-task-modal__select"
+                disabled={disabled || isSubmitting}
+              >
+                <option value="">No category</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+              {onManageCategories && (
+                <button
+                  type="button"
+                  onClick={onManageCategories}
+                  className="add-task-modal__manage-categories-btn"
+                  disabled={disabled || isSubmitting}
+                  title="Manage Categories"
+                >
+                  ⚙️
+                </button>
+              )}
+            </div>
+            {categoryId && categories.find((c) => c.id === categoryId) && (
+              <div className="add-task-modal__category-preview">
+                <CategoryBadge
+                  name={categories.find((c) => c.id === categoryId)!.name}
+                  color={categories.find((c) => c.id === categoryId)!.color}
+                  size="sm"
+                />
+              </div>
+            )}
           </div>
 
           {/* Due Date */}

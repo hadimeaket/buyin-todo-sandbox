@@ -43,7 +43,12 @@ export class SqliteUserRepository implements IUserRepository {
       VALUES (?, ?, ?, ?)
     `);
 
-    stmt.run(user.id, user.email, user.passwordHash, user.createdAt.toISOString());
+    stmt.run(
+      user.id,
+      user.email,
+      user.passwordHash,
+      user.createdAt.toISOString()
+    );
 
     return user;
   }

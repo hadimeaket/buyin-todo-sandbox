@@ -28,11 +28,25 @@ export function initializeDatabase(): void {
     )
   `);
 
-  // Create todos table with userId foreign key
+  // Create categories table
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS categories (
+      id TEXT PRIMARY KEY,
+      userId TEXT NOT NULL,
+      name TEXT NOT NULL,
+      color TEXT NOT NULL,
+      createdAt TEXT NOT NULL,
+      updatedAt TEXT NOT NULL,
+      FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE
+    )
+  `);
+
+  // Create todos table with userId and categoryId foreign keys
   db.exec(`
     CREATE TABLE IF NOT EXISTS todos (
       id TEXT PRIMARY KEY,
       userId TEXT NOT NULL,
+      categoryId TEXT,
       title TEXT NOT NULL,
       description TEXT,
       completed INTEGER NOT NULL DEFAULT 0,
@@ -46,6 +60,7 @@ export function initializeDatabase(): void {
       createdAt TEXT NOT NULL,
       updatedAt TEXT NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
+      FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE SET NULL,
       CHECK (completed IN (0, 1)),
       CHECK (priority IN ('low', 'medium', 'high')),
       CHECK (recurrence IN ('none', 'daily', 'weekly', 'monthly', 'yearly')),

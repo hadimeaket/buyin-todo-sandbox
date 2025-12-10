@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import { userRepository } from "../repositories/UserRepository";
 import { RegisterDto, LoginDto, AuthResponse } from "../models/User";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET =
+  process.env.JWT_SECRET || "your-secret-key-change-in-production";
 const JWT_EXPIRES_IN = "7d";
 const SALT_ROUNDS = 10;
 

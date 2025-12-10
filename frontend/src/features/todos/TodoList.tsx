@@ -1,4 +1,6 @@
-import type { Todo } from "../../types/todo";
+import { useState, useEffect } from "react";
+import type { Todo, Category } from "../../types/todo";
+import { categoryApi } from "../../services/categoryApi";
 import TodoItem from "./TodoItem";
 import "./TodoList.scss";
 
@@ -16,6 +18,20 @@ interface GroupedTodos {
 }
 
 function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await categoryApi.getAllCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
@@ -116,6 +132,7 @@ function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
                 onToggle={onToggle}
                 onDelete={onDelete}
                 onViewDetails={onViewDetails}
+                categories={categories}
               />
             ))}
           </div>

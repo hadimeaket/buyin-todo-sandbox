@@ -66,7 +66,9 @@ export default function AuthForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={isLogin ? "Enter your password" : "Minimum 8 characters"}
+              placeholder={
+                isLogin ? "Enter your password" : "Minimum 8 characters"
+              }
               required
               disabled={isSubmitting}
             />

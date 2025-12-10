@@ -44,7 +44,10 @@ describe("TASK2_USER_ACCOUNTS", () => {
     const response = await fetch(`${API_BASE}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: `short-${Date.now()}@example.com`, password: "short" }),
+      body: JSON.stringify({
+        email: `short-${Date.now()}@example.com`,
+        password: "short",
+      }),
     });
 
     expect(response.status).toBe(400);
@@ -58,7 +61,7 @@ describe("TASK2_USER_ACCOUNTS", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${authToken}`,
+        Authorization: `Bearer ${authToken}`,
       },
       body: JSON.stringify({ title: "User-scoped todo" }),
     });
@@ -68,7 +71,7 @@ describe("TASK2_USER_ACCOUNTS", () => {
 
     // Fetch todos as the authenticated user
     const todosResponse = await fetch(`${API_BASE}/api/todos`, {
-      headers: { "Authorization": `Bearer ${authToken}` },
+      headers: { Authorization: `Bearer ${authToken}` },
     });
 
     expect(todosResponse.status).toBe(200);
@@ -88,7 +91,7 @@ describe("TASK2_USER_ACCOUNTS", () => {
     const otherToken = otherData.token;
 
     const otherTodosResponse = await fetch(`${API_BASE}/api/todos`, {
-      headers: { "Authorization": `Bearer ${otherToken}` },
+      headers: { Authorization: `Bearer ${otherToken}` },
     });
 
     const otherTodos = (await otherTodosResponse.json()) as Todo[];
@@ -102,7 +105,7 @@ describe("TASK2_USER_ACCOUNTS", () => {
 
     // Try to access todos with an invalid token
     const invalidTokenResponse = await fetch(`${API_BASE}/api/todos`, {
-      headers: { "Authorization": "Bearer invalid-token" },
+      headers: { Authorization: "Bearer invalid-token" },
     });
     expect(invalidTokenResponse.status).toBe(401);
   });

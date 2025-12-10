@@ -5,6 +5,7 @@ import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
 import { todoApi } from "./services/todoApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
+import CategoryManager from "./features/todos/CategoryManager";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
@@ -17,7 +18,14 @@ function App() {
   // Show loading spinner while checking authentication
   if (authLoading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
         <p>Loading...</p>
       </div>
     );
@@ -40,6 +48,8 @@ function AuthenticatedApp() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
+  const [isCategoryManagerOpen, setIsCategoryManagerOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
@@ -305,6 +315,19 @@ function AuthenticatedApp() {
             onAdd={handleAddTodo}
             disabled={loading}
             existingTodos={todos}
+            onManageCategories={() => {
+              setIsAddTaskModalOpen(false);
+              setIsCategoryManagerOpen(true);
+            }}
+          />
+        )}
+
+        {isCategoryManagerOpen && (
+          <CategoryManager
+            onClose={() => {
+              setIsCategoryManagerOpen(false);
+              setIsAddTaskModalOpen(true);
+            }}
           />
         )}
       </div>

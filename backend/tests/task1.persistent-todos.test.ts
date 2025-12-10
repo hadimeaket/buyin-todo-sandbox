@@ -11,17 +11,20 @@ describe("TASK1_PERSISTENT_TODOS", () => {
   });
 
   it("rejects todos without a title", async () => {
-    await expect(todoService.createTodo({ title: "" }, testUserId)).rejects.toThrow(
-      "Title is required"
-    );
+    await expect(
+      todoService.createTodo({ title: "" }, testUserId)
+    ).rejects.toThrow("Title is required");
   });
 
   it("creates todos that can be retrieved afterwards", async () => {
     const uniqueTitle = `challenge-${Date.now()}-${Math.random()}`;
-    const created = await todoService.createTodo({
-      title: uniqueTitle,
-      description: "ensures repository returns persisted todo",
-    }, testUserId);
+    const created = await todoService.createTodo(
+      {
+        title: uniqueTitle,
+        description: "ensures repository returns persisted todo",
+      },
+      testUserId
+    );
 
     const todos = await todoService.getAllTodos(testUserId);
     const found = todos.find((todo) => todo.id === created.id);
@@ -31,12 +34,15 @@ describe("TASK1_PERSISTENT_TODOS", () => {
 
   it("persists todos across service restarts", async () => {
     const uniqueTitle = `persistent-${Date.now()}-${Math.random()}`;
-    
+
     // Create a todo
-    const created = await todoService.createTodo({
-      title: uniqueTitle,
-      description: "should persist after restart",
-    }, testUserId);
+    const created = await todoService.createTodo(
+      {
+        title: uniqueTitle,
+        description: "should persist after restart",
+      },
+      testUserId
+    );
 
     // Verify it exists
     const beforeRestart = await todoService.getTodoById(created.id, testUserId);
@@ -50,7 +56,7 @@ describe("TASK1_PERSISTENT_TODOS", () => {
     expect(afterRestart).toBeDefined();
     expect(afterRestart?.id).toBe(created.id);
     expect(afterRestart?.title).toBe(uniqueTitle);
-    
+
     // Clean up
     await todoService.deleteTodo(created.id, testUserId);
   });
