@@ -117,6 +117,21 @@
     > .add-task-modal__actions {
       grid-column: 1 / -1;
     }
+
+    > .add-task-modal__error {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__error {
+    padding: $spacing-3 $spacing-4;
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: $radius-md;
+    color: #ef4444;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-2;
   }
 
   &__field {

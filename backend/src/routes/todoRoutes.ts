@@ -7,25 +7,26 @@ import {
   toggleTodo,
   deleteTodo,
 } from '../controllers/todoController';
+import { authenticate } from '../middleware/authenticate';
 
 const router = Router();
 
 // GET all todos
-router.get('/', getAllTodos);
+router.get('/', authenticate, getAllTodos);
 
 // GET todo by id
-router.get('/:id', getTodoById);
+router.get('/:id', authenticate, getTodoById);
 
 // POST create todo
-router.post('/', createTodo);
+router.post('/', authenticate, createTodo);
 
 // PUT update todo
-router.put('/:id', updateTodo);
+router.put('/:id', authenticate, updateTodo);
 
 // PATCH toggle todo completion
-router.patch('/:id/toggle', toggleTodo);
+router.patch('/:id/toggle', authenticate, toggleTodo);
 
 // DELETE todo
-router.delete('/:id', deleteTodo);
+router.delete('/:id', authenticate, deleteTodo);
 
 export default router;

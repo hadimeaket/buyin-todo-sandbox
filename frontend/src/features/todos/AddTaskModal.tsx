@@ -32,6 +32,7 @@ export default function AddTaskModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
+  const [validationError, setValidationError] = useState<string>("");
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   // Handle title change with autocomplete
@@ -141,6 +142,13 @@ export default function AddTaskModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationError("");
+
+    // Validate title
+    if (!title.trim()) {
+      setValidationError("Title is required and cannot be empty");
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -192,6 +200,17 @@ export default function AddTaskModal({
         </div>
 
         <form onSubmit={handleSubmit} className="add-task-modal__form">
+          {/* Validation Error Message */}
+          {validationError && (
+            <div
+              className="add-task-modal__error"
+              role="alert"
+              data-testid="add-task-error"
+            >
+              {validationError}
+            </div>
+          )}
+
           {/* Title with Autocomplete - Full Width */}
           <div
             className="add-task-modal__field add-task-modal__field--autocomplete add-task-modal__field--full-width"

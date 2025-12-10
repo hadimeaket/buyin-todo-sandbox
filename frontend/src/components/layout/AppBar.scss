@@ -39,4 +39,31 @@
     width: auto;
     object-fit: contain;
   }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__user-email {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__logout-btn {
+    padding: $spacing-2 $spacing-4;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: $radius-md;
+    color: #ffffff;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
 }
