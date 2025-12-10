@@ -1,0 +1,95 @@
+@import "../../styles/variables";
+
+.auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-primary;
+  padding: $spacing-4;
+
+  &__container {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  &__card {
+    background-color: $bg-secondary;
+    border-radius: $radius-xl;
+    padding: $spacing-8;
+    box-shadow: $shadow-lg;
+  }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin: 0 0 $spacing-2 0;
+    text-align: center;
+  }
+
+  &__subtitle {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    text-align: center;
+    margin: 0 0 $spacing-6 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+
+  &__error {
+    background-color: $error-bg;
+    color: $error;
+    padding: $spacing-3 $spacing-4;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    text-align: center;
+    border: 1px solid rgba(253, 48, 57, 0.3);
+  }
+
+  &__submit {
+    width: 100%;
+    margin-top: $spacing-2;
+  }
+
+  &__toggle {
+    margin-top: $spacing-6;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-2;
+  }
+
+  &__toggle-text {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+
+  &__toggle-btn {
+    background: none;
+    border: none;
+    color: $brand-red;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $brand-red-dark;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $brand-red;
+      outline-offset: 2px;
+      border-radius: $radius-sm;
+    }
+  }
+}

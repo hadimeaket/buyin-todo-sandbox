@@ -1,5 +1,7 @@
 import "./AppBar.scss";
 import whiteLogoWhiteFont from "../../assets/white-logo-white-font.png";
+import { useAuth } from "../../contexts/AuthContext";
+import { Button } from "../ui";
 
 /**
  * AppBar Component
@@ -8,6 +10,8 @@ import whiteLogoWhiteFont from "../../assets/white-logo-white-font.png";
  * Matches the design system from the BuyIn brand identity.
  */
 export default function AppBar() {
+  const { user, logout, isAuthenticated } = useAuth();
+
   return (
     <header className="app-bar">
       <div className="app-bar__toolbar">
@@ -18,6 +22,19 @@ export default function AppBar() {
             className="app-bar__logo"
           />
         </div>
+        {isAuthenticated && user && (
+          <div className="app-bar__user-section">
+            <span className="app-bar__username">{user.name}</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={logout}
+              className="app-bar__logout-btn"
+            >
+              Logout
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -39,4 +39,24 @@
     width: auto;
     object-fit: contain;
   }
+
+  &__user-section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+  }
+
+  &__username {
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  &__logout-btn {
+    color: $text-primary !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
 }

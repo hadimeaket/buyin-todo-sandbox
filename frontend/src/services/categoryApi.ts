@@ -1,5 +1,9 @@
-import axios, { AxiosError } from "axios";
-import type { Todo, CreateTodoDto, UpdateTodoDto } from "../types/todo";
+import axios, { type AxiosError } from "axios";
+import type {
+  Category,
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from "../types/category";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
@@ -61,79 +65,63 @@ const handleApiError = (error: unknown, context: string): never => {
   throw new Error(`Unexpected error in ${context}`);
 };
 
-export const todoApi = {
-  // Get all todos
-  async getAllTodos(): Promise<Todo[]> {
+export const categoryApi = {
+  // Get all categories
+  async getAllCategories(): Promise<Category[]> {
     try {
-      const response = await api.get<Todo[]>("/api/todos", {
+      const response = await api.get<Category[]>("/api/categories", {
         headers: getHeaders(),
       });
       return response.data;
     } catch (error) {
-      throw handleApiError(error, "getAllTodos");
+      throw handleApiError(error, "getAllCategories");
     }
   },
 
-  // Get a single todo by ID
-  async getTodoById(id: string): Promise<Todo> {
+  // Get a single category by ID
+  async getCategoryById(id: string): Promise<Category> {
     try {
-      const response = await api.get<Todo>(`/api/todos/${id}`, {
+      const response = await api.get<Category>(`/api/categories/${id}`, {
         headers: getHeaders(),
       });
       return response.data;
     } catch (error) {
-      throw handleApiError(error, `getTodoById(${id})`);
+      throw handleApiError(error, `getCategoryById(${id})`);
     }
   },
 
-  // Create a new todo
-  async createTodo(data: CreateTodoDto): Promise<Todo> {
+  // Create a new category
+  async createCategory(data: CreateCategoryDto): Promise<Category> {
     try {
-      const response = await api.post<Todo>("/api/todos", data, {
+      const response = await api.post<Category>("/api/categories", data, {
         headers: getHeaders(),
       });
       return response.data;
     } catch (error) {
-      throw handleApiError(error, "createTodo");
+      throw handleApiError(error, "createCategory");
     }
   },
 
-  // Update a todo
-  async updateTodo(id: string, data: UpdateTodoDto): Promise<Todo> {
+  // Update a category
+  async updateCategory(id: string, data: UpdateCategoryDto): Promise<Category> {
     try {
-      const response = await api.put<Todo>(`/api/todos/${id}`, data, {
+      const response = await api.put<Category>(`/api/categories/${id}`, data, {
         headers: getHeaders(),
       });
       return response.data;
     } catch (error) {
-      throw handleApiError(error, `updateTodo(${id})`);
+      throw handleApiError(error, `updateCategory(${id})`);
     }
   },
 
-  // Toggle todo completion status
-  async toggleTodo(id: string): Promise<Todo> {
+  // Delete a category
+  async deleteCategory(id: string): Promise<void> {
     try {
-      const response = await api.patch<Todo>(
-        `/api/todos/${id}/toggle`,
-        {},
-        {
-          headers: getHeaders(),
-        }
-      );
-      return response.data;
-    } catch (error) {
-      throw handleApiError(error, `toggleTodo(${id})`);
-    }
-  },
-
-  // Delete a todo
-  async deleteTodo(id: string): Promise<void> {
-    try {
-      await api.delete(`/api/todos/${id}`, {
+      await api.delete(`/api/categories/${id}`, {
         headers: getHeaders(),
       });
     } catch (error) {
-      throw handleApiError(error, `deleteTodo(${id})`);
+      throw handleApiError(error, `deleteCategory(${id})`);
     }
   },
 };

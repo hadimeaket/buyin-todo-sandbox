@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
+import { categoryApi } from "../../services/categoryApi";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
@@ -29,10 +31,25 @@ export default function AddTaskModal({
   const [recurrence, setRecurrence] = useState<
     "none" | "daily" | "weekly" | "monthly" | "yearly"
   >("none");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Load categories
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryApi.getAllCategories();
+        setCategories(data);
+      } catch (err) {
+        console.error("Failed to load categories:", err);
+      }
+    };
+    loadCategories();
+  }, []);
 
   // Handle title change with autocomplete
   const handleTitleChange = (value: string) => {
@@ -154,6 +171,7 @@ export default function AddTaskModal({
         startTime: !isAllDay && startTime ? startTime : undefined,
         endTime: !isAllDay && endTime ? endTime : undefined,
         recurrence,
+        categoryId: categoryId || undefined,
       };
 
       await onAdd(todoData);
@@ -266,6 +284,24 @@ export default function AddTaskModal({
                 { value: "low", label: "Low" },
                 { value: "medium", label: "Medium" },
                 { value: "high", label: "High" },
+              ]}
+              disabled={disabled || isSubmitting}
+            />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <Select
+              id="category"
+              label="Category"
+              value={categoryId}
+              onChange={(value) => setCategoryId(value)}
+              options={[
+                { value: "", label: "No Category" },
+                ...categories.map((cat) => ({
+                  value: cat.id,
+                  label: cat.name,
+                })),
               ]}
               disabled={disabled || isSubmitting}
             />

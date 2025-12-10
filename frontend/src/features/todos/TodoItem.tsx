@@ -1,5 +1,7 @@
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
 import Checkbox from "../../components/ui/Checkbox";
+import { CategoryBadge } from "../categories";
 import "./TodoItem.scss";
 
 interface TodoItemProps {
@@ -7,9 +9,16 @@ interface TodoItemProps {
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
   onViewDetails: (todo: Todo) => void;
+  category?: Category;
 }
 
-function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
+function TodoItem({
+  todo,
+  onToggle,
+  onDelete,
+  onViewDetails,
+  category,
+}: TodoItemProps) {
   const isOverdue = () => {
     if (!todo.dueDate || todo.completed) return false;
 
@@ -149,6 +158,9 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
         <div className="todo-item__right">
           {/* Metadata */}
           <div className="todo-item__metadata">
+            {/* Category Badge */}
+            {category && <CategoryBadge category={category} />}
+
             {/* Priority Badge */}
             <span
               className={`todo-item__priority-badge ${getPriorityClass(

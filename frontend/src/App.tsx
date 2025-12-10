@@ -5,23 +5,26 @@ import type { Todo, CreateTodoDto, UpdateTodoDto } from "./types/todo";
 import { todoApi } from "./services/todoApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
+import { CategoryList } from "./features/categories";
 import { Tabs } from "./components/common";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { useAuth } from "./contexts/AuthContext";
+import { AuthForm } from "./features/auth";
+
+type AppView = "todos" | "calendar" | "categories";
 
 function App() {
+  const { user, isAuthenticated, logout } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedTodo, setSelectedTodo] = useState<Todo | null>(null);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+  const [currentView, setCurrentView] = useState<AppView>("todos");
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
 
   const fetchTodos = async () => {
     try {
@@ -36,6 +39,24 @@ function App() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated && user?.id) {
+      setTodos([]);
+      // Small delay to ensure localStorage is updated
+      const timer = setTimeout(() => {
+        fetchTodos();
+      }, 50);
+      return () => clearTimeout(timer);
+    } else if (!isAuthenticated) {
+      setTodos([]);
+    }
+  }, [user?.id]);
+
+  // Show auth form if not authenticated
+  if (!isAuthenticated) {
+    return <AuthForm />;
+  }
 
   const handleAddTodo = async (data: CreateTodoDto) => {
     try {
@@ -180,15 +201,15 @@ function App() {
             </div>
           )}
 
-          {/* View Mode Segmented Control */}
+          {/* Main Navigation */}
           <section className="section section--view-toggle section--bordered">
             <div className="view-toggle">
               <button
                 className={`view-toggle__button ${
-                  viewMode === "list" ? "view-toggle__button--active" : ""
+                  currentView === "todos" ? "view-toggle__button--active" : ""
                 }`}
-                onClick={() => setViewMode("list")}
-                aria-pressed={viewMode === "list"}
+                onClick={() => setCurrentView("todos")}
+                aria-pressed={currentView === "todos"}
               >
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -198,14 +219,16 @@ function App() {
                     d="M4 6h16M4 12h16M4 18h16"
                   />
                 </svg>
-                List View
+                Todos
               </button>
               <button
                 className={`view-toggle__button ${
-                  viewMode === "calendar" ? "view-toggle__button--active" : ""
+                  currentView === "calendar"
+                    ? "view-toggle__button--active"
+                    : ""
                 }`}
-                onClick={() => setViewMode("calendar")}
-                aria-pressed={viewMode === "calendar"}
+                onClick={() => setCurrentView("calendar")}
+                aria-pressed={currentView === "calendar"}
               >
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -215,13 +238,36 @@ function App() {
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                Calendar View
+                Calendar
+              </button>
+              <button
+                className={`view-toggle__button ${
+                  currentView === "categories"
+                    ? "view-toggle__button--active"
+                    : ""
+                }`}
+                onClick={() => setCurrentView("categories")}
+                aria-pressed={currentView === "categories"}
+              >
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                  />
+                </svg>
+                Categories
               </button>
             </div>
           </section>
 
           {/* Conditional Content Rendering */}
-          {viewMode === "list" ? (
+          {currentView === "categories" ? (
+            <section className="section section--list">
+              <CategoryList />
+            </section>
+          ) : currentView === "todos" ? (
             <>
               <section className="section section--search section--bordered">
                 <SearchInput
@@ -258,7 +304,7 @@ function App() {
                 )}
               </section>
             </>
-          ) : (
+          ) : currentView === "calendar" ? (
             <section className="section section--calendar">
               <CalendarView
                 todos={filteredTodos}
@@ -266,7 +312,7 @@ function App() {
                 onTodoClick={handleViewDetails}
               />
             </section>
-          )}
+          ) : null}
         </main>
 
         {selectedTodo && (

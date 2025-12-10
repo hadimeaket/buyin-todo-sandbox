@@ -1,0 +1,72 @@
+@import "../../styles/variables";
+
+.category-form {
+  padding: 1.5rem;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  &__color-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__color-picker {
+    width: 60px;
+    height: 40px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: $brand-red;
+    }
+  }
+
+  &__color-text {
+    flex: 1;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  &__error {
+    color: $brand-red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  &__button {
+    flex: 1;
+  }
+}

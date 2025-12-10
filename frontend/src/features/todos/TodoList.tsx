@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
+import { categoryApi } from "../../services/categoryApi";
 import TodoItem from "./TodoItem";
 import "./TodoList.scss";
 
@@ -16,6 +19,23 @@ interface GroupedTodos {
 }
 
 function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
+  const [categories, setCategories] = useState<Map<string, Category>>(
+    new Map()
+  );
+
+  // Load categories
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryApi.getAllCategories();
+        const categoryMap = new Map(data.map((cat) => [cat.id, cat]));
+        setCategories(categoryMap);
+      } catch (err) {
+        console.error("Failed to load categories:", err);
+      }
+    };
+    loadCategories();
+  }, []);
   if (todos.length === 0) {
     return (
       <div className="todo-list__empty">
@@ -116,6 +136,9 @@ function TodoList({ todos, onToggle, onDelete, onViewDetails }: TodoListProps) {
                 onToggle={onToggle}
                 onDelete={onDelete}
                 onViewDetails={onViewDetails}
+                category={
+                  todo.categoryId ? categories.get(todo.categoryId) : undefined
+                }
               />
             ))}
           </div>
