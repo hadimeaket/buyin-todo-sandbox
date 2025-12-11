@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import type { Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
+import { categoryApi } from "../../services/todoApi";
 import Checkbox from "../../components/ui/Checkbox";
 import "./TodoItem.scss";
 
@@ -10,6 +13,18 @@ interface TodoItemProps {
 }
 
 function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
+  const [category, setCategory] = useState<Category | null>(null);
+
+  useEffect(() => {
+    if (todo.categoryId) {
+      categoryApi
+        .getCategoryById(todo.categoryId)
+        .then(setCategory)
+        .catch(() => setCategory(null));
+    } else {
+      setCategory(null);
+    }
+  }, [todo.categoryId]);
   const isOverdue = () => {
     if (!todo.dueDate || todo.completed) return false;
 
@@ -108,6 +123,9 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
   return (
     <div
       className={`todo-item ${todo.completed ? "todo-item--completed" : ""}`}
+      style={
+        category ? { borderLeft: `4px solid ${category.color}` } : undefined
+      }
     >
       <div className="todo-item__container">
         {/* Left Side: Checkbox + Text Content */}
@@ -141,6 +159,19 @@ function TodoItem({ todo, onToggle, onDelete, onViewDetails }: TodoItemProps) {
             {/* Description */}
             {todo.description && (
               <p className="todo-item__description">{todo.description}</p>
+            )}
+
+            {/* Category Badge */}
+            {category && (
+              <div className="todo-item__category-badge">
+                <div
+                  className="todo-item__category-color"
+                  style={{ backgroundColor: category.color }}
+                />
+                <span className="todo-item__category-name">
+                  {category.name}
+                </span>
+              </div>
             )}
           </div>
         </div>

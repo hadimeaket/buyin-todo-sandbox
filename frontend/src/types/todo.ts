@@ -6,6 +6,7 @@ export interface Todo {
   description?: string;
   completed: boolean;
   priority: "low" | "medium" | "high";
+  categoryId?: string;
   dueDate?: string;
   dueEndDate?: string;
   isAllDay?: boolean;
@@ -20,6 +21,7 @@ export interface CreateTodoDto {
   title: string;
   description?: string;
   priority?: "low" | "medium" | "high";
+  categoryId?: string;
   dueDate?: string;
   dueEndDate?: string;
   isAllDay?: boolean;
@@ -33,6 +35,7 @@ export interface UpdateTodoDto {
   description?: string;
   completed?: boolean;
   priority?: "low" | "medium" | "high";
+  categoryId?: string;
   dueDate?: string;
   dueEndDate?: string;
   isAllDay?: boolean;

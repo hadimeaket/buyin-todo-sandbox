@@ -8,6 +8,7 @@ interface DrawerProps {
   activeCount: number;
   completedCount: number;
   onAddTask: () => void;
+  onOpenCategories: () => void;
 }
 
 export default function Drawer({
@@ -16,6 +17,7 @@ export default function Drawer({
   activeCount,
   completedCount,
   onAddTask,
+  onOpenCategories,
 }: DrawerProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -197,6 +199,30 @@ export default function Drawer({
             <circle cx="12" cy="12" r="3" />
           </svg>
           {isExpanded && <span className="drawer__label">Settings</span>}
+        </button>
+
+        {/* Categories Button */}
+        <button
+          className="drawer__action"
+          onClick={onOpenCategories}
+          title="Manage Categories"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+          </svg>
+          {isExpanded && <span className="drawer__label">Categories</span>}
         </button>
 
         {/* Help Button */}

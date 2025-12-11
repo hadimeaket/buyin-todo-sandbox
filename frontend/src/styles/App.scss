@@ -213,3 +213,23 @@
     color: var(--theme-text-secondary);
   }
 }
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--theme-bg-primary);
+  gap: 1rem;
+
+  .loading__spinner {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  p {
+    color: var(--theme-text-secondary);
+    font-size: $font-size-base;
+  }
+}

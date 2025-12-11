@@ -22,13 +22,13 @@
   &__toolbar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100%;
     padding: 0 16px;
     max-width: 100%;
   }
 
   &__logo-container {
-    flex-grow: 1;
     height: 70px;
     display: flex;
     align-items: center;
@@ -38,5 +38,27 @@
     height: 130%;
     width: auto;
     object-fit: contain;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__user-email {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  &__logout {
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
   }
 }

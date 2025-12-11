@@ -6,10 +6,14 @@ import { todoApi } from "./services/todoApi";
 import { AppBar, Drawer } from "./components/layout";
 import { AddTaskModal, TodoList, TodoDetail } from "./features/todos";
 import { Tabs } from "./components/common";
+import { Categories } from "./components/categories";
 import { CalendarView } from "./features/calendar";
 import { SearchInput } from "./components/ui";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { Login, Register } from "./components/auth";
 
-function App() {
+function AuthenticatedApp() {
+  const { logout } = useAuth();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,6 +22,10 @@ function App() {
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState<boolean>(false);
+  const [isCategoriesModalOpen, setIsCategoriesModalOpen] =
+    useState<boolean>(false);
+  const [isCategoriesModalOpen, setIsCategoriesModalOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     fetchTodos();
@@ -153,6 +161,7 @@ function App() {
         activeCount={stats.active}
         completedCount={stats.completed}
         onAddTask={() => setIsAddTaskModalOpen(true)}
+        onOpenCategories={() => setIsCategoriesModalOpen(true)}
       />
       <div className="app__container">
         <main className="app__main-card">
@@ -285,8 +294,48 @@ function App() {
             existingTodos={todos}
           />
         )}
+
+        {isCategoriesModalOpen && (
+          <Categories
+            isOpen={isCategoriesModalOpen}
+            onClose={() => setIsCategoriesModalOpen(false)}
+          />
+        )}
       </div>
     </div>
+  );
+}
+
+function UnauthenticatedApp() {
+  const [showLogin, setShowLogin] = useState(true);
+
+  return showLogin ? (
+    <Login onSwitchToRegister={() => setShowLogin(false)} />
+  ) : (
+    <Register onSwitchToLogin={() => setShowLogin(true)} />
+  );
+}
+
+function AppContent() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading__spinner animate-spin" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  return user ? <AuthenticatedApp /> : <UnauthenticatedApp />;
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { CreateTodoDto, Todo } from "../../types/todo";
+import type { Category } from "../../types/category";
+import { categoryApi } from "../../services/todoApi";
 import DatePicker from "../../components/ui/DatePicker";
 import TimePicker from "../../components/ui/TimePicker";
 import Select from "../../components/ui/Select";
@@ -21,6 +23,8 @@ export default function AddTaskModal({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
   const [dueDate, setDueDate] = useState<string>("");
   const [dueEndDate, setDueEndDate] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
@@ -33,6 +37,19 @@ export default function AddTaskModal({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<Todo[]>([]);
   const titleInputRef = useRef<HTMLInputElement>(null);
+
+  // Load categories on mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryApi.getAllCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+      }
+    };
+    loadCategories();
+  }, []);
 
   // Handle title change with autocomplete
   const handleTitleChange = (value: string) => {
@@ -55,6 +72,7 @@ export default function AddTaskModal({
     setTitle(todo.title);
     setDescription(todo.description || "");
     setPriority(todo.priority);
+    setCategoryId(todo.categoryId || "");
     setDueDate(todo.dueDate ? todo.dueDate.substring(0, 10) : "");
     setDueEndDate(todo.dueEndDate ? todo.dueEndDate.substring(0, 10) : "");
     setIsAllDay(todo.isAllDay ?? false);
@@ -148,6 +166,7 @@ export default function AddTaskModal({
         title: title.trim(),
         description: description.trim() || undefined,
         priority,
+        categoryId: categoryId || undefined,
         dueDate: dueDate || undefined,
         dueEndDate: dueEndDate || undefined,
         isAllDay,
@@ -259,8 +278,8 @@ export default function AddTaskModal({
               id="priority"
               label="Priority"
               value={priority}
-              onChange={(value) =>
-                setPriority(value as "low" | "medium" | "high")
+              onChange={(e) =>
+                setPriority(e.target.value as "low" | "medium" | "high")
               }
               options={[
                 { value: "low", label: "Low" },
@@ -268,7 +287,42 @@ export default function AddTaskModal({
                 { value: "high", label: "High" },
               ]}
               disabled={disabled || isSubmitting}
+              data-testid="add-task-priority-select"
             />
+          </div>
+
+          {/* Category */}
+          <div className="add-task-modal__field">
+            <label htmlFor="category" className="add-task-modal__label">
+              Category
+            </label>
+            <select
+              id="category"
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+              className="add-task-modal__select"
+              disabled={disabled || isSubmitting}
+            >
+              <option value="">No Category</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+            {categoryId && categories.find((c) => c.id === categoryId) && (
+              <div
+                className="add-task-modal__category-preview"
+                style={{
+                  backgroundColor: categories.find((c) => c.id === categoryId)
+                    ?.color,
+                  width: "20px",
+                  height: "20px",
+                  borderRadius: "50%",
+                  marginTop: "4px",
+                }}
+              />
+            )}
           </div>
 
           {/* Due Date */}
