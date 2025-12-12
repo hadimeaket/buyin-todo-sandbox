@@ -26,6 +26,7 @@ RUN npm ci --prefer-offline --no-audit
 # Copy TypeScript config and source code
 COPY tsconfig.json ./
 COPY src ./src
+COPY migrations ./migrations
 
 # Build TypeScript to JavaScript
 RUN npm run build
@@ -54,6 +55,7 @@ COPY package*.json ./
 # Copy built application from builder stage
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs /app/migrations ./migrations
 
 # Switch to non-root user
 USER nodejs

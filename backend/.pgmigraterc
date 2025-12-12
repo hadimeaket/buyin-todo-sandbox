@@ -1,0 +1,9 @@
+{
+  "database-url-var": "DATABASE_URL",
+  "migrations-dir": "migrations",
+  "dir": "migrations",
+  "schema": "public",
+  "migration-file-language": "js",
+  "check-order": true,
+  "ignore-pattern": "\\..*"
+}
