@@ -1,0 +1,614 @@
+{
+  "versuro-andrea-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "bektas-cengizhan-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "akbulut-burak-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "goek-cihad-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "Maia-Dinis-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "Dogan-Mansur-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "high"
+    }
+  },
+  "Dogan-Enes-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "goek-fadime-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "goek-yasin-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "tselekoglou-ioannis-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "prinz-leon-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "helling-max-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "rubas-michael-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "allamani-rando-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T4": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T5": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "sethi-sangat-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T4": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  },
+  "tobias-lehrer-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T3": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T5": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T8": {
+      "attempted": false,
+      "confidence": "none"
+    }
+  },
+  "august-martin-vibe": {
+    "T1": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T2": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T3": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T4": {
+      "attempted": true,
+      "confidence": "high"
+    },
+    "T5": {
+      "attempted": false,
+      "confidence": "none"
+    },
+    "T6": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T7": {
+      "attempted": true,
+      "confidence": "low"
+    },
+    "T8": {
+      "attempted": true,
+      "confidence": "low"
+    }
+  }
+}

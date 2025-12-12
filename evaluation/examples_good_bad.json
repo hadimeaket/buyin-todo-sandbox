@@ -1,0 +1,110 @@
+[
+  {
+    "branch": "Dogan-Enes-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\n\nexport interface ITodoRepository {\n  findAll(userId?: string): Promise<Todo[]>;\n  findById(id: string): Promise<Todo | null>;\n  findDuplicate(title: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string): Promise<Todo | null>;\n  delete(id: string): Promise<boolean>;\n}\n\n/**\n * InMemoryTodoRepository - Kept for testing purposes",
+    "type": "bad"
+  },
+  {
+    "branch": "Dogan-Mansur-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport db from \"../database/Database\";\n\nexport interface ITodoRepository {\n  findAllByUser(userId: string): Promise<Todo[]>;\n  findByIdAndUser(id: string, userId: string): Promise<Todo | null>;\n  findDuplicateForUser(\n    userId: string,\n    title: string,\n    description?: string\n  ): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, data: UpdateTodoDto, userId: string): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;",
+    "type": "bad"
+  },
+  {
+    "branch": "Maia-Dinis-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport { getDatabase } from \"../db/database\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(\n    title: string,\n    userId: string,\n    description?: string\n  ): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;",
+    "type": "bad"
+  },
+  {
+    "branch": "Theuerkauf-Jochen-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { SqliteTodoRepository } from \"./SqliteTodoRepository\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(\n    title: string,\n    userId: string,\n    description?: string\n  ): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;",
+    "type": "bad"
+  },
+  {
+    "branch": "akbulut-burak-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport { db } from \"../database/db\";\nimport { attachmentRepository } from \"./AttachmentRepository\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(\n    title: string,\n    userId: string,\n    description?: string\n  ): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;",
+    "type": "bad"
+  },
+  {
+    "branch": "allamani-rando-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\n\nexport interface ITodoRepository {\n  findAll(userId?: number): Promise<Todo[]>;\n  findById(id: string, userId?: number): Promise<Todo | null>;\n  findDuplicate(\n    title: string,\n    description?: string,\n    userId?: number\n  ): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId?: number): Promise<Todo>;\n  update(\n    id: string,\n    data: UpdateTodoDto,",
+    "type": "bad"
+  },
+  {
+    "branch": "august-martin-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "bektas-cengizhan-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "goek-cihad-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "goek-fadime-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "goek-yasin-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "prinz-leon-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "rubas-michael-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "tobias-lehrer-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "tselekoglou-ioannis-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "versuro-andrea-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "sethi-sangat-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  },
+  {
+    "branch": "helling-max-vibe",
+    "task": "T1",
+    "code": "import { Todo, CreateTodoDto, UpdateTodoDto } from \"../models/Todo\";\nimport { v4 as uuidv4 } from \"uuid\";\nimport DatabaseConnection from \"../database/connection\";\nimport type Database from \"better-sqlite3\";\n\nexport interface ITodoRepository {\n  findAll(userId: string): Promise<Todo[]>;\n  findById(id: string, userId: string): Promise<Todo | null>;\n  findDuplicate(title: string, userId: string, description?: string): Promise<Todo | null>;\n  create(data: CreateTodoDto, userId: string): Promise<Todo>;\n  update(id: string, userId: string, data: UpdateTodoDto): Promise<Todo | null>;\n  toggle(id: string, userId: string): Promise<Todo | null>;\n  delete(id: string, userId: string): Promise<boolean>;\n}\n",
+    "type": "good"
+  }
+]

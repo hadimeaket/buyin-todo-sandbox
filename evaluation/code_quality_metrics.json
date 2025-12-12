@@ -1,0 +1,128 @@
+{
+  "Dogan-Enes-vibe": {
+    "tsFileCount": 54,
+    "anyUsage": 42,
+    "consoleUsage": 17,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "Dogan-Mansur-vibe": {
+    "tsFileCount": 57,
+    "anyUsage": 15,
+    "consoleUsage": 9,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "Maia-Dinis-vibe": {
+    "tsFileCount": 50,
+    "anyUsage": 30,
+    "consoleUsage": 5,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "tsFileCount": 49,
+    "anyUsage": 5,
+    "consoleUsage": 5,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "akbulut-burak-vibe": {
+    "tsFileCount": 80,
+    "anyUsage": 10,
+    "consoleUsage": 4,
+    "testCount": 6,
+    "lintErrors": 0
+  },
+  "allamani-rando-vibe": {
+    "tsFileCount": 63,
+    "anyUsage": 2,
+    "consoleUsage": 4,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "august-martin-vibe": {
+    "tsFileCount": 44,
+    "anyUsage": 11,
+    "consoleUsage": 9,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "bektas-cengizhan-vibe": {
+    "tsFileCount": 74,
+    "anyUsage": 16,
+    "consoleUsage": 4,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "goek-cihad-vibe": {
+    "tsFileCount": 70,
+    "anyUsage": 3,
+    "consoleUsage": 10,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "goek-fadime-vibe": {
+    "tsFileCount": 43,
+    "anyUsage": 6,
+    "consoleUsage": 6,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "goek-yasin-vibe": {
+    "tsFileCount": 51,
+    "anyUsage": 7,
+    "consoleUsage": 6,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "prinz-leon-vibe": {
+    "tsFileCount": 58,
+    "anyUsage": 16,
+    "consoleUsage": 10,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "rubas-michael-vibe": {
+    "tsFileCount": 43,
+    "anyUsage": 6,
+    "consoleUsage": 17,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "tobias-lehrer-vibe": {
+    "tsFileCount": 53,
+    "anyUsage": 11,
+    "consoleUsage": 19,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "tselekoglou-ioannis-vibe": {
+    "tsFileCount": 54,
+    "anyUsage": 5,
+    "consoleUsage": 10,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "versuro-andrea-vibe": {
+    "tsFileCount": 47,
+    "anyUsage": 19,
+    "consoleUsage": 6,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "sethi-sangat-vibe": {
+    "tsFileCount": 63,
+    "anyUsage": 2,
+    "consoleUsage": 4,
+    "testCount": 5,
+    "lintErrors": 0
+  },
+  "helling-max-vibe": {
+    "tsFileCount": 63,
+    "anyUsage": 2,
+    "consoleUsage": 4,
+    "testCount": 5,
+    "lintErrors": 0
+  }
+}

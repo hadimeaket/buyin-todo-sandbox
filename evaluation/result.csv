@@ -1,0 +1,9 @@
+branch,taskId,taskName,score,passed,backendTotal,backendFailed,frontendTotal,frontendFailed,e2eTotal,e2eFailed,backendLintErrors,frontendLintErrors
+goek-fadime-vibe,1,Persistent Todos,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,2,User Accounts,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,3,Categories,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,4,Attachments,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,5,Multi-day Calendar,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,6,Email Verification,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,7,Performance with 1000+ Todos,0.00,false,0,0,0,0,0,0,0,0
+goek-fadime-vibe,8,ICS Export,0.00,false,0,0,0,0,0,0,0,0
