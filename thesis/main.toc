@@ -1,0 +1,80 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Einleitung}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problemstellung}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Zielsetzung der Arbeit}{5}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Aufbau der Arbeit}{5}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Theoretischer Hintergrund und Stand der Forschung}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}AI Coding Agents und das Paradigma des Vibe-Codings}{6}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Technologische Grundlagen: Transformer und In-Context Learning}{6}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Definition: Vibe-Coding als System-1-Aktivität}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Theoretische Einordnung in die HCI-Forschung}{7}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Kompetenzmodelle: Vom Dreyfus-Modell zu kognitiven Architekturen}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Das Dreyfus-Modell der Expertise}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Kritik und Erweiterung: ACT-R und Adaptive Expertise}{8}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Situated Learning und Cognitive Apprenticeship}{9}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Kognitionspsychologische Aspekte der Human-AI Interaction}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Automation Bias und Vertrauen}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Cognitive Load Theory (CLT)}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Mixed-Initiative Interaction}{10}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Empirische Studien zu KI-Assistenz}{10}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Softwarequalität und Produktivität}{10}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Softwarequalität nach ISO/IEC 25010}{10}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Produktivität: Das SPACE-Framework}{11}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Zusammenfassung und Forschungslücke}{11}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Forschungsdesign und Hypothesenentwicklung}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Methodischer Ansatz: Between-Subjects Design}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Theoretische Herleitung der Hypothesen}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}H1: Der \enquote {Sweet Spot} der KI-Unterstützung (Mid-Code)}{12}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}H2: Das Validierungs-Paradoxon (Low-Code)}{13}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}H3: Skeptizismus und Qualitätsfokus (High-Code)}{13}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Operationalisierung der Kompetenzstufen}{13}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Kontrolle von Störvariablen (Confounder)}{13}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Die Testumgebung als unabhängige Variable: Ecological Validity}{14}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Durchführung und Methodik der Datenerhebung}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Ablauf der Untersuchung}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Operationalisierung der Metriken}{16}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Funktionale Korrektheit (Effectiveness)}{16}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Effizienz (Efficiency)}{16}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Codequalität (Quality)}{16}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Interaktionsqualität (Interaction Quality)}{16}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Güte der Untersuchung (Threats to Validity)}{17}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Konstruktvalidität (Construct Validity)}{17}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Interne Validität (Internal Validity)}{17}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Externe Validität (External Validity)}{17}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Reliabilität (Reliability)}{18}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Datenanalyse-Strategie}{18}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Technische Realisierung der Testumgebung}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Anforderungen an die Sandbox}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Architektur und Tech-Stack: Kognitive Dimensionen}{19}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Backend: Node.js \& Express (Layered Architecture)}{19}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Frontend: React \& Vite}{20}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Technische Funktionsweise von Copilot in der Sandbox}{20}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Prompt Construction und Context Retrieval}{20}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Token Prediction und Ranking}{21}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Design der Aufgaben (Workload Grading)}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Automatisierung der Evaluation}{21}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Das Analyse-Skript (\texttt {run.js})}{21}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Grenzen der LLM-gestützten Code-Analyse}{22}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Relevanz für den Unternehmenskontext (BuyIn)}{22}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Containerisierung und Reproduzierbarkeit}{22}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Ergebnisse}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Datengrundlage und Toolkontext}{23}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Studiensetting und Rahmenbedingungen}{23}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Datenquellen und Artefakte}{23}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Dateninventar und Vollständigkeit}{24}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Zuordnung und Zusammenführung der Daten}{24}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Reproduzierbarkeit und Auswertungswerkzeuge}{24}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Abgrenzung zu Kapitel 7}{25}{subsection.6.1.6}%
+\contentsline {section}{\numberline {6.2}Task-Pipeline-Analyse}{25}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Detaillierte Task-Analyse}{25}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Task 1: Persistente Datenspeicherung}{25}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Task 2: Benutzerauthentifizierung}{25}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Task 3: Kategorien und Farbcodierung}{25}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Task 4: Dateianhänge}{26}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Task 5: Kalenderansicht}{26}{subsection.6.3.5}%
+\contentsline {section}{\numberline {6.4}Code-Qualität und Metriken}{26}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Chat-Interaktionsmuster}{26}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Triangulation der Datenquellen}{26}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Zusammenfassung der Ergebnisse}{26}{section.6.7}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

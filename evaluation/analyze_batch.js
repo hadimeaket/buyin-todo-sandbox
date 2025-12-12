@@ -1,6 +1,6 @@
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 const branches = [
   "origin/Dogan-Enes-vibe",
@@ -18,7 +18,7 @@ const branches = [
   "origin/rubas-michael-vibe",
   "origin/tobias-lehrer-vibe",
   "origin/tselekoglou-ioannis-vibe",
-  "origin/versuro-andrea-vibe"
+  "origin/versuro-andrea-vibe",
 ];
 
 const results = {};
@@ -42,29 +42,39 @@ const runLint = (dir) => {
 console.log("Starting analysis...");
 
 for (const branch of branches) {
-  const branchName = branch.replace('origin/', '');
+  const branchName = branch.replace("origin/", "");
   console.log(`Analyzing ${branchName}...`);
-  
+
   try {
-    execSync(`git checkout ${branchName} 2>/dev/null || git checkout -b ${branchName} ${branch} 2>/dev/null`);
-    
+    execSync(
+      `git checkout ${branchName} 2>/dev/null || git checkout -b ${branchName} ${branch} 2>/dev/null`
+    );
+
     const analysis = {
-      task1_persistence: exists('backend/src/repositories/TodoRepository.ts'),
-      task2_auth: exists('backend/src/middleware/auth.ts') || exists('backend/src/controllers/authController.ts'),
-      task3_categories: exists('backend/src/models/Category.ts') || exists('frontend/src/features/categories'),
-      task4_attachments: exists('backend/src/models/Attachment.ts') || exists('backend/src/repositories/AttachmentRepository.ts'),
-      task5_calendar: exists('frontend/src/features/calendar/CalendarView.tsx'),
-      task6_email: exists('backend/src/services/EmailService.ts'),
-      task7_perf: exists('backend/src/utils/performance.ts'), // Guessing
-      task8_ics: exists('backend/src/services/IcsService.ts') || exists('todos-test.ics'),
-      
+      task1_persistence: exists("backend/src/repositories/TodoRepository.ts"),
+      task2_auth:
+        exists("backend/src/middleware/auth.ts") ||
+        exists("backend/src/controllers/authController.ts"),
+      task3_categories:
+        exists("backend/src/models/Category.ts") ||
+        exists("frontend/src/features/categories"),
+      task4_attachments:
+        exists("backend/src/models/Attachment.ts") ||
+        exists("backend/src/repositories/AttachmentRepository.ts"),
+      task5_calendar: exists("frontend/src/features/calendar/CalendarView.tsx"),
+      task6_email: exists("backend/src/services/EmailService.ts"),
+      task7_perf: exists("backend/src/utils/performance.ts"), // Guessing
+      task8_ics:
+        exists("backend/src/services/IcsService.ts") ||
+        exists("todos-test.ics"),
+
       // Code Quality Indicators (Static)
-      hasTests: exists('backend/tests') && fs.readdirSync('backend/tests').length > 1,
-      lintConfig: exists('backend/eslint.config.mjs'),
+      hasTests:
+        exists("backend/tests") && fs.readdirSync("backend/tests").length > 1,
+      lintConfig: exists("backend/eslint.config.mjs"),
     };
 
     results[branchName] = analysis;
-
   } catch (e) {
     console.error(`Failed to analyze ${branchName}: ${e.message}`);
     results[branchName] = { error: e.message };
@@ -73,8 +83,13 @@ for (const branch of branches) {
 
 // Switch back to thesis branch
 try {
-    execSync('git checkout thesis');
+  execSync("git checkout thesis");
 } catch (e) {}
 
-fs.writeFileSync('evaluation/batch_analysis.json', JSON.stringify(results, null, 2));
-console.log("Analysis complete. Results written to evaluation/batch_analysis.json");
+fs.writeFileSync(
+  "evaluation/batch_analysis.json",
+  JSON.stringify(results, null, 2)
+);
+console.log(
+  "Analysis complete. Results written to evaluation/batch_analysis.json"
+);
