@@ -1,0 +1,596 @@
+{
+  "Dogan-Enes-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "Dogan-Mansur-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "evidence": "backend/src/middleware/auth.ts"
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "backend/src/models/Attachment.ts"
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "Maia-Dinis-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "evidence": "backend/src/middleware/auth.ts"
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "akbulut-burak-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": true,
+      "implemented": false,
+      "verified": false,
+      "evidence": "backend/src/middleware/auth.ts"
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "allamani-rando-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "strategy": "Memory/Other",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "backend/src/models/Category.ts"
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "august-martin-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "bektas-cengizhan-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "goek-cihad-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "goek-fadime-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "goek-yasin-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "prinz-leon-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "rubas-michael-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "tobias-lehrer-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "tselekoglou-ioannis-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "versuro-andrea-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "sethi-sangat-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  },
+  "helling-max-vibe": {
+    "T1": {
+      "attempted": true,
+      "implemented": true,
+      "verified": true,
+      "strategy": "SQLite",
+      "evidence": "backend/src/repositories/TodoRepository.ts"
+    },
+    "T2": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T3": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T4": {
+      "attempted": false,
+      "implemented": false,
+      "verified": false,
+      "evidence": null
+    },
+    "T5": {
+      "attempted": true,
+      "implemented": true,
+      "verified": false,
+      "evidence": "frontend/src/features/calendar/CalendarView.tsx"
+    }
+  }
+}

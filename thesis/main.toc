@@ -67,14 +67,33 @@
 \contentsline {subsection}{\numberline {6.1.5}Reproduzierbarkeit und Auswertungswerkzeuge}{24}{subsection.6.1.5}%
 \contentsline {subsection}{\numberline {6.1.6}Abgrenzung zu Kapitel 7}{25}{subsection.6.1.6}%
 \contentsline {section}{\numberline {6.2}Task-Pipeline-Analyse}{25}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Detaillierte Task-Analyse}{25}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Task 1: Persistente Datenspeicherung}{25}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Task 2: Benutzerauthentifizierung}{25}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Task 3: Kategorien und Farbcodierung}{25}{subsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.3.4}Task 4: Dateianhänge}{26}{subsection.6.3.4}%
-\contentsline {subsection}{\numberline {6.3.5}Task 5: Kalenderansicht}{26}{subsection.6.3.5}%
-\contentsline {section}{\numberline {6.4}Code-Qualität und Metriken}{26}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Chat-Interaktionsmuster}{26}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Triangulation der Datenquellen}{26}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Zusammenfassung der Ergebnisse}{26}{section.6.7}%
+\contentsline {subsection}{\numberline {6.2.1}Methodische Definitionen}{25}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Pipeline-Ergebnisse (T1--T5)}{26}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Beobachtungen und Interpretation}{26}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Detaillierte Lösungsstrategien pro Task (T1--T5)}{27}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Code-Qualität und technische Metriken}{31}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}ESLint und Typisierung}{31}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Testabdeckung und Teststabilität}{31}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Architektur- und Strukturindikatoren}{32}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Zusammenhänge mit Task-Fortschritt}{32}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Kurzfazit: Beobachtete Qualitätsmerkmale}{32}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Chat-Interaktionsmuster}{33}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Umfang und Intensität der Interaktion}{33}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Struktur der Prompts}{34}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.3}Debugging-Interaktionen und Iterationsmuster}{34}{subsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.5.4}Modelltypische Antwortmuster (Claude Sonnet 4.5)}{35}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.5}Beziehung zwischen Chat-Mustern und Task-Fortschritt (deskriptiv)}{35}{subsection.6.5.5}%
+\contentsline {section}{\numberline {6.6}Triangulation der Datenquellen}{36}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Datenbasis und Aggregationslogik}{36}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Pipeline-Fortschritt und Implementationsstrategien (Strukturindikatoren)}{37}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Pipeline-Fortschritt und technische Metriken}{37}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Pipeline-Fortschritt und Chat-Interaktionsmetriken}{38}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}Pipeline-Fortschritt und Survey-Merkmale}{38}{subsection.6.6.5}%
+\contentsline {subsection}{\numberline {6.6.6}Abgrenzung zu Kapitel 7}{39}{subsection.6.6.6}%
+\contentsline {section}{\numberline {6.7}Zusammenfassung der Ergebnisse}{39}{section.6.7}%
+\contentsline {paragraph}{\nonumberline Pipeline-Ergebnisse entlang der Tasks (T1--T5).}{39}{paragraph*.10}%
+\contentsline {paragraph}{\nonumberline Technische Qualität (aggregiert, ohne Kausalannahmen).}{39}{paragraph*.12}%
+\contentsline {paragraph}{\nonumberline Chat-Interaktionsmuster (kompakt).}{40}{paragraph*.14}%
+\contentsline {paragraph}{\nonumberline Triangulation auf Meta-Ebene.}{40}{paragraph*.16}%
+\contentsline {paragraph}{\nonumberline Abgrenzung zu Kapitel~7.}{40}{paragraph*.18}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

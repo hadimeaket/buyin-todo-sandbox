@@ -1,12 +1,94 @@
 \section{Triangulation der Datenquellen}
 \label{sec:results_triangulation}
 
-Hier werden die Ergebnisse aus Code-Analyse, Chat-Logs und Test-Reports zusammengeführt, um Zusammenhänge sichtbar zu machen.
+Dieses Unterkapitel stellt die in Abschnitt~6.2 bis 6.5 berichteten Ergebnisse sowie Survey-Merkmale nebeneinander.
+Ziel ist eine rein deskriptive Triangulation auf Ebene der 18 Branches (Teilnehmer A--R): Pipeline-Fortschritt (\texttt{attempted}/\texttt{implemented}/\texttt{verified}), beobachtete Strukturindikatoren der Implementationen, technische Metriken, Interaktionsmetriken aus den Chat-Exports sowie Survey-Angaben.
+Alle Aussagen werden als Zählwerte, Spannweiten oder Verteilungskennwerte berichtet; daraus werden keine Wirk- oder Kausalzusammenhänge abgeleitet.
+Die folgenden Abschnitte ordnen diese Datenquellen paarweise und gruppenweise nebeneinander, um Muster und Spannweiten sichtbar zu machen.
 
-% DATENQUELLEN:
-% - Aggregierte Daten aus allen vorherigen Analysen
-%
-% HINWEISE:
-% - Zusammenhang zwischen Chat-Verhalten und Code-Qualität
-% - Zusammenhang zwischen Strategie (z.B. DB-Wahl) und Testerfolg
-% - Rein deskriptive Korrelationen, keine kausale Interpretation
+\subsection{Datenbasis und Aggregationslogik}
+\label{sec:results_triangulation_basis}
+
+{\bfseries Messdefinition.} Die Triangulation erfolgt pro Branch als gemeinsame Analyseeinheit.
+Der Pipeline-Fortschritt wird aus \path{evaluation/task_pipeline_v3.json} als Anzahl der pro Branch als \texttt{implemented} bzw. \texttt{verified} markierten Tasks (T1--T5) abgeleitet.
+Als ergänzende Strukturindikatoren (z.\,B. Persistenzvariante) und Test-Summen (\texttt{test\_pass}/\texttt{test\_fail}) wird \path{evaluation/deep_code_analysis.json} genutzt; technische Metriken wie \texttt{tsFileCount}, \texttt{anyUsage} und \texttt{consoleUsage} stammen aus \path{evaluation/code_quality_metrics.json}.
+Survey-Merkmale (Kompetenzgruppe und Hürdenkategorie) werden aus \path{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx} über das Mapping \path{evaluation/survey_mapping.json} übernommen.
+Chat-bezogene Metriken werden in diesem Unterkapitel nicht neu berechnet, sondern als die in Abschnitt~6.5 berichteten Werte (Extraktion aus \path{thesis/chats/}) übernommen.
+
+{\bfseries Ergebnis.} Die Branches verteilen sich auf 1 bis 4 als \texttt{implemented} markierte Tasks (Verteilung: 1\,$\rightarrow$\,1 Branch, 2\,$\rightarrow$\,6 Branches, 3\,$\rightarrow$\,8 Branches, 4\,$\rightarrow$\,3 Branches).
+Für \texttt{verified} ergeben sich 0 bis 2 verifizierte Tasks je Branch (Verteilung: 0\,$\rightarrow$\,4 Branches, 1\,$\rightarrow$\,1 Branch, 2\,$\rightarrow$\,13 Branches).
+T5 ist in \path{evaluation/task_pipeline_v3.json} in allen Branches nicht implementiert und nicht verifiziert.
+
+\subsection{Pipeline-Fortschritt und Implementationsstrategien (Strukturindikatoren)}
+\label{sec:results_triangulation_strategies}
+
+{\bfseries Messdefinition.} Als Stellvertreter für ausgewählte Implementationsstrategien werden Strukturindikatoren aus \path{evaluation/deep_code_analysis.json} herangezogen.
+Für T1 betrifft dies die klassifizierte Persistenzvariante (z.\,B. \emph{sqlite}, \emph{mongo}); für T2--T4 werden Implementationsklassen (\texttt{implemented}/\texttt{none}) berichtet.
+
+{\bfseries Ergebnis.} Über alle Branches hinweg dominiert bei T1 \emph{sqlite} (14/18); daneben treten \emph{mongo} (1/18), \emph{postgres} (1/18), \emph{json-file} (1/18) und \emph{memory/other} (1/18) auf.
+Bei Gruppierung nach \texttt{implemented}-Taskanzahl zeigt sich folgende Verteilung der Persistenzvarianten: bei 2 implementierten Tasks (n=6) \emph{sqlite} in 5/6 Fällen und \emph{postgres} in 1/6; bei 3 implementierten Tasks (n=8) \emph{sqlite} in 7/8 und \emph{mongo} in 1/8; bei 4 implementierten Tasks (n=3) \emph{sqlite} in 2/3 und \emph{json-file} in 1/3; der einzelne Branch mit 1 implementiertem Task ist \emph{memory/other}.
+
+Für T2 wird in \path{evaluation/deep_code_analysis.json} in 17/18 Branches \texttt{implemented} ausgewiesen; konsistent dazu liegen in \path{evaluation/task_pipeline_v3.json} \texttt{implemented} für T2 in 17/18 Branches vor.
+Für T3 sind 7/18 Branches in \path{evaluation/task_pipeline_v3.json} als \texttt{implemented} markiert; gleichzeitig ist T3 in 13/18 Branches \texttt{verified}.
+Für T4 sind 8/18 Branches als \texttt{implemented} markiert; \texttt{verified} ist bei T4 in allen Branches 0/18.
+
+\subsection{Pipeline-Fortschritt und technische Metriken}
+\label{sec:results_triangulation_quality}
+
+{\bfseries Messdefinition.} Für eine deskriptive Gegenüberstellung werden pro Branch technische Metriken aus \path{evaluation/code_quality_metrics.json} (\texttt{tsFileCount}, \texttt{anyUsage}, \texttt{consoleUsage}) sowie Test-Summen aus \path{evaluation/deep_code_analysis.json} (\texttt{test\_pass}, \texttt{test\_fail}) neben die Anzahl \texttt{implemented} Tasks gestellt.
+
+{\bfseries Ergebnis.} Über alle 18 Branches liegt \texttt{tsFileCount} zwischen 43 und 80 Dateien; \texttt{anyUsage} liegt zwischen 2 und 42 und \texttt{consoleUsage} zwischen 4 und 19.
+Gruppiert nach \texttt{implemented}-Taskanzahl ergeben sich folgende Spannweiten und Mediane:
+\begin{itemize}
+	\item 1 implementierter Task (n=1): \texttt{anyUsage}=6, \texttt{consoleUsage}=6, \texttt{tsFileCount}=43; \texttt{test\_pass}=14, \texttt{test\_fail}=12.
+	\item 2 implementierte Tasks (n=6): \texttt{anyUsage} 2--30 (Median: 4), \texttt{consoleUsage} 4--17 (Median: 4.5), \texttt{tsFileCount} 43--63 (Median: 56.5); \texttt{test\_pass} 0--14 (Median: 12), \texttt{test\_fail} 9--37 (Median: 11).
+	\item 3 implementierte Tasks (n=8): \texttt{anyUsage} 3--42 (Median: 8.5), \texttt{consoleUsage} 4--19 (Median: 10), \texttt{tsFileCount} 49--80 (Median: 54); \texttt{test\_pass} 0--12 (Median: 0), \texttt{test\_fail} 12--28 (Median: 15.5).
+	\item 4 implementierte Tasks (n=3): \texttt{anyUsage} 15--19 (Median: 16), \texttt{consoleUsage} 4--9 (Median: 6), \texttt{tsFileCount} 47--74 (Median: 57); \texttt{test\_pass} 0--13 (Median: 12), \texttt{test\_fail} 10--13 (Median: 12).
+\end{itemize}
+Diese Gegenüberstellung beschreibt ausschließlich gemeinsame Verteilungen innerhalb derselben Branches.
+
+\subsection{Pipeline-Fortschritt und Chat-Interaktionsmetriken}
+\label{sec:results_triangulation_chat}
+
+{\bfseries Messdefinition.} Als Chat-Metriken werden die in Abschnitt~6.5 definierten und berichteten Intensitäts- und Interaktionsindikatoren (Wortanzahl, Prompt-Antwort-Zyklen, Nutzerbeiträge, Fehlermarker-Iterationen) herangezogen.
+Für die Triangulation werden diese Werte neben die \texttt{implemented}- und \texttt{verified}-Taskanzahl aus \path{evaluation/task_pipeline_v3.json} gestellt.
+
+{\bfseries Ergebnis.} In Abschnitt~6.5 wird bereits eine gruppierte Gegenüberstellung nach \texttt{implemented}-Taskanzahl berichtet.
+Dort liegen (a) in der Gruppe mit 2 implementierten Tasks (n=6) Wortanzahl und Zyklenzahl zwischen 4046--9190 Wörtern (Median: 6449) bzw. 12--20 Zyklen (Median: 14.5), (b) in der Gruppe mit 3 implementierten Tasks (n=8) zwischen 4863--26833 Wörtern (Median: 8865) bzw. 16--45 Zyklen (Median: 18) und (c) in der Gruppe mit 4 implementierten Tasks (n=3) zwischen 4764--6663 Wörtern (Median: 4919) bzw. 14--21 Zyklen (Median: 14).
+Über alle Gruppen hinweg liegt die verifizierte Taskanzahl in \path{evaluation/task_pipeline_v3.json} je Branch zwischen 0 und 2.
+
+\subsection{Pipeline-Fortschritt und Survey-Merkmale}
+\label{sec:results_triangulation_survey}
+
+{\bfseries Messdefinition.} Aus dem Survey werden (a) die Kompetenzgruppe (No-Code, Low-Code, Mid-Code, High-Coder) und (b) eine primäre Hürdenkategorie (Survey-Feld \texttt{D}) als kategoriale Merkmale herangezogen.
+Beide Merkmale werden ausschließlich als Gruppierungs- bzw. Häufigkeitsvariablen genutzt.
+
+{\bfseries Ergebnis.} Die Kompetenzgruppen verteilen sich auf No-Code (5/18), Low-Code (4/18), Mid-Code (5/18) und High-Coder (4/18).
+Tabelle~\ref{tab:triangulation_competence_vs_impl} stellt diese Gruppen der \texttt{implemented}-Taskanzahl gegenüber.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+{\bfseries Kompetenzgruppe} & \textbf{1 impl.} & \textbf{2 impl.} & \textbf{3 impl.} & \textbf{4 impl.} \\
+\hline
+No-Code (n=5) & 0 & 2 & 2 & 1 \\
+Low-Code (n=4) & 1 & 1 & 2 & 0 \\
+Mid-Code (n=5) & 0 & 1 & 2 & 2 \\
+High-Coder (n=4) & 0 & 2 & 2 & 0 \\
+\hline
+\end{tabular}
+\caption{Kompetenzgruppe (Survey) vs. Anzahl \texttt{implemented} Tasks pro Branch (\texttt{evaluation/task\_pipeline\_v3.json}, $N=18$).}
+\label{tab:triangulation_competence_vs_impl}
+\end{table}
+
+Als primäre Hürdenkategorien (Survey-Feld \texttt{D}) treten am häufigsten Zeitdruck (5/18) und Debugging von Fehlern (5/18) auf, gefolgt von Aufgabenverständnis (3/18).
+In der Gruppe mit 2 implementierten Tasks (n=6) ist Zeitdruck 2/6-mal und Debugging 1/6-mal als primäre Hürde genannt; in der Gruppe mit 3 implementierten Tasks (n=8) Debugging 3/8-mal und Zeitdruck 2/8-mal.
+In der Gruppe mit 4 implementierten Tasks (n=3) treten Zeitdruck, Debugging und Aufgabenverständnis jeweils in 1/3 Fällen als primäre Hürde auf.
+
+\subsection{Abgrenzung zu Kapitel 7}
+\label{sec:results_triangulation_boundary}
+
+Dieses Unterkapitel stellt ausschließlich Ko-Vorkommen und Verteilungen über mehrere Datenquellen hinweg dar.
+Es enthält keine Leistungs- oder Effizienzbewertung, keine Kompetenzzuschreibung und keine kausale Interpretation.
+Die Einordnung dieser Muster sowie die Diskussion möglicher Erklärungen erfolgt ausschließlich in Kapitel~7.

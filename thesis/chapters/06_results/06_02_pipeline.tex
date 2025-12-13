@@ -1,7 +1,57 @@
 \section{Task-Pipeline-Analyse}
 \label{sec:results_pipeline}
 
-In diesem Abschnitt wird der Fortschritt der Probanden entlang der definierten Aufgaben-Pipeline dargestellt. Es wird zwischen versuchten, implementierten und verifizierten Aufgaben unterschieden.
+In diesem Abschnitt wird der Fortschritt der Probanden entlang der Aufgaben-Pipeline (T1--T5) dargestellt. Ziel ist es, den \textit{Drop-off} über die Aufgaben hinweg sichtbar zu machen und zwischen Intention (Chat), Umsetzung (Code) und testbasierter Bestätigung (Integrationstests) zu unterscheiden.
+
+\subsection{Methodische Definitionen}
+Zur Einordnung werden drei Statuskategorien verwendet:
+\begin{itemize}
+	\item \textbf{Attempted (Versucht):} Ein Task gilt als \textit{Attempted}, wenn er im Chat-Verlauf explizit als Ziel, Anforderung oder nächster Arbeitsschritt formuliert wurde. Die bloße Existenz von Dateien ohne entsprechenden Kontext im Chat genügt nicht.
+	\item \textbf{Implemented (Umgesetzt):} Ein Task gilt als \textit{Implemented}, wenn taskspezifische Logik nachweisbar ist \textendash{} entweder durch statische Codeanalyse \textit{oder} durch konsistentes, wiederholbares, taskspezifisches API-Verhalten, das durch Integrationstests bestätigt wird.
+	\item \textbf{Verified (Testbasiert bestätigt):} Ein Task gilt als \textit{Verified}, wenn die zugehörigen automatisierten Integrationstests erfolgreich durchlaufen wurden.
+\end{itemize}
+
+\noindent\textbf{Hierarchie der Metriken.} Die drei Metriken sind bewusst als Trichter modelliert: \textit{Attempted} $\rightarrow$ \textit{Implemented} $\rightarrow$ \textit{Verified}. Durch die obige Definition gilt konzeptionell \textit{Verified} $\subseteq$ \textit{Implemented}: Besteht ein taskspezifischer Integrationstest, wird das bestätigte Verhalten als Implementationsnachweis gewertet. \textit{Verified} ist damit keine übergeordnete Qualitätsaussage, sondern ein nachrangiges Diagnose-Signal innerhalb des Trichters. Insbesondere wenn \textit{Implemented} $=0$, kann ein \textit{Verified}-Signal (falls es dennoch auftreten würde) nicht als fachlicher Erfolg interpretiert werden, sondern wäre als Messfehler (z.B. zu tolerante Tests) zu behandeln.
+
+\noindent\textbf{Hinweis zur Testmethodik (V2).} Für die Pipeline-Auswertung wurden die Tests (insbesondere T2, sowie in Teilen T3--T5) als API-Integrationstests (\textit{Supertest} gegen Express) gestaltet, um weniger abhängig von internen Architekturentscheidungen (z.B. Service-/Repository-Struktur) zu sein. \textit{Verified} bedeutet in dieser Studie daher explizit: „besteht die aktuellen Tests“ \textendash{} nicht „fachlich vollständig korrekt gelöst“. \textit{Verified} darf folglich nie isoliert interpretiert werden, sondern immer im Verhältnis zu \textit{Attempted} und \textit{Implemented}.
+
+\subsection{Pipeline-Ergebnisse (T1--T5)}
+Tabelle \ref{tab:task_pipeline_v2} fasst den Status der Aufgaben T1 bis T5 für alle $N=18$ Probanden zusammen. Der Fokus liegt aufgrund des strikten Zeitlimits (60 Minuten) auf diesen frühen Aufgaben.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+	extbf{Task} & \textbf{Attempted ($n$)} & \textbf{Implemented ($n$)} & \textbf{Verified ($n$)} \\
+\hline
+T1: Persistenz & 18 (100\%) & 17 (94\%) & 10 (56\%) \\
+T2: Auth & 18 (100\%) & 17 (94\%) & 4 (22\%) \\
+T3: Kategorien & 15 (83\%) & 13 (72\%) & 13 (72\%) \\
+T4: Attachments & 13 (72\%) & 8 (44\%) & 0 (0\%) \\
+T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
+\hline
+\end{tabular}
+\caption{Task-Pipeline: Von der Intention zur verifizierten Lösung ($N=18$), basierend auf V3-Integrationstests.}
+\label{tab:task_pipeline_v2}
+\end{table}
+
+\subsection{Beobachtungen und Interpretation}
+Für T3--T5 ist der \textit{Drop-off} in erster Linie zeitgetrieben: Unter dem 60-Minuten-Limit werden Integrationsaufgaben häufiger begonnen (\textit{Attempted}), aber seltener konsistent fertiggestellt (\textit{Implemented}) und noch seltener testkonform stabilisiert (\textit{Verified}). „Nicht implementiert“ bedeutet dabei nicht „nicht verstanden“, sondern häufig „nicht mehr rechtzeitig integriert, refaktoriert oder debuggt“.
+
+\noindent\textbf{T1 (Persistenz).} Alle Probanden adressierten Persistenz im Chat (100\%), und die hohe Implementierungsrate (94\%) zeigt, dass Persistenz als Kernanforderung verstanden wurde. Die Verifikationsrate (56\%) weist darauf hin, dass eine robuste, testkonforme Persistenz (z.B. stabiler CRUD-Fluss, konsistente IDs, fehlerfreie Serialisierung) innerhalb des Zeitfensters nicht in allen Fällen erreicht wurde.
+
+\noindent\textbf{T2 (User Accounts/Auth).} Auch T2 wurde von allen Probanden versucht (100\%) und sehr häufig implementiert (94\%). Die vergleichsweise niedrige \textit{Verified}-Rate (22\%) ist weniger als Qualitätsurteil zu lesen, sondern als Diagnose-Signal: Auth-Implementierungen sind stark architektur- und konfigurationsabhängig (Endpunktpfade, Token- vs. Cookie-Mechanismen, Zugriffskontrollen), wodurch selbst funktionierende Lösungen an den konkreten Testannahmen scheitern können.
+
+\noindent\textbf{T3 (Kategorien).} Der Drop-off (83\% \textit{Attempted} vs. 72\% \textit{Implemented}) deutet darauf hin, dass Kategorien häufig begonnen werden, aber nicht in allen Fällen bis zur stabilen, wiederholbaren Integration geführt werden. Durch die erweiterte Implemented-Definition (statischer Nachweis \textit{oder} reproduzierbares, testspezifisch bestätigtes API-Verhalten) fällt \textit{Verified} hier nicht als „besser“ aus, sondern bestätigt den Implementationsnachweis auf Verhaltensebene. Gleichzeitig bleibt \textit{Verified} als Diagnosesignal relevant: Es zeigt, ob die beobachtete Kategorie-Funktionalität die konkreten Testannahmen konsistent erfüllt.
+
+\noindent\textbf{T4 (Attachments).} Trotz 72\% \textit{Attempted} und 44\% \textit{Implemented} liegt \textit{Verified} bei 0\%. Das spricht für hohe Varianz in der Umsetzung (unterschiedliche Upload-Mechanismen, Feldnamen, Storage-Strategien) und dafür, dass die Testannahmen die Heterogenität nicht ausreichend abdecken. In diesem Fall ist \textit{Verified} vor allem als Hinweis auf Test-/Schnittstelleninkonsistenz zu lesen, nicht als Beleg fehlender Kompetenz.
+
+\noindent\textbf{T5 (Kalender/Multi-Day).} T5 wurde häufig begonnen (72\% \textit{Attempted}), jedoch liegt im (V3-)Pipeline-Lauf kein reproduzierbares, taskspezifisches API-Verhalten vor, das die Kalender-/Multi-Day-Semantik zuverlässig bestätigt (0\% \textit{Verified}). Entsprechend bleibt \textit{Implemented} hier bei 0\%: Weder konnte taskspezifische Logik statisch identifiziert werden, noch wurde sie durch konsistente Tests bestätigt. Inhaltlich ist dies mit dem Zeitlimit vereinbar: Kalenderlogik erfordert typischerweise zusätzliche Felder (Range), Validierung und Query-Semantik (Overlap), die unter 60 Minuten häufig nicht mehr end-to-end stabilisiert werden.
+
+\noindent\textbf{Zwischenfazit.} Insgesamt zeigt die Pipeline den erwartbaren Trichter: Alle Teilnehmer starten stark bei T1/T2, während komplexere Integrationsaufgaben (T3--T5) unter Zeitdruck seltener vollständig umgesetzt werden. \textit{Verified}-Werte werden in dieser Arbeit nicht „gefeiert“, sondern als Diagnose-Signal genutzt \textendash{} für Testqualität, Architekturdiversität sowie die Differenz zwischen beobachtbarem Verhalten und tatsächlich implementierter Fachlogik.
+
+\subsection*{Methodischer Hinweis zur Interpretation}
+Die Pipeline dient der Strukturanalyse von Arbeitsverläufen (Starten, Umsetzen, Stabilisieren) und damit der Beschreibung typischer Engpässe unter Zeitdruck \textendash{} nicht der Bewertung individueller Leistung.
 
 % DATENQUELLEN:
 % - Chat-Logs (für "Attempted"-Status)

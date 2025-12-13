@@ -1,0 +1,128 @@
+{
+  "versuro-andrea-vibe": {
+    "file": "Andrea_Versuro.docx",
+    "wordCount": 4766,
+    "errorMentions": 21,
+    "estimatedPrompts": 48,
+    "contentSnippet": " \r           Andrea Versuro: # 1. Create your feature branch            git checkout -b versuro - andrea - vibe            # 2. Start the development environment            docker - compose up --build"
+  },
+  "bektas-cengizhan-vibe": {
+    "file": "Bektas_Cengizhan.docx",
+    "wordCount": 4921,
+    "errorMentions": 7,
+    "estimatedPrompts": 50,
+    "contentSnippet": " \r           Cengizhan: i want to extend my application such that i want to use a persistant database like sqlite for example instead of the current InMemoryTodoRepository... after initialization o th"
+  },
+  "akbulut-burak-vibe": {
+    "file": "Burak_Akbulut.docx",
+    "wordCount": 10228,
+    "errorMentions": 51,
+    "estimatedPrompts": 103,
+    "contentSnippet": " \r           Burak Akbulut: Schreibe mir einen sehr guten prompt der folgendes Screesnshot löst und mir einen geeigenten Code erstellt                      GitHub Copilot: Ich analysiere das Screensho"
+  },
+  "goek-cihad-vibe": {
+    "file": "Cihad_Gök.docx",
+    "wordCount": 7425,
+    "errorMentions": 31,
+    "estimatedPrompts": 1,
+    "contentSnippet": " \r           Cihad Gök: in the following we are going to work on some tasks and want to add new features to our application                      as a user i want to have a db where my data is stored p"
+  },
+  "Maia-Dinis-vibe": {
+    "file": "Dinis_Maia.docx",
+    "wordCount": 5259,
+    "errorMentions": 14,
+    "estimatedPrompts": 53,
+    "contentSnippet": " \r           Dinis Maia: # 1. Create your feature branch            git checkout -b Maia - Dinis - vibe            # 2. Start the development environment            docker - compose up --build        "
+  },
+  "Dogan-Mansur-vibe": {
+    "file": "Dogan_Mansur.docx",
+    "wordCount": 6665,
+    "errorMentions": 15,
+    "estimatedPrompts": 1,
+    "contentSnippet": " \r           hadimeaket: # 1. Create your feature branch            git checkout -b Dogan - Mansur - vibe            # 2. Start the development environment            docker - compose up --build      "
+  },
+  "Dogan-Enes-vibe": {
+    "file": "Enes_Dogan.docx",
+    "wordCount": 11448,
+    "errorMentions": 17,
+    "estimatedPrompts": 1,
+    "contentSnippet": " \r           Enes Dogan: Verbessere meinen Prompr:             Rolle: Du bist ein Profesioneller FullStack Lead Entwickler            Aufgabe: Du musst Aufgaben Lösen die du bekommst, arbeite zukunfso"
+  },
+  "goek-fadime-vibe": {
+    "file": "Goek_Fadime.docx",
+    "wordCount": 6930,
+    "errorMentions": 41,
+    "estimatedPrompts": 70,
+    "contentSnippet": " \r           FadimeGoek: # 1. Create your feature branch            git checkout -b goek-fadime-vibe            # 2. Start the development environment            docker - compose up --build           "
+  },
+  "goek-yasin-vibe": {
+    "file": "Goek_Yasin.docx",
+    "wordCount": 1,
+    "errorMentions": 0,
+    "estimatedPrompts": 1,
+    "contentSnippet": ""
+  },
+  "tselekoglou-ioannis-vibe": {
+    "file": "Janni_Tselekoglu.docx",
+    "wordCount": 1,
+    "errorMentions": 0,
+    "estimatedPrompts": 1,
+    "contentSnippet": ""
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "file": "Jochen Theuerkauf.docx",
+    "wordCount": 7506,
+    "errorMentions": 61,
+    "estimatedPrompts": 1,
+    "contentSnippet": " \r           Jochen Theuerkauf: # 1. Create your feature branch            git checkout -b Theuerkauf - Jochen - vibe            # 2. Start the development environment            docker - compose up -"
+  },
+  "prinz-leon-vibe": {
+    "file": "Leon_Prinz.docx",
+    "wordCount": 6782,
+    "errorMentions": 26,
+    "estimatedPrompts": 68,
+    "contentSnippet": " \r           Leon Prinz: I am currently working on a Full Stack Project with the objective of creating a fully funcitonal todo list and calender application. In the following i will provide you with t"
+  },
+  "helling-max-vibe": {
+    "file": "Max_Helling.docx",
+    "wordCount": 7349,
+    "errorMentions": 51,
+    "estimatedPrompts": 74,
+    "contentSnippet": " \r           Max Helling: Ich muss innerhalb einer stunde einige aufgaben machen im rahmen einer coding challenge.                      Analysiere alle aufgaben und erstelle mir prompt sodass wir schr"
+  },
+  "rubas-michael-vibe": {
+    "file": "Michael_Rubas.docx",
+    "wordCount": 4048,
+    "errorMentions": 15,
+    "estimatedPrompts": 2,
+    "contentSnippet": " \r           Michael Rubas: bauen und starte den container in dem projekt                      GitHub Copilot: Ich werde die Container für das Projekt bauen und starten.                       Ran term"
+  },
+  "allamani-rando-vibe": {
+    "file": "Rando_Allamani.docx",
+    "wordCount": 7921,
+    "errorMentions": 71,
+    "estimatedPrompts": 5,
+    "contentSnippet": " \r           Rando Allamani: As a user, I want my todos to persist after            reloading. use sql lite to store data, validate the titles                      GitHub Copilot: I'll create a compre"
+  },
+  "sethi-sangat-vibe": {
+    "file": "Sangat_Sethi.docx",
+    "wordCount": 5553,
+    "errorMentions": 18,
+    "estimatedPrompts": 3,
+    "contentSnippet": " \r           Sangat Sethi: # 1. Create your feature branch            git checkout -b sethi - sangat - vibe            # 2. Start the development environment            docker - compose up --build    "
+  },
+  "tobias-lehrer-vibe": {
+    "file": "Tobias_Lehrer.docx",
+    "wordCount": 4881,
+    "errorMentions": 33,
+    "estimatedPrompts": 2,
+    "contentSnippet": " \r           Tobias Lehrer: okay du bist mein Senior Dev und sollst für eine challenge innerhalb von einer stunde so viele aufgaben wie nur möglich lösen. Dabei sollten die ergebnisse für diesen frame"
+  },
+  "august-martin-vibe": {
+    "file": "august_martin.docx",
+    "wordCount": 9192,
+    "errorMentions": 29,
+    "estimatedPrompts": 92,
+    "contentSnippet": " \r           August Martin: Schreibe mir ein Prompt für mein LLM:            - Ich muss bei einer coding challange mit machen und darf nur AI agends nutzen.            - Schreib mir zu den aufgaben, d"
+  }
+}

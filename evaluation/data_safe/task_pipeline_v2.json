@@ -1,0 +1,434 @@
+{
+  "Dogan-Enes-vibe": {
+    "branch_id": "Dogan-Enes-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "Dogan-Mansur-vibe": {
+    "branch_id": "Dogan-Mansur-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "Maia-Dinis-vibe": {
+    "branch_id": "Maia-Dinis-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "branch_id": "Theuerkauf-Jochen-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "akbulut-burak-vibe": {
+    "branch_id": "akbulut-burak-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": false
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "allamani-rando-vibe": {
+    "branch_id": "allamani-rando-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": false
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "august-martin-vibe": {
+    "branch_id": "august-martin-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "bektas-cengizhan-vibe": {
+    "branch_id": "bektas-cengizhan-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": false
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "goek-cihad-vibe": {
+    "branch_id": "goek-cihad-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "goek-fadime-vibe": {
+    "branch_id": "goek-fadime-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": false,
+      "T2": false,
+      "T3": true,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "goek-yasin-vibe": {
+    "branch_id": "goek-yasin-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "prinz-leon-vibe": {
+    "branch_id": "prinz-leon-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "rubas-michael-vibe": {
+    "branch_id": "rubas-michael-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "tobias-lehrer-vibe": {
+    "branch_id": "tobias-lehrer-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "tselekoglou-ioannis-vibe": {
+    "branch_id": "tselekoglou-ioannis-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "versuro-andrea-vibe": {
+    "branch_id": "versuro-andrea-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "sethi-sangat-vibe": {
+    "branch_id": "sethi-sangat-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  },
+  "helling-max-vibe": {
+    "branch_id": "helling-max-vibe",
+    "attempted": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true
+    },
+    "implemented": {
+      "T1": true,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    },
+    "verified": {
+      "T1": false,
+      "T2": false,
+      "T3": false,
+      "T4": false,
+      "T5": false
+    }
+  }
+}

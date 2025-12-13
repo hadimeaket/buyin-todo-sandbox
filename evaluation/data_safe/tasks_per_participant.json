@@ -1,0 +1,182 @@
+{
+  "Dogan-Enes-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "Dogan-Mansur-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "Maia-Dinis-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "akbulut-burak-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "allamani-rando-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "august-martin-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": false,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "bektas-cengizhan-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "goek-cihad-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "goek-fadime-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": true
+  },
+  "goek-yasin-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": false,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "prinz-leon-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": true,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "rubas-michael-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": true,
+    "T3_Categories": false,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "tobias-lehrer-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "tselekoglou-ioannis-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": true,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "versuro-andrea-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": false,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "sethi-sangat-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  },
+  "helling-max-vibe": {
+    "T1_Persistence": true,
+    "T2_Auth": false,
+    "T3_Categories": true,
+    "T4_Attachments": false,
+    "T5_Calendar": true,
+    "T6_Email": false,
+    "T7_Performance": false,
+    "T8_ICS": false
+  }
+}

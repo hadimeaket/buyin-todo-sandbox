@@ -1,0 +1,362 @@
+[
+  {
+    "branch": "goek-fadime-vibe",
+    "name": "Fadime Nur Goek",
+    "competence": "Low-Code",
+    "survey_data": {
+      "A": "45988.026246145833",
+      "B": "Fadime Nur Goek",
+      "C": "goek fadime vibe",
+      "D": "Umsetzung der Aufgabe / Implementing the solution",
+      "E": "Die AI hat UI-Renderings falsch/ungenau umgesetzt / The AI implemented the UI incorrectly or imprecisely",
+      "F": "Ungenaue oder falsche Performance-Optimierungen / Inaccurate or wrong performance optimizations",
+      "G": "4",
+      "O": "Task 8 – ICS Export",
+      "P": "anfangs detaillierter mich fragen was ich will, statt einfach prompt umzusetzen was ich sage.",
+      "Q": "4",
+      "R": "Verständnisprobleme",
+      "S": "Studium und grundsätzlich viel mehr Zeit mich mit dem Thema-den Themen auseinanderzusetzen.",
+      "T": "162"
+    }
+  },
+  {
+    "branch": "Dogan-Mansur-vibe",
+    "name": "Mansur Dogan",
+    "competence": "Mid-Code",
+    "survey_data": {
+      "A": "45988.807597916668",
+      "B": "Mansur Dogan",
+      "C": "Dogan-Mansur-vibe",
+      "D": "Zeitdruck / Time pressure",
+      "E": "Durch eine zu Große Anfrage, ist am Ende der Fehler aufgetaucht, dass die Seite nicht Aufrufbar war",
+      "F": "Ungenaue oder falsche Performance-Optimierungen / Inaccurate or wrong performance optimizations",
+      "N": "1",
+      "O": "Die Seite war am Ende nicht Aufrufbar",
+      "P": "Die KI hat eigentlich alles meiner Meinung nach gut gemacht",
+      "Q": "2",
+      "R": "Die Tests haben am meisten Zeit gekostet.",
+      "S": "Performance",
+      "AB": "Mid-Code"
+    }
+  },
+  {
+    "branch": "bektas-cengizhan-vibe",
+    "name": "Cengizhan Bektas",
+    "competence": "Mid-Code",
+    "survey_data": {
+      "A": "45989.805935879631",
+      "B": "Cengizhan Bektas",
+      "C": "bektas-cengizhan-vibe",
+      "D": "Debuggen von Fehlern / Debugging errors",
+      "E": "Die AI machte Wiederholungsfehler („Ping-Pong“) / The AI repeated the same mistakes (“ping-pong”)",
+      "F": "Fehler im Backend (API, DB, Models) / Backend errors (API, DB, models)",
+      "N": "4",
+      "O": "Task 2 – Benutzerkonten",
+      "P": "bei wiederkehrenden Problemen mich alarmieren",
+      "Q": "1",
+      "R": "Das nicht-lesen der Code-Ergebnisse/blindes Vertrauen an den Copilot",
+      "S": "eigenständige Ausführung von Alternativen statt das Warten auf den User (Docker statt npm)",
+      "AB": "Mid-Code"
+    }
+  },
+  {
+    "branch": "goek-yasin-vibe",
+    "name": "Yasin Goek",
+    "competence": "No-Code",
+    "survey_data": {
+      "A": "45990.632787210649",
+      "B": "Yasin Goek",
+      "C": "goek-yasin-vibe",
+      "D": "Verständnis der Aufgabe  / Understanding the tasks",
+      "E": "Die AI hat veralteten oder ineffizienten Code erzeugt / The AI produced outdated or inefficient code, keine Probleme / No noticeable problems",
+      "F": "Keine / None",
+      "N": "5",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Schneller und mehr aufgaben in einem mal. Nicht stück für stück",
+      "Q": "1",
+      "R": "Die Umsetzung von dem Prompt das aufbauen der Container",
+      "S": "Schnellere Rechenleistung von der AI",
+      "AB": "No-Code"
+    }
+  },
+  {
+    "branch": "versuro-andrea-vibe",
+    "name": "andrea versuro",
+    "competence": "No-Code",
+    "survey_data": {
+      "A": "45993.505406759257",
+      "B": "andrea versuro",
+      "C": "versuro-andrea-vibe ",
+      "D": "Verständnis der Aufgabe  / Understanding the tasks",
+      "E": "keine Probleme / No noticeable problems",
+      "F": "Fehler bei Datei-Upload oder Validierung/ Errors in file upload / validation",
+      "N": "5",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "recognize the upload issue and fixing it beforehand",
+      "Q": "1",
+      "R": "understanding the task in a way that was properly translate for the AI",
+      "S": "code being produced fastr",
+      "AB": "No-Code"
+    }
+  },
+  {
+    "branch": "Maia-Dinis-vibe",
+    "name": "Dinis Maia",
+    "competence": "Low-Code",
+    "survey_data": {
+      "A": "45993.674371273148",
+      "B": "Dinis Maia",
+      "C": "Maia-Dinis-vibe",
+      "D": "Zeitdruck / Time pressure",
+      "E": "deleted DB entries after I asked changes to the architecture",
+      "F": "Keine / None",
+      "N": "4",
+      "O": "Task 3 – Kategorien",
+      "P": "not delete the DB when I ask for changes in the DB",
+      "Q": "1",
+      "R": "running my prompts",
+      "S": "I am happy with how it went",
+      "AB": "Low-Code"
+    }
+  },
+  {
+    "branch": "allamani-rando-vibe",
+    "name": "Rando Allamani",
+    "competence": "Mid-Code",
+    "survey_data": {
+      "A": "45994.467300231481",
+      "B": "Rando Allamani",
+      "C": "allamani-rando-vibe",
+      "D": "Debuggen von Fehlern / Debugging errors",
+      "E": "Die AI konnte Bugs nicht korrekt beheben  / The AI could not fix bugs correctly, Die AI hat UI-Renderings falsch/ungenau umgesetzt / The AI implemented the UI incorrectly or imprecisely",
+      "F": "Fehler im Backend (API, DB, Models) / Backend errors (API, DB, models)",
+      "N": "4",
+      "O": "Task 2 – Benutzerkonten",
+      "P": "checking the frontend after changing code in the backend",
+      "Q": "3",
+      "R": "debugging",
+      "S": "Implementing a less robust solution ",
+      "AB": "Mid-Code"
+    }
+  },
+  {
+    "branch": "akbulut-burak-vibe",
+    "name": "Burak Akbulut",
+    "competence": "Low-Code",
+    "survey_data": {
+      "A": "45995.715562534722",
+      "B": "Burak Akbulut",
+      "C": "akbulut-burak-vibe",
+      "D": "Debuggen von Fehlern / Debugging errors",
+      "E": "Die AI konnte Bugs nicht korrekt beheben  / The AI could not fix bugs correctly",
+      "F": "Falsches Verständnis der Datenstruktur / Wrong understanding of the data model / data structures",
+      "N": "3",
+      "O": "Task 2 – Benutzerkonten",
+      "P": "Vielleicht einen schwachen Prompt besser aufwerten können, sodass die AI besser damit arbeiten kann",
+      "Q": "3",
+      "R": " Formulierung des Prompts und die Bearbeitung des Prompts seitens der KI",
+      "S": "Bisschen mehr Zeit um mich mit den Tools auseinanderzusetzten um bessere Prompts zu erstellen",
+      "AB": "Low-Code"
+    }
+  },
+  {
+    "branch": "Dogan-Enes-vibe",
+    "name": "Enes Dogan",
+    "competence": "High-Coder",
+    "survey_data": {
+      "A": "45995.904055312501",
+      "B": "Enes Dogan",
+      "C": "Dogan-Enes-vibe",
+      "D": "Zusammenarbeit mit der AI / Working together with the AI assistant",
+      "E": "Die AI hat falschen Code erzeugt / The AI produced wrong code, Die AI hat Performance falsch eingeschätzt / The AI misjudged performance aspects, Die AI war schwer zu steuern (Prompting) / The AI was hard to steer with prompts, Die AI machte Wiederholungsfehler („Ping-Pong“) / The AI repeated the same mistakes (“ping-pong”)",
+      "F": "Fehler im Frontend (UI/UX) / Frontend errors (UI/UX)",
+      "N": "4",
+      "O": "Task 2 – Benutzerkonten, Task 3 – Kategorien, Task 4 – Dateianhänge",
+      "P": "Am ende des Denkvorganges sollte die AI Deutlicher sagen, dass ich \"Weiter\" machen soll im chat, weil die Aufgabe noch nicht ganz fertig ist.",
+      "Q": "2",
+      "R": "Das warten auf die AI und mein Verständnis mit der AI. ",
+      "S": "Wenn ich mit der KI vertrauter wäre, dann würde ich deutlich bessere Ergebnisse liefern",
+      "AB": "High-Coder"
+    }
+  },
+  {
+    "branch": "prinz-leon-vibe",
+    "name": "Leon Prinz",
+    "competence": "Mid-Code",
+    "survey_data": {
+      "A": "45997.639640844907",
+      "B": "Leon Prinz",
+      "C": "prinz-leon-vibe",
+      "D": "Nichts davon / None of the above",
+      "E": "1. Login Page design did not fit the rest of the project 2. Did not create the login page frontend at all, only after another prompt.",
+      "F": "Reoccuring errors when building the docker container.",
+      "N": "4",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Design could have been better aligned with the rest of the application.",
+      "Q": "1",
+      "R": "Waiting for the agent to apply changes.",
+      "S": "More experience with prompting for larger projects like this one.",
+      "AB": "Mid-Code"
+    }
+  },
+  {
+    "branch": "tselekoglou-ioannis-vibe",
+    "name": "Ioannis Tselekoglou",
+    "competence": "Low-Code",
+    "survey_data": {
+      "A": "45998.549585833331",
+      "B": "Ioannis Tselekoglou",
+      "C": "tselekoglou-ioannis-vibe",
+      "D": "Debuggen von Fehlern / Debugging errors",
+      "E": "keine Probleme / No noticeable problems",
+      "F": "Fehler im Backend (API, DB, Models) / Backend errors (API, DB, models)",
+      "N": "4",
+      "O": "Task 1 – Persistente Todos",
+      "P": "Nothing, i think it worked well ",
+      "Q": "2",
+      "R": "Debugging the Erros, mostly typescript Errors",
+      "S": "Less validation and edge case testing",
+      "AB": "Low-Code"
+    }
+  },
+  {
+    "branch": "tobias-lehrer-vibe",
+    "name": "Tobias Lehrer",
+    "competence": "High-Coder",
+    "survey_data": {
+      "A": "46001.066020046295",
+      "B": "Tobias Lehrer",
+      "C": "tobias-lehrer-vibe",
+      "D": "Zeitdruck / Time pressure",
+      "E": "Die AI konnte Bugs nicht korrekt beheben  / The AI could not fix bugs correctly",
+      "F": "Fehler im Backend (API, DB, Models) / Backend errors (API, DB, models)",
+      "N": "3",
+      "O": "Task 1 – Persistente Todos",
+      "P": "Fix the problem initially",
+      "Q": "3",
+      "R": "We could not fix the issue of the db thats why we had the same occuring errors.",
+      "S": "The Ai should have a better overview of how we structure the tasks ",
+      "AB": "High-Coder"
+    }
+  },
+  {
+    "branch": "helling-max-vibe",
+    "name": "Max Hellinge",
+    "competence": "High-Coder",
+    "survey_data": {
+      "A": "46001.125167824073",
+      "B": "Max Hellinge",
+      "C": "max-helling-vibe",
+      "D": "Ich habe einen einzigen Master Prompt verwendet um alle Aufgaben zu lösen",
+      "E": "keine Probleme / No noticeable problems",
+      "F": "Keine / None",
+      "N": "4",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Schneller in der Lösung der Aufgaben bzw. in der Umsetzung des Codes sein.",
+      "Q": "2",
+      "R": "Den initialen Prompt definieren",
+      "S": "Die einzelnen Aufgaben ausführlicher und präziser formulieren",
+      "AB": "High-Coder"
+    }
+  },
+  {
+    "branch": "august-martin-vibe",
+    "name": "August Martin",
+    "competence": "High-Coder",
+    "survey_data": {
+      "A": "46001.135201342593",
+      "B": "August Martin",
+      "C": "august-martin-vibe",
+      "D": "Nichts davon / None of the above",
+      "E": "Nicht ausführlich genug getestet. Aufgaben waren \"Fetig\", aber sie haben teilweise nicht funktioniert. Erst nachdem man die AI darauf aufmerksam gemacht hat, obwohl man ausdrücklich gesagt hat, dass getestet werden soll.",
+      "F": "Fehler im Frontend (UI/UX) / Frontend errors (UI/UX)",
+      "N": "4",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Besser testen, ob alle Funktionalitäten noch funktionieren.",
+      "Q": "2",
+      "R": "am Zeitintensivsten war das warten auf die AI.",
+      "S": "Ich denke nichts, da man ein eingeschränktes Zeitlimit hatte. Ohne Zeitlimit komme ich gut uns sauber voran.",
+      "AB": "High-Coder"
+    }
+  },
+  {
+    "branch": "Theuerkauf-Jochen-vibe",
+    "name": "Jochen Theuerkauf",
+    "competence": "No-Code",
+    "survey_data": {
+      "A": "46001.563629837961",
+      "B": "Jochen Theuerkauf",
+      "C": "Theuerkauf-Jochen-vibe",
+      "D": "Debuggen von Fehlern / Debugging errors",
+      "E": "keine Probleme / No noticeable problems",
+      "F": "Syntaxfehler / Syntax errors",
+      "N": "4",
+      "O": "Task 3 – Kategorien",
+      "P": "All fine",
+      "Q": "1",
+      "R": "Waiting for the code generation",
+      "S": "All fine, there will be learning curve with next projects",
+      "AB": "No-Code"
+    }
+  },
+  {
+    "branch": "sethi-sangat-vibe",
+    "name": "Sangat Sethi",
+    "competence": "No-Code",
+    "survey_data": {
+      "A": "46001.646566226853",
+      "B": "Sangat Sethi",
+      "C": "sethi-sangat-vibe",
+      "D": "Zeitdruck / Time pressure",
+      "E": "keine Probleme / No noticeable problems",
+      "F": "Ungenaue oder falsche Performance-Optimierungen / Inaccurate or wrong performance optimizations",
+      "N": "3",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Nothing much",
+      "Q": "3",
+      "R": "Waiting for the AI to make the changes",
+      "S": "I would have optimised my prompts and explained what to do in a better way.",
+      "AB": "No-Code"
+    }
+  },
+  {
+    "branch": "goek-cihad-vibe",
+    "name": "Cihad Gök",
+    "competence": "Mid-Code",
+    "survey_data": {
+      "A": "46002.157814293983",
+      "B": "Cihad Gök",
+      "C": "goek-cihad-vibe",
+      "D": "Zeitdruck / Time pressure",
+      "E": "Die AI hat UI-Renderings falsch/ungenau umgesetzt / The AI implemented the UI incorrectly or imprecisely",
+      "F": "Fehler im Frontend (UI/UX) / Frontend errors (UI/UX)",
+      "N": "4",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "nothing",
+      "Q": "3",
+      "R": "Waiting for the Results",
+      "S": "nothing",
+      "AB": "Mid-Code"
+    }
+  },
+  {
+    "branch": "rubas-michael-vibe",
+    "name": "Michael Rubas",
+    "competence": "No-Code",
+    "survey_data": {
+      "A": "46003.402517870374",
+      "B": "Michael Rubas",
+      "C": "rubas-michael-vibe",
+      "D": "Verständnis der Aufgabe  / Understanding the tasks",
+      "E": "Die AI hat die Aufgabe falsch verstanden / The AI misunderstood the task, Die AI war schwer zu steuern (Prompting) / The AI was hard to steer with prompts",
+      "F": "Keine / None",
+      "N": "4",
+      "O": "keine Schwierigkeiten / No particular difficulties",
+      "P": "Work faster and better with docker.",
+      "Q": "2",
+      "R": "Understand the task and give an according prompt.",
+      "S": "A better understanding of the architecture.",
+      "AB": "No-Code"
+    }
+  }
+]

@@ -1,0 +1,49 @@
+
+> backend@1.0.0 test
+> jest --runTestsByPath tests/task2.user-accounts.test.ts --runInBand --forceExit
+
+FAIL tests/task2.user-accounts.test.ts
+  TASK2_USER_ACCOUNTS
+    ✕ registers and logs in a user (token or cookie) (23 ms)
+    ✓ rejects passwords shorter than 8 characters (or equivalent policy) (2 ms)
+    ✕ enforces auth and user scoping for /api/todos (5 ms)
+
+  ● TASK2_USER_ACCOUNTS › registers and logs in a user (token or cookie)
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected value: 400
+    Received array: [200, 201]
+
+      135 |
+      136 |     const reg = await registerUser(app, email, password);
+    > 137 |     expect([200, 201]).toContain(reg.response.status);
+          |                        ^
+      138 |
+      139 |     const login = await loginUser(app, email, password);
+      140 |     expect([200, 201]).toContain(login.response.status);
+
+      at Object.<anonymous> (tests/task2.user-accounts.test.ts:137:24)
+
+  ● TASK2_USER_ACCOUNTS › enforces auth and user scoping for /api/todos
+
+    expect(received).not.toBe(expected) // Object.is equality
+
+    Expected: not "none"
+
+      164 |     const loginA = await loginUser(app, userA.email, userA.password);
+      165 |     const authA = authFromLogin(loginA.response);
+    > 166 |     expect(authA.kind).not.toBe("none");
+          |                            ^
+      167 |
+      168 |     const unauth = await request(app).get("/api/todos");
+      169 |     expect([401, 403]).toContain(unauth.status);
+
+      at Object.<anonymous> (tests/task2.user-accounts.test.ts:166:28)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 1 passed, 3 total
+Snapshots:   0 total
+Time:        1.595 s, estimated 2 s
+Ran all test suites within paths "tests/task2.user-accounts.test.ts".
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?

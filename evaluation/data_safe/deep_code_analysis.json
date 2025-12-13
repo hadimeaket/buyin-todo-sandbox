@@ -1,0 +1,182 @@
+{
+  "Dogan-Enes-vibe": {
+    "t1_persistence": "mongo",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 0,
+    "test_fail": 12
+  },
+  "Dogan-Mansur-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 0,
+    "test_fail": 10
+  },
+  "Maia-Dinis-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 4,
+    "test_fail": 20
+  },
+  "Theuerkauf-Jochen-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 8,
+    "test_fail": 19
+  },
+  "akbulut-burak-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 4,
+    "test_fail": 28
+  },
+  "allamani-rando-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 13,
+    "test_fail": 9
+  },
+  "august-martin-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 14,
+    "test_fail": 37
+  },
+  "bektas-cengizhan-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 13,
+    "test_fail": 13
+  },
+  "goek-cihad-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 0,
+    "test_fail": 24
+  },
+  "goek-fadime-vibe": {
+    "t1_persistence": "memory/other",
+    "t2_auth": "none",
+    "t3_categories": "implemented",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 14,
+    "test_fail": 12
+  },
+  "goek-yasin-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 0,
+    "test_fail": 12
+  },
+  "prinz-leon-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 12,
+    "test_fail": 12
+  },
+  "rubas-michael-vibe": {
+    "t1_persistence": "postgres",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 0,
+    "test_fail": 12
+  },
+  "tobias-lehrer-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 0,
+    "test_fail": 24
+  },
+  "tselekoglou-ioannis-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 0,
+    "test_fail": 12
+  },
+  "versuro-andrea-vibe": {
+    "t1_persistence": "json-file",
+    "t2_auth": "implemented",
+    "t3_categories": "implemented",
+    "t4_attachments": "implemented",
+    "t5_calendar": "none",
+    "lint_errors": 1,
+    "test_pass": 12,
+    "test_fail": 12
+  },
+  "sethi-sangat-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 12,
+    "test_fail": 10
+  },
+  "helling-max-vibe": {
+    "t1_persistence": "sqlite",
+    "t2_auth": "implemented",
+    "t3_categories": "none",
+    "t4_attachments": "none",
+    "t5_calendar": "none",
+    "lint_errors": 0,
+    "test_pass": 12,
+    "test_fail": 10
+  }
+}

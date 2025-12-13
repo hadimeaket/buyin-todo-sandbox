@@ -1,13 +1,65 @@
-\section{Code-Qualität und Metriken}
+\section{Code-Qualität und technische Metriken}
 \label{sec:results_quality}
 
-Dieses Unterkapitel präsentiert die objektiven Messwerte zur Code-Qualität, basierend auf automatisierten Analysetools.
+Dieses Unterkapitel beschreibt beobachtbare Aspekte der Code-Qualität über alle 18 \texttt{*-vibe}-Branches hinweg.
+Im Fokus stehen technische Messwerte und Artefakte (Linting, Typisierungs-Surrogate, Teststabilität und Strukturindikatoren), die die Wartbarkeit und Robustheit des Systems ergänzend zur rein funktionalen Korrektheit beschreiben.
+Die Darstellung bleibt bewusst deskriptiv; sie bildet Messstände und Auswertungsergebnisse ab, ohne Ursachen oder Wirkzusammenhänge abzuleiten.
+Als Datenbasis dienen ausschließlich die Auswertungsartefakte \path{evaluation/code_quality_metrics.json}, \path{evaluation/data_safe/lint_results.json}, \path{evaluation/data_safe/test_results.json}, \path{evaluation/deep_code_analysis.json} und \path{evaluation/task_pipeline_v3.json}.
 
-% DATENQUELLEN:
-% - ESLint Reports (Linting Errors)
-% - Test Reports (Pass/Fail Raten)
-% - Lighthouse/Playwright (falls vorhanden)
-%
-% HINWEISE:
-% - Rein quantitative Darstellung
-% - Keine Bewertung der Ursachen (das folgt in Kap. 7)
+\subsection{ESLint und Typisierung}
+\label{sec:results_quality_lint_typing}
+
+Die ESLint-Ergebnisse liegen als Fehleranzahl pro Branch vor.
+In \path{evaluation/data_safe/lint_results.json} weisen 4 von 18 Branches \emph{0} ESLint-Fehler aus, während 14 von 18 Branches \emph{1} ESLint-Fehler ausweisen.
+Eine Aufschlüsselung nach ESLint-Regelkategorien (z.\,B. \emph{no-unused-vars}, \emph{no-explicit-any}) ist in den Artefakten nicht enthalten und wurde daher nicht ausgewertet.
+
+Als Surrogat für Typisierungsstrenge und potenziellen ``Escape'' aus dem Typsystem wird die Nutzung von \texttt{any} ausgewiesen (\texttt{anyUsage} in \path{evaluation/code_quality_metrics.json}).
+Über alle Branches liegt \texttt{anyUsage} zwischen 2 und 42 (Median: 8.5).
+Zusätzlich wird die Verwendung von \texttt{console} als Indikator für Debug-Ausgaben berichtet (\texttt{consoleUsage}); diese liegt zwischen 4 und 19 (Median: 6).
+Spezifische Vorkommen von \texttt{TODO}/\texttt{FIXME} oder ``temporären'' Debug-Endpunkten werden in den vorliegenden Metriken nicht erfasst.
+
+\subsection{Testabdeckung und Teststabilität}
+\label{sec:results_quality_tests}
+
+Die Testdaten liegen in zwei Formen vor: (a) eine Aggregation von Pass/Fail-Zählwerten je Branch in \path{evaluation/deep_code_analysis.json} sowie (b) Jest-JSON-Zusammenfassungen je Branch in \path{evaluation/data_safe/test_results.json}.
+In \path{evaluation/deep_code_analysis.json} reichen die pro Branch gezählten \texttt{test\_pass}-Werte von 0 bis 14 und die \texttt{test\_fail}-Werte von 9 bis 37.
+7 von 18 Branches weisen \texttt{test\_pass}=0 aus; 11 von 18 Branches weisen mindestens einen bestandenen Test aus.
+Die Jest-JSON-Ausgaben bestätigen dieses Bild in Form von Summen (z.\,B. \texttt{numFailedTestSuites}, \texttt{numFailedTests}, \texttt{numPassedTests}); eine normalisierte Kategorisierung der Fehlertypen (z.\,B. nach ``Auth/HTTP-Status'', ``Schema'', ``Datenpersistenz'') ist in den Artefakten nicht enthalten.
+
+Für die Aufgabenfortschritts-Metrik wird zusätzlich \path{evaluation/task_pipeline_v3.json} herangezogen.
+Für die dort ausgewiesene Test-Validierung (\texttt{verified}) ergeben sich über alle Branches: T1 ist in 10/18 Branches verifiziert, T2 in 4/18, T4 in 0/18 und T5 in 0/18.
+Für T5 wird in \path{evaluation/task_pipeline_v3.json} außerdem \texttt{implemented}=0/18 ausgewiesen.
+Bei T3 sind in \path{evaluation/task_pipeline_v3.json} \texttt{verified}=13/18 und \texttt{implemented}=7/18 vermerkt; diese Differenz wird in dieser Arbeit als Messartefakt der verwendeten ``implemented''-Heuristik ausgewiesen (die übergreifende Hierarchie \emph{Verified} $\subseteq$ \emph{Implemented} wird über die in Abschnitt~6.2 festgelegte Implemented-Definition hergestellt).
+
+\subsection{Architektur- und Strukturindikatoren}
+\label{sec:results_quality_architecture}
+
+Als strukturbezogene Indikatoren werden in \path{evaluation/deep_code_analysis.json} für einzelne Aufgaben Implementationsklassen sowie Persistenzvarianten ausgewiesen.
+Für T1 (Persistenz) werden unterschiedliche Backends beobachtet: 14/18 Branches sind als \emph{sqlite} klassifiziert, jeweils 1/18 als \emph{mongo}, \emph{postgres}, \emph{json-file} und \emph{memory/other}.
+Für T2 (Auth) werden 17/18 Branches als \emph{implemented} und 1/18 als \emph{none} klassifiziert.
+Für T3 (Kategorien) sind 7/18 Branches als \emph{implemented} und 11/18 als \emph{none} klassifiziert; für T4 (Attachments) 8/18 als \emph{implemented} und 10/18 als \emph{none}.
+Für T5 (Kalender) ist in \path{evaluation/deep_code_analysis.json} über alle 18 Branches hinweg \emph{none} ausgewiesen, konsistent zu \path{evaluation/task_pipeline_v3.json} (\texttt{implemented}=0/18, \texttt{verified}=0/18).
+
+Die Codeumfangs-Metrik \texttt{tsFileCount} (\path{evaluation/code_quality_metrics.json}) liegt über alle Branches zwischen 43 und 80 TypeScript-Dateien (Median: 54) und liefert damit einen groben, rein quantitativen Indikator für Codebasis-Variation.
+
+\subsection{Zusammenhänge mit Task-Fortschritt}
+\label{sec:results_quality_correlations}
+
+Für eine rein deskriptive Gegenüberstellung wird die Anzahl als \texttt{implemented} markierter Tasks pro Branch aus \path{evaluation/task_pipeline_v3.json} genutzt.
+Die Branches verteilen sich dabei auf 1 bis 4 als \texttt{implemented} markierte Tasks (T5 ist in allen Fällen nicht implementiert).
+In den gruppierten Mittelwerten ko-auftreten höhere Werte von \texttt{anyUsage} und \texttt{consoleUsage} mit höherer \texttt{implemented}-Taskanzahl (z.\,B. \texttt{anyUsage} im Mittel 8.8 bei 2 implementierten Tasks vs. 12.4 bei 3 vs. 16.7 bei 4).
+Analog zeigt die Gegenüberstellung nach ESLint-Fehleranzahl (0 vs. 1 Fehler laut \path{evaluation/data_safe/lint_results.json}) Unterschiede in den Medianen von \texttt{consoleUsage} (4.5 vs. 7.5) und \texttt{anyUsage} (7.5 vs. 9); diese Darstellung ist als kleine Fallzahl bei 0 Fehlern (4 Branches) zu lesen.
+
+Darüber hinaus enthalten die vorliegenden Artefakte keine Kennzahlen zu Testabdeckung in Prozent, keine Komplexitätsmaße (z.\,B. zyklomatische Komplexität), keine TypeScript-Compilerfehlerstatistiken, keine Performance-/Bundle-Metriken und keine konsolidierten Frontend-Lighthouse-Ergebnisse.
+Aus diesem Grund werden hier keine weitergehenden, metrisch gestützten Aussagen über Abdeckung, Komplexität oder Laufzeitverhalten getroffen.
+
+\subsection{Kurzfazit: Beobachtete Qualitätsmerkmale}
+\label{sec:results_quality_summary}
+
+\begin{itemize}
+	\item ESLint: 4/18 Branches ohne ESLint-Fehler, 14/18 mit genau einem Fehler (keine Regelkategorien verfügbar).
+	\item Typisierung/Debug-Surrogate: \texttt{anyUsage} variiert stark (2--42), \texttt{consoleUsage} liegt zwischen 4 und 19.
+	\item Tests: Testausgänge sind heterogen (\texttt{test\_pass} 0--14; \texttt{test\_fail} 9--37); 7/18 Branches ohne bestandene Tests.
+	\item Aufgabenvalidierung (Pipeline v3): T1 ist in 10/18 Branches verifiziert, T2 in 4/18; T4 und T5 in 0/18.
+	\item Architekturindikatoren: Persistenz- und Feature-Varianten sind sichtbar (mehrere Persistenztypen; T2 überwiegend implementiert; T5 in allen Branches nicht implementiert).
+\end{itemize}
