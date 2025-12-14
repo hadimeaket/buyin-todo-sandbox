@@ -1,11 +1,11 @@
 \section{Chat-Interaktionsmuster}
 \label{sec:results_chat}
 
-Dieses Unterkapitel beschreibt beobachtbare Muster der Interaktion zwischen den Teilnehmenden (Teilnehmer A--R) und dem im Experiment eingesetzten Tool \emph{GitHub Copilot} mit dem zugrundeliegenden LLM \emph{Claude Sonnet 4.5}.
+Dieses Unterkapitel beschreibt beobachtbare Muster der Interaktion zwischen den Teilnehmenden (Teilnehmer A--R) und dem im Experiment eingesetzten Tool \emph{GitHub Copilot} mit dem zugrundeliegenden LLM \emph{Claude Sonnet~4.5}.
 Als Datenbasis dienen ausschließlich die 18 Chat-Exports in \path{thesis/chats/} (\texttt{.docx}) sowie der Task-Status aus \path{evaluation/task_pipeline_v3.json}.
-Ein separates, maschinell generiertes Chat-Metrik-Artefakt liegt nicht vor; alle berichteten Metriken wurden direkt aus den Chat-Exports extrahiert.
+Ein separates, maschinell generiertes Chat-Metrik-Artefakt liegt nicht vor. Alle berichteten Metriken wurden direkt aus den Chat-Exports extrahiert.
 Die Zuordnung Chat $\leftrightarrow$ Branch erfolgt über die im Evaluationskapitel beschriebene Normalisierung der Chat-Dateinamen und deren Mapping auf Branches.
-Alle Aussagen werden als Zählwerte, Spannweiten oder Verteilungskennwerte berichtet; eine qualitative Inhaltsbewertung der Antworten erfolgt in diesem Unterkapitel nicht.
+Alle Aussagen werden als Zählwerte, Spannweiten oder Verteilungskennwerte berichtet. Eine qualitative Inhaltsbewertung der Antworten erfolgt in diesem Unterkapitel nicht.
 
 \subsection{Umfang und Intensität der Interaktion}
 \label{sec:results_chat_volume}
@@ -14,12 +14,13 @@ Alle Aussagen werden als Zählwerte, Spannweiten oder Verteilungskennwerte beric
 Wortanzahl, Zyklenzahl und Anzahl der Nutzerbeiträge sind in diesem Abschnitt als Intensitätsindikatoren operationalisiert und werden nicht als Leistungs- oder Effizienzmaße interpretiert.
 
 
-\textbf{Ergebnis.} Die Wortanzahl pro Chat liegt zwischen 4046 und 26833 Wörtern (Median: 7137.5; Quartile: Q1=5330.5, Q3=8862.25).
+\textbf{Ergebnis.} Die Wortanzahl pro Chat liegt zwischen 4046 und 26833 Wörtern (Median: 7137.5, Quartile: Q1=5330.5, Q3=8862.25).
 
 \textbf{Messdefinition.} Die Anzahl der Prompt-Antwort-Zyklen wurde als Sequenzpaar aus einem Nutzerbeitrag (in den Exports typischerweise markiert durch \texttt{You said:} oder einen Namenspräfix \texttt{X:}) und der unmittelbar folgenden Modellantwort (in den Exports u.\,a. markiert durch \texttt{GitHub Copilot:} oder \texttt{ChatGPT said:}) gezählt.
 Die genannten Sprecherkennzeichnungen werden ausschließlich zur Segmentierung in Nutzerbeiträge und Modellantworten verwendet.
 
-\textbf{Ergebnis.} Über alle Chats liegt die Anzahl der Prompt-Antwort-Zyklen zwischen 12 und 45 (Median: 16.5; Quartile: Q1=14.25, Q3=19.75).
+
+\textbf{Ergebnis.} Über alle Chats liegt die Anzahl der Prompt-Antwort-Zyklen zwischen 12 und 45 (Median: 16.5, Quartile: Q1=14.25, Q3=19.75).
 
 \textbf{Messdefinition.} Als zusätzlicher Intensitätsindikator wurde die Anzahl der erkannten Nutzerbeiträge pro Chat bestimmt.
 
@@ -30,7 +31,7 @@ Damit werden in den Chat-Exports sowohl Fälle mit wenigen Dutzend Nutzerbeiträ
 \label{sec:results_chat_prompt_structure}
 
 \textbf{Messdefinition.} Für die formale Beschreibung der Prompt-Struktur wurden alle 3390 erkannten Nutzerbeiträge aggregiert ausgewertet.
-Die folgenden Merkmale wurden regelbasiert bestimmt; die Kategorien sind nicht disjunkt (ein Nutzerbeitrag kann mehrere Merkmale gleichzeitig aufweisen).
+Die folgenden Merkmale wurden regelbasiert bestimmt. Die Kategorien sind nicht disjunkt, ein Nutzerbeitrag kann mehrere Merkmale gleichzeitig aufweisen.
 
 \textbf{Ergebnis.} Ein-Satz-Prompts (operationalisiert als Nutzerbeiträge mit höchstens einem Satzendzeichen \texttt{.?!}) treten in 1901 von 3390 Fällen auf (56.1\%).
 Strukturierte Mehrpunkt-Prompts (operationalisiert über Aufzählungs-/Schrittmuster, z.\,B. \texttt{•} oder nummerierte Listen sowie Schlüsselwörter wie \texttt{To do}/\texttt{Schritt}) treten in 471 von 3390 Fällen auf (13.9\%).
@@ -45,14 +46,14 @@ Nachforderungen bzw. erneute Anweisungen (operationalisiert über Wiederholungs-
 \label{sec:results_chat_debugging}
 
 \textbf{Messdefinition.} Debugging-bezogene Nutzerbeiträge wurden über Vorkommen typischer Fehlermarker (z.\,B. \texttt{error}, \texttt{exception}, \texttt{failed}, \texttt{TypeError}, \texttt{TS\dots}, \texttt{eslint}) erfasst.
-Die folgenden Iterations- und Wiederholungsmetriken beschreiben ausschließlich Textmuster in den Nutzerbeiträgen; daraus werden keine Aussagen über Emotionen, Kompetenz oder Motivation abgeleitet.
+Die folgenden Iterations- und Wiederholungsmetriken beschreiben ausschließlich Textmuster in den Nutzerbeiträgen. Daraus werden keine Aussagen über Emotionen, Kompetenz oder Motivation abgeleitet.
 
 \textbf{Ergebnis.} Insgesamt enthalten 296 von 3390 Nutzerbeiträgen solche Fehlermarker (8.7\%).
 
 \textbf{Messdefinition.} Als \emph{Iteration} wurde eine Folge von Nutzerbeiträgen operationalisiert, die jeweils Fehlermarker enthalten (aufeinanderfolgende Korrekturversuche im selben Chatabschnitt).
 
 \textbf{Ergebnis.} Über alle Chats hinweg wurden 254 solche Iterationssequenzen gezählt.
-Die maximale Länge aufeinanderfolgender Fehlermarker-Nutzerbeiträge in einem einzelnen Chat liegt zwischen 1 und 9 (Median: 2; Maximum: 9).
+Die maximale Länge aufeinanderfolgender Fehlermarker-Nutzerbeiträge in einem einzelnen Chat liegt zwischen 1 und 9 (Median: 2, Maximum: 9).
 
 \textbf{Messdefinition.} Als einfache Form von \emph{Wiederholung} wurde zusätzlich erfasst, ob zwei aufeinanderfolgende Fehlermarker-Nutzerbeiträge eine identische normalisierte Fehlersignatur (erste erkannte Error-/Exception-Zeile) enthalten.
 
@@ -62,13 +63,13 @@ Die maximale Länge aufeinanderfolgender Fehlermarker-Nutzerbeiträge in einem e
 Task-Wechsel werden in diesem Unterkapitel als Strukturmerkmal der Interaktion berichtet und nicht bewertet.
 
 \textbf{Ergebnis.} 148 von 3390 Nutzerbeiträgen enthalten mindestens eine Task-Mention (4.4\%).
-In 8 von 18 Chats wird mindestens ein Wechsel der zuerst genannten Task-Nummer beobachtet; über alle Chats hinweg wurden 74 solche Task-Wechsel gezählt.
+In 8 von 18 Chats wird mindestens ein Wechsel der zuerst genannten Task-Nummer beobachtet. Über alle Chats hinweg wurden 74 solche Task-Wechsel gezählt.
 
-\subsection{Modelltypische Antwortmuster (Claude Sonnet 4.5)}
+\subsection{Modelltypische Antwortmuster (Claude Sonnet~4.5)}
 \label{sec:results_chat_model_patterns}
 
 \textbf{Messdefinition.} Für die Modellantworten wurden 335 erkannte Antworten aggregiert ausgewertet.
-Als Modellantworten werden Textsegmente erfasst, die in den Exports als Antwort des Assistenzsystems markiert sind (z.\,B. durch \texttt{GitHub Copilot:} oder \texttt{ChatGPT said:}); diese Kennzeichnungen werden ausschließlich zur Segmentierung verwendet.
+Als Modellantworten werden Textsegmente erfasst, die in den Exports als Antwort des KI-Assistenzsystems markiert sind (z.\,B. durch \texttt{GitHub Copilot:} oder \texttt{ChatGPT said:}). Diese Kennzeichnungen werden ausschließlich zur Segmentierung verwendet.
 
 \textbf{Ergebnis.} Codeblöcke in der Modellantwort (operationalisiert über das Vorkommen von Markdown-Fences \texttt{```}) treten in 122 von 335 Modellantworten auf (36.4\%).
 Rückfragen bzw. Frageformen (operationalisiert über ein abschließendes Fragezeichen oder Formulierungen wie \texttt{Would you like}/\texttt{Can you}) treten in 21 von 335 Modellantworten auf (6.3\%).
@@ -79,15 +80,15 @@ Architektur-/Strukturbegriffe (operationalisiert über Schlüsselwörter wie \te
 \subsection{Beziehung zwischen Chat-Mustern und Task-Fortschritt (deskriptiv)}
 \label{sec:results_chat_vs_progress}
 
-\textbf{Messdefinition.} Für eine rein deskriptive Gegenüberstellung wird der Task-Fortschritt je Branch aus \path{evaluation/task_pipeline_v3.json} (Anzahl \texttt{implemented} und \texttt{verified} Tasks) neben die Interaktionsmetriken gestellt.
-Die folgenden Aussagen beschreiben Ko-Vorkommen innerhalb derselben Branches; es werden keine Wirk- oder Kausalzusammenhänge abgeleitet.
+									 	\textbf{Messdefinition.} Für eine rein deskriptive Gegenüberstellung wird der Task-Fortschritt je Branch aus \path{evaluation/task_pipeline_v3.json} neben die Interaktionsmetriken gestellt. Dabei wird \texttt{implemented} als heuristisches, statisches Artefakt-Signal (\textit{Implemented\textsubscript{static}}) verstanden; \texttt{verified} bildet testgebundenes Verhalten ab.
+Die folgenden Aussagen beschreiben Ko-Vorkommen innerhalb derselben Branches. Es werden keine Wirk- oder Kausalzusammenhänge abgeleitet.
 
-\textbf{Ergebnis.} Über die 18 Branches hinweg liegen die \texttt{implemented}-Taskanzahlen zwischen 1 und 4 (T5 ist in \path{evaluation/task_pipeline_v3.json} in allen Branches nicht implementiert).
+									 	\textbf{Ergebnis.} Über die 18 Branches hinweg liegen die \texttt{implemented}-(\textit{Implemented\textsubscript{static}})-Taskanzahlen zwischen 1 und 4 (T5 ist in \path{evaluation/task_pipeline_v3.json} in allen Branches nicht implementiert).
 
-In der Gruppe mit 2 implementierten Tasks (n=6) liegt die Wortanzahl zwischen 4046 und 9190 (Median: 6449) und die Zyklenzahl zwischen 12 und 20 (Median: 14.5); die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
-In der Gruppe mit 3 implementierten Tasks (n=8) liegt die Wortanzahl zwischen 4863 und 26833 (Median: 8865) und die Zyklenzahl zwischen 16 und 45 (Median: 18); die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
-In der Gruppe mit 4 implementierten Tasks (n=3) liegt die Wortanzahl zwischen 4764 und 6663 (Median: 4919) und die Zyklenzahl zwischen 14 und 21 (Median: 14); die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
-Die Kombination aus hoher Wortanzahl (bis 26833) und hoher Zyklenzahl (bis 45) tritt innerhalb derselben Gruppe (3 implementierte Tasks) auf.
+In der Gruppe mit 2 \texttt{implemented}-(\textit{Implemented\textsubscript{static}})-Tasks (n=6) liegt die Wortanzahl zwischen 4046 und 9190 (Median: 6449) und die Zyklenzahl zwischen 12 und 20 (Median: 14.5). Die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
+In der Gruppe mit 3 \texttt{implemented}-(\textit{Implemented\textsubscript{static}})-Tasks (n=8) liegt die Wortanzahl zwischen 4863 und 26833 (Median: 8865) und die Zyklenzahl zwischen 16 und 45 (Median: 18). Die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
+In der Gruppe mit 4 \texttt{implemented}-(\textit{Implemented\textsubscript{static}})-Tasks (n=3) liegt die Wortanzahl zwischen 4764 und 6663 (Median: 4919) und die Zyklenzahl zwischen 14 und 21 (Median: 14). Die Anzahl verifizierter Tasks liegt zwischen 0 und 2 (Median: 2).
+Die Kombination aus hoher Wortanzahl (bis 26833) und hoher Zyklenzahl (bis 45) tritt innerhalb derselben Gruppe (3 \texttt{implemented}-(\textit{Implemented\textsubscript{static}})-Tasks) auf.
 
 Dieses Unterkapitel beschreibt ausschließlich beobachtbare Interaktionsmuster und deren Messwerte.
 Es enthält keine Effizienz- oder Leistungsbewertung, keine Kompetenzzuschreibung, keine psychologischen Deutungen und keine Modellbewertung.

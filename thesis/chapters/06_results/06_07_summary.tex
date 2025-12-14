@@ -6,35 +6,35 @@ Die Ergebnisdarstellung basiert auf mehreren Datenquellen (Pipeline-Status \,\te
 Im Folgenden werden die zentralen Befundlinien systematisch zusammengeführt.
 
 \paragraph{Pipeline-Ergebnisse entlang der Tasks (T1--T5).}
-Über die Tasks hinweg zeigt sich ein gemeinsamer Trichter-Effekt: Attempted-Markierungen sind in der Breite vorhanden, während die Anteile der als Implemented bzw. Verified ausgewiesenen Ergebnisse mit zunehmendem Integrations- und Abhängigkeitsgrad abnehmen.
+Über die Tasks hinweg zeigt sich ein gemeinsamer Trichter-Effekt: Attempted-Markierungen sind in der Breite vorhanden, während die Anteile der als Implemented$^\ast$ (Trichter-Evidenzstufe) bzw. Verified ausgewiesenen Ergebnisse mit zunehmendem Integrations- und Abhängigkeitsgrad abnehmen.
 Dabei ist die Ausprägung dieses Trichters nicht in allen Branches gleichförmig, sondern zeigt Spannweiten zwischen sehr kurzem Task-Fortschritt und einem deutlich weiter reichenden Umsetzungsstand.
 In der Gegenüberstellung der Aufgaben treten dabei zwei Bündel hervor:
 \begin{itemize}
-\item \textbf{Backend-nahe Tasks (T1/T2).} T1 ist in den Branches in unterschiedlichen Persistenzvarianten umgesetzt, wobei eine Variante dominiert und mehrere Alternativen vereinzelt auftreten. T2 wird in der Mehrzahl der Branches als Implemented ausgewiesen und ist damit ein häufig realisiertes Backend-Element.
-\item \textbf{Integrations- und Frontend-nahe Tasks (T3--T5).} Bei T3 und T4 nehmen die Implemented-Ausweise ab; zugleich werden bei einzelnen Tasks Diskrepanzen zwischen Implemented und Verified sichtbar (ohne dass daraus in Kapitel~6 Schlussfolgerungen abgeleitet werden). T5 bleibt in den Artefakten durchgängig ohne Implemented- und ohne Verified-Ausweise.
+\item \textbf{Backend-nahe Tasks (T1/T2).} T1 ist in den Branches in unterschiedlichen Persistenzvarianten umgesetzt, wobei eine Variante dominiert und mehrere Alternativen vereinzelt auftreten. T2 wird in der Mehrzahl der Branches als Implemented$^\ast$ ausgewiesen und ist damit ein häufig realisiertes Backend-Element.
+\item \textbf{Integrations- und Frontend-nahe Tasks (T3--T5).} Bei T3 und T4 nehmen die Implemented\textsubscript{static}-Ausweise ab. Zugleich werden bei einzelnen Tasks Diskrepanzen zwischen Implemented\textsubscript{static} (heuristische Artefakt-Markierung) und Verified sichtbar (ohne dass daraus in Kapitel~6 Schlussfolgerungen abgeleitet werden). T5 bleibt in den Artefakten durchgängig ohne Implemented\textsubscript{static}- und ohne Verified-Ausweise.
 \end{itemize}
-Über alle Tasks hinweg gilt: Verified, Implemented und Attempted sind empirisch unterscheidbare Statuskategorien und fallen nicht notwendigerweise zusammen.
+Über alle Tasks hinweg gilt: Verified, Implemented\textsubscript{static} und Attempted sind empirisch unterscheidbare Statuskategorien und fallen nicht notwendigerweise zusammen. Für die Trichterdarstellung wird Implemented$^\ast$ (Attempted $\wedge$ (Implemented\textsubscript{static} $\vee$ Verified)) als konsistente Evidenzstufe genutzt.
 Kapitel~6 beschreibt diese Statusausweise als Ergebnisvariablen der Pipeline und nutzt sie als gemeinsame Referenz, um Code-, Test- und Chat-Artefakte pro Branch in Beziehung zu setzen.
 
 \paragraph{Technische Qualität (aggregiert, ohne Kausalannahmen).}
 Die in Kapitel~6 berichteten Qualitäts- und Technikindikatoren zeigen insgesamt eine heterogene Ausprägung über die Branches hinweg.
 Dazu gehören (a) Unterschiede im Linting-Status und in der Häufigkeit typischer TypeScript-Surrogate (z.\,B. Any-Nutzung), (b) Spannweiten bei strukturbezogenen Metriken (z.\,B. Anzahl TypeScript-Dateien) sowie (c) variierende Testausgänge bis hin zu Konstellationen mit Fehlanteilen.
-Diese Befunde werden in Kapitel~6 als Ko-Existenz von Pipeline-Fortschritt und technischen Merkmalen beschrieben; es wird keine Korrelation oder Wirkbeziehung behauptet.
+Diese Befunde werden in Kapitel~6 als Ko-Existenz von Pipeline-Fortschritt und technischen Merkmalen beschrieben. Es wird keine Korrelation oder Wirkbeziehung behauptet.
 Zusätzlich wird sichtbar, dass sich technische Ausprägungen nicht auf einen einheitlichen "Projektzustand" reduzieren lassen: Branches mit ähnlichem Pipeline-Fortschritt können unterschiedliche Muster in Linting-, Typisierungs- und Testindikatoren aufweisen.
 Zugleich werden die Messgrenzen betont: Die verwendeten Indikatoren ersetzen keine Coverage-, Komplexitäts- oder Performance-Metriken und erlauben entsprechend keine Aussagen zu nicht gemessenen Qualitätsdimensionen.
 
 \paragraph{Chat-Interaktionsmuster (kompakt).}
 Die Chat-Analysen zeigen große Spannweiten bei der Interaktionsintensität, insbesondere bei Wortanzahl und Prompt-Antwort-Zyklen.
-Über die Branches hinweg koexistieren kurze, wenig strukturierte Prompts mit detaillierten Mehrpunkt-Prompts; beide Formen treten im selben Datensatz nebeneinander auf.
+Über die Branches hinweg koexistieren kurze, wenig strukturierte Prompts mit detaillierten Mehrpunkt-Prompts. Beide Formen treten im selben Datensatz nebeneinander auf.
 Als wiederkehrendes Strukturmerkmal sind Debugging-Iterationen sichtbar (z.\,B. wiederholte Fehlermarker und erneute Anpassungsversuche), ohne dass daraus eine qualitative Einordnung ("gut/schlecht") abgeleitet wird.
 Neben Intensitätsmaßen werden in Kapitel~6 auch Muster in der Interaktionsstruktur beschrieben, etwa wiederkehrende Task-Referenzen, Wechsel zwischen Aufgaben sowie Tooling-/Aktionsformulierungen im Verlauf der Chats.
 
 \paragraph{Triangulation auf Meta-Ebene.}
 Die Triangulation macht sichtbar, dass unterschiedliche Datenquellen teils kongruente, teils divergente Signale liefern: Pipeline-Status, technische Indikatoren, Testausgänge, Chat-Merkmale und Survey-Merkmale können für dieselben Branches zusammenpassen oder auseinanderlaufen.
-Insbesondere verdeutlicht die Gegenüberstellung, dass Verified $\neq$ Implemented $\neq$ Attempted und dass Spannungsfelder zwischen Statusausweisen, technischen Beobachtungen und Interaktionsmustern empirisch auftreten.
+Insbesondere verdeutlicht die Gegenüberstellung, dass Verified $\neq$ Implemented\textsubscript{static} $\neq$ Attempted und dass Spannungsfelder zwischen Statusausweisen, technischen Beobachtungen und Interaktionsmustern empirisch auftreten.
 Auch Survey-Merkmale werden als kategoriale Kontextvariablen einbezogen (Selbsteinstufungsgruppen und benannte Hürdenkategorien), ohne dass daraus individuelle Zuschreibungen oder Bewertungen abgeleitet werden.
 In der Gesamtschau entstehen damit nebeneinander stehende Ergebnislinien, die Gemeinsamkeiten und Unterschiede zwischen Branches sichtbar machen, ohne diese zu erklären.
 Kapitel~6 stellt diese Spannungsfelder dar, löst sie jedoch nicht auf.
 
 \paragraph{Abgrenzung zu Kapitel~7.}
-Kapitel~6 beschreibt, \emph{was} beobachtet wurde; Kapitel~7 diskutiert, \emph{wie} diese Befunde einzuordnen sind und \emph{warum} bestimmte Muster auftreten könnten.
+Kapitel~6 beschreibt, \emph{was} beobachtet wurde. Kapitel~7 diskutiert, \emph{wie} diese Befunde einzuordnen sind und \emph{warum} bestimmte Muster auftreten könnten.

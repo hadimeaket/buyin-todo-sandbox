@@ -16,7 +16,7 @@ Die Studie wurde als kontrolliertes Experiment durchgeführt. Jede Sitzung folgt
     
     \item \textbf{Vibe-Coding-Challenge (60 Min.):}
     Die Kernphase der Untersuchung. Die Teilnehmenden bearbeiteten die Aufgaben selbstständig. Eingriffe durch den Versuchsleiter erfolgten nur bei technischen Problemen (z.\,B. Absturz der IDE), nicht jedoch bei inhaltlichen Fragen.
-    \textbf{Begründung des Zeitlimits:} Die Begrenzung auf 60 Minuten dient nicht nur der organisatorischen Machbarkeit, sondern fungiert als Stressor. Zeitdruck erhöht die Wahrscheinlichkeit, dass Teilnehmende auf heuristische Strategien (\emph{System 1}) zurückgreifen, was den \emph{Automation Bias} verstärken kann. Dies simuliert realistische Deadline-Situationen.
+        \csname textbf\endcsname{Begründung des Zeitlimits:} Die Begrenzung auf 60 Minuten dient der organisatorischen Machbarkeit und fungiert als Stressor. Zeitdruck erhöht die Wahrscheinlichkeit, dass Teilnehmende auf heuristische Strategien (\emph{System 1}) zurückgreifen. Dies kann den \emph{Automation Bias} verstärken und simuliert realistische Deadline-Situationen.
     
     \item \textbf{Post-Survey (5 Min.):}
     Unmittelbar nach Abschluss der Bearbeitung füllten die Teilnehmenden den Fragebogen zur subjektiven Wahrnehmung aus (NASA-TLX, TAM).
@@ -48,13 +48,13 @@ Für Teilnehmende, die alle Aufgaben vor Ablauf der Zeit lösten, steigt der Eff
 Die Qualität des erzeugten Codes wird anhand statischer Analyse und manuellem Review bewertet:
 \begin{itemize}
     \item \textbf{Linting-Fehler:} Anzahl der Warnungen und Fehler durch ESLint (objektiv).
-    \item \textbf{Wartbarkeit:} Subjektive Bewertung der Lesbarkeit und Struktur (z.\,B. sinnvolle Variablennamen, Modularisierung) auf einer Likert-Skala (1--5). Um die Reliabilität zu sichern, orientiert sich die Bewertung an den Clean-Code-Prinzipien von \textcite{martin2009cleancode}.
+    \item \textbf{Wartbarkeit:} Subjektive Bewertung der Lesbarkeit und Struktur (z.\,B. sinnvolle Variablennamen, Modularisierung) auf einer Likert-Skala (1--5). Zur Sicherung der Reliabilität orientiert sich die Bewertung an den Clean-Code-Prinzipien von \textcite{martin2009cleancode}.
 \end{itemize}
 
 \subsection{Interaktionsqualität (Interaction Quality)}
-Die Interaktion mit dem Agenten wird durch quantitative Telemetrie und qualitative Beobachtung erfasst:
+Die Interaktion mit dem KI-Assistenzsystem wird durch quantitative Telemetrie und qualitative Beobachtung erfasst:
 \begin{itemize}
-    \item \textbf{Acceptance Rate:} Das Verhältnis von akzeptierten zu angezeigten Vorschlägen (Ghost Text). Eine hohe Rate bei Low-Codern deutet auf \emph{Automation Bias} hin.
+    \item \textbf{Acceptance Rate:} Das Verhältnis von akzeptierten zu angezeigten Vorschlägen (Ghost Text). Eine hohe Rate bei Low-Code-Teilnehmenden deutet auf \emph{Automation Bias} hin.
     \item \textbf{Prompt Iterations:} Wie oft muss ein Prompt umformuliert werden, bis das Ergebnis passt? Dies misst die Fähigkeit zum \emph{Prompt Engineering}.
     \item \textbf{Backtracking:} Wie oft wird akzeptierter Code wieder gelöscht? Ein Indikator für \emph{Trial \& Error}.
     \item \textbf{Prompt-Typologie:} Unterscheidung zwischen \emph{Inline-Kommentaren} (Code-nahe Steuerung) und \emph{Chat-Panel} (konzeptionelle Fragen).
@@ -76,7 +76,7 @@ Können die beobachteten Effekte eindeutig der unabhängigen Variable (Kompetenz
 \begin{itemize}
     \item \textbf{Selection Bias:} Die Zuteilung zu den Gruppen basierte auf Selbsteinschätzung. Um dies zu mitigieren, wurde der Algorithmus zur Klassifizierung strikt angewendet.
     \item \textbf{Experimenter Bias (Rosenthal-Effekt):} Die Erwartungshaltung des Versuchsleiters könnte die Teilnehmenden beeinflussen. \textbf{Gegenmaßnahme:} Standardisierte Instruktionen und minimale Interaktion während der Coding-Phase.
-    \item \textbf{Compensatory Rivalry (John Henry Effect):} Wenn eine Gruppe sich benachteiligt fühlt, könnte sie sich mehr anstrengen. Da alle Gruppen Copilot nutzten, ist dieses Risiko gering, jedoch könnten High-Coder versuchen, „besser als die KI“ zu sein \parencite{saretsky1972johnhenry}.
+    \item \textbf{Compensatory Rivalry (John Henry Effect):} Wenn eine Gruppe sich benachteiligt fühlt, könnte sie sich mehr anstrengen. Da alle Gruppen Copilot nutzten, ist dieses Risiko gering. Dennoch könnten High-Code-Teilnehmende versuchen, „besser als die KI“ zu sein \parencite{saretsky1972johnhenry}.
 \end{itemize}
 
 \subsection{Externe Validität (External Validity)}
@@ -98,7 +98,7 @@ Die Auswertung erfolgt mittels eines \emph{Mixed-Methods}-Ansatzes:
 
 \begin{enumerate}
     \item \textbf{Quantitative Analyse:} Vergleich der Mittelwerte von Functional Score und Effizienz zwischen den vier Gruppen. Aufgrund der kleinen Stichprobe werden deskriptive Statistiken und Visualisierungen (Boxplots) bevorzugt.
-    \item \textbf{Qualitative Analyse:} Inhaltsanalyse der Screen-Recordings und des Codes, um Verhaltensmuster zu identifizieren (z.\,B. \enquote{Trial \& Error} bei Low-Codern vs. \enquote{Review \& Refine} bei High-Codern).
+    \item \textbf{Qualitative Analyse:} Inhaltsanalyse der Screen-Recordings und des Codes, um Verhaltensmuster zu identifizieren (z.\,B. \enquote{Trial \& Error} bei Low-Code-Teilnehmenden vs. \enquote{Review \& Refine} bei High-Code-Teilnehmenden).
 \end{enumerate}
 
 Dieser methodische Aufbau stellt sicher, dass nicht nur das \emph{Ergebnis} (Code), sondern auch der \emph{Prozess} (Interaktion) beleuchtet wird.

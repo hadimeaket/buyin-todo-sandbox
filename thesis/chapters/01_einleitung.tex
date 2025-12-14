@@ -1,21 +1,92 @@
 \chapter{Einleitung}
-\label{chap:einleitung}
+\label{chap:introduction}
 
 \section{Motivation}
-Die Softwareentwicklung befindet sich in einem fundamentalen Wandel. Durch den Einsatz von \emph{Large Language Models} (LLMs) und darauf basierenden \emph{AI Coding Agents} verändert sich die Art und Weise, wie Software konzipiert, implementiert und gewartet wird.
+Große Sprachmodelle (Large Language Models, LLMs) werden zunehmend in der Softwareentwicklung eingesetzt und unterstützen Entwurf, Implementierung und Wartung.
+Im Folgenden wird ein solches Assistenzsystem als \emph{KI-Assistenzsystem} bezeichnet (engl.: \emph{AI Coding Agent}) und konsistent so verwendet.
+In vielen Arbeitsabläufen verschiebt sich der Schwerpunkt von der reinen Codeerzeugung hin zur Bewertung, Auswahl und Integration vorgeschlagener Änderungen.
+Damit gewinnt eine Arbeitsweise an Relevanz, die häufig als \emph{Vibe-Coding} beschrieben wird.
+Entwicklerinnen und Entwickler delegieren Teilaufgaben an ein KI-Assistenzsystem und übernehmen verstärkt Aufgaben der semantischen Prüfung, des Reviews sowie der Einbettung in bestehende Strukturen.
+Diese Form der Mixed-Initiative-Zusammenarbeit betont weniger syntaktische Details als vielmehr das Verständnis von Anforderungen, Nebenbedingungen und Systemkontext.
+
+Für Unternehmen ist diese Entwicklung insbesondere im Brownfield-Kontext bedeutsam.
+Ein Großteil praktischer Softwareentwicklung findet in bestehenden Codebasen statt, die technische Schulden, heterogene Architekturen, historische Entscheidungen und operative Randbedingungen aufweisen.
+Die produktive Integration von KI-Assistenzsystemen in etablierte Entwicklungsprozesse muss daher neben Effizienzgewinnen auch Qualitätssicherung, Nachvollziehbarkeit und Risikobegrenzung berücksichtigen.
+Daraus ergibt sich ein Spannungsfeld zwischen schneller Iteration und belastbarer Validierung.
+
+Für die vorliegende Arbeit ist dabei zentral: Potenzielle Effizienzgewinne werden nicht quantifiziert; im Fokus steht vielmehr, wie Integration, Validierung und Review im Zusammenspiel mit einem KI-Assistenzsystem empirisch beobachtbar werden.
+
+Wissenschaftlich leistet die Arbeit damit einen Beitrag zur empirischen Evaluation von KI-Assistenzsystemen im Brownfield-Kontext, der über reine Produktivitätsbetrachtungen hinausgeht.
+
+Vor diesem Hintergrund ist der Nutzen eines KI-Assistenzsystems in dieser Arbeit nicht als reine Eigenschaft des Tools zu verstehen, sondern als Zusammenspiel aus (i) Interaktion zwischen Mensch und System, (ii) entwicklerseitiger Kompetenz und (iii) Praktiken der Validierung und Integration.
+Automation Bias kann dazu beitragen, dass Vorschläge überbewertet oder unzureichend geprüft werden, während umgekehrt übermäßige Skepsis potenzielle Vorteile reduziert.
+Eine wissenschaftlich belastbare Einordnung erfordert daher eine Betrachtung.
+Diese verknüpft Kompetenz als Analyseperspektive mit beobachtbaren Artefakten und Ergebnissignalen der Arbeit am Code, ohne daraus kausale Effekte oder Tool-Rangordnungen abzuleiten.
 
 \section{Problemstellung}
-Unternehmen stehen vor der Herausforderung, diese neuen Werkzeuge produktiv und sicher in ihre bestehenden Entwicklungsprozesse zu integrieren. Dabei ist unklar, wie sich der Einsatz von AI Coding Agents auf die Codequalität, die Entwicklerproduktivität und die Sicherheit auswirkt.
+In der Diskussion um KI-Assistenzsysteme werden häufig Produktivitätsannahmen formuliert, ohne hinreichend zu differenzieren, wie stark die Interaktion durch Kompetenz, Arbeitsstil und Validierungspraktiken moderiert wird.
+Unter realitätsnahen Bedingungen bestehender Codebasen und unter Zeitdruck bleibt zudem unklar, in welchem Verhältnis wahrgenommener Fortschritt, implementierte Änderungen und verifiziertes Verhalten zueinander stehen.
+Damit entsteht eine Forschungslücke: Kontrollierte Untersuchungen kombinieren selten Brownfield-Settings, eine differenzierte Ergebnislogik entlang einer Pipeline und Kompetenz als explizite Analyseperspektive.
+
+Diese Arbeit ist daher keine Produktivitätsmessung im Sinne von Output-Geschwindigkeit, Codeumfang (z.B. Zeilen Code) oder Zeitersparnis, sondern eine Analyse von Integrations-, Validierungs- und Reviewarbeit im Vibe-Coding-Kontext.
+
+Sie trifft keine Aussagen über kausale Effekte und leitet keine Rangordnung von Tools oder Modellen ab.
+
+Eine zentrale methodische Herausforderung liegt in der Messbarkeit von Effektivität.
+Chat-Interaktionen und Planäußerungen im Assistenzdialog sind nicht gleichzusetzen mit funktionsfähiger Implementierung.
+Ebenso ist eine Implementierung im Code nicht gleichzusetzen mit testgebundener Bestätigung, dass gewünschtes Verhalten tatsächlich erreicht wurde.
+Diese Differenzen sind im Kontext von KI-generiertem Code besonders relevant, weil die Geschwindigkeit der Generierung und die Plausibilität der Vorschläge die Notwendigkeit strukturierter Verifikation nicht aufheben, sondern eher erhöhen können.
+
+Zur Bearbeitung dieser Messprobleme wird eine Diagnoselogik benötigt, die Ergebnisse schrittweise differenziert und durch mehrere Evidenzquellen absichert.
+In dieser Arbeit wird dafür eine Pipeline-Logik verwendet, die den Bearbeitungsstand einer Aufgabe als \textit{Attempted}, \textit{Implemented\textsubscript{static}} oder \textit{Verified} beschreibt.
+Für die Trichterdarstellung wird in Kapitel~6 zusätzlich eine abgeleitete Evidenzstufe \textit{Implemented$^\ast$} verwendet.
+Diese Status sind als Diagnose- und Ergebnislogik zu verstehen, nicht als Qualitätsurteil.
+Die Einordnung wird nicht aus einer einzelnen Quelle abgeleitet, sondern trianguliert über Code-Artefakte, Test-Artefakte, Chat-Logs und Survey-Daten.
+Ziel ist eine methodisch robuste, deskriptive Einordnung, die subjektive oder dialogbasierte Signale nicht mit verifiziertem Outcome gleichsetzt und den Interaktionskontext dennoch berücksichtigt.
 
 \section{Zielsetzung der Arbeit}
-Ziel dieser Arbeit ist es, verschiedene AI Coding Agents zu bewerten und eine Integrationsstrategie für das Unternehmen BuyIn zu entwickeln. Dabei wird das Konzept des \emph{Vibe-Coding} als neuer Entwicklungsstil untersucht.
+Ziel dieser Arbeit ist die Evaluation eines KI-Assistenzsystems im Vibe-Coding-Kontext in einer kontrollierten Brownfield-Sandbox.
+Zur begrifflichen und methodischen Trennung wird zwischen der Assistenzumgebung GitHub Copilot (Tool), dem zugrundeliegenden LLM Claude Sonnet~4.5 und dem KI-Assistenzsystem als funktionaler Einheit unterschieden.
+Beobachtungen beziehen sich je nach Datenquelle auf unterschiedliche Ebenen.
+Es werden keine Tool- oder Modellvergleiche durchgeführt und keine Rangordnung abgeleitet.
+Die Evaluation erfolgt in einer kontrollierten Coding-Challenge mit $N = 18$ Teilnehmenden, einer Timebox von 60 Minuten und einer standardisierten, containerisierten Arbeitsumgebung.
+Die Aufgaben umfassen acht Tasks (T1--T8).
+In der Ergebnisanalyse werden insbesondere frühe Tasks (T1--T5) berücksichtigt, da das Zeitlimit die Bearbeitungsreihenfolge und -tiefe strukturell beeinflusst.
+
+Gegenstand der Arbeit ist dabei ein \emph{interaktives} KI-Assistenzsystem mit kontinuierlicher menschlicher Kontrolle (Human-in-the-Loop); nicht betrachtet werden autonome Agenten mit selbstständiger Aufgabenplanung, Tool-Auswahl oder Entscheidungsautonomie.
+
+Die Arbeit leistet im Kern vier Beiträge:
+\begin{enumerate}
+    \item[(a)] Entwicklung und Verwendung einer Brownfield-Sandbox als Messumgebung für kontrollierte, aber realitätsnahe Aufgaben in einer bestehenden Codebasis.
+    \item[(b)] Operationalisierung von Aufgabenerfolg über die Pipeline-Status \textit{Attempted}, \textit{Implemented\textsubscript{static}} und \textit{Verified} (sowie \textit{Implemented$^\ast$} als abgeleitete Evidenzstufe) als Trichter- und Diagnoselogik.
+    \item[(c)] Analyse der Ergebnisse im Kontext von Kompetenzgruppen als Analyseperspektiven (No-Code, Low-Code, Mid-Code, High-Code), ohne diese Einteilung als Wertung von Personen zu interpretieren.
+    \item[(d)] Methodische Triangulation über Code-Artefakte, Test-Artefakte, Chat-Logs und Survey, um die Differenz zwischen intendiertem Vorgehen, implementierten Änderungen und verifiziertem Verhalten empirisch einordnen zu können.
+\end{enumerate}
+
+\paragraph{Forschungsfragen.}
+Aus diesen Zielsetzungen ergeben sich drei Forschungsfragen:
+\begin{itemize}
+    \item \textbf{RQ1:} Wie hängt die Entwicklerkompetenz als Analyseperspektive mit dem Erreichen der Pipeline-Status \textit{Attempted}, \textit{Implemented\textsubscript{static}} und \textit{Verified} (sowie der abgeleiteten Evidenzstufe \textit{Implemented$^\ast$}) in einer kontrollierten Brownfield-Sandbox zusammen?
+    \item \textbf{RQ2:} Wie tragen Code- und Testartefakte zur Ergebnisbewertung entlang der Pipeline-Status bei, insbesondere zur Trennung von Implementierung und testgebundener Verifikation?
+    \item \textbf{RQ3:} Welche Chat-Interaktionsmuster treten im Vibe-Coding-Kontext auf, und wie sind sie für die Evaluation eines KI-Assistenzsystems im Hinblick auf Validierung und Integration einzuordnen?
+\end{itemize}
+Die Kompetenzgruppen dienen dabei ausschließlich der analytischen Typisierung; daraus wird keine Rangordnung abgeleitet und die Einleitung nimmt keine Ergebnisse vorweg.
+Die Aussagen dieser Arbeit beziehen sich auf Branches als Analyseeinheiten und auf aggregierte Muster über Gruppen hinweg, nicht auf eine Leistungsbewertung einzelner Personen.
+Ergänzend werden theoriegeleitet Hypothesen entwickelt, um erwartbare Muster im Spannungsfeld zwischen Unterstützungspotenzial, Validierungsaufwand und Interaktionsdynamik strukturiert zu prüfen, ohne Ergebnisse vorwegzunehmen.
 
 \section{Aufbau der Arbeit}
-Die Arbeit gliedert sich in folgende Kapitel:
-\begin{itemize}
-    \item Kapitel \ref{chap:hintergrund}: Hintergrund und Stand der Forschung
-    \item Kapitel \ref{chap:forschungsdesign}: Forschungsdesign
-    \item Kapitel \ref{chap:methodik}: Methodik
-    \item Kapitel \ref{chap:implementierung}: Implementierung der Sandbox
-    \item ...
-\end{itemize}
+Kapitel~2 führt die theoretischen Grundlagen ein und ordnet Vibe-Coding als Arbeitsstil in relevante Perspektiven ein, darunter Kompetenzmodelle, Human-Computer Interaction, Cognitive Load, Automation Bias sowie etablierte Bezugsrahmen aus Qualitäts- und Produktivitätsdiskursen (u.\,a. ISO/SPACE).
+Kapitel~3 beschreibt das Forschungsdesign, die Herleitung der Hypothesen und die Operationalisierung zentraler Konstrukte, einschließlich der Kompetenzgruppen als Analyseperspektiven und der Pipeline-Status \textit{Attempted}, \textit{Implemented\textsubscript{static}} und \textit{Verified} (sowie \textit{Implemented$^\ast$}).
+Kapitel~4 erläutert die Durchführung der Studie, die Datenerhebung und die verwendeten Metriken sowie die Absicherung der Validität durch die Kombination mehrerer Datenquellen.
+
+Kapitel~5 dokumentiert die technische Brownfield-Sandbox, ihre Architektur und die Automatisierungs- und Auswertungsinfrastruktur, die eine standardisierte, reproduzierbare Messung im kontrollierten Setting ermöglicht.
+Kapitel~6 präsentiert die Ergebnisse in deskriptiver Form und strukturiert sie entlang der Pipeline-Logik und der triangulierten Evidenz aus Artefakten und Interaktionen.
+Kapitel~7 diskutiert die Befunde, ordnet sie in den theoretischen Kontext ein und leitet Implikationen sowie Limitationen ab, ohne kausale Schlussfolgerungen über die beobachteten Zusammenhänge hinaus zu beanspruchen.
+Kapitel~8 schließt die Arbeit mit einer synthetischen Beantwortung der Forschungsfragen und einer Einordnung der Beiträge ab.
+
+\paragraph{Abgrenzung und wissenschaftlicher Beitrag.}
+Im Unterschied zu Teilen der bestehenden Forschung steht in dieser Arbeit weder die Optimierung von Prompts noch der Vergleich von Tools oder Modellen im Vordergrund.
+Ebenso werden keine Produktivitätsmetriken im Sinne von Ausstoß, Geschwindigkeit oder Zeitersparnis als primäre Zielgrößen bewertet.
+Stattdessen wird Vibe-Coding im Brownfield-Setting als Interaktions- und Integrationsprozess untersucht, der sich nicht zuverlässig über einzelne Proxy-Metriken abbilden lässt.
+Der Beitrag liegt in einer evaluativen Perspektive auf Nutzungstypen (Kompetenzgruppen als Analyseperspektiven), eine evidenzbasierte Ergebnislogik über Pipeline-Status sowie die systematische Triangulation über Code-, Test-, Chat- und Survey-Artefakte.
+Damit wird sichtbar gemacht, wie sich intendiertes Vorgehen, implementierte Änderungen und testgebunden verifiziertes Verhalten unter Zeitdruck zueinander verhalten, ohne daraus eine Leistungsbewertung einzelner Personen oder eine Rangordnung von Assistenzsystemen abzuleiten.

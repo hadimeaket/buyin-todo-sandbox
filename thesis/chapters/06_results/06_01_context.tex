@@ -1,14 +1,14 @@
 \section{Datengrundlage und Toolkontext}
 \label{sec:results_context}
 
-Dieses Unterkapitel beschreibt die Datengrundlage der Untersuchung sowie den technischen Kontext der durchgeführten \textit{VibeCoding-Challenge}. Die Analyse basiert auf einem Datensatz von $N=18$ Probanden, die im Rahmen einer kontrollierten Coding-Challenge Aufgaben zur Entwicklung einer Todo-Applikation bearbeiteten.
+Dieses Unterkapitel beschreibt die Datengrundlage der Untersuchung sowie den technischen Kontext der durchgeführten \textit{Vibe-Coding-Challenge}. Die Analyse basiert auf einem Datensatz von $N=18$ Probanden, die im Rahmen einer kontrollierten Coding-Challenge Aufgaben zur Entwicklung einer Todo-Applikation bearbeiteten.
 
 \subsection{Studiensetting und Rahmenbedingungen}
 Die Studie wurde unter einheitlichen Rahmenbedingungen durchgeführt, um die Vergleichbarkeit der Ergebnisse zu gewährleisten:
 \begin{itemize}
     \item \textbf{Zeitlimit:} Alle Probanden hatten ein striktes Zeitlimit von 60 Minuten für die Bearbeitung der Aufgaben.
     \item \textbf{Tooling:} Als Entwicklungsumgebung diente Visual Studio Code mit der GitHub Copilot Extension.
-    \item \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde \textbf{Claude 3.5 Sonnet} verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
+    \item \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde \textbf{Claude Sonnet~4.5} verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
     \item \textbf{Aufgabenstellung:} Die Probanden erhielten eine Liste von 8 Aufgaben (T1--T8) mit steigender Komplexität, beginnend bei Backend-Persistenz bis hin zu komplexen Frontend-Features und Export-Funktionen.
 \end{itemize}
 
@@ -19,11 +19,11 @@ Die empirische Auswertung stützt sich auf drei primäre Datenquellen, die eine 
     \item \textbf{Code-Artefakte (Git-Repositories):}
     Die finalen Implementierungen der Probanden liegen als separate Git-Branches vor. Diese Branches enthalten den vollständigen Quellcode zum Zeitpunkt des Zeitablaufs.
     \begin{itemize}
-        \item Pfad: Remote-Branches mit dem Suffix \texttt{*-vibe} (z.B. \texttt{origin/august-martin-vibe}).
+        \item Pfad: Remote-Branches mit dem Suffix \texttt{*-vibe} (z.B. \texttt{origin/nachname-vorname-vibe}).
     \end{itemize}
 
     \item \textbf{Chat-Logs:}
-    Die vollständigen Interaktionsprotokolle zwischen Proband und KI-Assistent wurden exportiert. Diese Protokolle enthalten alle Prompts der Nutzer sowie die Antworten und Code-Generierungen der KI.
+    Die vollständigen Interaktionsprotokolle zwischen Proband und KI-Assistenzsystem wurden exportiert. Diese Protokolle enthalten alle Prompts der Nutzer sowie die Antworten und Code-Generierungen der KI.
     \begin{itemize}
         \item Pfad: \texttt{thesis/chats/} (Format: \texttt{.docx}).
     \end{itemize}
@@ -44,12 +44,12 @@ Tabelle \ref{tab:data_inventory} zeigt das Inventar der verfügbaren Datenartefa
     \hline
     \textbf{Artefakt-Typ} & \textbf{Anzahl} & \textbf{Anmerkung} \\
     \hline
-    Git-Branches (\texttt{*-vibe}) & 16 & 2 Probanden arbeiteten lokal/ohne Push* \\
+    Git-Branches (\texttt{*-vibe}) & 18 & Vollständig als Remote-Branches vorhanden \\
     Chat-Logs & 18 & Vollständig für alle Teilnehmer \\
     Survey-Einträge & 18 & Vollständig ($N=18$) \\
     \hline
     \end{tabular}
-    \caption{Inventar der Datenartefakte. (*Für die fehlenden Remote-Branches liegen lokale Stände oder Chat-Rekonstruktionen vor, die für die Analyse genutzt wurden.)}
+    \caption{Inventar der Datenartefakte.}
     \label{tab:data_inventory}
 \end{table}
 
@@ -57,7 +57,7 @@ Tabelle \ref{tab:data_inventory} zeigt das Inventar der verfügbaren Datenartefa
 Die Zusammenführung der Datenquellen erfolgte über eine Mapping-Tabelle, die die Klarnamen aus dem Survey und den Chat-Dateinamen den entsprechenden Git-Branches zuordnet.
 \begin{itemize}
     \item \textbf{Survey $\leftrightarrow$ Branch:} Das Survey-Feld "Branch-Name" sowie der Name des Probanden dienten als Schlüssel.
-    \item \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. \texttt{Max\_Helling.docx}) wurden normalisiert und den entsprechenden Branches (z.B. \texttt{helling-max-vibe}) zugeordnet.
+    \item \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. \texttt{Nachname\_Vorname.docx}) wurden normalisiert und den entsprechenden Branches (z.B. \texttt{nachname-vorname-vibe}) zugeordnet.
 \end{itemize}
 Die Survey-Daten enthalten zudem eine Einteilung in Kompetenzgruppen (No-Code, Low-Code, Mid-Code, High-Code), die in der späteren Analyse als vergleichendes Merkmal herangezogen wird.
 

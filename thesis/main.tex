@@ -1,10 +1,33 @@
 \documentclass[12pt,a4paper]{scrreprt}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{iftex}
+
+% --- Encoding + PDF Unicode strategy ---
+% Goal: (1) correct rendering in the PDF, (2) clean copy&paste/search, (3) clean bookmarks/metadata.
+% - pdfLaTeX: uses inputenc/fontenc + ToUnicode mappings.
+% - LuaLaTeX/XeLaTeX: uses native Unicode (fontspec).
+\ifPDFTeX
+  % Improves copy&paste/search by providing ToUnicode mappings (fixes e.g. ff/fi/fl ligatures
+  % turning into control characters in extracted text).
+  \usepackage{cmap}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  \usepackage{microtype}
+
+  % Generate Unicode mappings for glyphs in the PDF (pdfTeX).
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\else
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \usepackage{microtype}
+\fi
+
 \usepackage[ngerman]{babel}
 
 \usepackage{graphicx}
+\usepackage{tikz}
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{csquotes}
@@ -29,9 +52,16 @@
 \usepackage{amsthm}
 \newtheorem{hypothesis}{Hypothese}
 
-\usepackage{hyperref}
+% Hyperlinks, PDF metadata, bookmarks.
+\usepackage[unicode]{hyperref}
+\ifPDFTeX
+  % Better Unicode coverage for PDF strings (bookmarks/metadata) under pdfLaTeX.
+  % Optional: not all TeX installations include it.
+  \IfFileExists{psdextra.sty}{\usepackage{psdextra}}{}
+\fi
+\usepackage{bookmark}
 
-\title{Einfluss der Entwicklerkompetenz auf die Effektivität von AI Coding Agents:\\
+\csname title\endcsname{Einfluss der Entwicklerkompetenz auf die Effektivität von KI-Assistenzsystemen:\\
 Eine empirische Untersuchung von Vibe-Coding in der Unternehmenssoftwareentwicklung}
 \author{Cihad Gök}
 \date{Dezember 2025}
@@ -44,12 +74,13 @@ Eine empirische Untersuchung von Vibe-Coding in der Unternehmenssoftwareentwickl
 \clearpage
 
 \input{chapters/01_einleitung}
-
 \input{chapters/02_hintergrund}
 \input{chapters/03_forschungsdesign}
 \input{chapters/04_methodik}
 \input{chapters/05_implementierung}
 \input{chapters/06_results}
+\input{chapters/07_diskussion}
+\input{chapters/08_fazit}
 
 \printbibliography
 

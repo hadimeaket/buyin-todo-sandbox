@@ -4,7 +4,7 @@
 Dieses Unterkapitel beschreibt typische Lösungsstrategien, die in den $N=18$ \texttt{*-vibe}-Branches für die Tasks T1--T5 beobachtet wurden. Grundlage sind Repository-Struktur und Implementationsartefakte (Backend/Frontend, Datenhaltung), Chat-basierte \textit{Attempted}-Signale sowie Survey-Angaben (aggregiert, ohne Klarnamen). Die Darstellung ist rein deskriptiv.
 
 \subsection*{Einordnung der Datenbasis (kurz)}
-T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie T4/T5 in jeweils $13/18$ Fällen; die Konfidenz sinkt dabei von T1/T2 zu T4/T5. In den Surveys werden Zeitdruck und Debugging am häufigsten als Hürden genannt (je $5/18$), gefolgt von Aufgabenverständnis ($3/18$); die Selbsteinstufung verteilt sich über No-Code ($5$), Low-Code ($4$), Mid-Code ($5$) und High-Coder ($4$).
+T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie T4/T5 in jeweils $13/18$ Fällen. Die Konfidenz sinkt dabei von T1/T2 zu T4/T5. In den Surveys werden Zeitdruck und Debugging am häufigsten als Hürden genannt (je $5/18$), gefolgt von Aufgabenverständnis ($3/18$). Die Selbsteinstufung verteilt sich über No-Code ($5$), Low-Code ($4$), Mid-Code ($5$) und High-Code ($4$).
 
 \subsection*{T1 -- Persistente Todos}
 \begin{enumerate}
@@ -12,50 +12,50 @@ T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie 
 
   \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} Die dominante Strategie war SQLite-basierte Persistenz ($14/18$). Daneben traten MongoDB ($1/18$) und PostgreSQL ($1/18$) sowie verbleibende Varianten wie In-Memory/sonstige Ablagen ($2/18$) auf. In der Code-Struktur zeigt sich häufig ein Repository-Pattern (z.B. \texttt{TodoRepository}) mit einer klaren Abgrenzung zwischen Controller/Route und Datenzugriff.
 
-  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind konsistente ID-Schemata und deterministisches CRUD; fragil sind v.a. uneinheitliche ID-Felder (\texttt{id} vs. \texttt{\_id}) und inkonsistente Update-Semantik.
+  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind konsistente ID-Schemata und deterministisches CRUD. Fragil sind v.a. uneinheitliche ID-Felder (\texttt{id} vs. \texttt{\_id}) und inkonsistente Update-Semantik.
 
   \item \textbf{Typische KI-generierte Muster.} Häufig sind Repository-/Controller-Boilerplates und generische CRUD-Endpunkte, bei denen Randfälle (Validierung, Fehlercodes, ID-Normalisierung) nur teilweise konsistent umgesetzt sind.
 
-  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T1 wurde selten abgebrochen, aber häufig nur bis zu einem Minimal-CRUD stabilisiert; Zeitdruck und Debugging (DB-Setup/Build) begrenzen die Absicherung.
+  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T1 wurde selten abgebrochen, aber häufig nur bis zu einem Minimal-CRUD stabilisiert. Zeitdruck und Debugging (DB-Setup/Build) begrenzen die Absicherung.
 \end{enumerate}
 
 \subsection*{T2 -- Benutzerkonten / Authentifizierung}
 \begin{enumerate}
   \item \textbf{Ziel des Tasks (kurz, technisch).} Nutzerregistrierung und Login mit Zugriffskontrolle auf geschützte Endpunkte (z.B. \texttt{GET /api/todos}) sowie konsistenter Authentifizierungsweitergabe (Token oder Session).
 
-  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} JWT ist dominant ($11/18$), gefolgt von Session/Cookie ($4/18$) und Hybrid-Ansätzen ($1/18$); selten sind Sonderfälle (z.B. Hashing ohne klaren Token-Flow: $1/18$) bzw. fehlende/unklare Signale ($1/18$). Häufige Strukturmuster sind zentrale Auth-Middleware oder Prüfungen direkt im Controller.
+  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} JWT ist dominant ($11/18$), gefolgt von Session/Cookie ($4/18$) und Hybrid-Ansätzen ($1/18$). Selten sind Sonderfälle (z.B. Hashing ohne klaren Token-Flow: $1/18$) bzw. fehlende oder unklare Signale ($1/18$). Häufige Strukturmuster sind zentrale Auth-Middleware oder Prüfungen direkt im Controller.
 
-  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind eindeutige Token-/Session-Flows und konsistente Route-Guards; fragil sind inkonsistente Header-/Cookie-Nutzung und divergierende Erwartungen zwischen Frontend und Backend.
+  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind eindeutige Token-/Session-Flows und konsistente Route-Guards. Fragil sind inkonsistente Header-/Cookie-Nutzung und divergierende Erwartungen zwischen Frontend und Backend.
 
-  \item \textbf{Typische KI-generierte Muster.} Boilerplate-Flows (Register/Login/Protect) treten häufig auf, teils mit Over-Engineering (Rollen/Claims) oder mit Minimalismus (fehlende Validierung/Expiry); verbreitet sind Tutorial-nahe Copy-Paste-Muster (JWT + \texttt{bcrypt}).
+  \item \textbf{Typische KI-generierte Muster.} Boilerplate-Flows (Register/Login/Protect) treten häufig auf, teils mit Over-Engineering (Rollen/Claims) oder mit Minimalismus (fehlende Validierung/Expiry). Verbreitet sind Tutorial-nahe Copy-Paste-Muster (JWT + \texttt{bcrypt}).
 
-  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T2 ist stark schnittstellen- und konfigurationssensitiv (Endpunkte, Token-Feldnamen, Cookie-Flags) und wird laut Survey häufig durch Zeitdruck/Debugging begrenzt; die testnahe Absicherung bleibt oft nachrangig.
+  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T2 ist stark schnittstellen- und konfigurationssensitiv (Endpunkte, Token-Feldnamen, Cookie-Flags) und wird laut Survey häufig durch Zeitdruck und Debugging begrenzt. Die testnahe Absicherung bleibt oft nachrangig.
 \end{enumerate}
 
 \subsection*{T3 -- Kategorien}
 \begin{enumerate}
   \item \textbf{Ziel des Tasks (kurz, technisch).} Erweiterung des Todo-Datenmodells um Kategorisierung und Bereitstellung über API und UI, sodass Todos kategoriebasiert erstellt, gespeichert und angezeigt werden können.
 
-  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} Ein separates Kategorie-Konzept (Model/Tabelle/Collection mit Relation via \texttt{categoryId}) dominiert ($14/18$). Inline-Kategorien als String sind selten ($1/18$); in $3/18$ Branches ist das Kategorie-Konzept in Struktursignalen nicht klar erkennbar.
+  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} Ein separates Kategorie-Konzept (Model/Tabelle/Collection mit Relation via \texttt{categoryId}) dominiert ($14/18$). Inline-Kategorien als String sind selten ($1/18$). In $3/18$ Branches ist das Kategorie-Konzept in Struktursignalen nicht klar erkennbar.
 
-  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind konsistente Persistenz und stabile Referenzen (IDs/Relation); fragil sind rein UI-seitige Kategorien oder inkonsistente Relation/Serialisierung.
+  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind konsistente Persistenz und stabile Referenzen (IDs/Relation). Fragil sind rein UI-seitige Kategorien oder inkonsistente Relation/Serialisierung.
 
   \item \textbf{Typische KI-generierte Muster.} Häufig sind zusätzliche \texttt{Category}-Modelle und Routen (teils mit unnötiger CRUD-Komplexität) sowie „Tags vs. Categories“-Mischformen, bei denen Begriffe variieren, die Datenrepräsentation aber nicht konsistent vereinheitlicht wird.
 
-  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T3 erhöht den Integrationsaufwand (Schema, UI, Backward-Compatibility); unter Zeitdruck bleibt häufig die End-to-End-Stabilisierung (Persistenz/Anzeige/Tests) unvollständig.
+  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T3 erhöht den Integrationsaufwand (Schema, UI, Backward-Compatibility). Unter Zeitdruck bleibt häufig die End-to-End-Stabilisierung (Persistenz/Anzeige/Tests) unvollständig.
 \end{enumerate}
 
 \subsection*{T4 -- Dateianhänge (Attachments)}
 \begin{enumerate}
   \item \textbf{Ziel des Tasks (kurz, technisch).} Upload und Zuordnung von Dateien zu Todos (typischerweise \texttt{multipart/form-data}), Speicherung (Dateisystem oder DB) und Rückgabe verwertbarer Metadaten über die API.
 
-  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} In $8/18$ Branches ist ein Multer-/Upload-Ansatz erkennbar; in $10/18$ Branches sind Attachments nicht oder nur indirekt/unklar umgesetzt. Wo Upload existiert, ist Storage häufig lokal (Uploads-Ordner) oder metadatenbasiert (Dateiname/URL).
+  \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} In $8/18$ Branches ist ein Multer-/Upload-Ansatz erkennbar. In $10/18$ Branches sind Attachments nicht oder nur indirekt oder unklar umgesetzt. Wo Upload existiert, ist Storage häufig lokal (Uploads-Ordner) oder metadatenbasiert (Dateiname/URL).
 
-  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind klare Upload-Verträge (Feldnamen/Metadaten) und stabile Zuordnung zum Todo; fragil sind uneinheitliche Response-Formate und fehlende Metadaten-Persistenz.
+  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust sind klare Upload-Verträge (Feldnamen/Metadaten) und stabile Zuordnung zum Todo. Fragil sind uneinheitliche Response-Formate und fehlende Metadaten-Persistenz.
 
-  \item \textbf{Typische KI-generierte Muster.} Multer-Templates mit Boilerplate-Routen sind häufig; daneben treten Over-Engineering (komplexe Attachment-Entitäten) oder Minimal-Uploads ohne stabilen Metadaten-Rückkanal auf.
+  \item \textbf{Typische KI-generierte Muster.} Multer-Templates mit Boilerplate-Routen sind häufig. Daneben treten Over-Engineering (komplexe Attachment-Entitäten) oder Minimal-Uploads ohne stabilen Metadaten-Rückkanal auf.
 
-  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T4 bündelt viele Fehlerquellen (multipart, Storage, Pfade/URLs, Frontend-Integration) und wird in Surveys häufig als Debugging-getrieben beschrieben; unter Zeitdruck wird es oft hinter Persistenz/Auth priorisiert.
+  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T4 bündelt viele Fehlerquellen (multipart, Storage, Pfade/URLs, Frontend-Integration) und wird in Surveys häufig als Debugging-getrieben beschrieben. Unter Zeitdruck wird es oft hinter Persistenz/Auth priorisiert.
 \end{enumerate}
 
 \subsection*{T5 -- Kalender / Multi-Day}
@@ -64,9 +64,9 @@ T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie 
 
   \item \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} In den Branches sind Range-Felder als Struktursignale verbreitet (z.B. \texttt{dueEndDate} neben \texttt{dueDate}). Gleichzeitig zeigen die Integrationstests (V3) für T5 keine reproduzierbare End-to-End-Semantik ($0/18$ verifiziert), was auf eine häufige Teilstrategie hindeutet: Felder/Komponenten werden vorbereitet, die vollständige Backend-Semantik (Overlap/Filter, stabiler API-Vertrag) bleibt jedoch unvollständig.
 
-  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust wäre Range-Validierung (Ende $>$ Start), zuverlässige Persistenz und klare Overlap-Filterung; fragil sind reine Feld-Präsenz ohne konsistente Query-/Filter-Semantik.
+  \item \textbf{Qualitätsunterschiede (robust vs. fragil).} Robust wäre Range-Validierung (Ende $>$ Start), zuverlässige Persistenz und klare Overlap-Filterung. Fragil sind reine Feld-Präsenz ohne konsistente Query-/Filter-Semantik.
 
   \item \textbf{Typische KI-generierte Muster.} Häufig sind UI-/Modell-Boilerplates (zusätzliche Datumsfelder, Kalender-Komponenten) sowie Copy-Paste von Range-Utilities ohne konsistenten API-Vertrag (Parameter/Overlap-Regel).
 
-  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T5 ist stark gekoppelt (Modell \textrightarrow{} Persistenz \textrightarrow{} Query \textrightarrow{} UI) und wird laut Chat/Survey häufig durch Zeitdruck und Debugging limitiert; unter 60 Minuten bleibt die testbare Semantik (Overlap/Filter, konsistente API) oft unvollständig.
+  \item \textbf{Warum der Task häufig abgebrochen oder nur teilweise umgesetzt wurde.} T5 ist stark gekoppelt (Modell \textrightarrow{} Persistenz \textrightarrow{} Query \textrightarrow{} UI) und wird laut Chat/Survey häufig durch Zeitdruck und Debugging limitiert. Unter 60 Minuten bleibt die testbare Semantik (Overlap/Filter, konsistente API) oft unvollständig.
 \end{enumerate}

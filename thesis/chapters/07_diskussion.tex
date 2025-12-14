@@ -1,0 +1,283 @@
+\chapter{Diskussion}
+\label{chap:discussion}
+
+\section{Ziel und Abgrenzung der Diskussion}
+\label{sec:discussion_scope}
+
+Kapitel~6 hat die Ergebnisse der Studie ausschließlich deskriptiv berichtet und die beobachteten Muster entlang mehrerer Datenquellen nebeneinandergestellt.
+Kapitel~7 interpretiert diese Befunde im Licht des in Kapitel~2 eingeführten theoretischen Rahmens.
+Ziel ist es, die Forschungsfragen argumentativ zu beantworten und die Hypothesen zu bewerten.
+Damit adressiert die Diskussion die in Abschnitt~\ref{sec:related-work} formulierte Forschungslücke, indem Befunde aus einem kontrollierten Brownfield-Setting entlang der Pipeline-Status und im Kompetenzkontext eingeordnet werden, ohne daraus eine Generalisierbarkeit über andere Settings oder KI-Assistenzsysteme abzuleiten.
+Dabei werden keine neuen Daten eingeführt.
+Es werden keine zusätzlichen Metriken berechnet.
+Es werden keine Kausalzusammenhänge behauptet, die durch das Studiendesign oder die erhobenen Artefakte nicht abgesichert sind.
+
+\paragraph{Methodische Selbstbegrenzung (Kausalität, Gruppenvergleiche, Kompetenzgruppen).}
+Die Studie ist nicht als kausales Design angelegt, sondern als kontrollierte, artefaktbasierte Beobachtungsstudie: Es gibt keine Randomisierung, keine experimentelle Manipulation und keine prozessnahen Messungen, die eine Identifikation von Ursache--Wirkung erlauben würden.
+Zudem sind zentrale Einflussgrößen (z.B. Technologie-Fit, Test-/Debugging-Routinen, Prompting-Erfahrung, Unterbrechungen) nur teilweise messbar und können daher nicht hinreichend kontrolliert werden.
+Aus diesem Grund werden Befunde konsistent als deskriptive Muster und theoriegeleitete Einordnungen berichtet.
+Auf inferenzstatistische Gruppenvergleiche (Signifikanztests, Effektstärken) wird verzichtet, da die Fallzahlen pro Kompetenzgruppe klein sind, die Messannahmen für stabile Schätzungen nicht belastbar geprüft werden können und multiple Konfundierungen das Risiko scheinbarer Gruppenunterschiede erhöhen.
+Die Kompetenzgruppen werden deshalb nicht als Effektvariablen im Sinne gruppenstabiler Leistungs- oder Qualitätsunterschiede modelliert, sondern als Analyseperspektiven zur Strukturierung von Nutzungstypen und Interpretationskontexten.
+Damit bleibt die Diskussion auf die Frage fokussiert, welche Artefaktspuren und Prozesssignale im Brownfield-Setting beobachtbar sind und wie diese im Kompetenzkontext plausibel eingeordnet werden können.
+
+\paragraph{Geltungsbereich der Ergebnisse.}
+Die in dieser Arbeit diskutierten Befunde beziehen sich ausschließlich auf \emph{interaktive} KI-Assistenzsysteme im Vibe-Coding-Kontext, die in einer Brownfield-Sandbox auf ein bestehendes Codeartefakt angewendet werden. Sie gelten für eine zeitlich begrenzte Aufgabenbearbeitung unter den in Kapitel~6 beschriebenen Rahmenbedingungen. Nicht Gegenstand der Aussagen sind Greenfield-Projekte oder langfristige Produktentwicklung. Ebenfalls nicht abgedeckt sind autonome Agenten mit eigener Aufgabenplanung und eigenständiger Ziel- und Teilzielbildung.
+
+Eine zentrale Linse der Diskussion sind die vier Kompetenzgruppen No-Code, Low-Code, Mid-Code und High-Code.
+Diese Gruppen werden als gleichwertige Analyseperspektiven behandelt.
+Sie sind keine Qualitätsstufen und dienen nicht der Bewertung einzelner Personen.
+Aussagen beziehen sich daher auf aggregierte Gruppenmuster oder auf einzelne Branches als Analyseeinheiten.
+Eine Leistungsbewertung oder Rangordnung einzelner Personen erfolgt nicht.
+
+\paragraph{Group comparability \& confounders.}
+Die Vergleichbarkeit der Kompetenzgruppen ist in dieser Studie nur in Teilen abgesichert. Auf der einen Seite sind zentrale Rahmenbedingungen für alle Teilnehmenden konstant gehalten (einheitliche IDE \enquote{VS Code}, identische Sandbox und Aufgabenstellung, identisches Zeitlimit, sowie dasselbe KI-Assistenzsystem aus GitHub Copilot und Claude Sonnet~4.5). Damit sind Unterschiede in den in Kapitel~6 berichteten Artefaktspuren und Pipeline-Status grundsätzlich \emph{kompatibel mit} kompetenzabhängigen Nutzungstypen. Auf der anderen Seite können alternative Erklärungen nicht ausgeschlossen werden: Unterschiede in Technologie-Fit (TS/Node/Backend), allgemeiner Berufserfahrung, Test-/Debugging-Routinen und individueller Risikotoleranz beeinflussen sowohl Implementationsentscheidungen als auch die Wahrscheinlichkeit, \textit{Verified} unter der gegebenen Testmethodik zu erreichen. Einige dieser Faktoren sind im Pre-Survey als Kontextmerkmale verfügbar (z.B. Erfahrung, Technologie-Fit) und können deskriptiv als Gruppenprofil berichtet werden; andere (z.B. Vorerfahrung mit Copilot/LLMs, Prompting-Strategiequalität, Hardware/Performance, Unterbrechungen) sind in den vorliegenden Artefakten nicht belastbar operationalisiert. Entsprechend sind die Diskussionen in Kapitel~7 als theoriegeleitete Einordnungen zu lesen: Unterschiede \emph{lassen sich interpretieren als} unterschiedliche Integrations- und Validierungsmodi im Kompetenzkontext, ohne daraus kausale Effekte oder gruppenstabile Leistungsrangfolgen abzuleiten.
+
+Zur begrifflichen Trennung wird -- wie in Kapitel~1 eingeführt -- zwischen Assistenzumgebung (Tool), Modell (LLM) und \emph{KI-Assistenzsystem} als funktionaler Einheit unterschieden.
+
+\section{Rückbindung an die Hypothesen}
+\label{sec:discussion_hypotheses}
+
+Die Hypothesen wurden im Forschungsdesign als Erwartung darüber formuliert, wie Kompetenz und Arbeitsmodus mit dem KI-Assistenzsystem zusammenwirken.
+Im Folgenden wird jede Hypothese anhand der in Kapitel~6 berichteten Befundlinien diskutiert.
+Dabei werden die vier Kompetenzgruppen No-Code, Low-Code, Mid-Code und High-Code als Analyseperspektiven verwendet.
+Nicht jede Hypothese zielt in gleicher Weise auf alle Gruppen.
+
+\subsection{H1: Mid-Code als Sweet Spot}
+\label{sec:discussion_h1}
+
+\textbf{Befunde, die H1 stützen.}
+Die Ergebnisse aus Kapitel~6 sprechen für ein Muster, das mit einer produktiven Balance zwischen Delegation und Kontrolle bei Mid-Code vereinbar ist.
+In der Triangulation erscheinen für Mid-Code sowohl substanzielle Umsetzungsstände als auch Hinweise auf systematische Validierung als plausibles Arbeitsmuster.
+Dieses Bild ist kompatibel mit der in Kapitel~2 beschriebenen Kompetenzlogik, nach der Mid-Code Probleme in Teilprobleme zerlegt und die durch das KI-Assistenzsystem erzeugten prozeduralen Chunks fachlich prüfen kann.
+Die in Kapitel~6 beobachtete Koexistenz von Implementationsartefakten und Debugging-Iterationen ist damit konsistent.
+
+\textbf{Befunde, die H1 relativieren.}
+Die Gegenüberstellung Kompetenzgruppe und Umsetzungsstand zeigt kein exklusives Muster, das nur Mid-Code zugeordnet werden kann.
+Auch in anderen Gruppen treten Branches mit weiter reichenden Umsetzungsständen auf.
+Damit ist das empirische Signal nicht stark genug, um Mid-Code als eindeutig vorteilhaften Nutzungstyp gegenüber den anderen Analyseperspektiven zu interpretieren.
+Zudem sind die in Kapitel~6 ausgewiesenen Qualitätsindikatoren nur Surrogate.
+Sie erlauben keine direkte Aussage darüber, ob Mid-Code tatsächlich systematischer oder effizienter validiert.
+
+\textbf{Bewertung.}
+H1 wird insgesamt teilweise gestützt.
+Die Befunde sind kompatibel mit einem Sweet-Spot-Argument.
+Sie sind jedoch nicht hinreichend spezifisch, um eine klare Stützung gegenüber den anderen Kompetenzgruppen zu begründen.
+Damit kann die Arbeit H1 als theoriekompatibles Muster im Brownfield-Setting auf Ebene von Pipeline- und Artefaktspuren einordnen; offen bleibt, ob und unter welchen Variationen von Aufgaben, Zeitbudget und prozessnahen Messungen ein solcher Sweet Spot replizierbar und trennscharf nachweisbar ist.
+
+\subsection{H2: Validierungsparadoxon bei Low-Code}
+\label{sec:discussion_h2}
+
+\textbf{Befunde, die H2 stützen.}
+Kapitel~6 zeigt wiederholt Spannungsfelder zwischen sichtbarer Implementationsaktivität und fehlender testbasierter Bestätigung, insbesondere bei konfigurationssensitiven und stark integrierten Aufgaben.
+Die Befunde sind vereinbar mit der Interpretation, dass eine rasche Generierung von Artefakten nicht automatisch mit stabiler, testkonformer Funktionalität einhergeht.
+Dies ist kompatibel mit Kapitel~2, in dem Vibe-Coding als System~1-Aktivität und Automation Bias als Risiko unkritischer Übernahme diskutiert wird.
+Für Low-Code lässt sich dies theoriegeleitet damit plausibilisieren, dass syntaktische Plausibilität häufig leichter zu beurteilen ist als semantische Korrektheit in einem bestehenden System.
+
+\textbf{Befunde, die H2 relativieren.}
+Die Artefakte in Kapitel~6 erlauben keine direkte Beobachtung individueller Validierungspraktiken, etwa durch Protokolle von Testläufen oder IDE-Aktionen.
+Auch werden Chat- und Code-Metriken nicht systematisch nach Kompetenzgruppe aufgeschlüsselt.
+Damit bleibt die Zuordnung des Validierungsparadoxons zu Low-Code eine theoriegeleitete Interpretation.
+Es handelt sich nicht um einen unmittelbar gruppenspezifisch gemessenen Effekt.
+
+\textbf{Bewertung.}
+H2 ist plausibel und wird durch die in Kapitel~6 berichteten Diskrepanzen zwischen Statuskategorien inhaltlich gestützt.
+Aufgrund der fehlenden gruppenspezifischen Validierungsdaten bleibt die Hypothese jedoch nicht eindeutig.
+Damit kann die Arbeit die analytische Relevanz der Trennung von Implementationsartefakten und testgebundener Bestätigung für H2 sichtbar machen; offen bleibt, ob und in welchem Ausmaß das Muster in prozessnahen Daten tatsächlich kompetenzspezifisch durch konkrete Validierungspraktiken getrieben ist.
+
+\subsection{H3: Skepsis und Qualitätsfokus bei High-Code}
+\label{sec:discussion_h3}
+
+\textbf{Befunde, die H3 stützen.}
+Kapitel~6 liefert Hinweise, die mit der Beobachtung vereinbar sind, dass anspruchsvolle Integrationsaufgaben unter Zeitdruck häufig nicht bis zur testbasierten Stabilisierung gelangen.
+Für High-Code ist im Rahmen von Kapitel~2 ein Arbeitsmodus plausibel, der Vorschläge stärker hinterfragt und damit mehr kognitive Ressourcen in Kontrolle investiert.
+Dieses Muster wäre vereinbar mit kalibriertem Vertrauen, bei dem Overtrust vermieden wird.
+Es wäre ebenfalls vereinbar mit dem in Kapitel~2 diskutierten Befund, dass das Modifizieren von KI-Code kognitiv teuer sein kann.
+
+\textbf{Befunde, die H3 relativieren.}
+Die in Kapitel~6 berichteten Chat-Muster und Qualitätsindikatoren werden nicht nach Kompetenzgruppen getrennt.
+Daraus folgt, dass ein erhöhter Qualitätsfokus von High-Code nicht direkt beobachtet, sondern nur aus der Theorie abgeleitet werden kann.
+Zudem zeigen die Ergebnisse keine eindeutige Dominanz von High-Code beim Umsetzungsstand.
+Ein höherer Qualitätsanspruch kann unter Zeitlimit sogar zu konservativen Entscheidungen führen, ohne dass dies als geringere Kompetenz zu interpretieren ist.
+
+\textbf{Bewertung.}
+H3 ist im theoretischen Rahmen gut begründbar.
+Die empirischen Befunde aus Kapitel~6 sind mit dieser Hypothese vereinbar, stützen sie jedoch nicht eindeutig.
+Damit kann die Arbeit H3 als vorsichtige, theoriegeleitete Erklärung für mögliche Kontroll- und Integrationsmodi im Zeitlimit diskutieren; offen bleibt, ob sich ein entsprechender Qualitätsfokus in prozessnahen Messungen (z.B. Review-Tiefe, Testlauf-Sequenzen) als distinktes Muster empirisch abgrenzen lässt.
+
+\section{Kompetenzabhängige Interaktionsmuster}
+\label{sec:discussion_competence_patterns}
+
+Kapitel~6 zeigt, dass Branches sich nicht nur im Umsetzungsstand unterscheiden, sondern auch in der Art der Interaktion, in der Struktur der Prompts und in der Häufigkeit von Debugging-Sequenzen.
+Diese Variation lässt sich im Licht von Kapitel~2 als Ausdruck unterschiedlicher Kompetenzlagen interpretieren.
+Die folgenden Deutungen sind explizit theoriegeleitet und formulieren keinen kausalen Anspruch.
+Sie beschreiben Nutzungstypen und Analyseperspektiven, nicht Qualitätsstufen oder individuelle Leistungsfähigkeit.
+Zentral ist dabei nicht das Tool selbst, da alle Teilnehmenden mit derselben Assistenzumgebung (GitHub Copilot) und derselben Modellkonfiguration gearbeitet haben.
+In dieser Einordnung ist vielmehr relevant, welche kognitiven Ressourcen und welche mentalen Modelle zur Verfügung stehen, um Vorschläge zu prüfen, zu integrieren und bei Bedarf zu korrigieren.
+
+\subsection{No-Code}
+\label{sec:discussion_no_code}
+
+Die Befunde aus Kapitel~6 lassen sich so lesen, dass für No-Code der Zugang zu umsetzungsnahen Artefakten erleichtert werden kann.
+Gleichzeitig kann Validierung und Integration im bestehenden System häufig anspruchsvoll bleiben.
+Im Rahmen von Kapitel~2 lässt sich dies als Vibe-Coding-Arbeitsmodus interpretieren, in dem das KI-Assistenzsystem prozedurale Chunks liefert, die fehlende Produktionsregeln überbrücken.
+Gleichzeitig kann ohne tragfähige Schemata der Intrinsic Load der Prüfung und Integration höher ausfallen.
+Damit ist es im Sinne von Kapitel~2 plausibel, dass System~2 situativ nicht in dem Maß aktiviert wird, das für semantische Validierung erforderlich wäre, obwohl die Oberfläche plausibel wirkt.
+Diese Einordnung bleibt theoriegeleitet, da Kapitel~6 keine direkten Prozessmessungen der Validierung auf individueller Ebene enthält.
+
+\subsection{Low-Code}
+\label{sec:discussion_low_code}
+
+Kapitel~6 lässt sich so lesen, dass Low-Code sichtbare Implementationsartefakte erzeugt, während testgebundene Bestätigung bei stärker integrierten Aufgaben nicht durchgängig erreicht wird.
+Im Rahmen von Kapitel~2 lässt sich dies als Spannungsfeld zwischen Vertrauen und Kontrolle interpretieren.
+Dabei kann das KI-Assistenzsystem als Beschleuniger genutzt werden, während semantische Korrektheit im Systemkontext schwerer zu prüfen bleibt.
+Wenn Validierungsroutinen nicht etabliert sind, ist in dieser theoretischen Lesart plausibel, dass unkalibriertes Vertrauen häufiger auftritt, ohne dass dies aus den Artefakten als gruppenspezifischer Effekt gemessen werden kann.
+Die in Kapitel~6 berichteten Strategiemuster, etwa tutorial-nahe Implementationsflüsse und Boilerplate, sind mit einem stärker template-basierten Arbeitsmodus vereinbar.
+Diese Einordnung bleibt theoriegeleitet, da Kapitel~6 Validierungshandlungen nicht gruppenspezifisch und prozessnah erfasst.
+
+\subsection{Mid-Code}
+\label{sec:discussion_mid_code}
+
+Kapitel~6 ist mit der Beobachtung kompatibel, dass Mid-Code sowohl Umsetzungsartefakte als auch Iterationen der Nachjustierung und Validierung zeigt.
+Im Rahmen von Kapitel~2 lässt sich dies als Kompetenzlage interpretieren, die zielorientierte Zerlegung und aktive Kontrolle kombiniert.
+Damit lässt sich das KI-Assistenzsystem eher als Werkzeug in einem kontrollierten Problemlöseprozess einordnen.
+Die in Kapitel~6 berichtete Vielfalt an Prompt-Formen ist als funktionale Variation plausibel, in der kurze Prompts Beschleunigung und strukturierte Prompts Spezifikation und Kontextabgleich unterstützen.
+Debugging-Iterationen sind dabei als normaler Bestandteil iterativer Integrationsarbeit zu lesen, nicht als Effizienzindikator.
+Diese Einordnung bleibt vorsichtig, da Kapitel~6 keine direkten Messungen von Review- und Validierungstiefe enthält.
+
+\subsection{High-Code}
+\label{sec:discussion_high_code}
+
+Kapitel~6 ist kompatibel mit dem Befund, dass unter Zeitlimit bei anspruchsvollen Integrationsaufgaben testgebundene Bestätigung nicht durchgängig erreicht wird.
+Im Rahmen von Kapitel~2 lässt sich dies für High-Code als Nutzungstyp interpretieren.
+In dieser Einordnung wird das KI-Assistenzsystem eher für Boilerplate und Exploration genutzt, während zentrale Entscheidungen und Integrationslogik stärker manuell geprüft werden.
+In dieser Perspektive können intensives Prüfen und konservative Integrationsentscheidungen mit geringerem sichtbarem Fortschritt koexistieren, ohne dass daraus unmittelbar Rückschlüsse auf Qualität oder Kompetenz abzuleiten wären.
+Diese Einordnung bleibt vorsichtig, da Kapitel~6 keine direkte Messung von Review-Tiefe oder Kontrollhandlungen enthält.
+
+\section{Interpretation der Pipeline-Muster}
+\label{sec:discussion_pipeline}
+
+Die Pipeline-Kategorien \textit{Attempted}, \textit{Implemented\textsubscript{static}} und \textit{Verified} strukturieren die Befunde in Kapitel~6 entlang eines Trichters; für die Trichterdarstellung wird dort zusätzlich \textit{Implemented$^\ast$} als abgeleitete Evidenzstufe verwendet.
+Die folgenden Deutungen binden diese deskriptiven Status-Diskrepanzen explizit an die in Kapitel~2 eingeführten Konzepte (u.a. Cognitive Load, Automation Bias) zurück.
+Für die Diskussion ist entscheidend, dass diese Kategorien unterschiedliche Aspekte desselben Arbeitsprozesses repräsentieren.
+In der Notation gilt: $\textit{Attempted} \neq \textit{Implemented\textsubscript{static}} \neq \textit{Verified}$.
+Attempted beschreibt Intention und Planbildung auf der Chat-Ebene.
+Implemented\textsubscript{static} beschreibt aufgabenspezifische Artefakte in der Codebasis (White-Box).
+Verified beschreibt testgebundenes, von außen beobachtbares Verhalten (Black-Box).
+Verified ist damit methodengebunden und als Integrationsindikator zu lesen, nicht als Leistungs- oder Qualitätsmaß.
+Aus Kapitel~6 folgt, dass diese Ebenen nicht zusammenfallen müssen.
+
+\subsection{Attempted ist nicht gleich \texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic}}
+\label{sec:discussion_attempted_vs_implemented}
+
+Die beobachtete Differenz zwischen Attempted und Implemented\textsubscript{static} lässt sich plausibel als Integrationsphänomen interpretieren.
+Insbesondere Aufgaben, die mehrere Systemteile koppeln, gehen mit zusätzlichem Koordinationsaufwand einher.
+Im Rahmen von Kapitel~2 lässt sich dies über Cognitive Load erklären.
+Die Aufgabe reduziert sich nicht auf das Erzeugen von Code, sondern umfasst das Verstehen des bestehenden Kontexts, das Abstimmen von Datenmodellen und Schnittstellen sowie das Beheben von Fehlanpassungen.
+Dieser Aufwand dürfte den Intrinsic Load erhöhen.
+Das KI-Assistenzsystem kann Extraneous Load senken, indem es Syntax und Boilerplate generiert.
+Es kann die semantische Konsistenzarbeit im Systemkontext jedoch nicht ersetzen.
+
+\subsection{\texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic} ist nicht gleich Verified}
+\label{sec:discussion_implemented_vs_verified}
+
+Die Diskrepanz zwischen Implemented\textsubscript{static} und Verified ist nicht als Qualitätsurteil über einzelne Branches zu lesen.
+Kapitel~6 betont, dass Verified ein Diagnosesignal innerhalb der eingesetzten Testmethodik ist.
+Für konfigurationssensitive Aufgaben kann Verified stark von Details des Endpunktvertrags und der Testannahmen abhängen.
+Ein fehlendes Verified-Signal kann daher bedeuten, dass eine Lösung heterogen, nur teilweise integriert oder nicht exakt testkonform ist.
+Es kann auch bedeuten, dass die Tests eine bestimmte Implementationsform voraussetzen, die nicht mit allen plausiblen Lösungen kompatibel ist.
+
+\subsection{Warum Verified gleich null kein eindeutiges Negativsignal ist}
+\label{sec:discussion_verified_zero}
+
+Kapitel~6 zeigt für bestimmte Integrationsaufgaben, dass testbasierte Bestätigung ausbleibt.
+Im Kontext dieser Studie ist das als erwartbares Ergebnis eines strikten Zeitlimits und hoher Schnittstellenkomplexität interpretierbar.
+Gerade in einer Brownfield-Umgebung dürfte der Aufwand durch bestehende Konventionen, vorhandene Datenmodelle und implizite Vertragsannahmen steigen.
+Dies kann mit erhöhter kognitiver Belastung und Debugging-Aufwand einhergehen.
+Unter Automation Bias Perspektive ist zudem plausibel, dass scheinbar fertige Artefakte in einzelnen Fällen zu früh als ausreichend akzeptiert werden.
+Die Abwesenheit von Verified ist in dieser Arbeit daher kein Synonym für fehlendes Verständnis, sondern kann als Signal für Integrationskosten und Validierungsengpässe gelesen werden.
+
+\section{Einordnung der Chat-Interaktionsmuster}
+\label{sec:discussion_chat}
+
+Die Chat-Ergebnisse aus Kapitel~6 zeigen starke Variation der Interaktionsintensität und wiederkehrende Muster von Debugging-Sequenzen.
+Kapitel~6 bewertet diese Muster nicht.
+Für die Diskussion sind drei Punkte zentral.
+
+\subsection{Warum Chat-Intensität kein Effizienzmaß ist}
+\label{sec:discussion_chat_intensity}
+
+Eine hohe Interaktionsintensität kann mehrere Bedeutungen haben.
+Sie kann auf Exploration, auf unklare Anforderungen, auf Fehlanpassungen an den Kontext oder auf konsequente Validierung und Nachjustierung hinweisen.
+Kapitel~2 betont, dass Vibe-Coding den Schwerpunkt vom Schreiben zum Lesen und Prüfen verschiebt.
+Damit kann ein längerer Chat-Verlauf auch Ausdruck von Kontrolle und Review sein.
+Umgekehrt kann ein kurzer Chat-Verlauf sowohl effiziente Beschleunigung als auch unkritische Übernahme bedeuten.
+Ohne zusätzliche Prozessdaten, etwa Messungen von Testläufen oder IDE-Interaktionen, ist eine Effizienzdeutung nicht abgesichert.
+
+\subsection{Warum Debugging-Loops normal sind}
+\label{sec:discussion_debugging_loops}
+
+Kapitel~6 berichtet Debugging-Iterationen als wiederkehrendes Strukturmerkmal.
+Im Rahmen von Kapitel~2 ist dies erwartbar.
+Mixed-Initiative Interaction bedeutet, dass Vorschläge, Rückfragen und Korrekturen in Schleifen organisiert sind.
+Zudem kann die Arbeit in einem bestehenden System die Wahrscheinlichkeit von Konfigurations- und Schnittstellenfehlern erhöhen.
+Debugging-Sequenzen sind daher als normaler Bestandteil von Integrationsarbeit zu interpretieren.
+Sie sind nicht per se ein Indikator für geringe Kompetenz oder geringe Qualität.
+
+\subsection{Explorative und zielgerichtete Interaktion}
+\label{sec:discussion_exploration_vs_acceleration}
+
+Kapitel~2 unterscheidet Interaktionsmodi wie Exploration und Beschleunigung.
+Kapitel~6 zeigt sowohl kurze, wenig strukturierte Prompts als auch strukturierte, mehrpunktige Prompts.
+Diese Koexistenz lässt sich als situativ wechselnder Arbeitsmodus interpretieren.
+Exploration kann genutzt werden, um APIs, Projektkonventionen oder mögliche Lösungswege zu verstehen.
+Beschleunigung kann genutzt werden, um bekannte Muster schnell zu implementieren.
+Der Wechsel zwischen diesen Modi ist in einer zeitlich begrenzten Aufgabenbearbeitung plausibel.
+
+\section{Implikationen für Praxis und Forschung}
+\label{sec:discussion_implications}
+
+Aus der Diskussion lassen sich vorsichtige Implikationen für Praxis und Forschung formulieren, die über die konkrete Sandbox hinausreichen.
+Sie betreffen sowohl die Einführung von KI-Tools in Organisationen als auch die Art, wie deren Nutzen evaluiert wird.
+Sie knüpfen an die in Kapitel~6 berichteten Befunde an und werden im Licht der in Kapitel~2 eingeführten Konzepte formuliert.
+
+\subsection{Implikationen für Unternehmen}
+\label{sec:discussion_implications_practice}
+
+Die Bereitstellung eines KI-Tools allein adressiert nicht automatisch die in Kapitel~6 sichtbaren Unterschiede in Nutzungstypen.
+Die Befunde sind kompatibel mit der Annahme, dass Kompetenz den Umgang mit Delegation, Kontrolle und Validierung mitprägt.
+Als Implikation lässt sich vorsichtig ableiten, dass organisatorische Einbettung und Qualifizierung den beobachteten Prozessunterschieden begegnen können.
+Dies kann sich etwa in Kompetenzaufbau zu Validierung, Testdenken und Schnittstellenverträgen sowie in expliziten Erwartungen an Review und Integrationsarbeit ausdrücken.
+
+\subsection{Implikationen für die Evaluation von KI-Coding-Tools}
+\label{sec:discussion_implications_evaluation}
+
+Kapitel~6 zeigt, dass einzelne Signale wie Teststatus, Linting oder Interaktionsintensität isoliert schwer interpretierbar sind.
+Für Forschung und Praxis ergibt sich daraus, dass Interpretationen belastbarer werden, wenn mehrere Perspektiven gemeinsam betrachtet werden.
+Insbesondere ist die Unterscheidung zwischen Intention, Implementationsartefakt und testbasierter Bestätigung zentral.
+Ebenso ist der Kompetenzkontext für die Einordnung der Artefakte relevant, weil aggregierte Durchschnittseffekte Nutzungstypen überdecken können.
+
+\subsection{Abgrenzung zu Marketing-Narrativen}
+\label{sec:discussion_marketing}
+
+In der öffentlichen Darstellung werden häufig generische Produktivitätsgewinne hervorgehoben.
+Die in Kapitel~6 berichteten Muster legen dagegen eine differenzierte Einordnung entlang von Integrationsaufwand, Validierbarkeit und Kompetenzkontext nahe.
+Im Rahmen von Kapitel~2 können KI-Assistenzsysteme Extraneous Load reduzieren und damit Umsetzungsschritte beschleunigen.
+Gleichzeitig verschieben sich Anforderungen hin zu Review, semantischer Validierung und testmethodisch gebundener Absicherung.
+Ohne diese Prozessanteile ist im Sinne von Kapitel~2 unkalibriertes Vertrauen plausibel, ohne dass dies kausal belegt wäre.
+Damit ist der Nutzen nicht als automatische Eigenschaft eines Tools zu verstehen, sondern als Ergebnis einer arbeitsorganisatorischen Einbettung, die Kompetenzlagen und Integrationskosten berücksichtigt.
+
+\section{Limitationen und Ausblick}
+\label{sec:discussion_limitations}
+
+Die Studie ist in ihrer Aussagekraft durch mehrere Faktoren begrenzt.
+Erstens ist die Stichprobengröße begrenzt, wodurch gruppenspezifische Effekte nur eingeschränkt trennscharf beobachtbar sind.
+Zweitens setzt das strikte Zeitlimit den Fokus auf frühe Integrationsschritte und kann unvollständige Stabilisierung begünstigen.
+Drittens wurde GitHub Copilot als Assistenzumgebung in Kombination mit dem Modell Claude Sonnet~4.5 betrachtet, wodurch sich keine Aussagen zur Generalisierbarkeit über andere KI-Assistenzsysteme oder Modelle ableiten lassen.
+Viertens liegt keine Langzeitbeobachtung vor, sodass Lern- und Adaptationseffekte über Wochen oder Monate nicht erfasst werden.
+
+Aus diesen Limitationen ergeben sich unmittelbare Ansatzpunkte für weitere Forschung.
+Sinnvoll sind längere Beobachtungsfenster mit wiederholten Sessions, um Stabilisierung, Refactoring und Validierungsroutinen erfassen zu können.
+Ebenso sind Designs relevant, die Prozessdaten stärker erfassen, etwa Testlauf-Sequenzen, Review-Handlungen oder Kontextbereitstellung im Editor.
+Schließlich ist es für künftige Arbeiten relevant zu prüfen, inwieweit die beobachteten Muster über unterschiedliche KI-Assistenzsysteme und Modellkonfigurationen hinweg stabil sind, ohne daraus unmittelbare Leistungsrangfolgen abzuleiten.
+
+Kapitel~8 fasst die zentralen Erkenntnisse zusammen und leitet daraus die abschließenden Antworten auf die Forschungsfragen ab.
