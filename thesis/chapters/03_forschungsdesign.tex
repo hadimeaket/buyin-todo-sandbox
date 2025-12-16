@@ -50,16 +50,15 @@ Die Kompetenzgruppen (No-Code/Low-Code/Mid-Code/High-Coder) werden in dieser Arb
 \begin{table}[ht]
     \centering
     \begingroup
-    \scriptsize
-    \setlength{\tabcolsep}{2pt}
-    \renewcommand{\arraystretch}{0.9}
-    \begin{tabular}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\centering\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}p{4.2cm}|}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{@{}|>{\raggedright\arraybackslash}p{0.17\linewidth}|>{\raggedright\arraybackslash}p{0.28\linewidth}|>{\raggedright\arraybackslash}p{0.14\linewidth}|>{\centering\arraybackslash}p{0.07\linewidth}|>{\raggedright\arraybackslash}p{0.26\linewidth}|@{}}
     \hline
-        {\bfseries Input-Quelle} & {\bfseries \shortstack[l]{Skala\\(Pre-Survey)}} & {\bfseries \shortstack[l]{Punkte\\(Mapping)}} & {\bfseries \shortstack{Max.\\Punkte}} & {\bfseries Begr\"undung} \\ \hline
-    Jahre allgemeine Programmiererfahrung & \begin{tabular}[t]{@{}p{3.6cm}@{}}Keine Erfahrung / No experience\\Weniger als 1 Jahr / Less than 1 year\\1 bis 3 Jahre / 1 to 3 years\\Mehr als 3 Jahre / More than 3 years\end{tabular} & \begin{tabular}[t]{@{}p{2.9cm}@{}}(1)=0\\(2)=2\\(3)=4\\(4)=5\end{tabular} & 5/13 & Proxy f\"ur routinierte Programmierpraxis; als Selbstauskunft erhoben und daher kein objektives Kompetenzma\ss{}. \\ \hline
-    Jahre Erfahrung mit TS/Node/Backend & \begin{tabular}[t]{@{}p{3.6cm}@{}}Keine Erfahrung / No experience\\Weniger als 1 Jahr / Less than 1 year\\1 bis 3 Jahre / 1 to 3 years\\Mehr als 3 Jahre / More than 3 years\end{tabular} & \begin{tabular}[t]{@{}p{2.9cm}@{}}(1)=0\\(2)=1\\(3)=3\\(4)=4\end{tabular} & 4/13 & Proxy f\"ur Dom\"anen- und Stack-N\"ahe (relevant f\"ur die Brownfield-Sandbox); Selbstauskunft, nicht Leistungsnachweis. \\ \hline
-    Implementierungs\-sicherheit\\(Selbst\-einsch\"atzung) & Likert 1--5 & \begin{tabular}[t]{@{}p{2.8cm}@{}}1--2\(\rightarrow\)0\\3\(\rightarrow\)1\\4--5\(\rightarrow\)2\end{tabular} & 2/13 & Proxy f\"ur wahrgenommene F\"ahigkeit, Feature-Logik selbstst\"andig umzusetzen; subjektiv und kontextabh\"angig. \\ \hline
-    Debugging- und Testpraxis\\(Selbst\-einsch\"atzung) & Likert 1--5 & \begin{tabular}[t]{@{}p{2.8cm}@{}}1--2\(\rightarrow\)0\\3\(\rightarrow\)1\\4--5\(\rightarrow\)2\end{tabular} & 2/13 & Proxy f\"ur Validierungs- und Fehlersuchroutinen (z.B. Tests/Debugging) im Arbeitsprozess; Selbstauskunft statt objektiver Messung. \\ \hline
+	    	{\bfseries Input-Quelle} & {\bfseries Skala (Pre-Survey)} & {\bfseries Punkte (Mapping)} & {\bfseries Max. Punkte} & {\bfseries Begr\"undung} \\ \hline
+    Jahre allgemeine Programmiererfahrung & \parbox[t]{\linewidth}{\vspace{0pt}Keine Erfahrung\par Weniger als 1 Jahr\par 1 bis 3 Jahre\par Mehr als 3 Jahre} & \parbox[t]{\linewidth}{\vspace{0pt}(1)=0\par (2)=2\par (3)=4\par (4)=5} & 5/13 & Proxy f\"ur routinierte Programmierpraxis; als Selbstauskunft erhoben und daher kein objektives Kompetenzma\ss{}. \\ \hline
+    Jahre Erfahrung mit TS/Node/Backend & \parbox[t]{\linewidth}{\vspace{0pt}Keine Erfahrung\par Weniger als 1 Jahr\par 1 bis 3 Jahre\par Mehr als 3 Jahre} & \parbox[t]{\linewidth}{\vspace{0pt}(1)=0\par (2)=1\par (3)=3\par (4)=4} & 4/13 & Proxy f\"ur Dom\"anen- und Stack-N\"ahe (relevant f\"ur die Brownfield-Sandbox); Selbstauskunft, nicht Leistungsnachweis. \\ \hline
+    \parbox[t]{\linewidth}{\vspace{0pt}Implementierungs\-sicherheit\par (Selbst\-einsch\"atzung)} & Likert 1--5 & \parbox[t]{\linewidth}{\vspace{0pt}1--2\(\rightarrow\)0\par 3\(\rightarrow\)1\par 4--5\(\rightarrow\)2} & 2/13 & Proxy f\"ur wahrgenommene F\"ahigkeit, Feature-Logik selbstst\"andig umzusetzen; subjektiv und kontextabh\"angig. \\ \hline
+    \parbox[t]{\linewidth}{\vspace{0pt}Debugging- und Testpraxis\par (Selbst\-einsch\"atzung)} & Likert 1--5 & \parbox[t]{\linewidth}{\vspace{0pt}1--2\(\rightarrow\)0\par 3\(\rightarrow\)1\par 4--5\(\rightarrow\)2} & 2/13 & Proxy f\"ur Validierungs- und Fehlersuchroutinen (z.B. Tests/Debugging) im Arbeitsprozess; Selbstauskunft statt objektiver Messung. \\ \hline
     \end{tabular}
     \caption{Auditierbare Scoring-Rubrik zur Kompetenz-Operationalisierung (0--13 Punkte) basierend auf den tats\"achlich erhobenen Pre-Survey-Items (Form Responses 1 in \protect\path{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx}). Verwendet werden ausschlie\ss{}lich erfahrungsnahe Proxies (Jahre allgemeine Programmiererfahrung; Jahre TS/Node/Backend; Selbsteinsch\"atzung Implementierungssicherheit; Selbsteinsch\"atzung Debugging-/Testpraxis). Die Gewichtung ist als maximal erreichbare Punktzahl pro Item angegeben; der Gesamtscore ist die Summe \(S\).}
     \label{tab:competence-rubric}

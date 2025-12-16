@@ -47,23 +47,30 @@ T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
 
 \begin{figure}[ht]
 \centering
+\makebox[\linewidth][c]{%
 \begin{tikzpicture}
 \begin{axis}[
     xbar,
+    width=0.92\linewidth,
+    height=7.2cm,
     xmin=0,
     xmax=18,
-    xtick={0,1,...,18},
+    xtick={0,2,...,18},
+    scaled x ticks=false,
+    tick label style={/pgf/number format/fixed,/pgf/number format/precision=0},
     xticklabel style={font=\scriptsize},
     xlabel={Anzahl Branches ($N=18$)},
     xlabel style={font=\small},
     symbolic y coords={T1: Persistenz,T2: Auth,T3: Kategorien,T4: Attachments,T5: Kalender},
     ytick=data,
     y dir=reverse,
-    bar width=4pt,
-    enlarge y limits=0.25,
+    bar width=6pt,
+    enlarge y limits=0.45,
+    trim axis left,
+    trim axis right,
     axis lines=left,
     xmajorgrids,
-    grid style={black!15},
+    grid style={black!8, line width=0.15pt},
     tick style={black!50},
     legend style={
         at={(0.5,-0.18)},
@@ -72,23 +79,38 @@ T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
         font=\small,
         draw=none
     },
+    point meta=explicit symbolic,
     nodes near coords,
     nodes near coords style={
         font=\scriptsize,
         anchor=west,
-        xshift=2pt,
-        text=black!70
+        xshift=3pt,
+        text=black!80
     },
+    clip=false,
 ]
-    \addplot[fill=black!20, draw=none, bar shift=6pt]
-    coordinates {(18,T1: Persistenz) (18,T2: Auth) (15,T3: Kategorien) (13,T4: Attachments) (13,T5: Kalender)};
-    \addplot[fill=black!45, draw=none, bar shift=0pt]
-    coordinates {(17,T1: Persistenz) (17,T2: Auth) (13,T3: Kategorien) (8,T4: Attachments) (0,T5: Kalender)};
-    \addplot[fill=black!70, draw=none, bar shift=-6pt]
-    coordinates {(10,T1: Persistenz) (4,T2: Auth) (13,T3: Kategorien) (0,T4: Attachments) (0,T5: Kalender)};
+    % Attempted (hellgrau)
+    \addplot[fill=black!15, draw=black!55, line width=0.2pt, bar shift=9pt]
+    coordinates {(18,T1: Persistenz) [18] (18,T2: Auth) [18] (15,T3: Kategorien) [15] (13,T4: Attachments) [13] (13,T5: Kalender) [13]};
+
+    % Implemented* (mittelgrau, visuell dominanter)
+    \addplot[fill=black!55, draw=black, line width=0.35pt, bar width=7pt, bar shift=0pt]
+    coordinates {(17,T1: Persistenz) [17] (17,T2: Auth) [17] (13,T3: Kategorien) [13] (8,T4: Attachments) [8] (0,T5: Kalender) [{}]};
+
+    % Verified (dunkelgrau/schwarz; zusätzlich Schraffur)
+    \addplot[fill=black!85, draw=black, line width=0.4pt, pattern=north east lines, pattern color=black, bar shift=-9pt]
+    coordinates {(10,T1: Persistenz) [10] (4,T2: Auth) [4] (13,T3: Kategorien) [13] (0,T4: Attachments) [{}] (0,T5: Kalender) [{}]};
+
+    % 0-Werte (ohne Textlabel) optional als Marker am Achsenstart
+    \addplot[only marks, mark=o, mark size=2.6pt, draw=black, mark layer=foreground, forget plot, bar shift=0pt]
+    coordinates {(0,T5: Kalender)};
+    \addplot[only marks, mark=x, mark size=3.0pt, draw=black, mark layer=foreground, forget plot, bar shift=-9pt]
+    coordinates {(0,T4: Attachments) (0,T5: Kalender)};
+
     \legend{Attempted, Implemented$^\ast$, Verified}
 \end{axis}
 \end{tikzpicture}
+}%
 \caption{Pipeline-Ergebnisse für T1--T5 ($N=18$) als gruppierte Balken:  \textit{Attempted} (Chat-Signal),  \textit{Implemented$^\ast$} (definiert als  \textit{Attempted} $\wedge$ (\textit{Implemented\textsubscript{static}} $\vee$  \textit{Verified})) und  \textit{Verified} (testgebunden: bestandene V3-Integrationstests). Die Werte entsprechen Tabelle~\ref{tab:task_pipeline_v2}.}
 \label{fig:task_pipeline_funnel_t1_t5}
 \end{figure}

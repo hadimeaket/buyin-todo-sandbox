@@ -28,6 +28,7 @@
 
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{patterns}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{amsmath}
@@ -55,7 +56,8 @@
 \newtheorem{hypothesis}{Hypothese}
 
 % Hyperlinks, PDF metadata, bookmarks.
-\usepackage[unicode]{hyperref}
+% Keep links clickable, but remove colored boxes around them (e.g., in the TOC).
+\usepackage[unicode,hidelinks]{hyperref}
 \ifPDFTeX
   % Better Unicode coverage for PDF strings (bookmarks/metadata) under pdfLaTeX.
   % Optional: not all TeX installations include it.
@@ -70,7 +72,8 @@ Evaluationsrahmen und Integrationsstrategie am Beispiel BuyIn}
 
 \begin{document}
 
-\maketitle
+\input{chapters/00_titelseite}
+\clearpage
 
 \tableofcontents
 \clearpage
