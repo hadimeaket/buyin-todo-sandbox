@@ -8,8 +8,12 @@ Kapitel~8 schließt die Arbeit ab, indem die in Kapitel~6 berichteten Ergebnisse
 Im Unterschied zu Kapitel~6 (deskriptiv) und Kapitel~7 (theoriegeleitet) dient dieses Kapitel der abschließenden Synthese und der expliziten Beantwortung der Forschungsfragen.
 Es werden keine neuen Daten eingeführt und keine zusätzlichen Metriken berechnet.
 
-Übergeordnetes Ziel der Arbeit war die Evaluation eines interaktiven KI-Assistenzsystems im Vibe-Coding-Kontext in einer kontrollierten Brownfield-Sandbox.
-Im Studiensetup wurde -- konsistent zur Begriffsklärung in Kapitel~1 -- zwischen Assistenzumgebung (Tool), Modell (LLM) und KI-Assistenzsystem als funktionaler Einheit unterschieden.
+\begin{sloppypar}
+\hbadness=4000\relax
+Übergeordnetes Ziel der Arbeit war die Evaluation eines interaktiven KI-Assistenzsystems.
+Diese erfolgte im Vibe-Coding-Kontext in einer kontrollierten Brownfield-Sandbox.
+Im Studiensetup wurde -- konsistent zur Begriffsklärung in Kapitel~1 -- zwischen Assistenzumgebung (Tool), Modell (LLM) und KI-Assistenzsystem als funktionaler Einheit unterschieden; betrachtet wurde GitHub Copilot als Assistenzumgebung im VS-Code-Kontext.
+\end{sloppypar}
 
 \section{Beantwortung der Forschungsfragen}
 \label{sec:conclusion_rqs}
@@ -17,23 +21,23 @@ Im Studiensetup wurde -- konsistent zur Begriffsklärung in Kapitel~1 -- zwische
 \subsection[Forschungsfrage 1: Kompetenz und Pipeline-Status]{Forschungsfrage 1: Wie hängt die Entwicklerkompetenz mit dem Erreichen der Pipeline-Status Attempted, \texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic} und Verified zusammen?}
 \label{sec:conclusion_rq1}
 
-\textbf{Kurzantwort.}
-Attempted und Implemented\textsubscript{static} sind über die Kompetenzgruppen hinweg als Artefaktspuren sichtbar; Verified als testgebundene Stufe wird am seltensten erreicht.
+ \textbf{Kurzantwort.}
+Attempted und Implemented\textsubscript{static} sind über die Kompetenzgruppen hinweg als Artefaktspuren in den Auswertungsartefakten ausgewiesen; Verified als testgebundene Stufe wird am seltensten erreicht.
 
-\textbf{Verdichtete Begründung.}
-Kapitel~6 trennt die Evidenzebenen Attempted, Implemented\textsubscript{static} und Verified.
+ \textbf{Verdichtete Begründung.}
+Kapitel~6 trennt die Ebenen Attempted, Implemented\textsubscript{static} und Verified.
 Attempted steht für Intention (Chat-Ebene), Implemented\textsubscript{static} für White-Box-Artefakte (Codebasis), Verified für testgebundenes Black-Box-Verhalten und ist damit methodengebunden.
-Für die Trichterdarstellung wird in Kapitel~6 zusätzlich Implemented$^\ast$ als abgeleitete Evidenzstufe verwendet.
-Die Befunde aus Kapitel~6 und die Einordnung in Kapitel~7 sind damit vereinbar, dass Implementationsfortschritt nicht notwendigerweise in testgebundene Bestätigung übergeht.
+Für die aggregierte Darstellung wird in Kapitel~6 zusätzlich Implemented$^\ast$ als abgeleitete Evidenzstufe verwendet.
 Kompetenz dient dabei als Analyseperspektive auf unterschiedliche Integrations- und Validierungsmodi, nicht als Leistungsbewertung.
+Die Befunde aus Kapitel~6 und die Einordnung in Kapitel~7 zeigen, dass Implementationsfortschritt nicht notwendigerweise in testgebundene Bestätigung übergeht.
 
 \subsection[Forschungsfrage 2: Code- und Test-Artefakte]{Forschungsfrage 2: Welche Rolle spielen Code- und Test-Artefakte für die Bewertung der Arbeitsergebnisse eines KI-Assistenzsystems?}
 \label{sec:conclusion_rq2}
 
-\textbf{Kurzantwort.}
+ \textbf{Kurzantwort.}
 Code- und Test-Artefakte sind zentral, weil sie die Trennung zwischen sichtbarer Implementierung (Implemented\textsubscript{static}) und testgebundener Bestätigung (Verified) operationalisieren und Chat-Signale methodisch ergänzen.
 
-\textbf{Verdichtete Begründung.}
+ \textbf{Verdichtete Begründung.}
 Die Artefaktanalyse macht Implementationsfortschritt über Quellcodeänderungen, Surrogat-Signale (z.B. Linting) und strukturelle Spuren in der Codebasis nachvollziehbar.
 Testgebundene Ergebnisse bilden beobachtbares Verhalten unter den gegebenen Tests ab und sind damit zentral für die Bestätigung im Systemkontext.
 Die Pipeline-Logik liefert so eine nachvollziehbare Trennung von Intention, Implementationsartefakt und testgebundener Bestätigung (Kapitel~6) und wird in Kapitel~7 methodisch eingeordnet.
@@ -42,16 +46,16 @@ Kompetenz ergänzt diese Sicht als Analyseperspektive, weil sich Artefaktspuren 
 \subsection[Forschungsfrage 3: Chat-Interaktionsmuster]{Forschungsfrage 3: Welche Chat-Interaktionsmuster treten im Vibe-Coding-Kontext auf, und wie sind sie für die Evaluation einzuordnen?}
 \label{sec:conclusion_rq3}
 
-\textbf{Kurzantwort.}
+ \textbf{Kurzantwort.}
 Im Vibe-Coding-Kontext variieren Chat-Interaktionsmuster deutlich; ihre Intensität ist weder als Effizienzmaß noch als Qualitätsmaß geeignet.
 Für die Evaluation sind Chat-Muster nur im Zusammenspiel mit Pipeline-Status sowie Code- und Test-Artefakten aussagekräftig.
 
-\textbf{Verdichtete Begründung.}
+ \textbf{Verdichtete Begründung.}
 Die Chat-Artefakte zeigen unterschiedliche Prompt-Strukturen, wechselnde Interaktionsmodi und wiederkehrende Debugging-Schleifen.
-Diese Muster sind konsistent damit, dass Interaktion sowohl Exploration als auch Beschleunigung unterstützen kann.
+Diese Muster werden in Kapitel~7 entlang der Interaktionsmodi Exploration und Beschleunigung eingeordnet; beide Modi treten im Material auf.
 Eine hohe Interaktionsintensität kann dabei gleichermaßen aus Validierung, aus Fehlanpassungen an den Systemkontext oder aus iterativer Integration resultieren.
 Entsprechend ist die Einordnung von Chat-Mustern an die Pipeline-Logik zu koppeln.
-Attempted macht die Intention sichtbar, Implemented\textsubscript{static} die resultierenden Artefakte und Verified die testgebundene Funktion im System.
+Attempted bildet die Intention ab, Implemented\textsubscript{static} die resultierenden Artefakte und Verified die testgebundene Funktion im System.
 Die Kompetenzgruppen liefern hierfür den Kontext als Analyseperspektiven auf Nutzungsformen, ohne dass daraus eine Bewertung einzelner Personen abgeleitet wird.
 
 \section{Zentrale Erkenntnisse der Arbeit}
@@ -60,42 +64,97 @@ Die Kompetenzgruppen liefern hierfür den Kontext als Analyseperspektiven auf Nu
 Die Arbeit verdichtet sich in folgenden Befundlinien.
 
 \begin{itemize}
-    \item \textbf{Kompetenz als Perspektive auf Nutzungstypen:} Unterschiede zeigen sich in Nutzungsformen des KI-Assistenzsystems, nicht als Wertung von Personen oder Gruppen.
-    \item \textbf{Trennung von Intention, Artefakt und Bestätigung:} Attempted, Implemented\textsubscript{static} und Verified bilden unterschiedliche Ebenen desselben Arbeitsprozesses ab und fallen nicht notwendigerweise zusammen.
-    \item \textbf{Validierung und Integration als Engpass:} Sichtbare Implementationsartefakte sind häufig erreichbar, während testgebundene Bestätigung die methodisch engste Stufe darstellt.
-    \item \textbf{Chat-Interaktion ist kein Ersatz für Ergebnisprüfung:} Interaktionsintensität und Prompt-Formen sind ohne Artefakt- und Testbezug nicht belastbar als Effizienz- oder Qualitätssignale.
-    \item \textbf{Grenzen vereinfachter Produktivitätsnarrative:} Produktivität lässt sich in der untersuchten Umgebung nicht auf Generierungsgeschwindigkeit reduzieren, sondern ist entlang von Integrationsaufwand und Validierungsarbeit einzuordnen.
-    \item \textbf{Relevanz von Triangulation statt Einzelmetriken:} Belastbare Einordnung entsteht durch das Zusammenspiel von Pipeline-Status, Code- und Test-Artefakten sowie Chat-Mustern.
+    \item  \textbf{Kompetenz als Perspektive auf Nutzungstypen:} Unterschiede zeigen sich in Nutzungsformen des KI-Assistenzsystems, nicht als Wertung von Personen oder Gruppen.
+    \item  \textbf{Trennung von Intention, Artefakt und Bestätigung:}\\
+    Attempted, Implemented\textsubscript{static} und Verified sind unterschiedliche Ebenen und fallen nicht notwendigerweise zusammen.
+    \item  \textbf{Validierung und Integration als Engpass:} Sichtbare Implementationsartefakte sind häufig erreichbar, während testgebundene Bestätigung die methodisch engste Stufe darstellt.
+    \item  \textbf{Chat-Interaktion ist kein Ersatz für Ergebnisprüfung:} Interaktionsintensität und Prompt-Formen sind ohne Artefakt- und Testbezug nicht belastbar als Effizienz- oder Qualitätssignale.
+    \item  \textbf{Grenzen vereinfachter Produktivitätsnarrative:} Produktivität ist in der untersuchten Umgebung nicht auf Generierungsgeschwindigkeit zu reduzieren, sondern entlang von Integrationsaufwand und Validierungsarbeit einzuordnen.
+    \item  \textbf{Relevanz von Triangulation statt Einzelmetriken:} Belastbare Einordnung entsteht durch das Zusammenspiel von Pipeline-Status, Code- und Test-Artefakten sowie Chat-Mustern.
 \end{itemize}
 
 \section{Beitrag der Arbeit}
 \label{sec:conclusion_contributions}
 
-\textbf{Wissenschaftlicher Beitrag.}
+ \textbf{Wissenschaftlicher Beitrag.}
 Die Arbeit liefert eine strukturierte Einordnung der Evaluation eines KI-Assistenzsystems im Vibe-Coding-Kontext, indem Kompetenzgruppen als Analyseperspektiven mit Artefaktspuren und Prozesssignalen zusammengeführt werden.
 
-\textbf{Methodischer Beitrag.}
+ \textbf{Methodischer Beitrag.}
 Die Arbeit operationalisiert Aufgabenerfolg über die Pipeline-Logik (Attempted, Implemented\textsubscript{static}, Verified; sowie Implemented$^\ast$ als abgeleitete Evidenzstufe) und verknüpft diese systematisch mit der Triangulation mehrerer Artefaktquellen.
 Damit liegt ein Evaluationsschema vor, das die Trennung zwischen intendierter Bearbeitung, sichtbarer Implementierung und testgebundener Bestätigung explizit und nachvollziehbar macht.
 
-\textbf{Konzeptioneller Beitrag.}
+ \textbf{Konzeptioneller Beitrag.}
 Die Arbeit betont Kompetenz als Perspektive auf Nutzungstypen und verschiebt den Fokus von einer rein toolzentrierten Betrachtung hin zu der Frage, wie KI-Assistenzsysteme in konkreten Entwicklungspraktiken genutzt und geprüft werden.
 
-\textbf{Empirischer Beitrag.}
+ \textbf{Empirischer Beitrag.}
 Die Sandbox-Studie in einer Brownfield-Umgebung liefert eine Artefaktbasis aus Code-, Test- und Chat-Spuren, anhand derer die Pipeline-Status operationalisiert und gruppenbezogen eingeordnet werden können (Kapitel~6/7).
 
-\textbf{Praktischer Beitrag.}
+ \textbf{Praktischer Beitrag.}
 Für Organisationen ergibt sich ein Rahmen zur Einführung und Evaluation von KI-Coding-Tools, der Qualifizierung, Review-Praxis und testbasierte Absicherung als Bestandteile einer kontrollierten Nutzung sichtbar macht.
+
+\section{Implikationen und Empfehlungen für BuyIn}
+\label{sec:conclusion_buyin_recommendations}
+
+Die Empfehlungen werden ausschließlich aus den in Kapitel~6 berichteten Mustern und der Einordnung in Kapitel~7 abgeleitet.
+Zentral ist dabei die Trennung zwischen Intention (\textit{Attempted}), sichtbarer Implementierung (\textit{Implemented\textsubscript{static}}) und testgebundener Bestätigung (\textit{Verified}).
+Insbesondere der wiederkehrende Engpass in der testgebundenen Bestätigung bei Integrationsaufgaben (z.B. T4/T5) unterstreicht, dass eine Einführung nicht auf Codegenerierung, sondern auf Integration und Validierung zu fokussieren ist.
+
+\subsection{Rollout in Phasen (kontrollierte Skalierung)}
+\label{sec:conclusion_rollout_phases}
+
+\begin{itemize}
+    \item \textbf{Phase 1: Pilot im Brownfield-Subset.} Auf Basis des in Kapitel~6 sichtbaren Engpasses beim Übergang von \textit{Implemented\textsubscript{static}} zu \textit{Verified} (insbesondere bei Integrationsaufgaben wie T4/T5) empfehlen wir einen Pilot in wenigen Teams/Services mit klaren Tests und stabilen Schnittstellen; Ziel ist die Etablierung von Arbeits- und Review-Routinen, nicht maximale Geschwindigkeit.
+    \item \textbf{Phase 2: Skalierung mit Governance.} Auf Basis der in Kapitel~6 verwendeten Pipeline-Logik (Trennung von Intention/Artefakt/Testbestätigung) empfehlen wir die Skalierung nur bei gleichzeitig verbindlichen Qualitätsgates (Tests/CI) und dokumentierten Guardrails.
+    \item \textbf{Phase 3: Verstetigung.} Auf Basis der in Kapitel~7 diskutierten Integrationskosten und wiederkehrenden Debugging- und Anpassungsschleifen empfehlen wir regelmäßige Retrospektiven zu Integrationskosten (z.B. wiederkehrende Contract-/Test-Fails) und eine fortlaufende Anpassung der Enablement-Materialien.
+\end{itemize}
+
+\subsection{Rollen und Verantwortlichkeiten}
+\label{sec:conclusion_roles}
+
+\begin{itemize}
+    \item \textbf{Engineering Enablement / \allowbreak Tool Owner:}\\
+    Definiert auf Basis der in Kapitel~6/7 beobachteten Trennung von Chat-Signalen und verifiziertem Outcome Standard-Workflows (Prompting-Konventionen, Review-Checklisten, Testausführung) und betreibt Qualifizierung.
+    \item \textbf{Tech Lead / Architekt:} Verantwortet Schnittstellenverträge (API/Schema/UI), da Kapitel~6 bei gekoppelten Aufgaben Diskrepanzen zwischen Artefaktfortschritt und \textit{Verified} sichtbar macht.
+    \item \textbf{Reviewer (Code Owners):} Prüft Änderungen diff-basiert gegen Contracts und Tests; auf Basis der in Kapitel~6/7 beschriebenen Risiken plausibler, aber nicht integrierter Artefakte werden KI-generierte Änderungen nicht ohne nachvollziehbare Verifikation akzeptiert.
+    \item \textbf{Entwickelnde:} Nutzen das KI-Assistenzsystem als Beschleuniger für Umsetzungsschritte; auf Basis der in Kapitel~6 beschriebenen Pipeline-Diskrepanzen wird jede Änderung an lokale Tests und CI gekoppelt.
+\end{itemize}
+
+\subsection{Guardrails und Qualitätsgates (Integration \& Verifikation)}
+\label{sec:conclusion_guardrails}
+
+\begin{itemize}
+    \item \textbf{\textit{Verified} als Merge-Voraussetzung.} Auf Basis der in Kapitel~6 operationalisierten Differenz zwischen \textit{Implemented\textsubscript{static}} und \textit{Verified} werden Pull Requests nicht über reine Artefaktspuren freigegeben; entscheidend ist testgebundene Bestätigung im Systemkontext.
+    \item \textbf{Contract-first bei Integrationsaufgaben.} Auf Basis des in Kapitel~6 sichtbar werdenden Integrationsengpasses bei gekoppelten Aufgaben (z.B. T4/T5) werden für Änderungen an Schema/API/UI Contracts explizit festgehalten (z.B. OpenAPI/DTOs), um Integrations- und Validierungsarbeit zu stabilisieren.
+    \item \textbf{Review-Checklisten für KI-Änderungen.} Auf Basis der in Kapitel~7 diskutierten Risiken plausibler, aber semantisch nicht integrierter Artefakte werden minimale Checks verbindlich: Tests lokal/CI, Konsistenz zu bestehenden Konventionen, keine ungenutzten/\enquote{toten} Pfade, nachvollziehbare Fehlermeldungen.
+    \item \textbf{Triangulation statt Proxy-Optimierung.} Auf Basis der in Kapitel~6/7 begründeten Methodik werden Chat-Intensität oder technische Surrogate (Lint, \texttt{anyUsage}) nicht als Qualitätsersatz verwendet; aussagekräftig werden sie erst im Zusammenspiel mit Tests und Artefakten.
+\end{itemize}
+
+\subsection{Qualifizierung nach Kompetenzprofil (ohne Leistungsranking)}
+\label{sec:conclusion_training_by_competence}
+
+Die Kompetenzgruppen werden als unterschiedliche Nutzungstypen adressiert.
+Ziel ist nicht die Bewertung von Personen, sondern die Reduktion der in Kapitel~6/7 sichtbaren Integrations- und Validierungsrisiken.
+
+\begin{itemize}
+    \item \textbf{No-Code:} Auf Basis der in Kapitel~7 diskutierten Nutzungstypen und der in Kapitel~6 sichtbaren Differenz zwischen Artefaktspuren und \textit{Verified} liegt der Fokus auf Lese- und Prüfkompetenz (Tests ausführen, Fehlermeldungen interpretieren, minimale Code-Navigation), damit plausible Ausgaben nicht mit korrekter Integration verwechselt werden.
+    \item \textbf{Low-Code:} Auf Basis des in Kapitel~6/7 sichtbaren Integrations- und Validierungsengpasses liegt der Fokus auf Schnittstellenverständnis und systematischem Debugging (Contracts, Request/Response, Datenmodell), da Artefaktfortschritt allein kein verlässlicher Indikator für \textit{Verified} ist.
+    \item \textbf{Mid-Code:} Auf Basis der in Kapitel~6/7 berichteten Iterations- und Debugging-Muster liegt der Fokus auf kontrollierter Iteration (kleine PRs, gezielte Tests, Refactoring unter Zeitdruck), um den Übergang von Implementationsspuren zu testgebundener Bestätigung zu stabilisieren.
+    \item \textbf{High-Coder:} Auf Basis der in Kapitel~7 diskutierten selektiven Nutzungstypen liegt der Fokus auf effizienter Nutzung (Boilerplate/Exploration delegieren, Integrationslogik gezielt prüfen), damit der KI-Einsatz in stabilen Integrations- und Review-Routinen verankert bleibt.
+\end{itemize}
 
 \section{Abschließendes Fazit}
 \label{sec:conclusion_final}
 
-Die Arbeit zeigt, dass die Evaluation KI-gestützter Softwareentwicklung im Vibe-Coding-Kontext eine klare Trennung zwischen Intention, Implementationsartefakt und testgebundener Bestätigung erfordert.
-Die Kombination aus Pipeline-Logik, Artefaktanalyse und Chat-Auswertung erlaubt eine konsistente, methodisch abgesicherte Zusammenführung der Befunde (Kapitel~6) und ihrer Einordnung (Kapitel~7).
+Die Arbeit zeigt, dass die Evaluation KI-gestützter Softwareentwicklung im Vibe-Coding-Kontext eine klare Trennung zwischen Intention, Implementationsartefakt und testgebundener Bestätigung benötigt.
+Die Kombination aus Pipeline-Logik, Artefaktanalyse und Chat-Auswertung ermöglicht eine konsistente, methodisch begründete Zusammenführung der Befunde (Kapitel~6) und ihrer Einordnung (Kapitel~7).
 
-Im Ergebnis ist der Nutzen im untersuchten Brownfield-Setting nicht als automatische Eigenschaft eines Tools zu lesen, sondern als Zusammenspiel von Integrationsaufwand, Validierungsarbeit und Nutzungstypen im Kompetenzkontext.
+Im untersuchten Brownfield-Setting ist der Nutzen nicht als automatische Eigenschaft eines Tools zu verstehen, sondern als Zusammenspiel von Integrationsaufwand, Validierungsarbeit und Nutzungstypen im Kompetenzkontext.
 
-\noindent\textbf{Absicherung (Group comparability \& Confounder).} Die Schlussfolgerungen sind an die in Kapitel~6 berichteten Proxys (Pipeline-Status, Code-/Test-Surrogate, Chat-Muster) gebunden; mögliche Konfundierungen und die konservative Lesart werden in Abschnitt~\ref{sec:discussion_scope} (Kapitel~7) begründet. Entsprechend begründen die Befunde keine kausalen Effekte und keine generalisierbaren Rangfolgen zwischen Kompetenzgruppen.
+\noindent \textbf{Absicherung (Group comparability \& Confounder).} Die Schlussfolgerungen sind an die in Kapitel~6 berichteten Proxys (Pipeline-Status, Code-/Test-Surrogate, Chat-Muster) gebunden; mögliche Konfundierungen und die konservative Lesart werden in Abschnitt~\ref{sec:discussion_scope} (Kapitel~7) begründet. Entsprechend begründen die Befunde keine kausalen Effekte und keine generalisierbaren Rangfolgen zwischen Kompetenzgruppen.
 Die Aussagen beziehen sich auf Branches als Analyseeinheiten und auf aggregierte Muster, nicht auf eine Leistungsbewertung einzelner Personen.
 
-\noindent\textbf{Take-Home-Message.} Für KI-gestützte Softwareentwicklung sind singuläre Produktivitäts- oder Proxy-Metriken nur begrenzt belastbar, weil Integrations- und Validierungsarbeit zentral bleibt (Kapitel~6/7). Robust wird die Evaluation durch die konsequente Trennung und Triangulation von Intention (Attempted), Implementationsartefakt (Implemented\textsubscript{static}) und testgebundener Bestätigung (Verified). Kompetenz wird dabei durchgehend als Analyseperspektive genutzt, um unterschiedliche Nutzungs- und Validierungsmodi einzuordnen\,-- ohne Leistungsrangfolgen abzuleiten. Die Kernaussage ist: Belastbare Schlussfolgerungen entstehen erst aus der gemeinsamen Betrachtung dieser drei Ebenen.
+\noindent \textbf{Take-Home-Message.}\\
+Für KI-gestützte Softwareentwicklung sind singuläre Produktivitäts- oder Proxy-Metriken nur begrenzt belastbar, weil Integrations- und Validierungsarbeit zentral bleibt (Kapitel~6/7).
+Robuster wird die Evaluation durch die konsequente Trennung und Triangulation von Intention (Attempted), Implementationsartefakt (Implemented\textsubscript{static}) und testgebundener Bestätigung (Verified).
+Kompetenz wird dabei durchgehend als Analyseperspektive genutzt, um unterschiedliche Nutzungs- und Validierungsmodi einzuordnen, ohne Leistungsrangfolgen abzuleiten.
+Die Kernaussage ist: Belastbare Schlussfolgerungen entstehen erst aus der gemeinsamen Betrachtung dieser drei Ebenen.

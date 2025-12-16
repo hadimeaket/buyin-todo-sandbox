@@ -1,50 +1,50 @@
 \section{Datengrundlage und Toolkontext}
 \label{sec:results_context}
 
-Dieses Unterkapitel beschreibt die Datengrundlage der Untersuchung sowie den technischen Kontext der durchgeführten \textit{Vibe-Coding-Challenge}. Die Analyse basiert auf einem Datensatz von $N=18$ Probanden, die im Rahmen einer kontrollierten Coding-Challenge Aufgaben zur Entwicklung einer Todo-Applikation bearbeiteten.
+Dieses Unterkapitel beschreibt die Datengrundlage der Untersuchung sowie den technischen Kontext der durchgeführten  \textit{Vibe-Coding-Challenge}. Die Analyse basiert auf einem Datensatz von $N=18$ Probanden, die im Rahmen einer kontrollierten Coding-Challenge Aufgaben zur Entwicklung einer Todo-Applikation bearbeiteten.
 
 \subsection{Studiensetting und Rahmenbedingungen}
 Die Studie wurde unter einheitlichen Rahmenbedingungen durchgeführt, um die Vergleichbarkeit der Ergebnisse zu gewährleisten:
 \begin{itemize}
-    \item \textbf{Zeitlimit:} Alle Probanden hatten ein striktes Zeitlimit von 60 Minuten für die Bearbeitung der Aufgaben.
-    \item \textbf{Tooling:} Als Entwicklungsumgebung diente Visual Studio Code mit der GitHub Copilot Extension.
-    \item \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde \textbf{Claude Sonnet~4.5} verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
-    \item \textbf{Aufgabenstellung:} Die Probanden erhielten eine Liste von 8 Aufgaben (T1--T8) mit steigender Komplexität, beginnend bei Backend-Persistenz bis hin zu komplexen Frontend-Features und Export-Funktionen.
+    \item  \textbf{Zeitlimit:} Alle Probanden hatten ein striktes Zeitlimit von 60 Minuten für die Bearbeitung der Aufgaben.
+    \item  \textbf{Tooling:} Als Entwicklungsumgebung diente Visual Studio Code mit der GitHub Copilot Extension.
+    \item  \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde  \textbf{Claude Sonnet~4.5} verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
+    \item  \textbf{Aufgabenstellung:} Die Probanden erhielten eine Liste von 8 Aufgaben (T1--T8) mit steigender Komplexität, beginnend bei Backend-Persistenz bis hin zu komplexen Frontend-Features und Export-Funktionen.
 \end{itemize}
 
 \subsection{Datenquellen und Artefakte}
 Die empirische Auswertung stützt sich auf drei primäre Datenquellen, die eine Triangulation der Ergebnisse ermöglichen:
 
 \begin{enumerate}
-    \item \textbf{Code-Artefakte (Git-Repositories):}
+    \item  \textbf{Code-Artefakte (Git-Repositories):}
     Die finalen Implementierungen der Probanden liegen als separate Git-Branches vor. Diese Branches enthalten den vollständigen Quellcode zum Zeitpunkt des Zeitablaufs.
     \begin{itemize}
-        \item Pfad: Remote-Branches mit dem Suffix \texttt{*-vibe} (z.B. \texttt{origin/nachname-vorname-vibe}).
+        \item Pfad: Remote-Branches mit dem Suffix \path{*-vibe}.\\
+        Beispiel: \path{origin/nachname-vorname-vibe}.
     \end{itemize}
 
-    \item \textbf{Chat-Logs:}
+    \item  \textbf{Chat-Logs:}
     Die vollständigen Interaktionsprotokolle zwischen Proband und KI-Assistenzsystem wurden exportiert. Diese Protokolle enthalten alle Prompts der Nutzer sowie die Antworten und Code-Generierungen der KI.
     \begin{itemize}
-        \item Pfad: \texttt{thesis/chats/} (Format: \texttt{.docx}).
+        \item Pfad: \path{thesis/chats/} (Format: \texttt{.docx}).
     \end{itemize}
 
-    \item \textbf{Survey-Daten:}
+    \item  \textbf{Survey-Daten:}
     Im Anschluss an die Challenge füllten die Probanden einen Fragebogen zur Selbsteinschätzung und subjektiven Wahrnehmung der KI-Interaktion aus.
     \begin{itemize}
-        \item Pfad: \texttt{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx}.
+        \item Pfad: \path{thesis/surveys/}\\
+        \path{Probanden-Einstufungsformular (Responses).xlsx}.
     \end{itemize}
 \end{enumerate}
 
 \subsection{Dateninventar und Vollständigkeit}
-Tabelle \ref{tab:data_inventory} zeigt das Inventar der verfügbaren Datenartefakte. Insgesamt liegen für 18 Probanden Daten vor.
-
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \begin{tabular}{|l|c|l|}
     \hline
-    \textbf{Artefakt-Typ} & \textbf{Anzahl} & \textbf{Anmerkung} \\
+     \textbf{Artefakt-Typ} &  \textbf{Anzahl} &  \textbf{Anmerkung} \\
     \hline
-    Git-Branches (\texttt{*-vibe}) & 18 & Vollständig als Remote-Branches vorhanden \\
+    Git-Branches (\path{*-vibe}) & 18 & Vollständig als Remote-Branches vorhanden \\
     Chat-Logs & 18 & Vollständig für alle Teilnehmer \\
     Survey-Einträge & 18 & Vollständig ($N=18$) \\
     \hline
@@ -53,21 +53,26 @@ Tabelle \ref{tab:data_inventory} zeigt das Inventar der verfügbaren Datenartefa
     \label{tab:data_inventory}
 \end{table}
 
+\noindent \textbf{Messung.} Erfasst wurde die Verfügbarkeit der drei Datenartefakte Git-Branches, Chat-Logs und Survey-Einträge über alle Teilnehmenden ($N=18$).
+\noindent \textbf{Hauptbefund.} Für alle drei Artefakt-Typen liegt Vollständigkeit vor (jeweils 18/18).
+\noindent \textbf{RQ-Bezug.} Das Dateninventar ist die Grundlage für die Triangulation von Code-, Test- und Chat-Artefakten (insbesondere RQ2) sowie für die Auswertung der Pipeline-Status in Kapitel~6.
+
 \subsection{Zuordnung und Zusammenführung der Daten}
-Die Zusammenführung der Datenquellen erfolgte über eine Mapping-Tabelle, die die Klarnamen aus dem Survey und den Chat-Dateinamen den entsprechenden Git-Branches zuordnet.
+Die Zusammenführung der Datenquellen erfolgte über eine Mapping-Tabelle, die Namensangaben aus dem Survey und die Chat-Dateinamen den entsprechenden Git-Branches zuordnet. In der Ergebnisdarstellung werden Teilnehmende ausschließlich als Teilnehmer A--R referenziert.
 \begin{itemize}
-    \item \textbf{Survey $\leftrightarrow$ Branch:} Das Survey-Feld "Branch-Name" sowie der Name des Probanden dienten als Schlüssel.
-    \item \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. \texttt{Nachname\_Vorname.docx}) wurden normalisiert und den entsprechenden Branches (z.B. \texttt{nachname-vorname-vibe}) zugeordnet.
+    \item  \textbf{Survey $\leftrightarrow$ Branch:} Das Survey-Feld "Branch-Name" sowie der Name des Probanden dienten als Schlüssel.
+    \item  \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. \path{Nachname_Vorname.docx}) wurden normalisiert und den entsprechenden Branches zugeordnet.\\
+    Beispiel: \path{nachname-vorname-vibe}.
 \end{itemize}
-Die Survey-Daten enthalten zudem eine Einteilung in Kompetenzgruppen (No-Code, Low-Code, Mid-Code, High-Code), die in der späteren Analyse als vergleichendes Merkmal herangezogen wird.
+Die Survey-Daten enthalten zudem eine Einteilung in Kompetenzgruppen (No-Code, Low-Code, Mid-Code, High-Coder), die in der späteren Analyse als vergleichendes Merkmal herangezogen wird.
 
 \subsection{Reproduzierbarkeit und Auswertungswerkzeuge}
-Um die Ergebnisse objektiv und reproduzierbar zu gestalten, kommen automatisierte Analysewerkzeuge zum Einsatz, deren Resultate im Ordner \texttt{evaluation/} persistiert werden:
+Um die Ergebnisse nachvollziehbar und reproduzierbar zu gestalten, kommen automatisierte Analysewerkzeuge zum Einsatz, deren Resultate im Ordner \path{evaluation/} persistiert werden:
 
 \begin{itemize}
-    \item \textbf{Statische Code-Analyse:} Einsatz von \texttt{ESLint} zur Überprüfung der Code-Qualität und Einhaltung von Standards.
-    \item \textbf{Automatisierte Tests:} Ausführung der vorhandenen Test-Suite (basierend auf \texttt{Jest/Vitest}), um die funktionale Korrektheit der Implementierungen (Task Completion) zu verifizieren.
-    \item \textbf{Chat-Parsing:} Algorithmische Auswertung der Chat-Logs zur Bestimmung von "Attempted"-Tasks und Identifikation von Prompting-Mustern.
+    \item  \textbf{Statische Code-Analyse:} Einsatz von \texttt{ESLint} zur Überprüfung der Code-Qualität und Einhaltung von Standards.
+    \item  \textbf{Automatisierte Tests:} Ausführung der vorhandenen Test-Suite (basierend auf \texttt{Jest/Vitest}), um die funktionale Korrektheit der Implementierungen (Task Completion) zu verifizieren.
+    \item  \textbf{Chat-Parsing:} Algorithmische Auswertung der Chat-Logs zur Bestimmung von \textit{Attempted}-Tasks und Identifikation von Prompting-Mustern.
 \end{itemize}
 
 \subsection{Abgrenzung zu Kapitel 7}

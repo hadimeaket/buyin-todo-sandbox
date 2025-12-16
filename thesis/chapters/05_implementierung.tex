@@ -8,10 +8,10 @@ Dieses Kapitel dokumentiert die technische Implementierung der \emph{BuyIn Todo 
 Um valide Aussagen über Vibe-Coding in Unternehmenskontexten treffen zu können, musste die Testumgebung folgende Anforderungen erfüllen:
 
 \begin{enumerate}
-    \item \textbf{Realismus (Brownfield):} Die Codebasis darf nicht leer sein (\enquote{Greenfield}), sondern muss bestehende Strukturen, technische Schulden und Konventionen enthalten, die das KI-Assistenzsystem und der Mensch verstehen müssen.
-    \item \textbf{Komplexität:} Der Tech-Stack muss modern, aber komplex genug sein, um triviale Lösungen zu verhindern.
-    \item \textbf{Isolierbarkeit:} Die Umgebung muss für jeden Teilnehmenden identisch zurückgesetzt werden können (Containerisierung).
-    \item \textbf{Messbarkeit:} Das System muss automatisierte Tests bereitstellen, um den funktionalen Fortschritt objektiv zu messen.
+    \item  \textbf{Realismus (Brownfield):} Die Codebasis darf nicht leer sein (\enquote{Greenfield}), sondern soll bestehende Strukturen, technische Schulden und Konventionen enthalten, die das KI-Assistenzsystem und der Mensch verstehen sollen.
+    \item  \textbf{Komplexität:} Der Tech-Stack soll modern, aber komplex genug sein, um triviale Lösungen zu verhindern.
+    \item  \textbf{Isolierbarkeit:} Die Umgebung soll für jeden Teilnehmenden identisch zurückgesetzt werden können (Containerisierung).
+    \item  \textbf{Messbarkeit:} Das System soll automatisierte Tests bereitstellen, um den funktionalen Fortschritt standardisiert zu erfassen.
 \end{enumerate}
 
 \section{Architektur und Tech-Stack: Kognitive Dimensionen}
@@ -21,41 +21,46 @@ Die Sandbox ist als klassische Full-Stack-Webanwendung konzipiert. Die Architekt
 \subsection{Backend: Node.js \& Express (Layered Architecture)}
 Das Backend basiert auf Node.js mit dem Express-Framework und folgt einer strikten Schichtenarchitektur:
 \begin{itemize}
-    \item \textbf{Routes:} Definition der API-Endpunkte.
-    \item \textbf{Controllers:} Verarbeitung der HTTP-Requests und Validierung.
-    \item \textbf{Services:} Kapselung der Geschäftslogik.
-    \item \textbf{Repositories:} Datenzugriffsschicht.
+    \item  \textbf{Routes:} Definition der API-Endpunkte.
+    \item  \textbf{Controllers:} Verarbeitung der HTTP-Requests und Validierung.
+    \item  \textbf{Services:} Kapselung der Geschäftslogik.
+    \item  \textbf{Repositories:} Datenzugriffsschicht.
 \end{itemize}
-\csname textbf\endcsname{Kognitive Dimension - Viscosity (Zähigkeit):} Diese Trennung erhöht die \emph{Viscosity} für Novizen, da eine Änderung an mehreren Stellen (Datei-Hopping) durchgeführt werden muss. Für Copilot hingegen ist diese Struktur vorteilhaft. Sie zieht klare semantische Grenzen, die das KI-Assistenzsystem über Dateinamen und Pfadkontext nutzen kann.
+    \csname textbf\endcsname{Kognitive Dimension - Viscosity (Zähigkeit):} Diese Trennung erhöht die \emph{Viscosity} für Novizen, da Änderungen häufig an mehreren Stellen (Datei-Hopping) vorgenommen werden. Für Copilot hingegen ist diese Struktur vorteilhaft. Sie zieht klare semantische Grenzen, die das KI-Assistenzsystem über Dateinamen und Pfadkontext nutzen kann.
 
 \subsection{Frontend: React \& Vite}
 Das Frontend nutzt React mit TypeScript. Die Komponenten sind funktional aufgebaut und nutzen Hooks.
-\csname textbf\endcsname{Kognitive Dimension - Hidden Dependencies:} Die Verwendung von \emph{Custom Hooks} und \emph{Context API} erzeugt \emph{Hidden Dependencies}. Low-Code-Teilnehmende sehen im UI-Code nicht sofort, woher die Daten kommen. Dies testet die Fähigkeit des KI-Assistenzsystems, diese Abhängigkeiten aufzulösen, sowie die Fähigkeit des Nutzers, dem KI-Assistenzsystem den passenden Kontext zu geben.
+    \csname textbf\endcsname{Kognitive Dimension - Hidden Dependencies:} Die Verwendung von \emph{Custom Hooks} und \emph{Context API} erzeugt \emph{Hidden Dependencies}. Low-Code-Teilnehmende sehen im UI-Code nicht sofort, woher die Daten kommen. Dies testet die Fähigkeit des KI-Assistenzsystems, diese Abhängigkeiten aufzulösen, sowie die Fähigkeit des Nutzers, dem KI-Assistenzsystem den passenden Kontext zu geben.
 
 \section{Technische Funktionsweise von Copilot in der Sandbox}
 
-Um zu verstehen, warum die Sandbox Copilot fordert, muss die technische Funktionsweise betrachtet werden.
+Zur Einordnung, warum die Sandbox Copilot fordert, ist die technische Funktionsweise relevant.
 
 \subsection{Prompt Construction und Context Retrieval}
 Copilot sendet nicht nur den Code vor dem Cursor an das Modell. Der \emph{Copilot Proxy} in der IDE sammelt Kontext aus:
 \begin{itemize}
-    \item \textbf{Jaccard Similarity:} Offene Tabs werden nach Ähnlichkeit zum aktuellen Code gescannt.
-    \item \textbf{Semantic Search:} Vektorisierte Suche im Projekt (bei neueren Versionen).
+    \item  \textbf{Jaccard Similarity:} Offene Tabs werden nach Ähnlichkeit zum aktuellen Code gescannt.
+    \item  \textbf{Semantic Search:} Vektorisierte Suche im Projekt (bei neueren Versionen).
 \end{itemize}
-In der Sandbox sind die Aufgaben so gestaltet, dass die Lösung oft in einer \emph{anderen} Datei liegt (z.B. muss der Controller angepasst werden, um den Service zu nutzen). Wenn der Nutzer diese Datei nicht öffnet, fehlt dem KI-Assistenzsystem der Kontext. Dadurch wird indirekt die Kompetenz des Nutzers gemessen, dem KI-Assistenzsystem die richtigen „Hinweise“ zu geben.
+\begin{sloppypar}
+In der Sandbox sind die Aufgaben so gestaltet, dass die Lösung oft in einer \emph{anderen} Datei liegt (z.B. ist der Controller anzupassen, um den Service zu nutzen). Wenn der Nutzer diese Datei nicht öffnet, fehlt dem KI-Assistenzsystem der Kontext. Dadurch wird indirekt abgebildet, in welchem Maß Nutzende relevanten Kontext bereitstellen.
+\end{sloppypar}
 
 \subsection{Token Prediction und Ranking}
-Das Modell generiert mehrere Vorschläge (Beams) und rankt diese nach Wahrscheinlichkeit. In einer Brownfield-Umgebung ist die Wahrscheinlichkeit für „korrekten“ Code höher, wenn er dem Stil der Umgebung entspricht. High-Code-Teilnehmende erkennen, ob ein Vorschlag den Stil bricht (z.B. \texttt{var} statt \texttt{const}); Low-Code-Teilnehmende häufig nicht.
+Das Modell generiert mehrere Vorschläge (Beams) und rankt diese nach Wahrscheinlichkeit. In einer Brownfield-Umgebung ist die Wahrscheinlichkeit für „korrekten“ Code höher, wenn er dem Stil der Umgebung entspricht. High-Coder-Teilnehmende erkennen, ob ein Vorschlag den Stil bricht (z.B. \texttt{var} statt \texttt{const}); Low-Code-Teilnehmende häufig nicht.
 
 \section{Design der Aufgaben (Workload Grading)}
 
 Die Aufgaben sind so gestaffelt, dass sie die kognitive Last sukzessive erhöhen:
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|l|l|l|}
+    \begingroup\sloppy
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{|p{0.08\textwidth}|>{\raggedright\arraybackslash}p{0.28\textwidth}|>{\raggedright\arraybackslash}p{0.58\textwidth}|}
     \hline
-    \textbf{Task} & \textbf{Beschreibung} & \textbf{Kognitive Anforderung} \\ \hline
+     \textbf{Task} &  \textbf{Beschreibung} &  \textbf{Kognitive Anforderung} \\ \hline
     1 & Persistenz (JSON) & Verstehen des Repository-Patterns (Backend). \\ \hline
     2 & User-Accounts & Einführung neuer Entitäten, Anpassung mehrerer Layer. \\ \hline
     3 & Kategorien (UI) & Frontend-Logik, State-Management. \\ \hline
@@ -65,6 +70,7 @@ Die Aufgaben sind so gestaffelt, dass sie die kognitive Last sukzessive erhöhen
     7 & Performance & Optimierung, kein funktionales Feature (Experten-Task). \\ \hline
     8 & ICS-Export & Standard-Format, reines Mapping (Erholung). \\ \hline
     \end{tabular}
+    \endgroup
     \caption{Aufgaben-Design und kognitive Anforderungen}
     \label{tab:task-design}
 \end{table}
@@ -76,27 +82,27 @@ Um die Auswertung der Ergebnisse zu standardisieren, wurde ein Evaluations-Frame
 \subsection{Das Analyse-Skript (\texttt{run.js})}
 Ein Node.js-Skript automatisiert die Prüfung der Lösungen. Es führt folgende Schritte aus:
 \begin{enumerate}
-    \item \textbf{Test-Execution:} Ausführung der Unit-Tests (Vitest) und End-to-End-Tests (Playwright).
-    \item \textbf{Linting:} Prüfung auf Code-Style-Verletzungen mittels ESLint.
-    \item \textbf{Report-Generierung:} Zusammenfassung der Ergebnisse in einer JSON-Datei.
+    \item  \textbf{Test-Execution:} Ausführung der Unit-Tests (Vitest) und End-to-End-Tests (Playwright).
+    \item  \textbf{Linting:} Prüfung auf Code-Style-Verletzungen mittels ESLint.
+    \item  \textbf{Report-Generierung:} Zusammenfassung der Ergebnisse in einer JSON-Datei.
 \end{enumerate}
 
 \subsection{Grenzen der LLM-gestützten Code-Analyse}
-Zusätzlich zur rein funktionalen Prüfung wird ein LLM-Prompt-Template verwendet, um qualitative Aspekte des Codes zu bewerten. Hierbei muss kritisch angemerkt werden, dass LLMs zu \emph{Halluzinationen} neigen können: Sie finden Fehler, die nicht existieren, oder übersehen echte Probleme. Der Score dient daher nur als Indikator und wird stichprobenartig manuell validiert.
+Zusätzlich zur rein funktionalen Prüfung wird ein LLM-Prompt-Template verwendet, um qualitative Aspekte des Codes zu bewerten. Hierbei ist kritisch anzumerken, dass LLMs zu \emph{Halluzinationen} neigen können: Sie finden Fehler, die nicht existieren, oder übersehen echte Probleme. Der Score dient daher nur als Indikator und wird stichprobenartig manuell validiert.
 
 
 \section{Relevanz für den Unternehmenskontext (BuyIn)}
 
 Die gewählte Architektur und Methodik spiegelt reale Herausforderungen bei BuyIn wider:
 \begin{itemize}
-    \item \textbf{Legacy-Integration:} Wie bei BuyIn müssen Entwickler oft in gewachsenen Strukturen arbeiten, die nicht perfekt dokumentiert sind. Vibe-Coding kann hier helfen, den „impliziten Kontext“ schneller zu erschließen.
-    \item \textbf{Security \& Compliance:} Der Einsatz von Copilot in Enterprise-Umgebungen birgt Risiken (Datenabfluss, Lizenzverletzungen). Die Sandbox simuliert dies durch Aufgaben, bei denen sensible Daten (User-Accounts) behandelt werden müssen.
-    \item \textbf{Skalierbarkeit:} Die modulare Struktur der Sandbox zeigt, wie Copilot in größeren Teams (wo Modularisierung Pflicht ist) performt, im Gegensatz zu kleinen Skript-Projekten.
+    \item  \textbf{Legacy-Integration:} Wie bei BuyIn arbeiten Entwickler häufig in gewachsenen Strukturen, die nicht perfekt dokumentiert sind. Vibe-Coding kann hier unterstützen, den „impliziten Kontext“ schneller zu erschließen.
+    \item  \textbf{Security \& Compliance:} Der Einsatz von Copilot in Enterprise-Umgebungen birgt Risiken (Datenabfluss, Lizenzverletzungen). Die Sandbox simuliert dies durch Aufgaben, bei denen sensible Daten (User-Accounts) behandelt werden.
+    \item  \textbf{Skalierbarkeit:} Die modulare Struktur der Sandbox bildet einen Kontext, um den Einsatz von Copilot in stärker modularisierten Codebasen (z.B. größere Teams) im Kontrast zu kleinen Skript-Projekten einzuordnen.
 \end{itemize}
 
 \section{Containerisierung und Reproduzierbarkeit}
 
-Die gesamte Umgebung ist mittels Docker containerisiert. Dies stellt sicher, dass alle Teilnehmenden -- unabhängig von ihrem Betriebssystem -- unter identischen Bedingungen arbeiten und technische Störfaktoren (z.B. unterschiedliche Node-Versionen) eliminiert werden.
+Die gesamte Umgebung ist mittels Docker containerisiert. Dies stellt sicher, dass alle Teilnehmenden -- unabhängig von ihrem Betriebssystem -- unter identischen Bedingungen arbeiten und technische Störfaktoren (z.B. unterschiedliche Node-Versionen) reduziert werden.
 
 \subsection{Reproduzierbarkeit / Artefaktzugang}
 Die in dieser Arbeit berichteten quantitativen Ergebnisse (Tests, Linting und daraus abgeleitete Scores) sind aus dem Repository heraus nachvollziehbar reproduzierbar. Neben der containerisierten Sandbox liegen die zentralen Auswerteskripte sowie die genutzten Rohdaten (Chat- und Survey-Exporte) versioniert vor.
@@ -110,31 +116,54 @@ Die in dieser Arbeit berichteten quantitativen Ergebnisse (Tests, Linting und da
 \end{itemize}
 
 \paragraph{Minimaler Reproduktionspfad (4 Schritte).}
+\begin{sloppypar}
 \begin{enumerate}
-    \item Abhängigkeiten installieren: \csname texttt\endcsname{npm ci --prefix backend}
-    \item Abhängigkeiten installieren: \csname texttt\endcsname{npm ci --prefix frontend}
-    \item Evaluation ausführen: \csname texttt\endcsname{node} \path{evaluation/run.js}
-    \item Ergebnisse einsehen: \path{evaluation/result.json}, \path{evaluation/result.md} \\
-    (zusätzlich Detailreports in \path{backend/test-results.json}, \path{frontend/test-results.json}, \path{frontend/playwright-report.json} sowie \path{backend/lint-results.json}, \path{frontend/lint-results.json}).
+    \item Abhängigkeiten installieren: \texttt{npm ci --prefix backend}
+    \item Abhängigkeiten installieren: \texttt{npm ci --prefix frontend}
+    \item Evaluation ausführen: \texttt{node} \path{evaluation/run.js}
+    \item Ergebnisse einsehen: \path{evaluation/result.json}, \path{evaluation/result.md}.
+    Zusätzlich (Detailartefakte):
+    \begin{itemize}
+        \item \path{backend/test-results.json}
+        \item \path{frontend/test-results.json}
+        \item \path{frontend/playwright-report.json}
+        \item \path{backend/lint-results.json}
+        \item \path{frontend/lint-results.json}
+    \end{itemize}
 \end{enumerate}
+\end{sloppypar}
 
 \paragraph{Erweiterte Reproduktion (optional).}
-Für die im Ergebnisteil verwendete Pipeline-Klassifikation (
-\enquote{Attempted} aus Chat-Signalen, \enquote{Implemented\textsubscript{static}} aus Code-Heuristiken, \enquote{Verified} durch Testausführung) kann zusätzlich \csname texttt\endcsname{node} \path{evaluation/run_pipeline_v3.js} ausgeführt werden. Das Skript erzeugt u.a. \path{evaluation/task_pipeline_v3.json} und \path{evaluation/task_pipeline_v3.csv}. Die Survey-Zuordnung zu Branches liegt als erzeugtes Artefakt vor (\path{evaluation/survey_mapping.json}); die Neugenerierung via \csname texttt\endcsname{node} \path{evaluation/map_survey.js} ist möglich, erfordert jedoch ggf. eine Anpassung der im Skript hinterlegten Dateipfade.
+\begin{sloppypar}
+Für die im Ergebnisteil verwendete Pipeline-Klassifikation kann zusätzlich \texttt{node} \path{evaluation/run_pipeline_v3.js} ausgeführt werden.
+Die Klassifikation basiert auf drei Evidenzstufen:
+\begin{itemize}
+    \item \enquote{Attempted} aus Chat-Signalen
+    \item \enquote{Implemented\textsubscript{static}} aus Code-Heuristiken
+    \item \enquote{Verified} durch Testausführung
+\end{itemize}
+Das Skript erzeugt u.a. \path{evaluation/task_pipeline_v3.json} und \path{evaluation/task_pipeline_v3.csv}.
+Die Survey-Zuordnung zu Branches liegt als erzeugtes Artefakt vor (\path{evaluation/survey_mapping.json}); die Neugenerierung via \texttt{node} \path{evaluation/map_survey.js} ist möglich.
+Sie kann jedoch ggf. eine Anpassung der im Skript hinterlegten Dateipfade erfordern.
+\end{sloppypar}
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|p{0.34\textwidth}|p{0.42\textwidth}|p{0.18\textwidth}|}
+    \begingroup\sloppy
+    \small
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{0.30\textwidth}|>{\raggedright\arraybackslash}p{0.38\textwidth}|>{\raggedright\arraybackslash}p{0.26\textwidth}|}
     \hline
-    \csname textbf\endcsname{Artefakt} & \csname textbf\endcsname{Zweck} & \csname textbf\endcsname{Erzeugt durch} \\ \hline
+        \csname textbf\endcsname{Artefakt} & \textbf{Zweck} & \textbf{Erzeugt durch} \\ \hline
     \path{evaluation/result.json} & Aggregierte Task- und Lint-Ergebnisse pro Branch/Run & \path{run.js} \\ \hline
     \path{evaluation/result.md} & Menschlich lesbare Zusammenfassung der Checks & \path{run.js} \\ \hline
     \path{backend/test-results.json} & Backend-Testergebnisse (Jest) als JSON-Report & \path{run.js} \\ \hline
     \path{frontend/test-results.json} & Frontend-Testergebnisse (Vitest) als JSON-Report & \path{run.js} \\ \hline
     \path{frontend/playwright-report.json} & E2E-Testergebnisse (Playwright) als JSON-Report & \path{run.js} \\ \hline
-    \path{evaluation/task_pipeline_v3.json} & Pipeline-Klassifikation je Branch (Attempted/Implemented/Verified) & \path{run_pipeline_v3.js} \\ \hline
+    \path{evaluation/task_pipeline_v3.json} & Pipeline-Klassifikation je Branch (Attempted, Implemented und Verified) & \path{run_pipeline_v3.js} \\ \hline
     \path{evaluation/survey_mapping.json} & Zuordnung: Branch -- Teilnehmende Person -- Kompetenzgruppe & \path{map_survey.js} \\ \hline
     \end{tabular}
+    \endgroup
     \caption{Zentrale Artefakte und ihre Erzeugung im Repository}
     \label{tab:artefakte-reproduzierbarkeit}
 \end{table}

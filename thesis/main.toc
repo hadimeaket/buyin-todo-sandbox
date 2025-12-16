@@ -29,22 +29,21 @@
 \contentsline {section}{\numberline {3.2}Theoretische Herleitung der Hypothesen}{16}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}H1: Der \enquote {Sweet Spot} der KI-Unterstützung (Mid-Code)}{16}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}H2: Das Validierungs-Paradoxon (Low-Code)}{17}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}H3: Skeptizismus und Qualitätsfokus (High-Code)}{17}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.3}H3: Skeptizismus und Qualitätsfokus (High-Coder)}{17}{subsection.3.2.3}%
 \contentsline {section}{\numberline {3.3}Operationalisierung der Kompetenzstufen}{18}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Kontrolle von Störvariablen (Confounder)}{20}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Die Testumgebung als unabhängige Variable: Ecological Validity}{20}{section.3.5}%
 \contentsline {chapter}{\numberline {4}Durchführung und Methodik der Datenerhebung}{21}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Ablauf der Untersuchung}{21}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Operationalisierung der Metriken}{22}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Funktionale Korrektheit (Effectiveness)}{22}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Effizienz (Efficiency)}{22}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Codequalität (Quality)}{22}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Interaktionsqualität (Interaction Quality)}{22}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Güte der Untersuchung (Threats to Validity)}{23}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Konstruktvalidität (Construct Validity)}{23}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.2.1}Aufgabenfortschritt und Validierung (Pipeline-Status)}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Code- und Test-Artefakte (Surrogatindikatoren)}{22}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Chat-Artefakte (Interaktion im Vibe-Coding)}{22}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Güte der Untersuchung (Threats to Validity)}{22}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Konstruktvalidität (Construct Validity)}{22}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Interne Validität (Internal Validity)}{23}{subsection.4.3.2}%
 \contentsline {subsection}{\numberline {4.3.3}Externe Validität (External Validity)}{23}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Reliabilität (Reliability)}{24}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.4}Reliabilität (Reliability)}{23}{subsection.4.3.4}%
 \contentsline {section}{\numberline {4.4}Datenanalyse-Strategie}{24}{section.4.4}%
 \contentsline {chapter}{\numberline {5}Technische Realisierung der Testumgebung}{25}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Anforderungen an die Sandbox}{25}{section.5.1}%
@@ -64,78 +63,84 @@
 \contentsline {paragraph}{\nonumberline Ablage der relevanten Artefakte.}{28}{paragraph*.7}%
 \contentsline {paragraph}{\nonumberline Minimaler Reproduktionspfad (4 Schritte).}{29}{paragraph*.9}%
 \contentsline {paragraph}{\nonumberline Erweiterte Reproduktion (optional).}{29}{paragraph*.11}%
-\contentsline {chapter}{\numberline {6}Ergebnisse}{30}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Datengrundlage und Toolkontext}{30}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Studiensetting und Rahmenbedingungen}{30}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Datenquellen und Artefakte}{30}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Dateninventar und Vollständigkeit}{31}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}Zuordnung und Zusammenführung der Daten}{31}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}Reproduzierbarkeit und Auswertungswerkzeuge}{32}{subsection.6.1.5}%
-\contentsline {subsection}{\numberline {6.1.6}Abgrenzung zu Kapitel 7}{32}{subsection.6.1.6}%
-\contentsline {section}{\numberline {6.2}Task-Pipeline-Analyse}{32}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Methodische Definitionen}{32}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Pipeline-Ergebnisse (T1--T5)}{33}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Beobachtungen und Interpretation}{33}{subsection.6.2.3}%
+\contentsline {chapter}{\numberline {6}Ergebnisse}{31}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Datengrundlage und Toolkontext}{31}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Studiensetting und Rahmenbedingungen}{31}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Datenquellen und Artefakte}{31}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Dateninventar und Vollständigkeit}{32}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Zuordnung und Zusammenführung der Daten}{32}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Reproduzierbarkeit und Auswertungswerkzeuge}{33}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Abgrenzung zu Kapitel 7}{33}{subsection.6.1.6}%
+\contentsline {section}{\numberline {6.2}Task-Pipeline-Analyse}{33}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Methodische Definitionen}{33}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Pipeline-Ergebnisse (T1--T5)}{34}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Kurzbefunde pro Task (T1--T5)}{35}{subsection.6.2.3}%
 \contentsline {section}{\numberline {6.3}Detaillierte Lösungsstrategien pro Task (T1--T5)}{35}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Code-Qualität und technische Metriken}{38}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}ESLint und Typisierung}{38}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.1}ESLint und Typisierung}{39}{subsection.6.4.1}%
 \contentsline {subsection}{\numberline {6.4.2}Testabdeckung und Teststabilität}{39}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Architektur- und Strukturindikatoren}{39}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.3}Architektur- und Strukturindikatoren}{40}{subsection.6.4.3}%
 \contentsline {subsection}{\numberline {6.4.4}Zusammenhänge mit Task-Fortschritt}{40}{subsection.6.4.4}%
-\contentsline {subsection}{\numberline {6.4.5}Kurzfazit: Beobachtete Qualitätsmerkmale}{40}{subsection.6.4.5}%
-\contentsline {section}{\numberline {6.5}Chat-Interaktionsmuster}{40}{section.6.5}%
+\contentsline {subsection}{\numberline {6.4.5}Kurzfazit: Beobachtete Qualitätsmerkmale}{41}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Chat-Interaktionsmuster}{41}{section.6.5}%
 \contentsline {subsection}{\numberline {6.5.1}Umfang und Intensität der Interaktion}{41}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Struktur der Prompts}{41}{subsection.6.5.2}%
+\contentsline {subsection}{\numberline {6.5.2}Struktur der Prompts}{42}{subsection.6.5.2}%
 \contentsline {subsection}{\numberline {6.5.3}Debugging-Interaktionen und Iterationsmuster}{42}{subsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.5.4}Modelltypische Antwortmuster (Claude Sonnet~4.5)}{42}{subsection.6.5.4}%
+\contentsline {subsection}{\numberline {6.5.4}Modelltypische Antwortmuster (Claude Sonnet~4.5)}{43}{subsection.6.5.4}%
 \contentsline {subsection}{\numberline {6.5.5}Beziehung zwischen Chat-Mustern und Task-Fortschritt (deskriptiv)}{43}{subsection.6.5.5}%
-\contentsline {section}{\numberline {6.6}Triangulation der Datenquellen}{43}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Datenbasis und Aggregationslogik}{44}{subsection.6.6.1}%
-\contentsline {subsection}{\numberline {6.6.2}Pipeline-Fortschritt und Implementationsstrategien (Strukturindikatoren)}{44}{subsection.6.6.2}%
-\contentsline {subsection}{\numberline {6.6.3}Pipeline-Fortschritt und technische Metriken}{45}{subsection.6.6.3}%
-\contentsline {subsection}{\numberline {6.6.4}Pipeline-Fortschritt und Chat-Interaktionsmetriken}{45}{subsection.6.6.4}%
-\contentsline {subsection}{\numberline {6.6.5}Pipeline-Fortschritt und Survey-Merkmale}{46}{subsection.6.6.5}%
-\contentsline {subsection}{\numberline {6.6.6}Abgrenzung zu Kapitel 7}{46}{subsection.6.6.6}%
-\contentsline {section}{\numberline {6.7}Zusammenfassung der Ergebnisse}{46}{section.6.7}%
-\contentsline {paragraph}{\nonumberline Pipeline-Ergebnisse entlang der Tasks (T1--T5).}{47}{paragraph*.20}%
-\contentsline {paragraph}{\nonumberline Technische Qualität (aggregiert, ohne Kausalannahmen).}{47}{paragraph*.22}%
-\contentsline {paragraph}{\nonumberline Chat-Interaktionsmuster (kompakt).}{48}{paragraph*.24}%
-\contentsline {paragraph}{\nonumberline Triangulation auf Meta-Ebene.}{48}{paragraph*.26}%
-\contentsline {paragraph}{\nonumberline Abgrenzung zu Kapitel~7.}{48}{paragraph*.28}%
-\contentsline {chapter}{\numberline {7}Diskussion}{49}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Ziel und Abgrenzung der Diskussion}{49}{section.7.1}%
-\contentsline {paragraph}{\nonumberline Methodische Selbstbegrenzung (Kausalität, Gruppenvergleiche, Kompetenzgruppen).}{49}{paragraph*.30}%
-\contentsline {paragraph}{\nonumberline Geltungsbereich der Ergebnisse.}{49}{paragraph*.32}%
-\contentsline {paragraph}{\nonumberline Group comparability \& confounders.}{50}{paragraph*.34}%
-\contentsline {section}{\numberline {7.2}Rückbindung an die Hypothesen}{50}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}H1: Mid-Code als Sweet Spot}{51}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}H2: Validierungsparadoxon bei Low-Code}{51}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}H3: Skepsis und Qualitätsfokus bei High-Code}{52}{subsection.7.2.3}%
-\contentsline {section}{\numberline {7.3}Kompetenzabhängige Interaktionsmuster}{52}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}No-Code}{53}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Low-Code}{53}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Mid-Code}{53}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}High-Code}{54}{subsection.7.3.4}%
-\contentsline {section}{\numberline {7.4}Interpretation der Pipeline-Muster}{54}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}Attempted ist nicht gleich Implemented\textsubscript {static}}{54}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Implemented\textsubscript {static} ist nicht gleich Verified}{54}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Warum Verified gleich null kein eindeutiges Negativsignal ist}{55}{subsection.7.4.3}%
-\contentsline {section}{\numberline {7.5}Einordnung der Chat-Interaktionsmuster}{55}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Warum Chat-Intensität kein Effizienzmaß ist}{55}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Warum Debugging-Loops normal sind}{55}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Explorative und zielgerichtete Interaktion}{56}{subsection.7.5.3}%
-\contentsline {section}{\numberline {7.6}Implikationen für Praxis und Forschung}{56}{section.7.6}%
-\contentsline {subsection}{\numberline {7.6.1}Implikationen für Unternehmen}{56}{subsection.7.6.1}%
-\contentsline {subsection}{\numberline {7.6.2}Implikationen für die Evaluation von KI-Coding-Tools}{56}{subsection.7.6.2}%
-\contentsline {subsection}{\numberline {7.6.3}Abgrenzung zu Marketing-Narrativen}{57}{subsection.7.6.3}%
-\contentsline {section}{\numberline {7.7}Limitationen und Ausblick}{57}{section.7.7}%
-\contentsline {chapter}{\numberline {8}Fazit und Schlussfolgerungen}{58}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Ziel und Einordnung des Kapitels}{58}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Beantwortung der Forschungsfragen}{58}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Forschungsfrage 1: Kompetenz und Pipeline-Status}{58}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Forschungsfrage 2: Code- und Test-Artefakte}{59}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Forschungsfrage 3: Chat-Interaktionsmuster}{59}{subsection.8.2.3}%
-\contentsline {section}{\numberline {8.3}Zentrale Erkenntnisse der Arbeit}{59}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Beitrag der Arbeit}{60}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Abschließendes Fazit}{61}{section.8.5}%
+\contentsline {section}{\numberline {6.6}Triangulation der Datenquellen}{44}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Pipeline-Fortschritt und Implementationsstrategien (Strukturindikatoren)}{45}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Pipeline-Fortschritt und technische Metriken}{45}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Pipeline-Fortschritt und Chat-Interaktionsmetriken}{46}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Pipeline-Fortschritt und Survey-Merkmale}{46}{subsection.6.6.4}%
+\contentsline {subsection}{\numberline {6.6.5}Abgrenzung zu Kapitel 7}{47}{subsection.6.6.5}%
+\contentsline {section}{\numberline {6.7}Zusammenfassung der Ergebnisse}{47}{section.6.7}%
+\contentsline {paragraph}{\nonumberline Pipeline-Ergebnisse entlang der Tasks (T1--T5).}{47}{paragraph*.19}%
+\contentsline {paragraph}{\nonumberline Technische Qualität (aggregiert, ohne Kausalannahmen).}{48}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline Chat-Interaktionsmuster (kompakt).}{48}{paragraph*.23}%
+\contentsline {paragraph}{\nonumberline Triangulation auf Meta-Ebene.}{48}{paragraph*.25}%
+\contentsline {paragraph}{\nonumberline Abgrenzung zu Kapitel~7.}{49}{paragraph*.27}%
+\contentsline {chapter}{\numberline {7}Diskussion}{50}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Zentrale Erkenntnisse dieser Studie}{50}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Ziel und Abgrenzung der Diskussion}{50}{section.7.2}%
+\contentsline {paragraph}{\nonumberline Methodischer Rahmen (Kausalität, Gruppenvergleiche).}{51}{paragraph*.29}%
+\contentsline {paragraph}{\nonumberline Geltungsbereich der Ergebnisse.}{51}{paragraph*.31}%
+\contentsline {paragraph}{\nonumberline Group comparability \& confounders.}{51}{paragraph*.33}%
+\contentsline {section}{\numberline {7.3}Beantwortung der Forschungsfragen}{51}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Rückbindung an die Hypothesen}{53}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}H1: Mid-Code als möglicher Sweet Spot}{53}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}H2: Validierungsparadoxon bei Low-Code}{53}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}H3: Skepsis und Qualitätsfokus bei High-Coder}{53}{subsection.7.4.3}%
+\contentsline {section}{\numberline {7.5}Kompetenzabhängige Interaktionsmuster}{54}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}No-Code}{54}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Low-Code}{54}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Mid-Code}{55}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}High-Coder}{55}{subsection.7.5.4}%
+\contentsline {section}{\numberline {7.6}Interpretation der Pipeline-Muster}{55}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Attempted ist nicht gleich Implemented\textsubscript {static}}{56}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Implemented\textsubscript {static} ist nicht gleich Verified}{56}{subsection.7.6.2}%
+\contentsline {subsection}{\numberline {7.6.3}Zur Einordnung von Verified$=0$}{56}{subsection.7.6.3}%
+\contentsline {section}{\numberline {7.7}Einordnung der Chat-Interaktionsmuster}{57}{section.7.7}%
+\contentsline {subsection}{\numberline {7.7.1}Warum Chat-Intensität kein Effizienzmaß ist}{57}{subsection.7.7.1}%
+\contentsline {subsection}{\numberline {7.7.2}Warum Debugging-Loops normal sind}{57}{subsection.7.7.2}%
+\contentsline {subsection}{\numberline {7.7.3}Explorative und zielgerichtete Interaktion}{57}{subsection.7.7.3}%
+\contentsline {section}{\numberline {7.8}Implikationen für Praxis und Forschung}{58}{section.7.8}%
+\contentsline {subsection}{\numberline {7.8.1}Implikationen für Unternehmen}{58}{subsection.7.8.1}%
+\contentsline {subsection}{\numberline {7.8.2}Implikationen für die Evaluation von KI-Coding-Tools}{58}{subsection.7.8.2}%
+\contentsline {subsection}{\numberline {7.8.3}Abgrenzung zu Marketing-Narrativen}{58}{subsection.7.8.3}%
+\contentsline {section}{\numberline {7.9}Limitationen und Ausblick}{59}{section.7.9}%
+\contentsline {chapter}{\numberline {8}Fazit und Schlussfolgerungen}{60}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Ziel und Einordnung des Kapitels}{60}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Beantwortung der Forschungsfragen}{60}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Forschungsfrage 1: Kompetenz und Pipeline-Status}{60}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Forschungsfrage 2: Code- und Test-Artefakte}{61}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Forschungsfrage 3: Chat-Interaktionsmuster}{61}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Zentrale Erkenntnisse der Arbeit}{61}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Beitrag der Arbeit}{62}{section.8.4}%
+\contentsline {section}{\numberline {8.5}Implikationen und Empfehlungen für BuyIn}{63}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Rollout in Phasen (kontrollierte Skalierung)}{63}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}Rollen und Verantwortlichkeiten}{63}{subsection.8.5.2}%
+\contentsline {subsection}{\numberline {8.5.3}Guardrails und Qualitätsgates (Integration \& Verifikation)}{64}{subsection.8.5.3}%
+\contentsline {subsection}{\numberline {8.5.4}Qualifizierung nach Kompetenzprofil (ohne Leistungsranking)}{64}{subsection.8.5.4}%
+\contentsline {section}{\numberline {8.6}Abschließendes Fazit}{65}{section.8.6}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

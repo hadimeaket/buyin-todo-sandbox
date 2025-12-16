@@ -119,7 +119,7 @@
   - Evidence: frontend/src/features/calendar/CalendarView.tsx
 
 ## goek-fadime-vibe
-**Group:** Low-Code
+**Group:** No-Code
 
 - **T1:** ✅ Verified
   - Strategy: SQLite

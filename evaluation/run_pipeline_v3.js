@@ -4,6 +4,19 @@ const path = require("path");
 
 const repoRoot = path.resolve(__dirname, "..");
 
+process.chdir(repoRoot);
+
+const startingBranch = (() => {
+  try {
+    return execSync("git rev-parse --abbrev-ref HEAD", {
+      cwd: repoRoot,
+      encoding: "utf8",
+    }).trim();
+  } catch {
+    return "thesis";
+  }
+})();
+
 function readJsonIfExists(absPath, fallback) {
   if (!fs.existsSync(absPath)) return fallback;
   return JSON.parse(fs.readFileSync(absPath, "utf8"));
@@ -109,7 +122,7 @@ const injectedFiles = [
   },
 ];
 
-function runCmd(cmd, cwd = ".") {
+function runCmd(cmd, cwd = repoRoot) {
   try {
     return execSync(`${cmd} 2>&1`, { cwd, encoding: "utf8", stdio: "pipe" });
   } catch (e) {
@@ -117,7 +130,7 @@ function runCmd(cmd, cwd = ".") {
   }
 }
 
-function runCmdOk(cmd, cwd = ".") {
+function runCmdOk(cmd, cwd = repoRoot) {
   try {
     execSync(`${cmd} 2>&1`, { cwd, encoding: "utf8", stdio: "pipe" });
     return { ok: true, output: "" };
@@ -218,11 +231,9 @@ function analyzeBranch(branch) {
 
   // Clean up injected/modified files so the next checkout doesn't fail.
   runCmd("git reset --hard");
+  // Remove untracked injected tests (reset does not remove untracked files)
+  runCmd("git clean -fd backend/tests || true");
 }
-
-// Backup tests first
-runCmd("mkdir -p temp_tests");
-runCmd("cp backend/tests/*.ts temp_tests/");
 
 // Main Loop
 for (const branch of branches) {
@@ -231,8 +242,10 @@ for (const branch of branches) {
   analyzeBranch(branch);
 }
 
-// Restore Thesis Branch
-runCmd("git checkout thesis");
+// Restore original branch
+runCmd(`git checkout ${startingBranch}`);
+runCmd("git clean -fd backend/tests || true");
+runCmd("git clean -fd evaluation/debug || true");
 
 fs.writeFileSync(
   "evaluation/task_pipeline_v3.json",

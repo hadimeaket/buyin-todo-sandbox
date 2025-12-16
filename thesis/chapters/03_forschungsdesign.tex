@@ -1,15 +1,15 @@
 \chapter{Forschungsdesign und Hypothesenentwicklung}
 \label{chap:forschungsdesign}
 
-Dieses Kapitel leitet das empirische Design der Studie aus den in Kapitel~\ref{chap:hintergrund} vorgestellten Theorien ab. Ziel ist es, den Einfluss der unabhängigen Variable \emph{Kompetenz} auf die abhängigen Variablen \emph{Qualität}, \emph{Effizienz} und \emph{Interaktion} in einer kontrollierten Brownfield-Umgebung zu isolieren.
+Dieses Kapitel leitet das empirische Design der Studie aus den in Kapitel~\ref{chap:hintergrund} vorgestellten Theorien ab. Ziel ist es, den Einfluss der unabhängigen Variable \emph{Kompetenz} auf die beobachteten Dimensionen \emph{Aufgabenfortschritt/Validierung} (artefakt- und testgebunden) sowie \emph{Interaktion} in einer kontrollierten Brownfield-Umgebung zu isolieren.
 
 \section{Methodischer Ansatz: Between-Subjects Design}
 
 Die Untersuchung folgt einem \emph{Between-Subjects Design}, bei dem Teilnehmende basierend auf ihrer Vorkenntnis in disjunkte Gruppen eingeteilt werden.
-\textbf{Begründung nach \textcite{wohlin2012experimentation}:}
+ \textbf{Begründung nach \textcite{wohlin2012experimentation}:}
 \begin{itemize}
-    \item \textbf{Vermeidung von Lerneffekten (Carry-Over Effects):} Ein Within-Subjects Design (jede Person löst Aufgaben einmal mit, einmal ohne KI) wäre hier problematisch, da das Lösen einer Aufgabe Wissen für den zweiten Durchgang generiert.
-    \item \textbf{Isolierung der Kompetenzvariable:} Das Ziel ist der Vergleich der Interaktionsmuster zwischen verschiedenen Kompetenzniveaus (\enquote{Mensch A + Maschine} vs. \enquote{Mensch B + Maschine}), nicht der Vergleich des Tools an sich.
+    \item  \textbf{Vermeidung von Lerneffekten (Carry-Over Effects):} Ein Within-Subjects Design (jede Person löst Aufgaben einmal mit, einmal ohne KI) wäre hier problematisch, da das Lösen einer Aufgabe Wissen für den zweiten Durchgang generiert.
+    \item  \textbf{Isolierung der Kompetenzvariable:} Das Ziel ist der Vergleich der Interaktionsmuster zwischen verschiedenen Kompetenzniveaus (\enquote{Mensch A + Maschine} vs. \enquote{Mensch B + Maschine}), nicht der Vergleich des Tools an sich.
 \end{itemize}
 
 \section{Theoretische Herleitung der Hypothesen}
@@ -20,84 +20,90 @@ Zur Orientierung wird die primäre Zuordnung der Hypothesen zu den Forschungsfra
 Diese Zuordnung dient ausschlie\ss{}lich der Strukturierung und nimmt keine Ergebnisse vorweg.
 
 \subsection{H1: Der \enquote{Sweet Spot} der KI-Unterstützung (Mid-Code)}
-\csname textbf\endcsname{Theoretische Begründung:} Nach der Cognitive Load Theory profitieren Lernende am meisten, wenn \emph{Extraneous Load} (Syntax) reduziert wird, solange genug Schema-Wissen vorhanden ist, um den Output zu validieren. Mid-Code-Teilnehmende befinden sich in einer Phase, in der sie Konzepte verstehen, aber die syntaktische Umsetzung noch kognitive Ressourcen bindet. Copilot übernimmt diese Last. Dadurch wird \emph{Germane Load} für architektonische Entscheidungen frei.
-\textbf{Alternative Hypothese:} Die \enquote{Rising Tide}-Hypothese würde besagen, dass alle Gruppen gleichermaßen profitieren. Dies widerspricht jedoch der Theorie der \emph{Zone der nächsten Entwicklung}, da Novizen ohne Scaffolding überfordert sind.
+    \csname textbf\endcsname{Theoretische Begründung:} Nach der Cognitive Load Theory profitieren Lernende am meisten, wenn \emph{Extraneous Load} (Syntax) reduziert wird, solange genug Schema-Wissen vorhanden ist, um den Output zu validieren. Mid-Code-Teilnehmende befinden sich in einer Phase, in der sie Konzepte verstehen, aber die syntaktische Umsetzung noch kognitive Ressourcen bindet. Copilot übernimmt diese Last. Dadurch wird \emph{Germane Load} für architektonische Entscheidungen frei.
+ \textbf{Alternative Hypothese:} Die \enquote{Rising Tide}-Hypothese würde besagen, dass alle Gruppen gleichermaßen profitieren. Dies widerspricht jedoch der Theorie der \emph{Zone der nächsten Entwicklung}, da Novizen ohne Scaffolding überfordert sind.
 \begin{hypothesis}
     \label{hyp:sweetspot}
-    Teilnehmende der Gruppe \textbf{Mid-Code} erreichen im Vergleich zu \textbf{No-Code}, \textbf{Low-Code} und \textbf{High-Code} am häufigsten den höchsten beobachteten \emph{Pipeline-Fortschritt} innerhalb des 60-Minuten-Limits (operationalisiert als maximale Anzahl \texttt{implemented} Tasks in \path{evaluation/task_pipeline_v3.json}).
+    Teilnehmende der Gruppe  \textbf{Mid-Code} erreichen im Vergleich zu  \textbf{No-Code},  \textbf{Low-Code} und  \textbf{High-Coder} tendenziell häufiger einen hohen \emph{Pipeline-Fortschritt} innerhalb des 60-Minuten-Limits (operationalisiert als maximale Anzahl \texttt{implemented}-Markierungen pro Branch in \nolinkurl{evaluation/task_pipeline_v3.json}; \texttt{implemented} wird dabei als heuristisches Artefakt-Signal  \textit{Implemented\textsubscript{static}} verstanden).
 \end{hypothesis}
 
 \subsection{H2: Das Validierungs-Paradoxon (Low-Code)}
-\textbf{Theoretische Begründung:} Novizen und Advanced Beginners (Dreyfus Stufe 1--2) fehlt das mentale Modell, um subtile Fehler zu erkennen. Sie operieren primär im \emph{System 1} (intuitiv) und akzeptieren plausibel klingende Vorschläge unkritisch (\emph{Errors of Commission}). Da ihnen die Schemata fehlen, um den Code zu „parsen“, ist der \emph{Intrinsic Load} der Validierung zu hoch.
-\textbf{Empirische Stützung:} Studien von \textcite{vaithilingam2022codecompletion} zeigen, dass Nutzer oft Code akzeptieren, den sie nicht verstehen, was zu schwer findbaren Bugs führt.
+ \textbf{Theoretische Begründung:} Novizen und Advanced Beginners (Dreyfus Stufe 1--2) fehlt das mentale Modell, um subtile Fehler zu erkennen. Sie operieren primär im \emph{System 1} (intuitiv) und akzeptieren plausibel klingende Vorschläge unkritisch (\emph{Errors of Commission}). Da ihnen die Schemata fehlen, um den Code zu „parsen“, ist der \emph{Intrinsic Load} der Validierung zu hoch.
+ \textbf{Empirische Stützung:} Studien von \textcite{vaithilingam2022codecompletion} zeigen, dass Nutzer oft Code akzeptieren, den sie nicht verstehen, was zu schwer findbaren Bugs führt.
 \begin{hypothesis}
     \label{hyp:validation}
-    Teilnehmende der Gruppen \textbf{No-Code} und \textbf{Low-Code} erreichen im Vergleich zu \textbf{Mid-Code} und \textbf{High-Code} seltener einen hohen \emph{Pipeline-Fortschritt} (operationalisiert über die Anzahl \texttt{implemented} Tasks in \path{evaluation/task_pipeline_v3.json}). Aussagen zu Sicherheitslücken, Wartbarkeit oder \emph{Overtrust} werden in dieser Studie als \emph{explorativ} behandelt.
+    Teilnehmende der Gruppen  \textbf{No-Code} und  \textbf{Low-Code} erreichen im Vergleich zu  \textbf{Mid-Code} und  \textbf{High-Coder} tendenziell seltener einen hohen \emph{Pipeline-Fortschritt} (operationalisiert über die Anzahl \texttt{implemented}-Markierungen pro Branch in \nolinkurl{evaluation/task_pipeline_v3.json};  \textit{Implemented\textsubscript{static}} als heuristisches Artefakt-Signal). Aussagen zu Sicherheitslücken, Wartbarkeit oder \emph{Overtrust} werden in dieser Studie als \emph{explorativ} behandelt.
 \end{hypothesis}
 
-\subsection{H3: Skeptizismus und Qualitätsfokus (High-Code)}
-\textbf{Theoretische Begründung:} Experten (Dreyfus Stufe 4--5) haben starke mentale Modelle und vertrauen der Automation weniger. Sie aktivieren \emph{System 2} (analytisch) häufiger, um Vorschläge zu prüfen. Dies führt zu einem \emph{Distrust}-Verhalten, bei dem Zeitersparnisse durch manuelle Reviews teilweise negiert werden.
-\textbf{Alternative Sichtweise:} Man könnte annehmen, Experten seien am schnellsten. Die Theorie der \emph{Expertise Reversal Effect} (Kalyuga et al.) legt jedoch nahe, dass Hilfestellungen für Experten redundant und störend sein können.
+\subsection{H3: Skeptizismus und Qualitätsfokus (High-Coder)}
+    \csname textbf\endcsname{Theoretische Begründung:} Experten (Dreyfus Stufe 4--5) haben starke mentale Modelle und vertrauen der Automation weniger. Sie aktivieren \emph{System 2} (analytisch) häufiger, um Vorschläge zu prüfen. Dies kann mit einem \emph{Distrust}-Verhalten einhergehen, bei dem potenzielle Zeitersparnisse durch manuelle Reviews teilweise relativiert werden.
+    \csname textbf\endcsname{Alternative Sichtweise:} Man könnte annehmen, Experten seien am schnellsten. Die Theorie der \emph{Expertise Reversal Effect} (Kalyuga et al.) legt jedoch nahe, dass Hilfestellungen für Experten redundant und störend sein können.
 \begin{hypothesis}
     \label{hyp:skepticism}
-    \csname textbf\endcsname{High-Code} erreichen im Vergleich zu \textbf{Mid-Code} seltener den maximalen \emph{Pipeline-Fortschritt} (operationalisiert über die Anzahl \texttt{implemented} Tasks in \path{evaluation/task_pipeline_v3.json}). Aussagen zu selektiver Nutzung (z.B. \enquote{Accept All}), Codier-Geschwindigkeit und Codequalität (Wartbarkeit/Sicherheit) werden in dieser Studie als \emph{explorativ} behandelt.
+    Teilnehmende der Gruppe  \textbf{High-Coder} erreichen im Vergleich zu  \textbf{Mid-Code} tendenziell seltener den maximalen \emph{Pipeline-Fortschritt} (operationalisiert über die Anzahl \texttt{implemented}-Markierungen pro Branch in \nolinkurl{evaluation/task_pipeline_v3.json};  \textit{Implemented\textsubscript{static}} als heuristisches Artefakt-Signal). Aussagen zu selektiver Nutzung (z.B. \enquote{Accept All}), Codier-Geschwindigkeit und Codequalität (Wartbarkeit/Sicherheit) werden in dieser Studie als \emph{explorativ} behandelt.
 \end{hypothesis}
 
 \section{Operationalisierung der Kompetenzstufen}
 
-Die Kompetenzgruppen (No-Code/Low-Code/Mid-Code/High-Code) werden in dieser Arbeit ausschlie\ss{}lich als \emph{Analyseperspektiven} verwendet (Stratifizierung/Segmentierung) und nicht als Leistungsbewertung einzelner Personen. Die Gruppenzuordnung erfolgt auf Basis eines transparenten, auditierbaren Scoring-Modells mit insgesamt 0--13 Punkten. Die Items werden im Pre-Survey erhoben und in Punkte gemappt; die Summe definiert die Kompetenzstufe.
+Die Kompetenzgruppen (No-Code/Low-Code/Mid-Code/High-Coder) werden in dieser Arbeit ausschlie\ss{}lich als \emph{Analyseperspektiven} verwendet (Stratifizierung/Segmentierung) und nicht als Leistungsbewertung einzelner Personen. Die Gruppenzuordnung erfolgt auf Basis eines transparenten, auditierbaren Scoring-Modells mit insgesamt 0--13 Punkten. Die Items werden im Pre-Survey erhoben und in Punkte gemappt; die Summe definiert die Kompetenzstufe. Formale Bildungsindikatoren (z.B. Ausbildungsstand/Abschluss) werden bewusst nicht erhoben und nicht verwendet.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|p{3.0cm}|p{3.0cm}|p{3.2cm}|p{1.7cm}|p{5.0cm}|}
+    \begingroup
+    \scriptsize
+    \setlength{\tabcolsep}{2pt}
+    \renewcommand{\arraystretch}{0.9}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{2.9cm}|>{\centering\arraybackslash}p{1.4cm}|>{\raggedright\arraybackslash}p{4.2cm}|}
     \hline
-        {\bfseries Input-Quelle} & {\bfseries Skala (Pre-Survey)} & {\bfseries Punkte (Mapping)} & {\bfseries Gewichtung} & {\bfseries Begr\"undung} \\ \hline
-    Programmiererfahrung (allgemein) & Berufsjahre SWE & 0J=0; 0--1=1; 1--3=2; \(>3\)=3 & 3/13 & Proxy f\"ur Routine; gut dokumentierbar und weniger anf\"allig f\"ur Ad-hoc-Interpretation. \\ \hline
-    Technologie-Fit (TS/Node/Backend) & Jahre Erfahrung mit TS/Node/Backend & 0=0; <1=1; 1--2=2; \(>2\)=3 & 3/13 & Aufgaben sind Backend-/API-lastig; dom\"anenspezifische Routine reduziert Setup- und Framework-Kosten. \\ \hline
-    Ausbildung / formale Grundlagen & H\"ochster relevanter Abschluss (Selbstauskunft) & kein/irrelevant=0; teilweise=1; einschl\"agig=2 & 2/13 & Formale Grundlagen sind ein (schwach gewichteter) Indikator f\"ur systematisches Verst\"andnis; nicht deterministisch, daher moderat gewichtet. \\ \hline
-    Selbsteinsch\"atzung Implementationssicherheit & Likert 1--5 mit Ankern & 1--2=0; 3=1; 4=2; 5=3 & 3/13 & Erfasst subjektive Handlungssicherheit; Anker reduzieren Interpretationsspielr\"aume zwischen Personen. \\ \hline
-    Selbsteinsch\"atzung Debugging/Testpraxis & Likert 1--5 mit Ankern & 1--2=0; 3=1; 4=2 & 2/13 & Debugging und Tests sind zentral f\"ur die Aufgaben (Fehlerdiagnose, Stabilisierung); bewusst getrennt von allgemeiner Skill-Selbsteinsch\"atzung. \\ \hline
+        {\bfseries Input-Quelle} & {\bfseries \shortstack[l]{Skala\\(Pre-Survey)}} & {\bfseries \shortstack[l]{Punkte\\(Mapping)}} & {\bfseries \shortstack{Max.\\Punkte}} & {\bfseries Begr\"undung} \\ \hline
+    Jahre allgemeine Programmiererfahrung & \begin{tabular}[t]{@{}p{3.6cm}@{}}Keine Erfahrung / No experience\\Weniger als 1 Jahr / Less than 1 year\\1 bis 3 Jahre / 1 to 3 years\\Mehr als 3 Jahre / More than 3 years\end{tabular} & \begin{tabular}[t]{@{}p{2.9cm}@{}}(1)=0\\(2)=2\\(3)=4\\(4)=5\end{tabular} & 5/13 & Proxy f\"ur routinierte Programmierpraxis; als Selbstauskunft erhoben und daher kein objektives Kompetenzma\ss{}. \\ \hline
+    Jahre Erfahrung mit TS/Node/Backend & \begin{tabular}[t]{@{}p{3.6cm}@{}}Keine Erfahrung / No experience\\Weniger als 1 Jahr / Less than 1 year\\1 bis 3 Jahre / 1 to 3 years\\Mehr als 3 Jahre / More than 3 years\end{tabular} & \begin{tabular}[t]{@{}p{2.9cm}@{}}(1)=0\\(2)=1\\(3)=3\\(4)=4\end{tabular} & 4/13 & Proxy f\"ur Dom\"anen- und Stack-N\"ahe (relevant f\"ur die Brownfield-Sandbox); Selbstauskunft, nicht Leistungsnachweis. \\ \hline
+    Implementierungs\-sicherheit\\(Selbst\-einsch\"atzung) & Likert 1--5 & \begin{tabular}[t]{@{}p{2.8cm}@{}}1--2\(\rightarrow\)0\\3\(\rightarrow\)1\\4--5\(\rightarrow\)2\end{tabular} & 2/13 & Proxy f\"ur wahrgenommene F\"ahigkeit, Feature-Logik selbstst\"andig umzusetzen; subjektiv und kontextabh\"angig. \\ \hline
+    Debugging- und Testpraxis\\(Selbst\-einsch\"atzung) & Likert 1--5 & \begin{tabular}[t]{@{}p{2.8cm}@{}}1--2\(\rightarrow\)0\\3\(\rightarrow\)1\\4--5\(\rightarrow\)2\end{tabular} & 2/13 & Proxy f\"ur Validierungs- und Fehlersuchroutinen (z.B. Tests/Debugging) im Arbeitsprozess; Selbstauskunft statt objektiver Messung. \\ \hline
     \end{tabular}
-    \caption{Auditierbare Scoring-Rubrik zur Kompetenz-Operationalisierung (0--13 Punkte). Die Gewichtung ist hier als maximal erreichbare Punktzahl pro Item angegeben; die Gesamtpunktzahl ist die Summe \(S\) \"uber alle Items.}
+    \caption{Auditierbare Scoring-Rubrik zur Kompetenz-Operationalisierung (0--13 Punkte) basierend auf den tats\"achlich erhobenen Pre-Survey-Items (Form Responses 1 in \protect\path{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx}). Verwendet werden ausschlie\ss{}lich erfahrungsnahe Proxies (Jahre allgemeine Programmiererfahrung; Jahre TS/Node/Backend; Selbsteinsch\"atzung Implementierungssicherheit; Selbsteinsch\"atzung Debugging-/Testpraxis). Die Gewichtung ist als maximal erreichbare Punktzahl pro Item angegeben; der Gesamtscore ist die Summe \(S\).}
     \label{tab:competence-rubric}
+    \endgroup
 \end{table}
 
-\noindent\textbf{Schwellenwerte zur Gruppenzuordnung.} Aus dem Gesamtscore \(S\in[0,13]\) ergeben sich die Kompetenzgruppen wie folgt: \textbf{No-Code} (\(S=0\)), \textbf{Low-Code} (\(S=1\) bis \(5\)), \textbf{Mid-Code} (\(S=6\) bis \(10\)) und \textbf{High-Code} (\(S=11\) bis \(13\)). Diese Cutoffs werden \emph{a priori} festgelegt, um nachtr\"agliche Anpassungen an die beobachteten Ergebnisse zu vermeiden.
+\noindent\emph{Hinweis:} Das Scoring stellt eine pragmatische Heuristik dar und ist kein psychometrisch validiertes Instrument.
 
-\begin{table}[h]
+\noindent \textbf{Schwellenwerte zur Gruppenzuordnung.} Aus dem Gesamtscore \(S\in[0,13]\) ergeben sich die Kompetenzgruppen wie folgt:  \textbf{No-Code} (\(S=0\)),  \textbf{Low-Code} (\(S=1\) bis \(6\)),  \textbf{Mid-Code} (\(S=7\) bis \(10\)) und  \textbf{High-Coder} (\(S=11\) bis \(13\)). Diese Cutoffs werden \emph{a priori} festgelegt, um nachtr\"agliche Anpassungen an die beobachteten Ergebnisse zu vermeiden.
+
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|l|l|l|p{6cm}|}
+    \begin{tabular}{|l|l|l|>{\raggedright\arraybackslash}p{6cm}|}
     \hline
-    \textbf{Gruppe} & \textbf{Dreyfus-Level} & \textbf{Score} & \textbf{Charakteristik} \\ \hline
-    No-Code & Novice & 0 & Kein mentales Modell von Programmierung. Verlässt sich zu 100\% auf KI als Black Box. \\ \hline
-    Low-Code & Advanced Beginner & 1--5 & Kennt Grundkonzepte, aber keine Architekturmuster. Hohes Risiko für \emph{Spaghetti-Code} und \emph{Automation Bias}. \\ \hline
-    Mid-Code & Competent & 6--10 & Versteht Zusammenhänge, plant Schritte. Kann KI-Fehler meist erkennen (\emph{System 2} Aktivierung möglich). \\ \hline
-    High-Code & Proficient/Expert & 11--13 & Intuitives Verst\"andnis. Nutzt KI zur Beschleunigung von Boilerplate, nicht zur L\"osungsfindung. \\ \hline
+     \textbf{Gruppe} &  \textbf{Dreyfus-Level} &  \textbf{Score} &  \textbf{Charakteristik} \\ \hline
+    No-Code & Novice & 0 & Kein mentales Modell von Programmierung. Stützt sich stark auf KI als Black Box. \\ \hline
+    Low-Code & Advanced Beginner & 1--6 & Kennt Grundkonzepte, aber keine Architekturmuster. Erhöhtes Risiko für \emph{Spaghetti-Code} und \emph{Automation Bias}. \\ \hline
+    Mid-Code & Competent & 7--10 & Versteht Zusammenhänge, plant Schritte. Kann KI-Fehler meist erkennen (\emph{System 2} Aktivierung möglich). \\ \hline
+    High-Coder & Proficient/Expert & 11--13 & Intuitives Verst\"andnis. Nutzt KI zur Beschleunigung von Boilerplate, nicht zur L\"osungsfindung. \\ \hline
     \end{tabular}
     \caption{Mapping von Kompetenzgruppen auf das Dreyfus-Modell}
     \label{tab:competence-mapping}
 \end{table}
 
-\noindent\textbf{Reduktion von Self-Report-Bias und Plausibilit\"atschecks.} Da Teile der Operationalisierung auf Selbstauskunft beruhen, werden Likert-Items mit klaren Ankern formuliert (z.\,B. von \enquote{ben\"otige Anleitung bei Debugging/Testfails} bis \enquote{kann Fehler systematisch isolieren und Tests zielgerichtet einsetzen}). Zus\"atzlich werden Plausibilit\"atsregeln dokumentiert (z.\,B. auff\"allig hohe Selbsteinsch\"atzung bei gleichzeitig 0 Jahren Erfahrung oder umgekehrt). Diese Checks dienen ausschlie\ss{}lich der Transparenz und markieren potenziell unsichere Einstufungen. Sie f\"uhren nicht zu einer nachtr\"aglichen, fallbezogenen \enquote{Korrektur} einzelner Personen.
+\noindent \textbf{Reduktion von Self-Report-Bias und Plausibilit\"atschecks.} Da die Operationalisierung auf Selbstauskunft beruht, werden ausschlie\ss{}lich diskrete Erfahrungsangaben (Jahre allgemeine Programmiererfahrung; Jahre TS/Node/Backend) und zwei Likert-Proxies (Implementierungssicherheit; Debugging-/Testpraxis) in ein festes Punkteschema \emph{ohne} nachtr\"agliche Einzelfallkorrekturen \"ubersetzt.
 
-\noindent\textbf{Optionale Sensitivit\"atsanalyse (Future Work).} Als optionale Erweiterung (nicht Teil dieser Arbeit) k\"onnte in zuk\"unftiger Arbeit gepr\"uft werden, wie stabil die beschriebenen Muster gegen plausible Alternativen der Kompetenz-Operationalisierung sind (z.\,B. leicht verschobene Cutoffs oder Variationen der Punktmappings der Selbsteinsch\"atzungsitems). Solche Sensitivit\"atsl\"aufe w\"urden hier lediglich die Abh\"angigkeit der Interpretation von der gew\"ahlten Gruppendefinition transparent machen; es wird dabei keine bestimmte Richtung oder St\"arke eines Effekts erwartet.
+\noindent \textbf{Optionale Sensitivit\"atsanalyse (Future Work).} Als optionale Erweiterung (nicht Teil dieser Arbeit) k\"onnte in zuk\"unftiger Arbeit gepr\"uft werden, wie stabil die beschriebenen Muster gegen plausible Alternativen der Kompetenz-Operationalisierung sind (z.\,B. leicht verschobene Cutoffs oder Variationen der Punktmappings der Selbsteinsch\"atzungsitems). Solche Sensitivit\"atsl\"aufe w\"urden hier lediglich die Abh\"angigkeit der Interpretation von der gew\"ahlten Gruppendefinition transparent machen; es wird dabei keine bestimmte Richtung oder St\"arke eines Effekts erwartet.
 
-\noindent\textbf{Threats to validity (Kompetenzmessung).} Kompetenz ist ein latentes Konstrukt und kann durch Berufsjahre, Ausbildung und Selbsteinsch\"atzung nur approximiert werden (Konstruktvalidit\"at). Zudem kann Selbstauskunft systematisch verzerrt sein (Selbst\"ubersch\"atzung/soziale Erw\"unschtheit), und Likert-Skalen k\"onnen zwischen Personen unterschiedlich interpretiert werden (Messinvarianz). Schlie\ss{}lich ist allgemeine Programmierkompetenz nicht identisch mit dom\"anenspezifischer Routine im verwendeten Stack (Konfundierung durch Technologie-Fit). Gegenma\ss{}nahmen sind die a priori festgelegte, auditierbare Rubrik, die Ankerung der Selbsteinsch\"atzung, dokumentierte Plausibilit\"atschecks sowie die als optionale Erweiterung vorgeschlagene Sensitivit\"atsanalyse gegen alternative Cutoffs/Mappings. Die Kompetenzgruppen bleiben damit eine interpretierbare Analyseperspektive, ohne Einzelfallbewertungen abzuleiten.
+\noindent \textbf{Threats to validity (Kompetenzmessung).} Kompetenz ist ein latentes Konstrukt und kann hier nur \emph{approximiert} werden (Konstruktvalidit\"at) \textendash{} \"uber Selbstauskunft zu allgemeiner Programmiererfahrung, TS/Node/Backend-Erfahrung sowie zwei erfahrungsnahen Selbsteinsch\"atzungs-Proxies (Implementierungssicherheit; Debugging-/Testpraxis). Selbstauskunft kann systematisch verzerrt sein (Selbst\"ubersch\"atzung/soziale Erw\"unschtheit), und Likert-Skalen k\"onnen zwischen Personen unterschiedlich interpretiert werden (Messinvarianz). Gegenma\ss{}nahmen sind die a priori festgelegte, auditierbare Rubrik mit diskreten Mappings sowie die als optionale Erweiterung vorgeschlagene Sensitivit\"atsanalyse gegen alternative Cutoffs/Mappings. Die Kompetenzgruppen bleiben damit eine interpretierbare Analyseperspektive, ohne Einzelfallbewertungen abzuleiten.
 
 \section{Kontrolle von Störvariablen (Confounder)}
 Um die interne Validität zu sichern, wurden folgende Störvariablen kontrolliert:
 \begin{itemize}
-    \item \textbf{IDE-Familiarity:} Alle Teilnehmenden nutzten VS Code. Unterschiede in der Vertrautheit wurden im Pre-Survey erfasst.
-    \item \textbf{Domain Knowledge:} Das Todo-App-Szenario ist generisch genug, um kein spezifisches Domänenwissen (wie z.B. in der Medizin) vorauszusetzen.
-    \item \textbf{Englischkenntnisse:} Da Copilot primär auf englischem Code trainiert ist, wurden Grundkenntnisse vorausgesetzt.
+    \item  \textbf{IDE-Familiarity:} Alle Teilnehmenden nutzten VS Code. Unterschiede in der Vertrautheit wurden im Pre-Survey erfasst.
+    \item  \textbf{Domain Knowledge:} Das Todo-App-Szenario ist generisch genug, um kein spezifisches Domänenwissen (wie z.B. in der Medizin) vorauszusetzen.
+    \item  \textbf{Englischkenntnisse:} Da Copilot primär auf englischem Code trainiert ist, wurden Grundkenntnisse vorausgesetzt.
 \end{itemize}
 
 \section{Die Testumgebung als unabhängige Variable: Ecological Validity}
 
-Die Wahl einer \textbf{Brownfield-Umgebung} (bestehender Code) statt Greenfield (leeres Blatt) ist essenziell für die \emph{ökologische Validität} der Studie.
+Die Wahl einer  \textbf{Brownfield-Umgebung} (bestehender Code) statt Greenfield (leeres Blatt) ist essenziell für die \emph{ökologische Validität} der Studie.
 In der industriellen Praxis arbeiten Entwickler:innen zu ca. 90\% in bestehenden Systemen \parencite{brandtner2024brownfield}.
 \begin{itemize}
-    \item \textbf{Kontext-Sensitivität (RAG-Test):} Das KI-Assistenzsystem muss den bestehenden Style (z.\,B. SCSS-Module, React Hooks) erkennen und adaptieren. Dies testet die Fähigkeit des Modells, Kontext zu nutzen, und die Fähigkeit des Nutzers, diesen Kontext bereitzustellen (z.B. durch Öffnen relevanter Dateien).
-    \item \textbf{Kognitive Belastung:} Die Teilnehmenden müssen sich in der Struktur zurechtfinden, was für Low-Code-Teilnehmende eine zusätzliche Hürde darstellt (\emph{Intrinsic Load}). Greenfield-Aufgaben (z.B. LeetCode) würden diese Komplexität ausblenden und die Ergebnisse verzerren.
+    \item  \textbf{Kontext-Sensitivität (RAG-Test):} Das KI-Assistenzsystem soll den bestehenden Style (z.\,B. SCSS-Module, React Hooks) erkennen und adaptieren. Dies testet die Fähigkeit des Modells, Kontext zu nutzen, und die Fähigkeit des Nutzers, diesen Kontext bereitzustellen (z.B. durch Öffnen relevanter Dateien).
+    \item  \textbf{Kognitive Belastung:} Die Teilnehmenden sind mit der Notwendigkeit konfrontiert, sich in der Struktur zurechtzufinden, was für Low-Code-Teilnehmende eine zusätzliche Hürde darstellt (\emph{Intrinsic Load}). Greenfield-Aufgaben (z.B. LeetCode) würden diese Komplexität ausblenden und die Ergebnisse verzerren.
 \end{itemize}
 Dies stellt sicher, dass wir \emph{reale} Arbeitsbedingungen simulieren und nicht nur die Fähigkeit testen, isolierte Algorithmen zu generieren.

@@ -1,133 +1,136 @@
-const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const XLSX = require("xlsx");
 
-const xlsxPath =
-  "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx";
-const branchesFile =
-  "/home/cgoek/Studium/BA/buyin-todo-sandbox/evaluation/branches.txt";
+const repoRoot = path.resolve(__dirname, "..");
+const xlsxPath = path.join(
+  repoRoot,
+  "thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx"
+);
+const branchesFile = path.join(repoRoot, "evaluation/branches.txt");
 
 // Manual additions for the 2 missing remotes
 const extraBranches = ["sethi-sangat-vibe", "helling-max-vibe"];
 
-function runCommand(cmd) {
-  try {
-    return execSync(cmd, { encoding: "utf8", stdio: "pipe" }).trim();
-  } catch (e) {
-    return "";
-  }
+function normalizeLooseId(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[_\s]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
-function parseXlsx() {
-  // 1. Extract Shared Strings
-  const sharedStringsXml = runCommand(
-    `unzip -p "${xlsxPath}" xl/sharedStrings.xml`
-  );
-  const sharedStrings = [];
-  const tRegex = /<t[^>]*>([\s\S]*?)<\/t>/g;
-  let match;
-  while ((match = tRegex.exec(sharedStringsXml)) !== null) {
-    sharedStrings.push(match[1]);
-  }
-
-  // 2. Extract Sheet Data
-  const sheetXml = runCommand(
-    `unzip -p "${xlsxPath}" xl/worksheets/sheet1.xml`
-  );
-  const rows = [];
-  const rowRegex = /<row r="(\d+)"[^>]*>(.*?)<\/row>/g;
-  let rowMatch;
-
-  while ((rowMatch = rowRegex.exec(sheetXml)) !== null) {
-    const rowContent = rowMatch[2];
-    const cells = {};
-    const cellRegex = /<c r="([A-Z]+)(\d+)"([^>]*)>(.*?)<\/c>/g;
-    let cellMatch;
-
-    while ((cellMatch = cellRegex.exec(rowContent)) !== null) {
-      const col = cellMatch[1];
-      const attrs = cellMatch[3];
-      const content = cellMatch[4];
-      const isSharedString = attrs.includes('t="s"');
-      const vMatch = /<v>(.*?)<\/v>/.exec(content);
-
-      if (vMatch) {
-        let val = vMatch[1];
-        if (isSharedString) {
-          val = sharedStrings[parseInt(val)];
-        }
-        cells[col] = val;
-      }
-    }
-    rows.push(cells);
-  }
-  return rows;
+function pickHeaderKey(headers, predicate) {
+  return headers.find((h) => predicate(String(h || "")));
 }
 
-const rows = parseXlsx();
+function loadSurveyRows() {
+  if (!fs.existsSync(xlsxPath)) {
+    throw new Error(`Survey XLSX not found at: ${xlsxPath}`);
+  }
+  const workbook = XLSX.readFile(xlsxPath);
+  const sheetName = workbook.SheetNames[0];
+  const sheet = workbook.Sheets[sheetName];
+  return XLSX.utils.sheet_to_json(sheet, { defval: "" });
+}
+
+const surveyRows = loadSurveyRows();
 const branches = fs
   .readFileSync(branchesFile, "utf8")
   .split("\n")
   .filter(Boolean)
   .concat(extraBranches);
 
-// Map Survey Columns (based on previous inspection)
-// C: Branch Name
-// B: Name
-// AB: Competence (Calculated in previous turn, but might be missing in raw XML if it was a formula or script result not saved as value)
-// Wait, the previous `parse_survey.js` output showed "AB": "Low-Code" for some rows.
-// If the "Kategorisierungs-Script" was a Google Apps Script, it might not be in the XLSX unless exported *after* running.
-// The user said "Die XLSX ist bereinigt. Sie enthält ... Kompetenzgruppe".
-// Let's assume column AB (or similar) holds it. In the dump it was AB.
-
 const mapping = [];
-const csvLines = ["branch,name,competence,experience,frequency,web_skill"];
+const csvLines = ["branch,name,competence"];
 
-rows.forEach((row, index) => {
-  if (index === 0) return; // Header
+const headers = surveyRows.length ? Object.keys(surveyRows[0]) : [];
+const nameKey = pickHeaderKey(headers, (h) =>
+  /vor-\s*und\s*nachname|full name/i.test(h)
+);
+const branchKey = pickHeaderKey(headers, (h) =>
+  /branch-?name|branch name/i.test(h)
+);
+const categoryKey = headers.includes("Kategorie") ? "Kategorie" : null;
 
-  // Fuzzy match branch name
-  const surveyBranch = row["C"] ? row["C"].trim() : "";
-  const name = row["B"] ? row["B"].trim() : "";
-
-  if (!surveyBranch) return;
-
-  let matchedBranch = branches.find(
-    (b) =>
-      b.toLowerCase().includes(surveyBranch.toLowerCase()) ||
-      surveyBranch.toLowerCase().includes(b.toLowerCase())
+if (!branchKey) {
+  throw new Error(
+    `Could not find the branch column in survey headers. Headers: ${headers.join(
+      ", "
+    )}`
   );
+}
+if (!categoryKey) {
+  throw new Error(
+    `Could not find 'Kategorie' column in survey headers. Headers: ${headers.join(
+      ", "
+    )}`
+  );
+}
 
-  // Manual fixups if fuzzy fails
-  if (!matchedBranch) {
-    if (surveyBranch.includes("Max Helling") || name.includes("Helling"))
-      matchedBranch = "helling-max-vibe";
-    if (surveyBranch.includes("Sangat") || name.includes("Sethi"))
-      matchedBranch = "sethi-sangat-vibe";
-    if (name.includes("Fadime") || surveyBranch.includes("fadime"))
-      matchedBranch = "goek-fadime-vibe";
+const branchesByNormalized = new Map(
+  branches.map((b) => [normalizeLooseId(b), b])
+);
+
+function matchBranchFromSurvey(rawSurveyBranch, rawName) {
+  const surveyNorm = normalizeLooseId(rawSurveyBranch);
+  if (branchesByNormalized.has(surveyNorm))
+    return branchesByNormalized.get(surveyNorm);
+
+  const withVibe = surveyNorm.endsWith("-vibe")
+    ? surveyNorm
+    : `${surveyNorm}-vibe`;
+  if (branchesByNormalized.has(withVibe))
+    return branchesByNormalized.get(withVibe);
+
+  const surveyLower = String(rawSurveyBranch || "").toLowerCase();
+  const byContains = branches.find(
+    (b) =>
+      b.toLowerCase().includes(surveyLower) ||
+      surveyLower.includes(b.toLowerCase())
+  );
+  if (byContains) return byContains;
+
+  const nameLower = String(rawName || "").toLowerCase();
+  if (nameLower.includes("helling") || surveyLower.includes("helling"))
+    return "helling-max-vibe";
+  if (
+    nameLower.includes("sethi") ||
+    nameLower.includes("sangat") ||
+    surveyLower.includes("sangat")
+  ) {
+    return "sethi-sangat-vibe";
   }
+  if (nameLower.includes("fadime") || surveyLower.includes("fadime"))
+    return "goek-fadime-vibe";
 
-  if (matchedBranch) {
-    const competence = row["AB"] || "Low-Code"; // Default to Low-Code if missing, as per observation
+  return null;
+}
 
-    // Extract other interesting stats
-    const experience = row["R"] || ""; // Q1
-    const frequency = row["S"] || ""; // Q3 (Indices might have shifted, checking dump...)
-    // Actually, let's look at the dump again.
-    // Index 157 was "Erfahrung mit Webentwicklung".
-    // Let's just grab the Competence for now as it's the critical grouping factor.
+for (const row of surveyRows) {
+  const surveyBranch = String(row[branchKey] || "").trim();
+  if (!surveyBranch) continue;
 
-    mapping.push({
-      branch: matchedBranch,
-      name: name,
-      competence: competence,
-      survey_data: row,
-    });
+  const name = nameKey ? String(row[nameKey] || "").trim() : "";
+  const competence = String(row[categoryKey] || "").trim();
+  const matchedBranch = matchBranchFromSurvey(surveyBranch, name);
 
-    csvLines.push(`${matchedBranch},"${name}",${competence}`);
-  }
-});
+  if (!matchedBranch) continue;
+  if (!competence) continue;
+
+  mapping.push({
+    branch: matchedBranch,
+    name,
+    competence,
+    survey_data: row,
+  });
+
+  csvLines.push(
+    `${matchedBranch},"${name.replaceAll('"', '""')}",${competence}`
+  );
+}
 
 // Write outputs
 fs.writeFileSync(
