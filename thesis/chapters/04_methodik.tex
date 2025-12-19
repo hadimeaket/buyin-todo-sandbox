@@ -1,85 +1,105 @@
 \chapter{Durchführung und Methodik der Datenerhebung}
 \label{chap:methodik}
 
-Während das vorangegangene Kapitel das Forschungsdesign und die Hypothesen definiert hat, beschreibt dieses Kapitel den konkreten Ablauf der Studie sowie die Operationalisierung der Messgrößen. Es wird detailliert dargelegt, wie die Datenerhebung organisiert wurde, um die interne Validität der Ergebnisse sicherzustellen.
+Während das vorangegangene Kapitel das Forschungsdesign und theoriegeleitete Perspektiven definiert hat, beschreibt dieses Kapitel den konkreten Ablauf der Studie sowie die Operationalisierung der Messgrößen. Es wird detailliert dargelegt, wie die Datenerhebung organisiert wurde, um Aspekte der internen Validität der Ergebnisse nachvollziehbar zu adressieren.
+
+Die in dieser Arbeit verwendete Bezeichnung eines \enquote{kontrollierten} Vorgehens bezieht sich auf die Standardisierung des Ablaufs und der Rahmenbedingungen; sie wird nicht im Sinne eines kausalen Nachweises verwendet. Eine Hypothesenprüfung oder inferenzstatistische Auswertung erfolgt nicht.
 
 \section{Ablauf der Untersuchung}
-
-Die Studie wurde als kontrolliertes Experiment durchgeführt. Jede Sitzung folgte einem strikten Protokoll, um Störfaktoren zu minimieren. Der Ablauf gliederte sich in fünf Phasen:
+Die Untersuchung wurde in einem standardisierten Laborsetting durchgeführt. Jede Sitzung folgte einem strikten Protokoll, um Störfaktoren zu minimieren. Der Ablauf gliederte sich in fünf Phasen:
 
 \begin{enumerate}
-    \item  \textbf{Onboarding (10 Min.):}
-    Die Teilnehmenden erhielten eine Einführung in das Szenario (\enquote{Sie sind neuer Entwickler im Team...}) und die Entwicklungsumgebung. Es wurde sichergestellt, dass GitHub Copilot aktiviert und funktionsfähig war.
-    
-    \item  \textbf{Pre-Survey (5 Min.):}
-    Erfassung der demografischen Daten und Selbsteinschätzung zur Kompetenzeinstufung (siehe Kapitel~\ref{chap:forschungsdesign}).
-    
-    \item  \textbf{Vibe-Coding-Challenge (60 Min.):}
-    Die Kernphase der Untersuchung. Die Teilnehmenden bearbeiteten die Aufgaben selbstständig. Eingriffe durch den Versuchsleiter erfolgten nur bei technischen Problemen (z.\,B. Absturz der IDE), nicht jedoch bei inhaltlichen Fragen.
-	\csname textbf\endcsname{Begründung des Zeitlimits:} Die Begrenzung auf 60 Minuten dient der organisatorischen Machbarkeit und fungiert als Stressor. Zeitdruck erhöht die Wahrscheinlichkeit, dass Teilnehmende auf heuristische Strategien (\emph{System 1}) zurückgreifen. Dies kann den \emph{Automation Bias} verstärken und simuliert realistische Deadline-Situationen.
-    
-    \item  \textbf{Datensicherung (5 Min.):}
-    Sicherung der Arbeitsartefakte (Branch-Stand, Test-/Lint-Ausgaben und Chat-Export) als Grundlage der späteren Artefaktanalyse.
-    
-    \item  \textbf{Debriefing (5 Min.):}
-    Kurzes Abschlussgespräch, um offene Fragen zu klären und qualitatives Feedback einzuholen, das im Survey nicht abgebildet werden konnte.
+  \item {\bfseries Onboarding (10 Min.):} Die Teilnehmenden erhielten eine Einführung in das Szenario (\enquote{Sie sind neuer Entwickler im Team...}) und die Entwicklungsumgebung. Es wurde sichergestellt, dass GitHub Copilot aktiviert und funktionsfähig war.
+
+  \item {\bfseries Pre-Survey (5 Min.):} Erfassung der demografischen Daten und Selbsteinschätzung zur Kompetenzeinstufung (siehe Kapitel~\ref{chap:forschungsdesign}).
+
+  \item {\bfseries Vibe-Coding-Challenge (60 Min.):} Die Kernphase der Untersuchung. Die Teilnehmenden bearbeiteten die Aufgaben selbstständig. Eingriffe durch den Versuchsleiter erfolgten nur bei technischen Problemen (z.\,B. Absturz der IDE), nicht jedoch bei inhaltlichen Fragen. {\bfseries Begründung des Zeitlimits:} Die Begrenzung auf 60 Minuten dient der organisatorischen Machbarkeit und fungiert als Stressor. Zeitdruck erhöht die Wahrscheinlichkeit, dass Teilnehmende auf heuristische Strategien (\emph{System 1}) zurückgreifen. Dies kann den \emph{Automation Bias} verstärken und simuliert realistische Deadline-Situationen.
+
+  \item {\bfseries Datensicherung (5 Min.):} Sicherung der Arbeitsartefakte (Branch-Stand, CI-/Lint-Ausgaben und Chat-Export) als Grundlage der späteren Artefaktanalyse.
+
+  \item {\bfseries Debriefing (5 Min.):} Kurzes Abschlussgespräch, um offene Fragen zu klären und qualitatives Feedback einzuholen, das im Survey nicht abgebildet werden konnte.
 \end{enumerate}
 
+\section{Werkzeuge, Konfiguration und Rahmenbedingungen}
+Die Aufgabenbearbeitung erfolgte in Visual Studio Code als Entwicklungsumgebung. Als KI-Unterstützung wurde GitHub Copilot verwendet; als zugrunde liegendes Modell wurde Claude Sonnet 4.5 genutzt.
+
+Der verwendete Copilot-Plan wird in dieser Arbeit nicht als Untersuchungsvariable geführt, da in der Durchführung eine identische Agentenfunktionalität angesetzt wurde.
+
+Die Bearbeitung erfolgte auf Basis des Repository-Zustands im Main-Branch. Für jede teilnehmende Person wurde ein individueller Branch angelegt und für die Aufgabenbearbeitung genutzt. Vor Beginn der Aufgaben wurden am Ausgangsstand keine inhaltlichen Änderungen vorgenommen; die Sitzung startete aus dem unveränderten Ausgangszustand.
+
+Als Arbeitsgeräte wurden unternehmensinterne BuyIn HP Laptops eingesetzt.
+
+Modellparameter (z.B. \enquote{Temperatur}) waren im verwendeten Setup nicht konfigurierbar und wurden entsprechend nicht als konfigurierter Faktor dokumentiert.
+
+\section{Ethik, Datenschutz und Einwilligung der Teilnehmenden}
+Die Teilnahme an der Untersuchung erfolgte freiwillig und nach Einwilligung der Teilnehmenden. Der Untersuchungsablauf war so organisiert, dass die Teilnehmenden die Sitzung jederzeit abbrechen konnten.
+
+Im Rahmen der Datenerhebung wurden die im Ablauf beschriebenen Arbeitsartefakte technisch gespeichert, insbesondere der Stand der jeweiligen Arbeits-Branches sowie protokollierte CI-Test- und Lint-Ausgaben. Zusätzlich wurden die Chat-Exporte mit dem KI-Assistenzsystem sowie die im Pre-Survey erhobenen Angaben als Erhebungsdaten abgelegt.
+
+In der schriftlichen Ausarbeitung und in der Analyse werden diese Daten ausschließlich anonym behandelt. Es werden keine Klarnamen oder direkt personenbezogenen Daten (z.B. Kontaktdaten) ausgewertet oder berichtet. Personenbezüge werden in den Ergebnisdarstellungen nicht hergestellt; Auswertungen werden in aggregierter Form (z.B. nach Kompetenzgruppen) oder anhand von nicht-identifizierenden Artefaktmerkmalen beschrieben.
+
+Die Aufgaben und die verwendeten Prompts basierten auf der bereitgestellten Sandbox-Umgebung und den dazugehörigen Aufgabenstellungen. Dabei wurden keine vertraulichen Unternehmensdaten als Inhalte der Aufgaben oder als Eingaben in das KI-System verwendet.
+
+Der Zugriff auf Rohdaten (insbesondere Chat-Exporte und Survey-Exporte) war auf den Autor beschränkt.
+
 \section{Operationalisierung der Metriken}
+Zur Einordnung der theoriegeleiteten Perspektiven wurden die abstrakten Beobachtungsdimensionen (Aufgabenfortschritt/Statusausweise sowie Interaktion) in nachvollziehbare, artefaktgebundene Indikatoren übersetzt.
 
-Um die Hypothesen zu prüfen, wurden die abstrakten Beobachtungsdimensionen (Aufgabenfortschritt/Validierung sowie Interaktion) in nachvollziehbare, artefaktgebundene Indikatoren übersetzt.
+\subsection{Aufgabenfortschritt und Statusausweise (Pipeline-Status)}
+Die Ergebnislogik der Arbeit basiert auf einer artefaktgestützten Pipeline-Klassifikation pro Task und Branch. Zur Trennung von Intention, Implementationsartefakt und dem Statusausweis Execution observed werden die Statuskategorien Attempted, Implemented\textsubscript{static} und Execution observed verwendet (Definitionen und Trichter-Evidenzstufe Implemented$^\ast$ in Abschnitt~\ref{sec:results_pipeline}). Wichtig ist dabei: Execution observed ist ein methodengebundenes Diagnose-Signal (aus den protokollierten Ausführungsausgaben) und kein allgemeines Qualitätsurteil.
 
-\subsection{Aufgabenfortschritt und Validierung (Pipeline-Status)}
-Die Ergebnislogik der Arbeit basiert auf einer artefaktgestützten Pipeline-Klassifikation pro Task und Branch. Zur Trennung von Intention, Implementationsartefakt und testgebundener Bestätigung werden die Statuskategorien  \textit{Attempted},  \textit{Implemented\textsubscript{static}} und  \textit{Verified} verwendet (Definitionen und Trichter-Evidenzstufe  \textit{Implemented$^\ast$} in Abschnitt~\ref{sec:results_pipeline}).
-Wichtig ist dabei:  \textit{Verified} ist strikt testgebunden (\enquote{besteht die aktuellen Tests}) und somit ein methodengebundenes Diagnose-Signal, kein allgemeines Qualitätsurteil.
-
-\subsection{Code- und Test-Artefakte (Surrogatindikatoren)}
-Zur Einordnung der Umsetzungsstände werden zusätzlich struktur- und testnahe Artefakte herangezogen. Dazu zählen u.a. heuristische Strukturindikatoren und aggregierte Testausgänge aus den Auswertungsartefakten (z.\,B. \texttt{evaluation/deep\_code\_analysis.json}, \texttt{evaluation/code\_quality\_metrics.json}). Diese Größen werden durchgängig als Surrogate berichtet und nicht als vollständige Qualitätsmessung verstanden.
+\subsection{Code- und Ausführungsartefakte (Surrogatindikatoren)}
+Zur Einordnung der Umsetzungsstände werden zusätzlich struktur- und ausführungsnahe Artefakte herangezogen. Dazu zählen u.a. heuristische Strukturindikatoren und aggregierte Ausführungsausgänge aus den Auswertungsartefakten (z.\,B. \path{evaluation/deep_code_analysis.json}, \path{evaluation/code_quality_metrics.json}). Diese Größen werden durchgängig als Surrogate berichtet und nicht als vollständige Qualitätsmessung\linebreak verstanden. Terminologische Klarstellung (Evaluation). Der Begriff \enquote{Evaluation}\linebreak wird in dieser Arbeit ausschließlich im deskriptiven Sinn einer dokumentierten Auswertung/Bestandsaufnahme der Artefakte verwendet und nicht im Sinne einer normativen \enquote{Bewertung}.
 
 \subsection{Chat-Artefakte (Interaktion im Vibe-Coding)}
-Die Interaktion wird über Chat-Exports und daraus abgeleitete deskriptive Indikatoren beschrieben (z.\,B. Wortanzahl, Prompt-Antwort-Zyklen, Fehlermarker-Iterationen). Die Auswertung bleibt auf Musterbeschreibung und Triangulation mit Pipeline- und Code/Test-Artefakten beschränkt; Chat-Intensität wird nicht als Effizienz- oder Qualitätsmaß interpretiert.
+Die Interaktion wird über Chat-Exports und daraus abgeleitete deskriptive Indikatoren beschrieben (z.\,B. Wortanzahl, Prompt-Antwort-Zyklen, Fehlermarker-Iterationen). Die Auswertung bleibt auf Musterbeschreibung und Triangulation mit Pipeline- und Code-/Ausführungsartefakten beschränkt; Chat-Intensität wird nicht als Effizienz- oder Qualitätsmaß interpretiert.
 
 \section{Güte der Untersuchung (Threats to Validity)}
-
 Die Validität der Studie wird anhand der Kategorien von \textcite{cook1979quasi} diskutiert.
 
 \subsection{Konstruktvalidität (Construct Validity)}
 Messen wir wirklich das, was wir messen wollen?
+
 \begin{itemize}
-    \item  \textbf{Problem:} \enquote{Kompetenz} ist schwer zu quantifizieren.
-    \item  \textbf{Mitigation:} Kompetenz wird als Analyseperspektive über eine auditierbare, diskrete Pre-Survey-Heuristik operationalisiert (Tabelle~\ref{tab:competence-rubric}). Es wird explizit keine psychometrische Validierung beansprucht; die Einordnung wird über Triangulation mit Artefaktspuren (Pipeline/Code/Test/Chat) abgesichert. Da die Kompetenzzuordnung auf Selbstauskunft im Pre-Survey beruht, sind systematische Verzerrungen (z.\,B. Selbstüberschätzung/soziale Erwünschtheit und unterschiedliche Interpretation von Skalen) möglich, sodass die Kompetenzgruppen als Analyseperspektiven und nicht als objektives Kompetenzmaß zu verstehen sind.
+  \item {\bfseries Problem:} \enquote{Kompetenz} ist schwer zu quantifizieren.
+  \item {\bfseries Mitigation:} Kompetenz wird als Analyseperspektive über eine auditierbare, diskrete Pre-Survey-Heuristik operationalisiert (Tabelle~\ref{tab:competence-rubric}). Es wird explizit keine psychometrische Fundierung beansprucht; die Einordnung wird über Triangulation mit Artefaktspuren (Pipeline/Code/Ausführung/Chat) kontextualisiert. Da die Kompetenzzuordnung auf Selbstauskunft im Pre-Survey beruht, sind systematische Verzerrungen (z.\,B. Selbstüberschätzung/soziale Erwünschtheit und unterschiedliche Interpretation von Skalen) möglich, sodass die Kompetenzgruppen als Analyseperspektiven und nicht als objektives Kompetenzmaß zu verstehen sind.
 \end{itemize}
 
 \subsection{Interne Validität (Internal Validity)}
-Können die beobachteten Effekte eindeutig der unabhängigen Variable (Kompetenz) zugeschrieben werden?
+Können die beobachteten Unterschiede eindeutig der unabhängigen Variable (Kompetenz) zugeschrieben werden?
+
 \begin{itemize}
-    \item  \textbf{Selection Bias:} Die Zuteilung zu den Gruppen basierte auf Selbsteinschätzung. Um dies zu mitigieren, wurde der Algorithmus zur Klassifizierung strikt angewendet.
-    \item  \textbf{Experimenter Bias (Rosenthal-Effekt):} Die Erwartungshaltung des Versuchsleiters könnte die Teilnehmenden beeinflussen.  \textbf{Gegenmaßnahme:} Standardisierte Instruktionen und minimale Interaktion während der Coding-Phase.
-    \item  \textbf{Compensatory Rivalry (John Henry Effect):} Wenn eine Gruppe sich benachteiligt fühlt, könnte sie sich mehr anstrengen. Da alle Gruppen Copilot nutzten, ist dieses Risiko gering. Dennoch könnten Teilnehmende versuchen, besonders \enquote{sorgfältig} oder \enquote{kontrolliert} zu arbeiten (z.\,B. durch mehr manuelles Prüfen), was den beobachteten Fortschritt unter Zeitlimit beeinflussen kann \parencite{saretsky1972johnhenry}.
+  \item {\bfseries Selection Bias:} Die Zuteilung zu den Gruppen basierte auf Selbsteinschätzung. Um dies zu mitigieren, wurde der Algorithmus zur Klassifizierung strikt angewendet.
+  \item {\bfseries Experimenter Bias (Rosenthal-Effekt):} Die Erwartungshaltung des Versuchsleiters könnte die Teilnehmenden beeinflussen. {\bfseries Gegenmaßnahme:} Standardisierte Instruktionen und minimale Interaktion während der Coding-Phase.
+  \item {\bfseries Compensatory Rivalry (John Henry Effect):} Wenn eine Gruppe sich benachteiligt fühlt, könnte sie sich mehr anstrengen. Da alle Gruppen Copilot nutzten, ist dieses Risiko gering. Dennoch könnten Teilnehmende versuchen, besonders \enquote{sorgfältig} oder \enquote{kontrolliert} zu arbeiten (z.\,B. durch mehr manuelle Kontrolle), was den beobachteten Fortschritt unter Zeitlimit beeinflussen kann \parencite{saretsky1972johnhenry}.
 \end{itemize}
 
 \subsection{Externe Validität (External Validity)}
 Sind die Ergebnisse verallgemeinerbar?
+
 \begin{itemize}
-    \item  \textbf{Hawthorne-Effekt:} Das Wissen, beobachtet zu werden, verändert das Verhalten. Dies ist in Laborstudien typischerweise nicht vollständig vermeidbar, wurde aber durch die realistische Aufgabenstellung (Flow-Erleben) abgemildert.
-    \item  \textbf{Ecological Validity:} Die Nutzung einer Brownfield-Umgebung erhöht die Übertragbarkeit auf Unternehmenskontexte im Vergleich zu synthetischen LeetCode-Aufgaben deutlich.
+  \item {\bfseries Hawthorne-Effekt:} Das Wissen, beobachtet zu werden, verändert das Verhalten. Dies ist in Laborstudien typischerweise nicht vollständig vermeidbar, wurde aber durch die realistische Aufgabenstellung (Flow-Erleben) abgemildert.
+  \item {\bfseries Ecological Validity:} Die Nutzung einer Brownfield-Umgebung erhöht die Übertragbarkeit auf Organisationskontexte im Vergleich zu synthetischen LeetCode-Aufgaben deutlich.
 \end{itemize}
 
 \subsection{Reliabilität (Reliability)}
 Sind die Ergebnisse reproduzierbar?
+
 \begin{itemize}
-    \item  \textbf{Reproduzierbarkeit der Auswertung:}\\
-    Die Pipeline-Status und Artefakt-Surrogate werden aus versionierten Branches und gespeicherten Auswertungsartefakten abgeleitet.
-    Die Klassifikation folgt festen, dokumentierten Regeln (Attempted, Implemented\textsubscript{static} und Verified; Abschnitt~\ref{sec:results_pipeline}) und ist damit prinzipiell wiederholbar.
+  \item {\bfseries Reproduzierbarkeit der Auswertung:}\par
+  Die Pipeline-Status und Artefakt-Surrogate werden aus versionierten Branches und gespeicherten Auswertungsartefakten abgeleitet. Die Klassifikation folgt festen, dokumentierten Regeln (Attempted, Implemented\textsubscript{static} und Execution observed; Abschnitt~\ref{sec:results_pipeline}) und ist damit prinzipiell wiederholbar.
 \end{itemize}
 
-\section{Datenanalyse-Strategie}
+\section{Datenanalyse-Ansatz}
+Die Aufgabenserie umfasste die Tasks T1–T8. Unter dem Zeitlimit von 60 Minuten erreichte keine teilnehmende Person Aufgaben über T5 hinaus. Die Tasks wurden so konzipiert, dass sie innerhalb einer Stunde nicht vollständig lösbar sind. Für die Auswertung wurden entsprechend ausschließlich T1–T5 berücksichtigt.
 
-Die Auswertung folgt einem artefaktbasierten, überwiegend deskriptiven Mixed-Methods-Ansatz:
+Die Teilnehmenden bearbeiteten die Aufgaben selbstständig, indem sie mithilfe des KI-Agents im jeweils eigenen Branch implementierten. Es wurden keine inhaltlichen Vorgaben, Musterlösungen oder zusätzlichen Einschränkungen zur konkreten Implementationsstrategie gemacht. Die Analyse stützt sich auf die beobachteten Ergebnisse und die gespeicherten Artefakte (z.B. Branch-Stand, Ausführungs- und Lint-Ausgaben sowie Chat-Exporte). Die Auswertung erfolgt durch den Autor und wird als explorativ-deskriptiv verstanden; interpretative Einordnungen basieren auf den dokumentierten Artefaktspuren und sind als potenziell subjektiv geprägte Perspektive eine Limitation.
+
+Die Auswertung folgt einem artefaktbasierten, überwiegend deskriptiven\linebreak \mbox{Mixed-Methods-Ansatz}:
 
 \begin{enumerate}
-    \item  \textbf{Deskriptive Quantifizierung:} Pipeline-Status (Attempted, Implemented\textsubscript{static} und Verified; sowie Implemented$^\ast$ für die Trichterdarstellung) werden pro Task und Branch berichtet. Ergänzend werden aggregierte Surrogatindikatoren aus Code- und Test-Artefakten ausgewiesen.
-    \item  \textbf{Musteranalyse \& Triangulation:} Chat- und Strukturmuster werden als qualitative Befundlinien beschrieben und mit Pipeline- und Artefaktspuren trianguliert, um Integrations- und Validierungsengpässe im Brownfield-Kontext einzuordnen.
+  \item {\bfseries Deskriptive Quantifizierung:} Pipeline-Status (Attempted, Implemented\textsubscript{static} und Execution observed; sowie Implemented$^\ast$ für die Trichterdarstellung) werden pro Task und Branch berichtet. Ergänzend werden aggregierte Surrogatindikatoren aus Code- und Ausführungsartefakten ausgewiesen.
+  \item {\bfseries Musteranalyse \& Triangulation:} Chat- und Strukturmuster werden als qualitative Befundlinien beschrieben und mit Pipeline- und Artefaktspuren trianguliert, um Integrations- und Abgleichengpässe im Brownfield-Kontext einzuordnen.
 \end{enumerate}
 
-Dieser methodische Aufbau stellt sicher, dass nicht nur das \emph{Ergebnis} (Code), sondern auch der \emph{Prozess} (Interaktion) beleuchtet wird.
+Dieser methodische Aufbau stellt sicher, dass nicht nur das Ergebnis (Code), sondern auch der Prozess (Interaktion) beleuchtet wird.

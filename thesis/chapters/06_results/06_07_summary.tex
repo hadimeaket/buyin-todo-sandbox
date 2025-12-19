@@ -1,20 +1,20 @@
 \section{Zusammenfassung der Ergebnisse}
 \label{sec:results_summary}
 
-Kapitel~6 dokumentiert die Ergebnisse der Evaluation und stellt beobachtete Ausprägungen und Verteilungen dar, ohne diese zu bewerten oder zu erklären.
-Die Ergebnisdarstellung basiert auf mehreren Datenquellen (Pipeline-Status \,\texttt{attempted}, \texttt{implemented} und \texttt{verified}, Code- und Test-Artefakte, Chat-Exports sowie Survey-Merkmale) und bleibt durchgängig deskriptiv.
+Kapitel~6 dokumentiert die Ergebnisse der Auswertung und stellt beobachtete Ausprägungen und Verteilungen dar, ohne diese einzuordnen oder zu erklären.
+Die Ergebnisdarstellung basiert auf mehreren Datenquellen (Pipeline-Status \,\texttt{attempted}, \texttt{implemented} und \texttt{verified}, Code- und Ausführungsartefakte, Chat-Exports sowie Survey-Merkmale) und bleibt durchgängig deskriptiv.
 Im Folgenden werden die zentralen Befundlinien systematisch zusammengeführt.
 
 \paragraph{Pipeline-Ergebnisse entlang der Tasks (T1--T5).}
-Über die Tasks hinweg werden abnehmende Statushäufigkeiten entlang der Pipeline-Stufen berichtet: Attempted-Markierungen sind in der Breite vorhanden, während die Anteile der als Implemented$^\ast$ (Evidenzstufe) bzw. Verified ausgewiesenen Ergebnisse über T1--T5 abnehmen.
+Über die Tasks hinweg werden abnehmende Statushäufigkeiten entlang der Pipeline-Stufen berichtet: Attempted-Markierungen sind in der Breite vorhanden, während die Anteile der als Implemented$^\ast$ (Evidenzstufe) bzw. Execution observed ausgewiesenen Ergebnisse über T1--T5 abnehmen.
 Dabei variiert der Umsetzungsstand zwischen den Branches.
 In der Gegenüberstellung der Aufgaben werden zwei Task-Gruppen unterschieden:
 \begin{itemize}
 \item  \textbf{Tasks T1/T2.} T1 ist in den Branches in unterschiedlichen Persistenzvarianten umgesetzt, wobei eine Variante am häufigsten auftritt und mehrere Alternativen vereinzelt vorkommen. T2 wird in der Mehrzahl der Branches als Implemented$^\ast$ ausgewiesen.
-\item  \textbf{Tasks T3--T5.} Bei T3 und T4 nehmen die Implemented\textsubscript{static}-Ausweise ab. Zugleich werden bei einzelnen Tasks Diskrepanzen zwischen Implemented\textsubscript{static} (heuristische Artefakt-Markierung) und Verified berichtet. T5 bleibt in den Artefakten durchgängig ohne Implemented\textsubscript{static}- und ohne Verified-Ausweise.
+\item  \textbf{Tasks T3--T5.} Bei T3 und T4 nehmen die Implemented\textsubscript{static}-Ausweise ab. Zugleich werden bei einzelnen Tasks Diskrepanzen zwischen Implemented\textsubscript{static} (heuristische Artefakt-Markierung) und Execution observed berichtet. T5 bleibt in den Artefakten durchgängig ohne Implemented\textsubscript{static}- und ohne Execution observed-Ausweise.
 \end{itemize}
-Über alle Tasks hinweg gilt: Verified, Implemented\textsubscript{static} und Attempted sind empirisch unterscheidbare Statuskategorien und fallen nicht notwendigerweise zusammen. Für die aggregierte Darstellung wird Implemented$^\ast$ (Attempted $\wedge$ (Implemented\textsubscript{static} $\vee$ Verified)) als konsistente Evidenzstufe genutzt.
-Kapitel~6 beschreibt diese Statusausweise als Ergebnisvariablen der Pipeline und nutzt sie als gemeinsame Referenz, um Code-, Test- und Chat-Artefakte pro Branch in Beziehung zu setzen.
+Über alle Tasks hinweg gilt: Execution observed, Implemented\textsubscript{static} und Attempted sind empirisch unterscheidbare Statuskategorien und fallen nicht notwendigerweise zusammen. Für die aggregierte Darstellung wird Implemented$^\ast$ (Attempted $\wedge$ (Implemented\textsubscript{static} $\vee$ Execution observed)) als konsistente Evidenzstufe genutzt.
+Kapitel~6 beschreibt diese Statusausweise als Ergebnisvariablen der Pipeline und nutzt sie als gemeinsame Referenz, um Code-, Ausführungs- und Chat-Artefakte pro Branch in Beziehung zu setzen.
 
 \paragraph{Technische Qualität (aggregiert, ohne Kausalannahmen).}
 Die in Kapitel~6 berichteten Qualitäts- und Technikindikatoren fallen insgesamt heterogen über die Branches hinweg aus.
@@ -31,7 +31,7 @@ Neben Intensitätsmaßen werden in Kapitel~6 auch Muster in der Interaktionsstru
 
 \paragraph{Triangulation auf Meta-Ebene.}
 Die Triangulation berichtet, dass unterschiedliche Datenquellen teils kongruente, teils divergente Signale liefern: Pipeline-Status, technische Indikatoren, Testausgänge, Chat-Merkmale und Survey-Merkmale können für dieselben Branches zusammenpassen oder auseinanderlaufen.
-Insbesondere wird berichtet, dass Verified $\neq$ Implemented\textsubscript{static} $\neq$ Attempted und dass Abweichungen zwischen Statusausweisen, technischen Beobachtungen und Interaktionsmustern empirisch auftreten.
+Insbesondere wird berichtet, dass Execution observed $\neq$ Implemented\textsubscript{static} $\neq$ Attempted und dass Abweichungen zwischen Statusausweisen, technischen Beobachtungen und Interaktionsmustern empirisch auftreten.
 Auch Survey-Merkmale werden als kategoriale Kontextvariablen einbezogen (Selbsteinstufungsgruppen und benannte Hürdenkategorien), ohne dass daraus individuelle Zuschreibungen oder Bewertungen abgeleitet werden.
 In der Gesamtschau ergeben sich damit nebeneinander stehende Ergebnislinien, die Gemeinsamkeiten und Unterschiede zwischen Branches beschreiben, ohne diese zu erklären.
 Kapitel~6 berichtet diese Abweichungen, ohne sie zu erklären.

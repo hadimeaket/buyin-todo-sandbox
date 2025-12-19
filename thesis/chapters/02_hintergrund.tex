@@ -5,7 +5,7 @@ Dieses Kapitel legt das theoretische Fundament für die Untersuchung der Interak
 Es erläutert zunächst das Konzept der \emph{KI-Assistenzsysteme} und grenzt den neuartigen Arbeitsmodus des \emph{Vibe-Coding} von klassischer Softwareentwicklung ab (Abschnitt~\ref{sec:definition-agents}).
 Darauf aufbauend wird ein Kompetenzmodell eingeführt, das auf dem Dreyfus-Modell der Expertise basiert, jedoch kritisch um moderne kognitive Architekturen wie ACT-R erweitert wird (Abschnitt~\ref{sec:competence-models}).
 Anschließend werden kognitionspsychologische Aspekte der Mensch-Maschine-Interaktion -- insbesondere \emph{Dual-Process Theory}, \emph{Cognitive Load} und \emph{Automation Bias} -- beleuchtet, die erklären, warum unterschiedliche Kompetenzstufen unterschiedlich stark von KI profitieren (Abschnitt~\ref{sec:human-ai}).
-Abschließend werden Qualitäts- und Produktivitätsmodelle (ISO 25010, SPACE) vorgestellt, die als Begriffs- und Bewertungsrahmen dienen (Abschnitt~\ref{sec:quality-productivity}).
+Abschließend werden Qualitäts- und Produktivitätsmodelle (ISO 25010, SPACE) vorgestellt, die als Begriffs- und Einordnungsrahmen dienen (Abschnitt~\ref{sec:quality-productivity}).
 
 \section{KI-Assistenzsysteme und das Paradigma des Vibe-Coding}
 \label{sec:definition-agents}
@@ -13,14 +13,14 @@ Abschließend werden Qualitäts- und Produktivitätsmodelle (ISO 25010, SPACE) v
 Die Integration von \emph{Large Language Models (LLMs)} in die Softwareentwicklung markiert einen Paradigmenwechsel. Während klassische IDE-Features wie IntelliSense deterministisch und syntaktisch operieren, arbeiten KI-Assistenzsysteme probabilistisch und semantisch.
 
 \subsection{Technologische Grundlagen: Transformer und In-Context Learning}
-Moderne Assistenzumgebungen wie  \textbf{GitHub Copilot} basieren auf der Transformer-Architektur \parencite{vaswani2017attention}, die es ermöglicht, Abhängigkeiten in Sequenzen über lange Distanzen zu modellieren.
-Technisch relevant für die Interaktion ist das \emph{Fill-In-The-Middle (FIM)} Paradigma \parencite{bavarian2022efficient}.
+Moderne Assistenzumgebungen wie GitHub Copilot basieren auf der Transformer-Architektur \parencite{vaswani2017attention}, mit der Abhängigkeiten in Sequenzen über lange Distanzen modelliert werden.
+Technisch relevant für die Interaktion ist das Fill-In-The-Middle (FIM) Paradigma \parencite{bavarian2022efficient}.
 Das Modell sagt nicht nur das nächste Token voraus, sondern berücksichtigt den Kontext \emph{vor} und \emph{nach} der Cursor-Position.
 
-Zusätzlich nutzen diese Systeme \emph{Retrieval-Augmented Generation (RAG)}-ähnliche Mechanismen.
-Die Assistenzumgebung scannt den lokalen Kontext (geöffnete Tabs, importierte Module) und injiziert relevante Code-Snippets in den Prompt, ohne dass der Nutzer dies explizit steuert.
-Dies reduziert die Notwendigkeit für manuelles Prompt Engineering, erhöht aber die Abhängigkeit von einer sauberen Projektstruktur.
-Das KI-Assistenzsystem ist nur so gut wie der Kontext, den es „sieht“ \parencite{witte2023context}.
+Zusätzlich nutzen diese Systeme Retrieval-Augmented Generation (RAG)-ähnliche Mechanismen.
+In Assistenzumgebungen wird lokaler Kontext (z.B. geöffnete Tabs, importierte Module) typischerweise als zusätzlicher Prompt-Kontext herangezogen, ohne dass Nutzer dies im Detail steuern.
+Damit wird die Notwendigkeit für manuelles Prompt Engineering tendenziell reduziert, zugleich steigt die Abhängigkeit von einer sauberen Projektstruktur.
+Entsprechend wird in der Literatur die Kontextabhängigkeit von Vorschlägen betont \parencite{witte2023context}.
 
 \subsection{Definition: Vibe-Coding als System-1-Aktivität}
 Der Begriff \emph{Vibe-Coding} beschreibt einen emergenten Entwicklungsstil, bei dem der Fokus von der imperativen Syntax-Erstellung zur deklarativen Intentions-Beschreibung verschiebt. Ich definiere Vibe-Coding für diese Arbeit als:
@@ -30,18 +30,18 @@ Der Begriff \emph{Vibe-Coding} beschreibt einen emergenten Entwicklungsstil, bei
 
 Dieser Modus lässt sich durch die \emph{Dual-Process Theory} von Kahneman \parencite{kahneman2011thinking} erklären:
 \begin{itemize}
-    \item  \textbf{System 1 (Schnelles Denken):} Vibe-Coding appelliert an die Intuition. Der Entwickler tippt einen Funktionsnamen, das KI-Assistenzsystem schlägt den Body vor. Die Akzeptanz erfolgt oft heuristisch („Sieht gut aus“).
-    \item  \textbf{System 2 (Langsames Denken):} Die Validierung des Codes geht mit analytischer Anstrengung einher. Hier liegt die Gefahr: Wenn das KI-Assistenzsystem (System 1) zu gut wirkt, wird System 2 nicht aktiviert, was zu Fehlern führt.
+    \item  \textbf{System 1 (Schnelles Denken):} Vibe-Coding appelliert an die Intuition. In der Assistenzumgebung werden Vorschläge angezeigt (z.B. nach Eingabe eines Funktionsnamens), die heuristisch akzeptiert werden können („Sieht gut aus“).
+    \item  \textbf{System 2 (Langsames Denken):} Der Abgleich des Codes mit Anforderungen geht mit analytischer Anstrengung einher. Als Risiko wird diskutiert, dass plausibel wirkende Vorschläge System 2 seltener aktivieren können, was Fehlanpassungen begünstigt.
 \end{itemize}
 
 Dieser Shift verändert die Anforderungen fundamental:
 \begin{itemize}
     \item  \textbf{Shift from Writing to Reading:} Der Anteil des Code-Lesens und -Verstehens nimmt deutlich zu.
-    \item  \textbf{Shift from Syntax to Semantics:} Entwickler:innen benötigen weniger Detailwissen darüber, \emph{wie} eine Schleife syntaktisch korrekt ist; zugleich ist ein präziseres Verständnis dafür erforderlich, \emph{was} sie logisch bewirken soll.
+    \item  \textbf{Shift from Syntax to Semantics:} Entwickler:innen benötigen weniger Detailwissen darüber, wie eine Schleife syntaktisch korrekt ist; zugleich ist ein präziseres Verständnis dafür erforderlich, was sie logisch leistet.
 \end{itemize}
 
 \subsection{Theoretische Einordnung in die HCI-Forschung}
-In der Human-Computer Interaction (HCI) lässt sich Vibe-Coding als eine Form der \emph{End-User Development} (EUD) verstehen, bei der die Barriere zur Code-Erstellung gesenkt wird. Es weist Parallelen zum \emph{Natural Language Programming} auf, unterscheidet sich jedoch durch den \emph{Mixed-Initiative}-Charakter \parencite{horvitz1999mixed}: Nicht nur der Mensch gibt Befehle, sondern die KI schlägt proaktiv Lösungen vor (\emph{Ghost Text}). Dies setzt eine fortlaufende Synchronisation der mentalen Modelle zwischen Mensch und Maschine voraus.
+In der Human-Computer Interaction (HCI) lässt sich Vibe-Coding als eine Form der End-User Development (EUD) verstehen, bei der die Barriere zur Code-Erstellung gesenkt wird. Es weist Parallelen zum Natural Language Programming auf, unterscheidet sich jedoch durch den Mixed-Initiative-Charakter \parencite{horvitz1999mixed}: In der Assistenzumgebung werden proaktive Lösungsvorschläge angezeigt (Ghost Text), während Nutzende fortlaufend auswählen, übernehmen oder verwerfen. Damit wird eine fortlaufende Synchronisation der mentalen Modelle zwischen Mensch und Maschine erforderlich.
 
 \section{Kompetenzmodelle: Vom Dreyfus-Modell zu kognitiven Architekturen}
 \label{sec:competence-models}
@@ -53,8 +53,8 @@ Das \emph{Dreyfus-Modell der Expertise} \parencite{dreyfus1986mind} beschreibt d
 
 \begin{enumerate}
     \item  \textbf{Novice (No-Code):} Befolgt strikte Regeln, hat kein kontextuelles Verständnis. Verlässt sich vollständig auf die KI als „Black Box“.
-    \item  \textbf{Advanced Beginner (Low-Code):} Kann einfache Aufgaben lösen, erkennt aber keine übergeordneten Muster. Kann KI-Vorschläge syntaktisch, aber oft nicht semantisch bewerten.
-    \item  \textbf{Competent (Mid-Code):} Arbeitet zielorientiert und kann Probleme in Teilprobleme zerlegen. Nutzt KI als Werkzeug zur Beschleunigung, besitzt aber genug Modellverständnis zur Validierung.
+    \item  \textbf{Advanced Beginner (Low-Code):} Kann einfache Aufgaben lösen, erkennt aber keine übergeordneten Muster. Kann KI-Vorschläge syntaktisch, aber oft nicht semantisch einordnen.
+    \item  \textbf{Competent (Mid-Code):} Arbeitet zielorientiert und kann Probleme in Teilprobleme zerlegen. Nutzt KI als Werkzeug zur Delegation von Syntax- und Boilerplate-Anteilen und besitzt genug Modellverständnis für Abgleich im Kontext.
     \item  \textbf{Proficient/Expert (High-Coder):} Handelt intuitiv und erkennt Abweichungen sofort. Nutzt KI zur Automatisierung von Boilerplate, ist aber skeptisch gegenüber komplexer Logik.
 \end{enumerate}
 
@@ -65,15 +65,15 @@ Hier bietet die kognitive Architektur  \textbf{ACT-R} (Adaptive Control of Thoug
     \item  \textbf{Deklaratives Wissen:} Faktenwissen („Was ist eine Schleife?“). Novizen rufen dieses Wissen häufig mühsam ab.
     \item  \textbf{Prozedurales Wissen:} Handlungswissen („Wie schreibe ich eine Schleife?“). Experten haben dies in „Produktionsregeln“ kompiliert, die schnell und mühelos ablaufen.
 \end{itemize}
-        \csname textbf\endcsname{Relevanz für Copilot:} Das KI-Assistenzsystem liefert \emph{prozedurale Chunks} (fertigen Code).
-Für Novizen, die nur über deklaratives Wissen verfügen, wirkt dies wie eine „Prothese“, die fehlende Produktionsregeln ersetzt.
-Für Experten ist es eine Beschleunigung bereits vorhandener Regeln.
+        \csname textbf\endcsname{Relevanz für Copilot:} In der Assistenzinteraktion werden \emph{prozedurale Chunks} (fertiger Code) als Vorschläge ausgegeben.
+    Für Novizen, die nur über deklaratives Wissen verfügen, wirkt dies wie eine „Prothese“, die fehlende Produktionsregeln ersetzt.
+    Für Experten ist es eine Beschleunigung bereits vorhandener Regeln.
 
 \subsection{Situated Learning und Cognitive Apprenticeship}
 Ergänzend bietet der Ansatz des \emph{Situated Learning} \parencite{lave1991situated} und \emph{Cognitive Apprenticeship} \parencite{collins1989cognitive} eine Perspektive auf das Lernen mit KI.
 \begin{itemize}
-    \item  \textbf{Scaffolding:} Das KI-Assistenzsystem dient als „Gerüst“ (Scaffold), das es Lernenden ermöglicht, Aufgaben zu lösen, die knapp über ihrem aktuellen Kompetenzniveau liegen (Zone der nächsten Entwicklung).
-    \item  \textbf{Legitimate Peripheral Participation:} Novizen können durch KI-Unterstützung früher an produktiven Prozessen teilnehmen, auch wenn sie die volle Komplexität noch nicht durchdringen.
+    \item  \textbf{Scaffolding:} KI-Unterstützung wird in dieser Perspektive als mögliches „Gerüst“ (Scaffold) diskutiert, das Lernenden das Bearbeiten von Aufgaben nahe ihrer Zone der nächsten Entwicklung erleichtern kann.
+    \item  \textbf{Legitimate Peripheral Participation:} In dieser Lesart kann KI-Unterstützung frühe Teilhabe an produktiven Prozessen begünstigen, auch wenn die volle Komplexität noch nicht durchdrungen ist.
 \end{itemize}
 
 Die in diesem Theorieblock dargestellten Modelle (u.\,a. Dreyfus, ACT-R, Adaptive Expertise) dienen in dieser Arbeit als theoretischer Bezugsrahmen zur Einordnung der im empirischen Teil beschriebenen Muster. Eine direkte Operationalisierung einzelner Modellkonstrukte erfolgt nicht; die Modelle werden vielmehr zur begrifflichen Strukturierung und zur theoriegeleiteten Diskussion herangezogen. Die daraus abgeleiteten Einordnungen sind entsprechend an den Umfang und die methodischen Möglichkeiten einer Bachelorarbeit gebunden.
@@ -89,26 +89,24 @@ Ein zentrales Phänomen ist der \emph{Automation Bias} \parencite{parasuraman201
     \item  \textbf{Errors of Commission:} Der Nutzer akzeptiert einen falschen Vorschlag der KI (häufig bei Low-Code).
     \item  \textbf{Errors of Omission:} Der Nutzer übersieht einen Fehler, weil das System keine Warnung ausgibt.
 \end{itemize}
-Das Vertrauen (\emph{Trust}) sollte kalibriert sein \parencite{leesee2004trust}. \emph{Overtrust} kann zu unkritischer Übernahme beitragen, \emph{Distrust} (oft bei Experten) zu ineffizienter manueller Überprüfung.
+Vertrauen (Trust) wird in der Literatur als kalibriert verstanden \parencite{leesee2004trust}. Overtrust kann zu unkritischer Übernahme beitragen, Distrust (oft bei Experten) zu ineffizienter manueller Durchsicht.
 
 \subsection{Cognitive Load Theory (CLT)}
-Die \emph{Cognitive Load Theory} \parencite{sweller1988clt} unterscheidet drei Arten der kognitiven Belastung:
+Die Cognitive Load Theory \parencite{sweller1988clt} unterscheidet drei Arten der kognitiven~Belastung:
 \begin{itemize}
     \item  \textbf{Intrinsic Load:} Die inhärente Komplexität der Aufgabe (z.B. Rekursion verstehen).
     \item  \textbf{Extraneous Load:} Belastung durch die Darstellung oder das Werkzeug (z.B. komplexe IDE-Menüs).
     \item  \textbf{Germane Load:} Die kognitive Kapazität, die für das Lernen und Schema-Bildung genutzt wird.
 \end{itemize}
 
-KI-Assistenzsysteme haben das Potenzial, den \emph{Extraneous Load} (Syntax-Details) deutlich zu senken.
-Dies kann jedoch \emph{Germane Load} freisetzen, die für die Validierung genutzt werden kann.
-Wenn Novizen keine mentalen Modelle (Schemata) haben, können sie diese freigewordene Kapazität nicht nutzen, und der \emph{Intrinsic Load} der Validierung überfordert sie.
+In der Literatur wird eine potenzielle Senkung von Extraneous Load (z.B. Syntax-Details) durch KI-Assistenz diskutiert. Damit wird eine Freisetzung von Germane Load beschrieben, die für den Abgleich genutzt werden kann. Wenn Novizen keine mentalen Modelle (Schemata) haben, können sie diese freigewordene Kapazität nicht nutzen, und der Intrinsic Load des Abgleichs überfordert sie.
  \textbf{Kritik:} Die CLT ist schwer in Echtzeit zu messen. Dennoch bietet sie ein robustes Erklärungsmodell für die Überforderung von Novizen trotz KI-Hilfe.
 
 \subsection{Mixed-Initiative Interaction}
-Die Interaktion mit Copilot ist ein Beispiel für \emph{Mixed-Initiative Interaction} \parencite{horvitz1999mixed}. Beide Parteien (Mensch und KI-Assistenzsystem) können die Initiative ergreifen. Das KI-Assistenzsystem schlägt proaktiv Code vor (Ghost Text), der Mensch kann diesen annehmen, ablehnen oder durch Weitertippen modifizieren. Die Effizienz dieser Kollaboration hängt davon ab, wie gut der Mensch die Intention des KI-Assistenzsystems vorhersagen und steuern kann (\emph{Theory of Mind} für die KI).
+Die Interaktion mit Copilot lässt sich als Beispiel für Mixed-Initiative Interaction \parencite{horvitz1999mixed} einordnen. In der Assistenzumgebung werden proaktive Code-Vorschläge angezeigt (Ghost Text), die Nutzende annehmen, ablehnen oder durch Weitertippen modifizieren können. Die Effizienz solcher Kollaboration wird in der Literatur u.a. in Bezug auf die Fähigkeit diskutiert, die Intention von Vorschlägen zu antizipieren und zu steuern (Theory of Mind für die KI).
 
 \section{Empirische Studien zu KI-Assistenz}
-Aktuelle Studien bestätigen die theoretischen Annahmen teilweise, zeigen aber auch neue Phänomene:
+Aktuelle Studien berichten theoretisch konsistente Befunde, zeigen aber auch neue Phänomene:
 \begin{itemize}
     \item  \textbf{Grounded Copilot:} \textcite{barke2023grounded} identifizierten zwei Modi der Interaktion: \emph{Acceleration} (schnelleres Tippen bekannter Logik) und \emph{Exploration} (Nutzen der KI, um neue APIs zu entdecken).
     \item  \textbf{Reading Between the Lines:} \textcite{mozannar2022reading} zeigten, dass das Modifizieren von KI-Code oft kognitiv teurer ist als das Selbstschreiben, wenn der Vorschlag subtile Fehler enthält.
@@ -117,20 +115,20 @@ Aktuelle Studien bestätigen die theoretischen Annahmen teilweise, zeigen aber a
 \section{Softwarequalität und Produktivität}
 \label{sec:quality-productivity}
 
-Die Bewertung der Arbeit mit KI-Assistenzsystemen bedarf klarer Kriterien für Qualität und Produktivität.
+Die Einordnung der Arbeit mit KI-Assistenzsystemen bedarf klarer Kriterien für Qualität und Produktivität.
 
 \subsection{Softwarequalität nach ISO/IEC 25010}
-Der Standard ISO/IEC 25010 definiert Softwarequalität über acht Hauptmerkmale \parencite{iso25010}. Für die Bewertung von KI-generiertem Code sind insbesondere relevant:
+Der Standard ISO/IEC 25010 definiert Softwarequalität über acht Hauptmerkmale \parencite{iso25010}. Für die Einordnung von KI-generiertem Code sind insbesondere relevant:
 \begin{itemize}
     \item  \textbf{Funktionale Eignung:} Erfüllt der generierte Code die fachlichen Anforderungen korrekt?
-    \item  \textbf{Wartbarkeit:} Ist der Code modular, verständlich und konsistent strukturiert? Studien zeigen, dass KI-Tools dazu verleiten können, Code zu duplizieren statt zu abstrahieren, was die Wartbarkeit langfristig gefährdet \parencite{nadi2022humaicollab}.
-    \item  \textbf{Sicherheit:} Enthält der Code Schwachstellen? Da LLMs auf öffentlichen Daten trainiert sind, können sie unsichere Muster reproduzieren \parencite{pearce2022asleep}.
+    \item  \textbf{Wartbarkeit:} Ist der Code modular, verständlich und konsistent strukturiert? Studien berichten Tendenzen zur Duplikation statt Abstraktion im Zusammenhang mit KI-gestützter Codeerzeugung, was die Wartbarkeit langfristig gefährden kann \parencite{nadi2022humaicollab}.
+    \item  \textbf{Sicherheit:} Enthält der Code Schwachstellen? In der Literatur wird diskutiert, dass im Kontext öffentlich trainierter LLMs unsichere Muster in Vorschlägen auftreten bzw. repliziert werden können \parencite{pearce2022asleep}.
 \end{itemize}
 
 \subsection{Produktivität: Das SPACE-Framework}
 Produktivität in der Softwareentwicklung ist mehrdimensional. Das SPACE-Framework \parencite{forsgren2021space} unterscheidet fünf Dimensionen, die auch für den Einsatz von Copilot zentral sind:
 \begin{itemize}
-    \item  \textbf{S (Satisfaction):} Steigert das Tool die Zufriedenheit und reduziert es Frustration?
+    \item  \textbf{S (Satisfaction):} Wie werden Zufriedenheit und Frustration im Toolkontext wahrgenommen?
     \item  \textbf{P (Performance):} Führt der Einsatz zu qualitativ besseren Ergebnissen?
     \item  \textbf{A (Activity):} Wie viele Aufgaben können in einer bestimmten Zeit abgeschlossen werden?
     \item  \textbf{C (Communication):} Wie verändert sich die Zusammenarbeit (hier: Mensch-Maschine-Interaktion)?
@@ -140,4 +138,5 @@ Produktivität in der Softwareentwicklung ist mehrdimensional. Das SPACE-Framewo
 \section{Zusammenfassung und Forschungslücke}
 \label{sec:related-work}
 
-Bisherige Studien konzentrierten sich oft auf die technische Leistungsfähigkeit von Modellen oder allgemeine Produktivitätsgewinne \parencite{peng2023copilot}. Es fehlt jedoch an einer differenzierten Betrachtung, wie die \emph{individuelle Kompetenz} die Interaktion mit dem KI-Assistenzsystem moderiert. In dieser Arbeit wird Kompetenz theoretisch über Dreyfus/ACT-R gerahmt (Abschnitt~\ref{sec:competence-models}) und empirisch über eine transparente Pre-Survey-Heuristik als Analyseperspektive operationalisiert (Kapitel~\ref{chap:forschungsdesign}). Insbesondere die Frage, ob KI als „Equalizer“ wirkt (Novizen auf Experten-Niveau hebt) oder die Kluft vergrößert („Rich get richer“), ist ungeklärt. Diese Arbeit adressiert diese Lücke durch ein experimentelles Design, das kognitive Theorien (Dual-Process, CLT) mit artefakt- und testgebundenen Auswertungen im Software-Engineering-Kontext verbindet.
+Bisherige Studien konzentrierten sich oft auf die technische Leistungsfähigkeit von Modellen oder allgemeine Produktivitätsgewinne \parencite{peng2023copilot}. Es fehlt jedoch an einer differenzierten Betrachtung, wie die \emph{individuelle Kompetenz} die Interaktion mit dem KI-Assistenzsystem moderiert. In dieser Arbeit wird Kompetenz theoretisch über Dreyfus/ACT-R gerahmt (Abschnitt~\ref{sec:competence-models}) und empirisch über eine transparente Pre-Survey-Heuristik als Analyseperspektive operationalisiert (Kapitel~\ref{chap:forschungsdesign}). Insbesondere die Frage, ob KI als „Equalizer“ wirkt (Novizen auf Experten-Niveau hebt) oder die Kluft vergrößert („Rich get richer“), ist ungeklärt. Diese Arbeit adressiert diese Lücke durch eine kontrollierte explorative Untersuchung, die kognitive Theorien (Dual-Process, CLT) mit artefaktgestützten Auswertungen im Software-Engineering-Kontext verbindet.
+

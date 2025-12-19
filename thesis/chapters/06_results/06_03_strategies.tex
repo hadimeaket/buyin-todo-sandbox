@@ -1,34 +1,37 @@
-\section{Detaillierte Lösungsstrategien pro Task (T1--T5)}
+\section{Detaillierte Lösungsmuster pro Task (T1--T5)}
 \label{sec:results_strategies}
 
-Dieses Unterkapitel beschreibt typische Lösungsstrategien, die in den $N=18$ \texttt{*-vibe}-Branches für die Tasks T1--T5 beobachtet wurden. Grundlage sind Repository-Struktur und Implementationsartefakte (Backend/Frontend, Datenhaltung), Chat-basierte  \textit{Attempted}-Signale sowie Survey-Angaben (aggregiert, ohne Klarnamen). Die Darstellung ist rein deskriptiv.
+\BeginAccSupp{unicode,method=pdfstringdef,ActualText={Dieses Unterkapitel beschreibt typische Lösungsmuster, die in den 𝑁 = 18 *-vibeBranches für die Tasks T1–T5 beobachtet wurden. Grundlage sind Repository-Struktur^^Jund Implementationsartefakte (Backend/Frontend, Datenhaltung), Chat-basierte Attempted-Signale sowie Survey-Angaben (aggregiert, ohne Klarnamen). Die Darstellung ist^^Jrein deskriptiv.}}
+Dieses Unterkapitel beschreibt typische Lösungsmuster, die in den $N = 18$ *-vibeBranches für die Tasks T1--T5 beobachtet wurden. Grundlage sind Repository-Struktur und Implementationsartefakte (Backend/Frontend, Datenhaltung), Chat-basierte  \textit{Attempted}-Signale sowie Survey-Angaben (aggregiert, ohne Klarnamen). Die Darstellung ist rein deskriptiv.
+\EndAccSupp{}
 
 \subsection*{Einordnung der Datenbasis (kurz)}
-T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie T4/T5 in jeweils $13/18$ Fällen. Entsprechend nimmt die Abdeckung der Chat-basierten  \textit{Attempted}-Signale von T1/T2 zu T4/T5 ab. In den Surveys werden Zeitdruck und Debugging am häufigsten als Hürden genannt (je $5/18$), gefolgt von Aufgabenverständnis ($3/18$). Die Selbsteinstufung verteilt sich über No-Code ($5$), Low-Code ($4$), Mid-Code ($5$) und High-Coder ($4$).
+T1 und T2 wurden im Chat durchgängig adressiert (18/18), T3 in 15/18 sowie T4/T5 in jeweils 13/18 Fällen. Entsprechend nimmt die Abdeckung der Chat-basierten  \textit{Attempted}-Signale von T1/T2 zu T4/T5 ab. In den Surveys werden Zeitdruck und Debugging am häufigsten als Hürden genannt (je 5/18), gefolgt von Aufgabenverständnis (3/18). Die Selbsteinstufung verteilt sich über No-Code (5), Low-Code (4), Mid-Code (5) und High-Coder (4).
 
 \subsection*{T1 -- Persistente Todos}
 \begin{enumerate}
   \item  \textbf{Ziel des Tasks (kurz, technisch).} Persistente Speicherung von Todos über Prozess-Neustarts hinweg, inkl. stabilem CRUD-Verhalten (Erstellen, Lesen, Aktualisieren, Löschen) und konsistenter Identifikatoren.
 
-  \item  \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} Die häufigste Strategie war SQLite-basierte Persistenz ($14/18$). Daneben traten MongoDB ($1/18$) und PostgreSQL ($1/18$) sowie verbleibende Varianten wie In-Memory/sonstige Ablagen ($2/18$) auf. In der Code-Struktur wird häufig ein Repository-Pattern (z.B. \texttt{TodoRepository}) mit einer klaren Abgrenzung zwischen Controller/Route und Datenzugriff verwendet.
+  \item  \textbf{Typische Implementierungsvarianten (mit Häufigkeiten).} Die häufigste Variante war eine SQLite-basierte Persistenz (14/18). Daneben traten MongoDB (1/18) und PostgreSQL (1/18) sowie verbleibende Varianten wie In-Memory/sonstige Ablagen (2/18) auf. In der Code-Struktur wird häufig ein Repository-Pattern (z.B. \texttt{TodoRepository}) mit einer klaren Abgrenzung zwischen Controller/Route und Datenzugriff verwendet.
 
   \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} Konsistent sind konsistente ID-Schemata und deterministisches CRUD. Inkonsistent sind v.a. uneinheitliche ID-Felder (\texttt{id} vs. \texttt{\_id}) und inkonsistente Update-Semantik.
 
   \item  \textbf{Beobachtete Implementationsmuster.} 
-  \begin{sloppypar}Häufig treten Repository-/Controller-Boilerplates und generische CRUD-Endpunkte auf. Randfälle (Validierung, Fehlercodes, ID-Normalisierung) sind in den Artefakten nicht in allen Branches durchgängig konsistent umgesetzt.\end{sloppypar}
+  \begin{sloppypar}Häufig treten Repository-/Controller-Boilerplates und generische CRUD-Endpunkte auf. Randfälle (Eingabeprüfung, Fehlercodes, ID-Normalisierung) sind in den Artefakten nicht in allen Branches durchgängig konsistent umgesetzt.\end{sloppypar}
 
-  \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} In einzelnen Branches bleiben Randfälle (Validierung, Fehlercodes, ID-Normalisierung) sowie Konsistenzanforderungen (einheitliche ID-Felder, deterministische Update-Semantik) unvollständig.
+  \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} In einzelnen Branches bleiben Randfälle (Eingabeprüfung, Fehlercodes, ID-Normalisierung) sowie Konsistenzanforderungen (einheitliche ID-Felder, deterministische Update-Semantik) unvollständig.
 \end{enumerate}
 
 \subsection*{T2 -- Benutzerkonten / Authentifizierung}
 \begin{enumerate}
   \item  \textbf{Ziel des Tasks (kurz, technisch).} Nutzerregistrierung und Login mit Zugriffskontrolle auf geschützte Endpunkte (z.B. \texttt{GET /api/todos}) sowie konsistenter Authentifizierungsweitergabe (Token oder Session).
 
-  \item  \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} JWT ist die häufigste Variante ($11/18$), gefolgt von Session/Cookie ($4/18$) und Hybrid-Ansätzen ($1/18$). Selten sind Sonderfälle (z.B. Hashing ohne klaren Token-Flow: $1/18$) bzw. fehlende oder unklare Signale ($1/18$). Häufige Strukturmuster sind zentrale Auth-Middleware oder Prüfungen direkt im Controller.
+  \item  \textbf{Typische Implementierungsvarianten (mit Häufigkeiten).} JWT ist die häufigste Variante (11/18), gefolgt von Session/Cookie (4/18) und Hybrid-Ansätzen (1/18). Selten sind Sonderfälle (z.B. Hashing ohne klaren Token-Flow: 1/18) bzw. fehlende oder unklare Signale (1/18). Häufige Strukturmuster sind zentrale Auth-Middleware oder Kontrollen direkt im Controller.
 
   \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} Konsistent sind eindeutige Token-/Session-Flows und konsistente Route-Guards. Inkonsistent sind inkonsistente Header-/Cookie-Nutzung und divergierende Erwartungen zwischen Frontend und Backend.
 
-  \item  \textbf{Beobachtete Implementationsmuster.} Boilerplate-Flows (Register/Login/Protect) treten häufig auf. In den Artefakten finden sich sowohl Varianten mit Rollen-/Claims-Strukturen als auch minimal gehaltene Flows (z.B. ohne durchgängige Validierung/Expiry). Häufig treten Kombinationen aus JWT und \texttt{bcrypt} auf.
+  \item  \textbf{Beobachtete Implementationsmuster.}\\
+  Boilerplate-Flows (Register, Login, Protect) treten häufig auf. In den Artefakten finden sich sowohl Varianten mit Rollen-/Claims-Strukturen als auch minimal gehaltene Flows (z.B. ohne durchgängige Eingabeprüfung/Expiry). Häufig treten Kombinationen aus JWT und \texttt{bcrypt} auf.
 
   \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} In einzelnen Branches sind Header-/Cookie-Nutzung und Route-Guards inkonsistent oder zwischen Frontend und Backend nicht durchgängig abgestimmt.
 \end{enumerate}
@@ -37,7 +40,7 @@ T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie 
 \begin{enumerate}
   \item  \textbf{Ziel des Tasks (kurz, technisch).} Erweiterung des Todo-Datenmodells um Kategorisierung und Bereitstellung über API und UI, sodass Todos kategoriebasiert erstellt, gespeichert und angezeigt werden können.
 
-  \item  \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} Ein separates Kategorie-Konzept (Model/Tabelle/Collection mit Relation via \texttt{categoryId}) dominiert ($14/18$). Inline-Kategorien als String sind selten ($1/18$). In $3/18$ Branches ist das Kategorie-Konzept in Struktursignalen nicht klar erkennbar.
+  \item  \textbf{Typische Implementierungsvarianten (mit Häufigkeiten).} Ein separates Kategorie-Konzept (Model/Tabelle/Collection mit Relation via \texttt{categoryId}) dominiert (14/18). Inline-Kategorien als String sind selten (1/18). In 3/18 Branches ist das Kategorie-Konzept in Struktursignalen nicht klar erkennbar.
 
   \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} Konsistent sind konsistente Persistenz und stabile Referenzen (IDs/Relation). Inkonsistent sind rein UI-seitige Kategorien oder inkonsistente Relation/Serialisierung.
 
@@ -50,11 +53,12 @@ T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie 
 \begin{enumerate}
   \item  \textbf{Ziel des Tasks (kurz, technisch).} Upload und Zuordnung von Dateien zu Todos (typischerweise \texttt{multipart/form-data}), Speicherung (Dateisystem oder DB) und Rückgabe verwertbarer Metadaten über die API.
 
-  \item  \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} In $8/18$ Branches ist ein Multer-/Upload-Ansatz erkennbar. In $10/18$ Branches sind Attachments nicht oder nur indirekt oder unklar umgesetzt. Wo Upload existiert, ist Storage häufig lokal (Uploads-Ordner) oder metadatenbasiert (Dateiname/URL).
+  \item  \textbf{Typische Implementierungsvarianten (mit Häufigkeiten).} In 8/18 Branches ist ein Multer-/Upload-Ansatz erkennbar. In 10/18 Branches sind Attachments nicht oder nur indirekt oder unklar umgesetzt. Wo Upload existiert, ist Storage häufig lokal (Uploads-Ordner) oder metadatenbasiert (Dateiname/URL).
 
   \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} Konsistent sind klare Upload-Verträge (Feldnamen/Metadaten) und stabile Zuordnung zum Todo. Inkonsistent sind uneinheitliche Response-Formate und fehlende Metadaten-Persistenz.
 
-  \item  \textbf{Beobachtete Implementationsmuster.} Multer-Templates mit Boilerplate-Routen sind häufig. Daneben finden sich sowohl Varianten mit separaten Attachment-Entitäten als auch Upload-Varianten ohne stabilen Metadaten-Rückkanal.
+  \item  \textbf{Beobachtete Implementationsmuster.}\\
+  Multer-Templates mit Boilerplate-Routen sind häufig. Daneben finden sich sowohl Varianten mit separaten Attachment-Entitäten als auch Upload-Varianten ohne stabilen Metadaten-Rückkanal.
 
   \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} Wo Upload existiert, sind Response-Formate, Feldnamen und Metadatenpersistenz nicht in allen Branches konsistent.
 \end{enumerate}
@@ -63,11 +67,11 @@ T1 und T2 wurden im Chat durchgängig adressiert ($18/18$), T3 in $15/18$ sowie 
 \begin{enumerate}
   \item  \textbf{Ziel des Tasks (kurz, technisch).} Abbildung von Todos im Kalender, inklusive Unterstützung von Zeiträumen (Multi-Day), sowie konsistente Query-/Filter-Semantik (z.B. Overlap-Logik) zur effizienten Darstellung in Kalenderansichten.
 
-  \item  \textbf{Typische Implementierungsstrategien (mit Häufigkeiten).} In den Branches sind Range-Felder als Struktursignale verbreitet (z.B. \texttt{dueEndDate} neben \texttt{dueDate}). Gleichzeitig ist T5 in den (V3-)Integrationstests in 0/18 Branches verifiziert.
+  \item  \textbf{Typische Implementierungsvarianten (mit Häufigkeiten).} In den Branches sind Range-Felder als Struktursignale verbreitet (z.B. \texttt{dueEndDate} neben \texttt{dueDate}). Gleichzeitig ist T5 in den (V3-)Integrationsläufen in 0/18 Branches als \textit{Execution observed} ausgewiesen.
 
-  \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} In den Artefakten treten zusätzliche Range-Felder häufig auf. Eine durchgängig erkennbare Range-Validierung (Ende $>$ Start) sowie eine konsistente Query-/Filter-Semantik (Overlap-Logik) ist in den Artefakten nicht in allen Branches erkennbar.
+  \item  \textbf{Beobachtete Stabilitätsmuster (konsistent vs. inkonsistent).} In den Artefakten treten zusätzliche Range-Felder häufig auf. Eine durchgängig erkennbare Range-Logik (Ende > Start) sowie eine konsistente Query-/Filter-Semantik (Overlap-Logik) ist in den Artefakten nicht in allen Branches erkennbar.
 
   \item  \textbf{Beobachtete Implementationsmuster.} Häufig treten UI-/Modell-Boilerplates (zusätzliche Datumsfelder, Kalender-Komponenten) sowie Range-Utilities auf. In den Artefakten ist der API-Vertrag (Parameter/Overlap-Regel) dabei nicht in allen Branches konsistent erkennbar.
 
-  \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} In den Artefakten sind Range-Felder und UI-Komponenten teilweise vorhanden, ohne dass eine durchgängig konsistente, testgebunden bestätigte End-to-End-Semantik für Overlap/Filter und API-Vertrag vorliegt.
+  \item  \textbf{Beobachtete Teilumsetzungen / offene Punkte.} In den Artefakten sind Range-Felder und UI-Komponenten teilweise vorhanden, ohne dass eine durchgängig konsistente, durch \textit{Execution observed} ausgewiesene End-to-End-Semantik für Overlap/Filter und API-Vertrag vorliegt.
 \end{enumerate}

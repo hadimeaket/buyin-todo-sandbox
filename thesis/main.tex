@@ -55,6 +55,10 @@
 \usepackage{amsthm}
 \newtheorem{hypothesis}{Hypothese}
 
+% Allows overriding copy&paste + pdftotext output via PDF /ActualText.
+% Used to match text-extraction order without changing visuals.
+\usepackage{accsupp}
+
 % Hyperlinks, PDF metadata, bookmarks.
 % Keep links clickable, but remove colored boxes around them (e.g., in the TOC).
 \usepackage[unicode,hidelinks]{hyperref}
@@ -65,8 +69,19 @@
 \fi
 \usepackage{bookmark}
 
-\csname title\endcsname{Bewertung von AI Coding Agents für Vibe-Coding in der Unternehmenssoftwareentwicklung:\\
-Evaluationsrahmen und Einordnung von Integrationsaspekten am Beispiel BuyIn}
+\newcommand{\ThesisTitlePDF}{Explorative Untersuchung von AI Coding Agents für Vibe-Coding in der Unternehmenssoftwareentwicklung: Fallstudie BuyIn}
+\newcommand{\ThesisTitleDisplay}{Explorative Untersuchung von AI Coding\\
+Agents für Vibe-Coding\\
+in der Unternehmenssoftwareentwicklung:\\
+Fallstudie BuyIn}
+
+\hypersetup{
+  pdftitle={\ThesisTitlePDF},
+  pdfauthor={Cihad Gök}
+}
+
+
+\csname title\endcsname{\ThesisTitleDisplay}
 \author{Cihad Gök}
 \date{Dezember 2025}
 
@@ -78,7 +93,7 @@ Evaluationsrahmen und Einordnung von Integrationsaspekten am Beispiel BuyIn}
 \input{chapters/00_abstract}
 \clearpage
 
-\tableofcontents
+\csname tableofcontents\endcsname
 \clearpage
 
 \input{chapters/01_einleitung}

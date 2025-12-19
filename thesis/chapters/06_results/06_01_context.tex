@@ -8,32 +8,32 @@ Die Studie wurde unter einheitlichen Rahmenbedingungen durchgeführt, um die Ver
 \begin{itemize}
     \item  \textbf{Zeitlimit:} Alle Probanden hatten ein striktes Zeitlimit von 60 Minuten für die Bearbeitung der Aufgaben.
     \item  \textbf{Tooling:} Als Entwicklungsumgebung diente Visual Studio Code mit der GitHub Copilot Extension.
-    \item  \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde  \textbf{Claude Sonnet~4.5} verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
+    \item  \textbf{KI-Modell:} Als zugrundeliegendes Large Language Model (LLM) wurde Claude Sonnet~4.5 verwendet. Die Interaktion erfolgte über das Chat-Interface von GitHub Copilot, wobei das Modell explizit als Backend konfiguriert war.
     \item  \textbf{Aufgabenstellung:} Die Probanden erhielten eine Liste von 8 Aufgaben (T1--T8) mit steigender Komplexität, beginnend bei Backend-Persistenz bis hin zu komplexen Frontend-Features und Export-Funktionen.
 \end{itemize}
 
 \subsection{Datenquellen und Artefakte}
-Die empirische Auswertung stützt sich auf drei primäre Datenquellen, die eine Triangulation der Ergebnisse ermöglichen:
+Die empirische Auswertung basiert auf drei primären Datenquellen, die eine Triangulation der Ergebnisse ermöglichen:
 
 \begin{enumerate}
-    \item  \textbf{Code-Artefakte (Git-Repositories):}
-    Die finalen Implementierungen der Probanden liegen als separate Git-Branches vor. Diese Branches enthalten den vollständigen Quellcode zum Zeitpunkt des Zeitablaufs.
+    \item Code-Artefakte (Git-Repositories):
+    Die finalen Implementierungen der Probanden~liegen als separate Git-Branch\-es vor. Diese Branches enthalten den vollständigen Quellcode zum Zeitpunkt des Zeitablaufs.
     \begin{itemize}
         \item Pfad: Remote-Branches mit dem Suffix \path{*-vibe}.\\
         Beispiel: \path{origin/nachname-vorname-vibe}.
     \end{itemize}
 
-    \item  \textbf{Chat-Logs:}
-    Die vollständigen Interaktionsprotokolle zwischen Proband und KI-Assistenzsystem wurden exportiert. Diese Protokolle enthalten alle Prompts der Nutzer sowie die Antworten und Code-Generierungen der KI.
+    \item Chat-Logs:
+    Die vollständigen Interaktionsprotokolle zwischen Proband und KI-Assistenzsystem wurden exportiert. Diese Protokolle enthalten alle Prompts der Nutzer sowie die in den Exports als Antworten des KI-Assistenzsystems markierten Textsegmente (inklusive ggf. enthaltener Codeblöcke).
     \begin{itemize}
         \item Pfad: \path{thesis/chats/} (Format: \texttt{.docx}).
     \end{itemize}
 
-    \item  \textbf{Survey-Daten:}
+    \item Survey-Daten:
     Im Anschluss an die Challenge füllten die Probanden einen Fragebogen zur Selbsteinschätzung und subjektiven Wahrnehmung der KI-Interaktion aus.
     \begin{itemize}
         \item Pfad: \path{thesis/surveys/}\\
-        \path{Probanden-Einstufungsformular (Responses).xlsx}.
+        \path{Probanden-Einstufungsformular(Responses).xlsx}.
     \end{itemize}
 \end{enumerate}
 
@@ -49,20 +49,20 @@ Die empirische Auswertung stützt sich auf drei primäre Datenquellen, die eine 
     Survey-Einträge & 18 & Vollständig ($N=18$) \\
     \hline
     \end{tabular}
-    \caption{Inventar der Datenartefakte.}
+    \caption{Inventar der in der Auswertung verwendeten Datenartefakte (Git-Branches, Chat-Logs, Survey-Responses) und ihre Verfügbarkeit über alle Teilnehmenden ($N=18$).}
     \label{tab:data_inventory}
 \end{table}
 
 \noindent \textbf{Messung.} Erfasst wurde die Verfügbarkeit der drei Datenartefakte Git-Branches, Chat-Logs und Survey-Einträge über alle Teilnehmenden ($N=18$).
 \noindent \textbf{Hauptbefund.} Für alle drei Artefakt-Typen liegt Vollständigkeit vor (jeweils 18/18).
-\noindent \textbf{RQ-Bezug.} Das Dateninventar ist die Grundlage für die Triangulation von Code-, Test- und Chat-Artefakten (insbesondere RQ2) sowie für die Auswertung der Pipeline-Status in Kapitel~6.
+\noindent \textbf{RQ-Bezug.} Das Dateninventar ist die Grundlage für die Triangulation von Code-, Ausführungs- und Chat-Artefakten (insbesondere RQ2) sowie für die Auswertung der Pipeline-Status in Kapitel 6.
 
 \subsection{Zuordnung und Zusammenführung der Daten}
 Die Zusammenführung der Datenquellen erfolgte über eine Mapping-Tabelle, die Namensangaben aus dem Survey und die Chat-Dateinamen den entsprechenden Git-Branches zuordnet. In der Ergebnisdarstellung werden Teilnehmende ausschließlich als Teilnehmer A--R referenziert.
 \begin{itemize}
-    \item  \textbf{Survey $\leftrightarrow$ Branch:} Das Survey-Feld "Branch-Name" sowie der Name des Probanden dienten als Schlüssel.
-    \item  \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. \path{Nachname_Vorname.docx}) wurden normalisiert und den entsprechenden Branches zugeordnet.\\
-    Beispiel: \path{nachname-vorname-vibe}.
+    \item  \textbf{Survey $\leftrightarrow$ Branch:} Das Survey-Feld "Branch-Name"sowie der Name des Probanden dienten als Schlüssel.
+    \item  \textbf{Chat $\leftrightarrow$ Branch:} Die Dateinamen der Chat-Logs (z.B. Nachname\_Vorname.docx) wurden normalisiert und den entsprechenden Branches zugeordnet.\\
+    Beispiel: nachname-vorname-vibe.
 \end{itemize}
 Die Survey-Daten enthalten zudem eine Einteilung in Kompetenzgruppen (No-Code, Low-Code, Mid-Code, High-Coder), die in der späteren Analyse als vergleichendes Merkmal herangezogen wird.
 
@@ -70,10 +70,10 @@ Die Survey-Daten enthalten zudem eine Einteilung in Kompetenzgruppen (No-Code, L
 Um die Ergebnisse nachvollziehbar und reproduzierbar zu gestalten, kommen automatisierte Analysewerkzeuge zum Einsatz, deren Resultate im Ordner \path{evaluation/} persistiert werden:
 
 \begin{itemize}
-    \item  \textbf{Statische Code-Analyse:} Einsatz von \texttt{ESLint} zur Überprüfung der Code-Qualität und Einhaltung von Standards.
-    \item  \textbf{Automatisierte Tests:} Ausführung der vorhandenen Test-Suite (basierend auf \texttt{Jest/Vitest}), um die funktionale Korrektheit der Implementierungen (Task Completion) zu verifizieren.
+    \item  \textbf{Statische Code-Analyse:} Einsatz von \texttt{ESLint} zur Analyse der Code-Qualität und Einhaltung von Standards.
+    \item  \textbf{Automatisierte Ausführung:} Ausführung der vorhandenen Suite (basierend auf \texttt{Jest/Vitest}), um funktionale Umsetzungsstände der Implementierungen (Task Completion) systematisch zu erfassen.
     \item  \textbf{Chat-Parsing:} Algorithmische Auswertung der Chat-Logs zur Bestimmung von \textit{Attempted}-Tasks und Identifikation von Prompting-Mustern.
 \end{itemize}
 
 \subsection{Abgrenzung zu Kapitel 7}
-Das vorliegende Kapitel 6 beschränkt sich auf die deskriptive Darstellung der Ergebnisse und die objektive Auswertung der Daten. Eine Interpretation dieser Ergebnisse, die Diskussion von Ursache-Wirkungs-Beziehungen sowie die Beantwortung der Forschungsfragen erfolgen im anschließenden Kapitel 7 (Diskussion).
+Das vorliegende Kapitel 6 beschränkt sich auf die deskriptive Darstellung der Ergebnisse und die objektive Auswertung der Daten. Eine Interpretation dieser Ergebnisse, die Diskussion möglicher Wirkzusammenhänge sowie die Beantwortung der Forschungsfragen erfolgen im anschließenden Kapitel 7 (Diskussion).

@@ -5,10 +5,299 @@
 \label{sec:discussion_core_findings}
 
 \begin{itemize}
+	\item \textbf{Bedingung: Brownfield \& Timebox (60 Minuten).} \textbf{Beobachtung:} Das Statusmuster ist konsistent: T1/T2 werden nahezu durchg\"angig adressiert und artefaktseitig umgesetzt, w\"ahrend der Statusausweis \textit{Execution observed} bei T4/T5 ausbleibt. \textbf{Einordnung:} In diesem Setting wird beobachtet, dass fr\"uhe Implementationsschritte h\"aufiger erreicht werden; Integrations- und Abgleichsarbeit bleibt ein Engpass.
+	\item \textbf{Bedingung: Mehrere Evidenzebenen.} \textbf{Beobachtung:} Chat-Intention (\textit{Attempted}), Artefakt-Signale (\textit{Implemented\textsubscript{static}}) und automatisierte Statussignale (\textit{Execution observed}) fallen empirisch auseinander (z.B. T3: \textit{Execution observed} kann gr\"o\ss er als \textit{Implemented\textsubscript{static}} sein). \textbf{Einordnung:} Die Befunde werden daher nicht \"uber Einzelmetriken (Chat-Intensit\"at, Lint, ein Statussignal) allein eingeordnet.
+	\item \textbf{Bedingung: Kompetenzgruppen als Analyseperspektiven.} \textbf{Beobachtung:} Kompetenzgruppen unterscheiden sich in der Verteilung von \textit{Implemented\textsubscript{static}}-Ausweisen (vgl. Tabelle~\ref{tab:triangulation_competence_vs_impl}); gleichzeitig liefern die Befunde keine Grundlage f\"ur eine einfache Rangordnung nach \textit{Execution observed}-Ausweisen. \textbf{Einordnung:} Der Befund l\"asst sich im Hinblick auf gruppenspezifische Risiken einordnen, ohne Kompetenz als Leistungsranking zu instrumentalisieren.
+	\item \textbf{Bedingung: Integrationsaufgaben (T3--T5).} \textbf{Beobachtung:} Bei steigender Kopplung (Schema\,$\rightarrow$\,API\,$\rightarrow$\,UI) sinken \textit{Implemented}\,$^\ast$ und \textit{Execution observed} deutlich. \textbf{Einordnung:} Der Befund l\"asst sich im Hinblick auf Schnittstellenvertr\"age, Ausf\"uhrung im Systemkontext und Review gegen\"uber blo\ss er Codeproduktion einordnen.
+	\item \textbf{Bedingung: Chat als Arbeitsoberfl\"ache.} \textbf{Beobachtung:} Interaktionsintensit\"at variiert stark und liefert in diesem Datensatz kein eindeutiges Effizienz- oder Qualit\"atssignal. \textbf{Einordnung:} Prozessqualit\"at l\"asst sich \"uber nachvollziehbare Artefakte (CI-Ausgaben, diff-basierte Reviews, Logging) beschreiben.
+\end{itemize}
+
+\section{Ziel und Abgrenzung der Diskussion}
+\label{sec:discussion_scope}
+
+Kapitel~6 hat die Ergebnisse ausschlie\ss lich deskriptiv berichtet; Kapitel~7 ordnet diese Befunde im Licht des in Kapitel~2 eingef\"uhrten theoretischen Rahmens ein.
+Ziel ist es, die Forschungsfragen anhand der berichteten Befundlinien zu beantworten und theoriegeleitete Perspektiven als Strukturierung aufzugreifen.
+Kapitel~7 f\"uhrt keine neuen Daten ein und berechnet keine zus\"atzlichen Metriken; kausale Effekte werden nicht beansprucht.
+
+Der methodische Beitrag dieser Arbeit liegt in der dokumentierten, artefaktgebundenen Auswertungslogik, die Pipeline-Status, Code- und Ausf\"uhrungsartefakte sowie Chat- und Survey-Artefakte systematisch zusammenf\"uhrt und dadurch eine nachvollziehbare, deskriptive Ergebnisdarstellung im kontrollierten Brownfield-Setting erm\"oglicht. Diese Vorgehensweise tr\"agt dazu bei, Intention (\"uber Interaktions- und Bearbeitungssignale), Implementationsspuren und \textit{Execution observed}-Ausweise getrennt zu behandeln und in einer gemeinsamen Referenzlogik zu berichten. Der Beitrag ist auf die im Manuskript beschriebenen Rahmenbedingungen (u.\,a. Sandbox, Timebox, Datenquellen und Auswertungsregeln) begrenzt und beansprucht keine Verallgemeinerung \"uber diesen Geltungsbereich hinaus.
+
+\paragraph{Methodischer Rahmen (Kausalit\"at, Gruppenvergleiche).}
+Die Studie ist als kontrollierte, artefaktbasierte Beobachtungsstudie angelegt; Randomisierung, eine Manipulation von Bedingungen und prozessnahe Messungen zur Identifikation von Wirkzusammenh\"angen liegen nicht vor.
+Aus diesem Grund werden die Befunde als Muster unter den in Kapitel~6 dokumentierten Bedingungen diskutiert.
+Auf inferenzstatistische Gruppenvergleiche wird verzichtet, da die Fallzahlen pro Kompetenzgruppe klein sind und potenzielle Konfundierungen nicht belastbar kontrolliert werden.
+
+\paragraph{Geltungsbereich der Ergebnisse.}
+Die diskutierten Befunde beziehen sich auf \emph{interaktive} KI-Assistenzsysteme im Vibe-Coding-Kontext, angewendet in einer Brownfield-Sandbox auf ein bestehendes Codeartefakt.
+Sie gelten f\"ur eine zeitlich begrenzte Aufgabenbearbeitung unter den in Kapitel~6 beschriebenen Rahmenbedingungen.
+Nicht Gegenstand sind Greenfield-Projekte, langfristige Produktentwicklung sowie autonome Agenten mit eigener Aufgabenplanung und eigenst\"andiger Ziel- und Teilzielbildung.
+
+Eine zentrale Linse der Diskussion sind die vier Kompetenzgruppen No-Code, Low-Code, Mid-Code und High-Coder.
+Diese Gruppen werden als gleichwertige Analyseperspektiven behandelt.
+Die Gruppenzuordnung beruht auf einer pragmatischen, auditierbaren Pre-Survey-Heuristik (Tabelle~\ref{tab:competence-rubric}) und beansprucht keine psychometrische Fundierung.
+Aussagen beziehen sich auf aggregierte Gruppenmuster oder auf einzelne Branches als Analyseeinheiten; eine Leistungsbewertung oder Rangordnung einzelner Personen erfolgt nicht.
+
+\paragraph{Group comparability \& confounders.}
+Zentrale Rahmenbedingungen sind konstant gehalten (einheitliche IDE \enquote{VS Code}, identische Sandbox und Aufgabenstellung, identisches Zeitlimit, sowie dasselbe KI-Assistenzsystem aus GitHub Copilot und Claude Sonnet~4.5).
+Die beobachteten Unterschiede k\"onnen damit als kompetenzabh\"angige Nutzungstypen diskutiert werden; alternative Erkl\"arungen (u.a. Berufserfahrung, Dom\"anenroutine, Debugging- und Abgleichroutinen, Risikotoleranz) bleiben m\"oglich.
+Entsprechend werden Unterschiede als theoriegeleitete Einordnungen diskutiert, ohne gruppenstabile Leistungsrangfolgen oder kausale Effekte zu behaupten.
+
+\section{Beantwortung der Forschungsfragen}
+\label{sec:discussion_rq_answers}
+
+\subsection*{RQ1: Kompetenz und Pipeline-Status}
+	\csname textbf\endcsname{Antwortsatz (gewichtet).} Unter den Bedingungen dieser Studie unterscheiden sich Kompetenzgruppen in den Verteilungen von \textit{Implemented\textsubscript{static}} und \textit{Implemented}\,$^\ast$; ein eindeutiges, gruppenstabiles Muster in \textit{Execution observed} ergibt sich nicht.
+
+	\csname textbf\endcsname{Begr\"undung (Befunde).} (1) In Kapitel~6 wird \textit{Implemented\textsubscript{static}} nach Kompetenzgruppen als H\"aufigkeitstabelle berichtet (Tabelle~\ref{tab:triangulation_competence_vs_impl}). Darin treten Branches mit vier als \texttt{implemented} markierten Tasks in Mid-Code h\"aufiger auf als in High-Coder, w\"ahrend No-Code und Low-Code dazwischen liegen (vgl. Kapitel~6). (2) \textit{Execution observed} ist als methodisch enger Statusausweis gefasst; Kapitel~6 berichtet hierf\"ur vor allem taskbezogene Engp\"asse (vgl. Kapitel~6). (3) Eine gruppierte Auswertung von \textit{Execution observed} wird in Kapitel~6 nicht als eigene Tabelle berichtet; entsprechend wird hier kein gruppenstabiles Muster behauptet.
+
+	\csname textbf\endcsname{Geltungsbereich / Limitation.} Die Aussage bezieht sich auf Branches als Analyseeinheiten, Timebox (60 Minuten) und die in Kapitel~6 dokumentierte Messmethodik. Sie ist deskriptiv; ein kausaler Einfluss von Kompetenz wird nicht beansprucht.
+
+\subsection*{RQ2: Rolle von Code- und Ausf\"uhrungsartefakten}
+	\csname textbf\endcsname{Antwortsatz (gewichtet).} Code- und Ausf\"uhrungsartefakte sind f\"ur die Ergebniseinordnung zentral, weil sie die Trennung zwischen sichtbaren Implementationsspuren und \textit{Execution observed}-Ausweisen operationalisieren und Chat-Signale methodisch einordnen.
+
+	\csname textbf\endcsname{Begr\"undung (Befunde).} (1) \textit{Execution observed} ist messgebunden und kann unabh\"angig von heuristischen Artefaktsignalen ausfallen (vgl. Kapitel~6). (2) F\"ur T4/T5 wird berichtet, dass \textit{Attempted} und teils \textit{Implemented}\,$^\ast$ auftreten k\"onnen, ohne dass \textit{Execution observed} ausgewiesen wird (vgl. Kapitel~6). (3) Technische Surrogate (Lint/\texttt{anyUsage}/CI-Summen) variieren innerhalb \"ahnlicher Pipeline-St\"ande und ersetzen keine Verhaltensbeobachtung.
+
+	\csname textbf\endcsname{Geltungsbereich / Limitation.} \textit{Execution observed} bedeutet in dieser Studie: Der Status wird in den Auswertungsartefakten als \texttt{verified} ausgewiesen; er ersetzt keine vollst\"andige fachliche Abdeckung und ist an die Messdefinition gebunden.
+
+\subsection*{RQ3: Chat-Interaktionsmuster}
+	\csname textbf\endcsname{Antwortsatz (gewichtet).} Chat-Muster sind als Prozesssignale relevant, liefern allein jedoch kein belastbares Ergebnisma\ss ; ihre Aussagekraft entsteht erst in Kombination mit Pipeline-Status sowie Code- und Ausf\"uhrungsartefakten.
+
+	\csname textbf\endcsname{Begr\"undung (Befunde).} (1) Wortanzahl, Zyklenzahl und Nutzerbeitr\"age variieren stark (Kapitel~6.5), ohne dass daraus ein eindeutiges Muster f\"ur \textit{Execution observed} folgt. (2) Debugging-Marker und Iterationssequenzen treten als wiederkehrendes Strukturmerkmal auf; sie beschreiben Interaktion, nicht Ergebnisqualit\"at. (3) Chat-basierte \textit{Attempted}-Signale und \textit{Execution observed}-Ausweise fallen nicht notwendigerweise zusammen (z.B. T3; vgl. Kapitel~6), was die Notwendigkeit der Triangulation unterstreicht.
+
+	\csname textbf\endcsname{Geltungsbereich / Limitation.} Die Chat-Metriken beruhen auf regelbasierten Extraktionen aus Exporten; sie erfassen keine IDE-Aktionen (Ausf\"uhrungsl\"aufe, Kontextbereitstellung) und damit nur einen Ausschnitt des Arbeitsprozesses.
+
+Zur begrifflichen Trennung wird -- wie in Kapitel~1 eingef\"uhrt -- zwischen Assistenzumgebung (Tool), Modell (LLM) und \emph{KI-Assistenzsystem} als funktionaler Einheit unterschieden.
+
+\section{R\"uckbindung an theoriegeleitete Perspektiven}
+\label{sec:discussion_perspectives}
+
+Die Perspektiven wurden im Forschungsdesign als theoriegeleitete Deutungsfolien formuliert, wie Kompetenz und Arbeitsmodus mit dem KI-Assistenzsystem zusammenwirken.
+Im Folgenden wird jede Perspektive anhand der in Kapitel~6 berichteten Befundlinien diskutiert.
+Dabei werden die vier Kompetenzgruppen No-Code, Low-Code, Mid-Code und High-Coder als Analyseperspektiven verwendet.
+Nicht jede Perspektive zielt in gleicher Weise auf alle Gruppen.
+
+\subsection{P1: Mid-Code als m\"oglicher Sweet Spot}
+\label{sec:discussion_p1}
+
+	\csname textbf\endcsname{Einordnung: gemischt.}
+
+	\csname textbf\endcsname{St\"arkstes Pro-Argument.} In Kapitel~6 weist Mid-Code in der H\"aufigkeitstabelle zu \textit{Implemented\textsubscript{static}} mehr Branches mit hohem artefaktseitigem Fortschritt aus als High-Coder (vgl. Kapitel~6, Tabelle~\ref{tab:triangulation_competence_vs_impl}), was als deskriptiver H\"aufigkeitsunterschied zu lesen ist und nicht als Kompetenz- oder Leistungsurteil.
+
+	\csname textbf\endcsname{St\"arkstes Contra-Argument.} F\"ur \textit{Execution observed} wird in Kapitel~6 kein gruppierter Vergleich berichtet; gleichzeitig bleibt \textit{Execution observed} bei T4/T5 in allen Branches aus (vgl. Kapitel~6). Ein klarer \enquote{Sweet Spot} in Richtung \textit{Execution observed}-Ausweisen l\"asst sich damit nicht ausweisen.
+
+	\csname textbf\endcsname{Finale Einordnung.} Im Material wird eine h\"ohere H\"aufigkeit artefaktseitigen Fortschritts bei Mid-Code beobachtet; zugleich zeigt sich kein eindeutiges Sweet-Spot-Muster in \textit{Execution observed}-Ausweisen.
+
+\subsection{P2: Abgleich-Paradoxon bei Low-Code}
+\label{sec:discussion_p2}
+
+	\csname textbf\endcsname{Einordnung: gemischt.}
+
+	\csname textbf\endcsname{St\"arkstes Pro-Argument.} In Kapitel 6 weist die H\"aufigkeitstabelle aus, dass Low-Code im Vergleich zu Mid-Code weniger Branches mit vier als \texttt{implemented} markierten Tasks aufweist und zugleich der einzige Branch mit nur einem \texttt{implemented}-Task in Low-Code liegt (vgl. Kapitel 6, Tabelle \ref{tab:triangulation_competence_vs_impl}), was als deskriptiver H\"aufigkeitsunterschied zu lesen ist und nicht als Kompetenz- oder Leistungsurteil.
+
+	\csname textbf\endcsname{St\"arkstes Contra-Argument.} Die Artefakte enthalten keine direkten Messungen von Abgleichroutinen (z.B. Ausf\"uhrungsl\"aufe pro Person), und Kapitel~6 berichtet \textit{Execution observed} nicht gruppiert nach Kompetenz. Damit kann ein spezifisches gruppenbezogenes \enquote{Abgleich-Paradoxon} nicht als Muster ausgewiesen werden.
+
+	\csname textbf\endcsname{Finale Einordnung.} Im Material tritt ein geringerer artefaktseitiger Fortschritt von No-/Low-Code gegen\"uber Mid-Code auf; ob dies durch ein spezifisches \enquote{Abgleich-Paradoxon} (Overtrust/fehlende Kontrolle) gepr\"agt ist, bleibt mit den vorliegenden Prozessdaten offen.
+
+\subsection{P3: Skepsis und Qualit\"atsfokus bei High-Coder}
+\label{sec:discussion_p3}
+
+	\csname textbf\endcsname{Einordnung: gemischt.}
+
+	\csname textbf\endcsname{St\"arkstes Pro-Argument.} High-Coder weist in Kapitel~6 keine Branches mit vier als \texttt{implemented} markierten Tasks aus, w\"ahrend Mid-Code diese Kategorie erreicht (vgl. Kapitel~6, Tabelle~\ref{tab:triangulation_competence_vs_impl}). Dieser Befund ist mit der Perspektive insofern vereinbar, als ein st\"arker selektives Vorgehen mit geringerem als \texttt{implemented} erfasstem Artefaktfortschritt einhergehen kann.
+
+	\csname textbf\endcsname{St\"arkstes Contra-Argument.} Ein \enquote{Qualit\"atsfokus} im Sinne h\"oherer \textit{Execution observed}-Ausweise wird in Kapitel~6 nicht als gruppiertes \textit{Execution observed}-Muster berichtet. Die vorliegenden Artefakte erlauben daher keine direkte Beobachtung, ob High-Coder systematisch st\"arker abgleichen oder zuverl\"assiger \textit{Execution observed} erreichen.
+
+	\csname textbf\endcsname{Finale Einordnung.} Im Material tritt auf, dass High-Coder weniger h\"aufig heuristisch als \enquote{implementiert} erfasst werden, ohne dass dies in \textit{Execution observed} als Nachteil sichtbar wird; ein spezifischer Qualit\"atsfokus bleibt ohne prozessnahe Review-/Ausf\"uhrungsdaten nicht direkt beobachtbar.
+
+\section{Kompetenzabh\"angige Interaktionsmuster}
+\label{sec:discussion_competence_patterns}
+
+Kapitel~6 berichtet, dass Branches sich nicht nur im Umsetzungsstand unterscheiden, sondern auch in der Art der Interaktion, in der Struktur der Prompts und in der H\"aufigkeit von Debugging-Sequenzen.
+Diese Variation kann im Licht von Kapitel~2 als Ausdruck unterschiedlicher Kompetenzlagen eingeordnet werden.
+Die folgenden Deutungen sind explizit theoriegeleitet und formulieren keinen kausalen Anspruch.
+Sie beschreiben Nutzungstypen und Analyseperspektiven, nicht Qualit\"atsstufen oder individuelle Leistungsf\"ahigkeit.
+Zentral ist dabei nicht das Tool selbst, da alle Teilnehmenden mit derselben Assistenzumgebung (GitHub Copilot) und derselben Modellkonfiguration gearbeitet haben.
+In dieser Einordnung ist vielmehr relevant, welche kognitiven Ressourcen und welche mentalen Modelle zur Verf\"ugung stehen, um Vorschl\"age zu kontrollieren, zu integrieren und bei Bedarf zu korrigieren.
+
+\subsection{No-Code}
+\label{sec:discussion_no_code}
+
+Die Befunde aus Kapitel~6 werden so gelesen, dass im vorliegenden Setting der Zugang zu umsetzungsnahen Artefakten in den beobachteten Durchl\"aufen erleichtert erscheint.
+Gleichzeitig erscheinen Abgleich und Integration im bestehenden System in den beobachteten Durchl\"aufen h\"aufig anspruchsvoll.
+Im Rahmen von Kapitel~2 l\"asst sich dies als Vibe-Coding-Arbeitsmodus einordnen, in dem in den beobachteten Durchl\"aufen prozedurale Chunks aus dem KI-Assistenzsystem \"ubernommen wurden, die fehlende Produktionsregeln \"uberbr\"ucken.
+Gleichzeitig kann ohne tragf\"ahige Schemata der Intrinsic Load der Kontrolle und Integration h\"oher ausfallen.
+Damit ist es im Sinne von Kapitel~2 plausibel, dass System~2 situativ nicht in dem Ma\ss{} aktiviert wird, das f\"ur semantischen Abgleich erforderlich w\"are, obwohl die Oberfl\"ache plausibel wirkt.
+Diese Einordnung bleibt theoriegeleitet, da Kapitel~6 keine direkten Prozessmessungen des Abgleichs auf individueller Ebene enth\"alt.
+
+\subsection{Low-Code}
+\label{sec:discussion_low_code}
+
+Kapitel~6 berichtet, dass Low-Code sichtbare Implementationsartefakte erzeugt, w\"ahrend \textit{Execution observed} bei st\"arker integrierten Aufgaben nicht durchg\"angig ausgewiesen wird.
+Im Rahmen von Kapitel~2 kann dies als Verh\"altnis zwischen Vertrauen und Kontrolle eingeordnet werden.
+Dabei l\"asst sich im vorliegenden Setting beschreiben, dass das KI-Assistenzsystem in den beobachteten Durchl\"aufen als Beschleuniger im Implementationsprozess genutzt wurde, w\"ahrend semantische Korrektheit im Systemkontext schwerer zu kontrollieren bleibt.
+Wenn Abgleichroutinen nicht etabliert sind, ist in dieser theoretischen Lesart plausibel, dass unkalibriertes Vertrauen h\"aufiger auftritt, ohne dass dies aus den Artefakten als gruppenspezifischer Effekt gemessen werden kann.
+Die in Kapitel~6 berichteten Strategiemuster, etwa tutorial-nahe Implementationsfl\"usse und Boilerplate, sind mit einem st\"arker template-basierten Arbeitsmodus vereinbar.
+Diese Einordnung bleibt theoriegeleitet, da Kapitel~6 Abgleichhandlungen nicht gruppenspezifisch und prozessnah erfasst.
+
+\subsection{Mid-Code}
+\label{sec:discussion_mid_code}
+
+Kapitel~6 berichtet, dass bei Mid-Code sowohl Umsetzungsartefakte als auch Iterationen der Nachjustierung und des Abgleichs beobachtbar sind.
+Im Rahmen von Kapitel~2 kann dies als Kompetenzlage eingeordnet werden, die zielorientierte Zerlegung und aktive Kontrolle kombiniert.
+Damit wird im vorliegenden Setting die Nutzung des KI-Assistenzsystems eher als Werkzeug in einem kontrollierten Probleml\"oseprozess eingeordnet.
+Die in Kapitel~6 berichtete Vielfalt an Prompt-Formen ist als funktionale Variation plausibel, in der kurze Prompts Beschleunigung und strukturierte Prompts Spezifikation und Kontextabgleich unterst\"utzen.
+Debugging-Iterationen sind dabei als normaler Bestandteil iterativer Integrationsarbeit zu lesen, nicht als Effizienzindikator.
+Diese Einordnung bleibt vorsichtig, da Kapitel~6 keine direkten Messungen von Review- und Abgleichtiefe enth\"alt.
+
+\subsection{High-Coder}
+\label{sec:discussion_high_code}
+
+Kapitel~6 berichtet, dass unter Zeitlimit bei anspruchsvollen Integrationsaufgaben \textit{Execution observed} nicht durchg\"angig ausgewiesen wird.
+Im Rahmen von Kapitel~2 kann dies f\"ur High-Coder als Nutzungstyp eingeordnet werden.
+In dieser Einordnung wird im vorliegenden Setting die Nutzung des KI-Assistenzsystems eher f\"ur Boilerplate und Exploration beschrieben, w\"ahrend zentrale Entscheidungen und Integrationslogik st\"arker manuell kontrolliert werden.
+In dieser Perspektive k\"onnen intensive Kontrolle und konservative Integrationsentscheidungen mit geringerem sichtbarem Fortschritt koexistieren, ohne dass daraus unmittelbar R\"uckschl\"usse auf Qualit\"at oder Kompetenz abzuleiten w\"aren.
+Diese Einordnung bleibt vorsichtig, da Kapitel~6 keine direkte Messung von Review-Tiefe oder Kontrollhandlungen enth\"alt.
+
+\section{Interpretation der Pipeline-Muster}
+\label{sec:discussion_pipeline}
+
+Die Pipeline-Kategorien \textit{Attempted}, \textit{Implemented\textsubscript{static}} und \textit{Execution observed} strukturieren die Befunde in Kapitel~6 als drei Status-Ebenen; f\"ur eine konsistente Aggregation wird dort zus\"atzlich \textit{Implemented$^\ast$} als abgeleitete Evidenzstufe verwendet.
+Die folgenden Deutungen binden diese deskriptiven Status-Diskrepanzen explizit an die in Kapitel~2 eingef\"uhrten Konzepte (u.a. Cognitive Load, Automation Bias) zur\"uck.
+F\"ur die Diskussion ist entscheidend, dass diese Kategorien unterschiedliche Aspekte desselben Arbeitsprozesses repr\"asentieren.
+In der Notation gilt: $\textit{Attempted} \neq \textit{Implemented\textsubscript{static}} \neq \textit{Execution observed}$.
+Attempted beschreibt Intention und Planbildung auf der Chat-Ebene.
+Implemented\textsubscript{static} beschreibt aufgabenspezifische Artefakte in der Codebasis (White-Box).
+Execution observed beschreibt einen methodisch gebundenen, von au\ss en beobachtbaren Statusausweis (Black-Box).
+Execution observed ist damit methodengebunden und als Integrationsindikator zu lesen, nicht als Leistungs- oder Qualit\"atsma\ss .
+Aus Kapitel~6 folgt, dass diese Ebenen nicht zwangsl\"aufig zusammenfallen.
+
+\subsection{Attempted ist nicht gleich \texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic}}
+\label{sec:discussion_attempted_vs_implemented}
+
+Die beobachtete Differenz zwischen Attempted und Implemented\textsubscript{static} ist plausibel als Integrationsph\"anomen einzuordnen.
+Insbesondere Aufgaben, die mehrere Systemteile koppeln, gehen mit zus\"atzlichem Koordinationsaufwand einher.
+Im Rahmen von Kapitel~2 kann dies \"uber Cognitive Load erkl\"art werden.
+Die Aufgabe reduziert sich nicht auf das Erzeugen von Code, sondern umfasst das Verstehen des bestehenden Kontexts, das Abstimmen von Datenmodellen und Schnittstellen sowie das Beheben von Fehlanpassungen.
+Dieser Aufwand d\"urfte den Intrinsic Load erh\"ohen.
+Im vorliegenden Setting wurden in den beobachteten Durchl\"aufen Syntax- und Boilerplate-Generierungen durch das KI-Assistenzsystem genutzt; dies l\"asst sich im Rahmen von Kapitel~2 als Senkung von Extraneous Load einordnen.
+In den beobachteten Durchl\"aufen blieb die semantische Konsistenzarbeit im Systemkontext jedoch weiterhin erforderlich.
+
+\subsection{\texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic} ist nicht gleich Execution observed}
+\label{sec:discussion_implemented_vs_execution_observed}
+
+Die Diskrepanz zwischen Implemented\textsubscript{static} und Execution observed ist nicht als Qualit\"atsurteil \"uber einzelne Branches zu lesen.
+Kapitel~6 betont, dass Execution observed ein Diagnosesignal innerhalb der eingesetzten Ausf\"uhrungsmethodik ist.
+F\"ur konfigurationssensitive Aufgaben kann Execution observed stark von Details des Endpunktvertrags und den Annahmen der Integrationsl\"aufe abh\"angen.
+Ein fehlendes Execution observed-Signal kann daher bedeuten, dass eine L\"osung heterogen, nur teilweise integriert oder nicht exakt methodenkonform ist.
+Es kann auch bedeuten, dass die Integrationsl\"aufe eine bestimmte Implementationsform voraussetzen, die nicht mit allen plausiblen L\"osungen kompatibel ist.
+
+\subsection{Zur Einordnung von Execution observed (0 Vorkommen)}
+\label{sec:discussion_execution_observed_zero}
+
+Kapitel~6 berichtet f\"ur bestimmte Integrationsaufgaben, dass Execution observed ausbleibt.
+Im Kontext dieser Studie ist das als erwartbares Ergebnis eines strikten Zeitlimits und hoher Schnittstellenkomplexit\"at einzuordnen.
+Gerade in einer Brownfield-Umgebung d\"urfte der Aufwand durch bestehende Konventionen, vorhandene Datenmodelle und implizite Vertragsannahmen steigen.
+Dies kann mit erh\"ohter kognitiver Belastung und Debugging-Aufwand einhergehen.
+Unter Automation Bias Perspektive ist zudem plausibel, dass scheinbar fertige Artefakte in einzelnen F\"allen zu fr\"uh als ausreichend akzeptiert werden.
+Die Abwesenheit von Execution observed wird in dieser Arbeit daher nicht als Synonym f\"ur fehlendes Verst\"andnis interpretiert, sondern kann als Signal f\"ur Integrationskosten und Abgleichengp\"asse gelesen werden.
+Execution observed (0 Vorkommen) wird damit als methoden- und settinggebundenes Ergebnis unter Zeitlimit und Brownfield-Integrationskomplexit\"at diskutiert.
+
+\section{Einordnung der Chat-Interaktionsmuster}
+\label{sec:discussion_chat}
+
+Die Chat-Ergebnisse aus Kapitel~6 zeigen starke Variation der Interaktionsintensit\"at und wiederkehrende Muster von Debugging-Sequenzen.
+Kapitel~6 ordnet diese Muster nicht ein.
+F\"ur die Diskussion sind drei Punkte zentral.
+
+\subsection{Warum Chat-Intensit\"at kein Effizienzma\ss{} ist}
+\label{sec:discussion_chat_intensity}
+
+Eine hohe Interaktionsintensit\"at kann mehrere Bedeutungen haben.
+Sie kann auf Exploration, auf unklare Anforderungen, auf Fehlanpassungen an den Kontext oder auf konsequenten Abgleich und Nachjustierung hinweisen.
+Kapitel~2 betont, dass Vibe-Coding den Schwerpunkt vom Schreiben zum Lesen und Kontrollieren verschiebt.
+Damit kann ein l\"angerer Chat-Verlauf auch Ausdruck von Kontrolle und Review sein.
+Umgekehrt kann ein kurzer Chat-Verlauf sowohl effiziente Beschleunigung als auch unkritische \"Ubernahme bedeuten.
+Ohne zus\"atzliche Prozessdaten, etwa Messungen von Ausf\"uhrungsl\"aufen oder IDE-Interaktionen, ist eine Effizienzdeutung nicht abgesichert.
+
+\subsection{Warum Debugging-Loops normal sind}
+\label{sec:discussion_debugging_loops}
+
+Kapitel~6 berichtet Debugging-Iterationen als wiederkehrendes Strukturmerkmal.
+Im Rahmen von Kapitel~2 ist dies erwartbar.
+Mixed-Initiative Interaction bedeutet, dass Vorschl\"age, R\"uckfragen und Korrekturen in Schleifen organisiert sind.
+Zudem kann die Arbeit in einem bestehenden System die Wahrscheinlichkeit von Konfigurations- und Schnittstellenfehlern erh\"ohen.
+Debugging-Sequenzen sind daher als normaler Bestandteil von Integrationsarbeit einzuordnen.
+Sie sind nicht per se ein Indikator f\"ur geringe Kompetenz oder geringe Qualit\"at.
+
+\subsection{Explorative und zielgerichtete Interaktion}
+\label{sec:discussion_exploration_vs_acceleration}
+
+Kapitel~2 unterscheidet Interaktionsmodi wie Exploration und Beschleunigung.
+Kapitel~6 berichtet sowohl kurze, wenig strukturierte Prompts als auch strukturierte, mehrpunktige Prompts.
+Diese Koexistenz ist als situativ wechselnder Arbeitsmodus plausibel.
+Exploration kann genutzt werden, um APIs, Projektkonventionen oder m\"ogliche L\"osungswege zu verstehen.
+Beschleunigung kann genutzt werden, um bekannte Muster schnell zu implementieren.
+Der Wechsel zwischen diesen Modi ist in einer zeitlich begrenzten Aufgabenbearbeitung plausibel.
+
+\section{Einordnung von Nutzung und Auswertung}
+\label{sec:discussion_usage_and_evaluation}
+
+Die folgenden Abschnitte fassen Einordnungen zusammen, die an die in Kapitel~6 berichteten Befunde anschlie\ss en.
+Sie betreffen die Einordnung von Nutzungstypen im Organisationskontext sowie die Einordnung der Auswertung von KI-Coding-Tools.
+Sie kn\"upfen an die in Kapitel~2 eingef\"uhrten Konzepte an.
+
+\subsection{Einordnung im Organisationskontext}
+\label{sec:discussion_org_context}
+
+Im vorliegenden Setting war die Bereitstellung eines KI-Tools allein nicht hinreichend, um die in Kapitel~6 sichtbaren Unterschiede in Nutzungstypen zu nivellieren.
+Die Befunde sprechen daf\"ur, dass Kompetenz den Umgang mit Delegation, Kontrolle und Abgleich mitpr\"agt.
+In dieser Einordnung erscheinen organisatorische Einbettung und Qualifizierung als Kontextfaktoren f\"ur die beobachteten Prozessunterschiede.
+Im Fokus stehen dabei u.a. Kompetenzaufbau zu Abgleich, Integrationsdenken und Schnittstellenvertr\"agen sowie explizite Erwartungen an Review und Integrationsarbeit.
+
+\subsection{Einordnung der Auswertung von KI-Coding-Tools}
+\label{sec:discussion_evaluation}
+
+Kapitel~6 berichtet, dass einzelne Signale wie Ausf\"uhrungsausg\"ange, Linting oder Interaktionsintensit\"at isoliert schwer interpretierbar sind.
+Die Befunde zeigen, dass Interpretationen je nach gemeinsamer Betrachtung mehrerer Perspektiven variieren.
+Insbesondere ist die Unterscheidung zwischen Intention, Implementationsartefakt und \textit{Execution observed}-Ausweisen zentral.
+
+Ebenso ist der Kompetenzkontext f\"ur die Einordnung der Artefakte relevant, weil aggregierte Durchschnittseffekte Nutzungstypen \"uberdecken k\"onnen.
+
+\subsection{Abgrenzung zu Marketing-Narrativen}
+\label{sec:discussion_marketing_narratives}
+
+In der \"offentlichen Darstellung werden h\"aufig generische Produktivit\"atsgewinne hervorgehoben.
+Die in Kapitel~6 berichteten Muster legen dagegen eine differenzierte Einordnung entlang von Integrationsaufwand, Abgleichbarkeit und Kompetenzkontext nahe.
+Im Rahmen von Kapitel~2 l\"asst sich im vorliegenden Setting die in Kapitel~6 berichtete Nutzung von KI-Assistenzsystemen als Reduktion von Extraneous Load und damit als Beschleunigung einzelner Umsetzungsschritte einordnen.
+Gleichzeitig verschieben sich Anforderungen hin zu Review, semantischem Abgleich und methodengebundener Absicherung.
+Ohne diese Prozessanteile ist im Sinne von Kapitel~2 unkalibriertes Vertrauen plausibel, ohne dass dies kausal begr\"undet w\"are.
+Damit ist der Nutzen nicht als automatische Eigenschaft eines Tools zu verstehen, sondern als Ergebnis einer arbeitsorganisatorischen Einbettung, die Kompetenzlagen und Integrationskosten ber\"ucksichtigt.
+
+\section{Limitationen und Ausblick}
+\label{sec:discussion_limitations}
+
+Die Studie ist in ihrer Aussagekraft durch mehrere Faktoren begrenzt.
+Erstens ist die Stichprobengr\"o\ss e begrenzt, wodurch gruppenspezifische Effekte nur eingeschr\"ankt trennscharf beobachtbar sind.
+Zweitens setzt das strikte Zeitlimit den Fokus auf fr\"uhe Integrationsschritte und kann unvollst\"andige Stabilisierung beg\"unstigen.
+Drittens wurde GitHub Copilot als Assistenzumgebung in Kombination mit dem Modell Claude Sonnet~4.5 betrachtet, wodurch sich keine Aussagen zur Generalisierbarkeit \"uber andere KI-Assistenzsysteme oder Modelle ableiten lassen.
+Viertens liegt keine Langzeitbeobachtung vor, sodass Lern- und Adaptationseffekte \"uber Wochen oder Monate nicht erfasst werden.
+
+F\"unftens sind die Ergebnisse an den konkreten Erhebungszeitraum gebunden.
+\"Anderungen an Modellen oder Tools nach diesem Zeitraum sind in den vorliegenden Daten nicht abgebildet und wurden entsprechend nicht ber\"ucksichtigt.
+
+Kapitel~8 fasst die zentralen Erkenntnisse zusammen und leitet daraus die abschlie\ss enden Antworten auf die Forschungsfragen ab.
+
+\endinput
+\chapter{Diskussion}
+\label{chap:discussion}
+
+\section{Zentrale Erkenntnisse dieser Studie}
+\label{sec:discussion_core_findings}
+
+\begin{itemize}
 	\item \textbf{Bedingung: Brownfield \& Timebox (60 Minuten).} \textbf{Beobachtung:} Das Statusmuster ist konsistent: T1/T2 werden nahezu durchgängig adressiert und artefaktseitig umgesetzt, während testgebundene Bestätigung bei T4/T5 ausbleibt. \textbf{Konsequenz:} In diesem Setting wird beobachtet, dass frühe Implementationsschritte häufiger erreicht werden; Integrations- und Validierungsarbeit bleibt ein Engpass.
-	\item \textbf{Bedingung: Mehrere Evidenzebenen.} \textbf{Beobachtung:} Chat-Intention (\textit{Attempted}), Artefakt-Signale (\textit{Implemented\textsubscript{static}}) und Testsignale (\textit{Verified}) fallen empirisch auseinander (z.B. T3: \textit{Verified} kann größer als \textit{Implemented\textsubscript{static}} sein). \textbf{Konsequenz:} Die Befunde werden daher nicht über Einzelmetriken (Chat-Intensität, Lint, ein Testsignal) allein eingeordnet.
+	\item \textbf{Bedingung: Mehrere Evidenzebenen.} \textbf{Beobachtung:} Chat-Intention (\textit{Attempted}), Artefakt-Signale (\textit{Implemented\textsubscript{static}}) und Testsignale (\textit{Execution observed}) fallen empirisch auseinander (z.B. T3: \textit{Execution observed} kann größer als \textit{Implemented\textsubscript{static}} sein). \textbf{Konsequenz:} Die Befunde werden daher nicht über Einzelmetriken (Chat-Intensität, Lint, ein Testsignal) allein eingeordnet.
 	\item \textbf{Bedingung: Kompetenzgruppen als Analyseperspektiven.} \textbf{Beobachtung:} Kompetenzgruppen unterscheiden sich in der Verteilung von \textit{Implemented\textsubscript{static}}-Ausweisen (vgl. Tabelle~\ref{tab:triangulation_competence_vs_impl}); gleichzeitig liefern die Befunde keine Grundlage für eine einfache Rangordnung nach testgebundener Bestätigung. \textbf{Konsequenz:} Einführung und Governance sollten gruppenspezifische Risiken adressieren, ohne Kompetenz als Leistungsranking zu instrumentalisieren.
-	\item \textbf{Bedingung: Integrationsaufgaben (T3--T5).} \textbf{Beobachtung:} Bei steigender Kopplung (Schema\,$\rightarrow$\,API\,$\rightarrow$\,UI) sinken  \textit{Implemented}\,$^\ast$ und  \textit{Verified} deutlich. \textbf{Konsequenz:} Guardrails sollten auf Schnittstellenverträge, Tests und Review fokussieren, nicht auf bloße Codeproduktion.
+	\item \textbf{Bedingung: Integrationsaufgaben (T3--T5).} \textbf{Beobachtung:} Bei steigender Kopplung (Schema\,$\rightarrow$\,API\,$\rightarrow$\,UI) sinken  \textit{Implemented}\,$^\ast$ und  \textit{Execution observed} deutlich. \textbf{Konsequenz:} Guardrails sollten auf Schnittstellenverträge, Tests und Review fokussieren, nicht auf bloße Codeproduktion.
 	\item \textbf{Bedingung: Chat als Arbeitsoberfläche.} \textbf{Beobachtung:} Interaktionsintensität variiert stark und liefert in diesem Datensatz kein eindeutiges Effizienz- oder Qualitätssignal. \textbf{Konsequenz:} Prozessqualität sollte über überprüfbare Artefakte (Tests/CI, diff-basierte Reviews, Logging) abgesichert werden.
 \end{itemize}
 
@@ -45,22 +334,22 @@ Entsprechend werden Unterschiede als theoriegeleitete Einordnungen diskutiert, o
 \label{sec:discussion_rq_answers}
 
 \subsection*{RQ1: Kompetenz und Pipeline-Status}
-	\csname textbf\endcsname{Antwortsatz (gewichtet).} Unter den Bedingungen dieser Studie unterscheiden sich Kompetenzgruppen in den Verteilungen von  \textit{Implemented\textsubscript{static}} und  \textit{Implemented}\,$^\ast$; ein eindeutiger, gruppenstabiler Vorteil in  \textit{Verified} ergibt sich nicht.
-	\csname textbf\endcsname{Begründung (Befunde).} (1) In Kapitel~6 wird \textit{Implemented\textsubscript{static}} nach Kompetenzgruppen als Häufigkeitstabelle berichtet (Tabelle~\ref{tab:triangulation_competence_vs_impl}). Darin treten Branches mit vier als \texttt{implemented} markierten Tasks in Mid-Code häufiger auf als in High-Coder, während No-Code und Low-Code dazwischen liegen (vgl. Kapitel~6). (2) \textit{Verified} ist als testgebundene Stufe methodisch enger; Kapitel~6 berichtet hierfür vor allem taskbezogene Engpässe (vgl. Kapitel~6). (3) Eine gruppierte Auswertung von \textit{Verified} wird in Kapitel~6 nicht als eigene Tabelle berichtet; entsprechend wird hier kein gruppenstabiler Vorteil behauptet.
+	\csname textbf\endcsname{Antwortsatz (gewichtet).} Unter den Bedingungen dieser Studie unterscheiden sich Kompetenzgruppen in den Verteilungen von  \textit{Implemented\textsubscript{static}} und  \textit{Implemented}\,$^\ast$; ein eindeutiger, gruppenstabiler Vorteil in  \textit{Execution observed} ergibt sich nicht.
+	\csname textbf\endcsname{Begründung (Befunde).} (1) In Kapitel~6 wird \textit{Implemented\textsubscript{static}} nach Kompetenzgruppen als Häufigkeitstabelle berichtet (Tabelle~\ref{tab:triangulation_competence_vs_impl}). Darin treten Branches mit vier als \texttt{implemented} markierten Tasks in Mid-Code häufiger auf als in High-Coder, während No-Code und Low-Code dazwischen liegen (vgl. Kapitel~6). (2) \textit{Execution observed} ist als testgebundene Stufe methodisch enger; Kapitel~6 berichtet hierfür vor allem taskbezogene Engpässe (vgl. Kapitel~6). (3) Eine gruppierte Auswertung von \textit{Execution observed} wird in Kapitel~6 nicht als eigene Tabelle berichtet; entsprechend wird hier kein gruppenstabiler Vorteil behauptet.
 
 	\csname textbf\endcsname{Geltungsbereich / Limitation.} Die Aussage bezieht sich auf Branches als Analyseeinheiten, Timebox (60 Minuten) und die in Kapitel~6 dokumentierte Testmethodik. Sie ist deskriptiv; ein kausaler Einfluss von Kompetenz wird nicht beansprucht.
 
 \subsection*{RQ2: Rolle von Code- und Testartefakten}
 	\csname textbf\endcsname{Antwortsatz (gewichtet).} Code- und Testartefakte sind für die Ergebnisbewertung zentral, weil sie die Trennung zwischen sichtbaren Implementationsspuren und testgebundenem Verhalten operationalisieren und Chat-Signale methodisch korrigieren.
 
-	\csname textbf\endcsname{Begründung (Befunde).} (1)  \textit{Verified} ist testgebunden und kann unabhängig von heuristischen Artefaktsignalen ausfallen (vgl. Kapitel~6). (2) Für T4/T5 wird berichtet, dass  \textit{Attempted} und teils \textit{Implemented}\,$^\ast$ auftreten können, ohne dass testgebundene Bestätigung erreicht wird (vgl. Kapitel~6). (3) Technische Surrogate (Lint/\texttt{anyUsage}/Test-Summen) variieren innerhalb ähnlicher Pipeline-Stände und ersetzen keine Verhaltensbestätigung.
+	\csname textbf\endcsname{Begründung (Befunde).} (1)  \textit{Execution observed} ist testgebunden und kann unabhängig von heuristischen Artefaktsignalen ausfallen (vgl. Kapitel~6). (2) Für T4/T5 wird berichtet, dass  \textit{Attempted} und teils \textit{Implemented}\,$^\ast$ auftreten können, ohne dass testgebundene Bestätigung erreicht wird (vgl. Kapitel~6). (3) Technische Surrogate (Lint/\texttt{anyUsage}/Test-Summen) variieren innerhalb ähnlicher Pipeline-Stände und ersetzen keine Verhaltensbestätigung.
 
-	\csname textbf\endcsname{Geltungsbereich / Limitation.} \textit{Verified} bedeutet in dieser Studie „besteht die aktuellen Tests“; es ersetzt keine vollständige fachliche Abdeckung und ist testmethodisch gebunden.
+	\csname textbf\endcsname{Geltungsbereich / Limitation.} \textit{Execution observed} bedeutet in dieser Studie „besteht die aktuellen Tests“; es ersetzt keine vollständige fachliche Abdeckung und ist testmethodisch gebunden.
 
 \subsection*{RQ3: Chat-Interaktionsmuster}
 	\csname textbf\endcsname{Antwortsatz (gewichtet).} Chat-Muster sind als Prozesssignale relevant, liefern allein jedoch kein belastbares Ergebnismaß; ihre Aussagekraft entsteht erst in Kombination mit Pipeline-Status sowie Code- und Testartefakten.
 
-	\csname textbf\endcsname{Begründung (Befunde).} (1) Wortanzahl, Zyklenzahl und Nutzerbeiträge variieren stark (Kapitel~6.5), ohne dass daraus ein eindeutiges Muster für  \textit{Verified} folgt. (2) Debugging-Marker und Iterationssequenzen treten als wiederkehrendes Strukturmerkmal auf; sie beschreiben Interaktion, nicht Ergebnisqualität. (3) Chat-basierte \textit{Attempted}-Signale und testgebundene Bestätigung fallen nicht notwendigerweise zusammen (z.B. T3; vgl. Kapitel~6), was die Notwendigkeit der Triangulation unterstreicht.
+	\csname textbf\endcsname{Begründung (Befunde).} (1) Wortanzahl, Zyklenzahl und Nutzerbeiträge variieren stark (Kapitel~6.5), ohne dass daraus ein eindeutiges Muster für  \textit{Execution observed} folgt. (2) Debugging-Marker und Iterationssequenzen treten als wiederkehrendes Strukturmerkmal auf; sie beschreiben Interaktion, nicht Ergebnisqualität. (3) Chat-basierte \textit{Attempted}-Signale und testgebundene Bestätigung fallen nicht notwendigerweise zusammen (z.B. T3; vgl. Kapitel~6), was die Notwendigkeit der Triangulation unterstreicht.
 
 	\csname textbf\endcsname{Geltungsbereich / Limitation.} Die Chat-Metriken beruhen auf regelbasierten Extraktionen aus Exporten; sie erfassen keine IDE-Aktionen (Testläufe, Kontextbereitstellung) und damit nur einen Ausschnitt des Arbeitsprozesses.
 
@@ -81,7 +370,7 @@ Nicht jede Hypothese zielt in gleicher Weise auf alle Gruppen.
 
 	\csname textbf\endcsname{Stärkstes Pro-Argument.} In Kapitel~6 weist Mid-Code in der Häufigkeitstabelle zu \textit{Implemented\textsubscript{static}} mehr Branches mit hohem artefaktseitigem Fortschritt aus als High-Coder (vgl. Kapitel~6, Tabelle~\ref{tab:triangulation_competence_vs_impl}).
 
-	\csname textbf\endcsname{Stärkstes Contra-Argument.} Für \textit{Verified} wird in Kapitel~6 kein gruppierter Vergleich berichtet; gleichzeitig bleiben die testgebundenen Status bei T4/T5 in allen Branches aus (vgl. Kapitel~6). Ein klarer „Sweet Spot“ in Richtung testgebundener Bestätigung lässt sich damit nicht belegen.
+	\csname textbf\endcsname{Stärkstes Contra-Argument.} Für \textit{Execution observed} wird in Kapitel~6 kein gruppierter Vergleich berichtet; gleichzeitig bleiben die testgebundenen Status bei T4/T5 in allen Branches aus (vgl. Kapitel~6). Ein klarer „Sweet Spot“ in Richtung testgebundener Bestätigung lässt sich damit nicht belegen.
 
 	\csname textbf\endcsname{Finale Einordnung.} Die Befunde sprechen für einen Vorteil von Mid-Code in artefaktseitigem Fortschritt, stützen aber keinen eindeutigen Sweet-Spot-Vorteil in testgebundener Bestätigung.
 
@@ -92,7 +381,7 @@ Nicht jede Hypothese zielt in gleicher Weise auf alle Gruppen.
 
 	\csname textbf\endcsname{Stärkstes Pro-Argument.} In Kapitel~6 weist die Häufigkeitstabelle aus, dass Low-Code im Vergleich zu Mid-Code weniger Branches mit vier als \texttt{implemented} markierten Tasks aufweist und zugleich der einzige Branch mit nur einem \texttt{implemented}-Task in Low-Code liegt (vgl. Kapitel~6, Tabelle~\ref{tab:triangulation_competence_vs_impl}).
 
-	\csname textbf\endcsname{Stärkstes Contra-Argument.} Die Artefakte enthalten keine direkten Messungen von Validierungsroutinen (z.B. Testlauf-Sequenzen pro Person), und Kapitel~6 berichtet \textit{Verified} nicht gruppiert nach Kompetenz. Damit kann ein spezifisches gruppenbezogenes „Validierungsparadoxon“ nicht als Muster belegt werden.
+	\csname textbf\endcsname{Stärkstes Contra-Argument.} Die Artefakte enthalten keine direkten Messungen von Validierungsroutinen (z.B. Testlauf-Sequenzen pro Person), und Kapitel~6 berichtet \textit{Execution observed} nicht gruppiert nach Kompetenz. Damit kann ein spezifisches gruppenbezogenes „Validierungsparadoxon“ nicht als Muster belegt werden.
 
 	\csname textbf\endcsname{Finale Einordnung.} Die Daten stützen einen geringeren artefaktseitigen Fortschritt von No-/Low-Code gegenüber Mid-Code; ob dies durch ein spezifisches „Validierungsparadoxon“ (Overtrust/fehlende Kontrolle) getrieben ist, bleibt mit den vorliegenden Prozessdaten offen.
 
@@ -103,9 +392,9 @@ Nicht jede Hypothese zielt in gleicher Weise auf alle Gruppen.
 
 	\csname textbf\endcsname{Stärkstes Pro-Argument.} High-Coder weist in Kapitel~6 keine Branches mit vier als \texttt{implemented} markierten Tasks aus, während Mid-Code diese Kategorie erreicht (vgl. Kapitel~6, Tabelle~\ref{tab:triangulation_competence_vs_impl}). Dieser Befund stützt die Hypothese insofern, als ein stärker selektives Vorgehen mit geringerem als \texttt{implemented} erfasstem Artefaktfortschritt einhergehen kann.
 
-	\csname textbf\endcsname{Stärkstes Contra-Argument.} Ein „Qualitätsfokus“ im Sinne höherer testgebundener Bestätigung wird in Kapitel~6 nicht als gruppiertes \textit{Verified}-Muster berichtet. Die vorliegenden Artefakte erlauben daher keine direkte Beobachtung, ob High-Coder systematisch stärker validieren oder zuverlässiger \textit{Verified} erreichen.
+	\csname textbf\endcsname{Stärkstes Contra-Argument.} Ein „Qualitätsfokus“ im Sinne höherer testgebundener Bestätigung wird in Kapitel~6 nicht als gruppiertes \textit{Execution observed}-Muster berichtet. Die vorliegenden Artefakte erlauben daher keine direkte Beobachtung, ob High-Coder systematisch stärker validieren oder zuverlässiger \textit{Execution observed} erreichen.
 
-	\csname textbf\endcsname{Finale Einordnung.} Die Daten sprechen dafür, dass High-Coder weniger häufig heuristisch als „implementiert“ erfasst werden, ohne dass dies in  \textit{Verified} als Nachteil sichtbar wird; ein spezifischer Qualitätsfokus bleibt ohne prozessnahe Review-/Testdaten nicht direkt beobachtbar.
+	\csname textbf\endcsname{Finale Einordnung.} Die Daten sprechen dafür, dass High-Coder weniger häufig heuristisch als „implementiert“ erfasst werden, ohne dass dies in  \textit{Execution observed} als Nachteil sichtbar wird; ein spezifischer Qualitätsfokus bleibt ohne prozessnahe Review-/Testdaten nicht direkt beobachtbar.
 
 \section{Kompetenzabhängige Interaktionsmuster}
 \label{sec:discussion_competence_patterns}
@@ -159,14 +448,14 @@ Diese Einordnung bleibt vorsichtig, da Kapitel~6 keine direkte Messung von Revie
 \section{Interpretation der Pipeline-Muster}
 \label{sec:discussion_pipeline}
 
-Die Pipeline-Kategorien  \textit{Attempted},  \textit{Implemented\textsubscript{static}} und  \textit{Verified} strukturieren die Befunde in Kapitel~6 als drei Status-Ebenen; für eine konsistente Aggregation wird dort zusätzlich  \textit{Implemented$^\ast$} als abgeleitete Evidenzstufe verwendet.
+Die Pipeline-Kategorien  \textit{Attempted},  \textit{Implemented\textsubscript{static}} und  \textit{Execution observed} strukturieren die Befunde in Kapitel~6 als drei Status-Ebenen; für eine konsistente Aggregation wird dort zusätzlich  \textit{Implemented$^\ast$} als abgeleitete Evidenzstufe verwendet.
 Die folgenden Deutungen binden diese deskriptiven Status-Diskrepanzen explizit an die in Kapitel~2 eingeführten Konzepte (u.a. Cognitive Load, Automation Bias) zurück.
 Für die Diskussion ist entscheidend, dass diese Kategorien unterschiedliche Aspekte desselben Arbeitsprozesses repräsentieren.
-In der Notation gilt: $ \textit{Attempted} \neq  \textit{Implemented\textsubscript{static}} \neq  \textit{Verified}$.
+In der Notation gilt: $ \textit{Attempted} \neq  \textit{Implemented\textsubscript{static}} \neq  \textit{Execution observed}$.
 Attempted beschreibt Intention und Planbildung auf der Chat-Ebene.
 Implemented\textsubscript{static} beschreibt aufgabenspezifische Artefakte in der Codebasis (White-Box).
-Verified beschreibt testgebundenes, von außen beobachtbares Verhalten (Black-Box).
-Verified ist damit methodengebunden und als Integrationsindikator zu lesen, nicht als Leistungs- oder Qualitätsmaß.
+Execution observed beschreibt testgebundenes, von außen beobachtbares Verhalten (Black-Box).
+Execution observed ist damit methodengebunden und als Integrationsindikator zu lesen, nicht als Leistungs- oder Qualitätsmaß.
 Aus Kapitel~6 folgt, dass diese Ebenen nicht zwangsläufig zusammenfallen.
 
 \subsection{Attempted ist nicht gleich \texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic}}
@@ -180,16 +469,16 @@ Dieser Aufwand dürfte den Intrinsic Load erhöhen.
 Das KI-Assistenzsystem kann Extraneous Load senken, indem es Syntax und Boilerplate generiert.
 Es kann die semantische Konsistenzarbeit im Systemkontext jedoch nicht ersetzen.
 
-\subsection{\texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic} ist nicht gleich Verified}
+\subsection{\texorpdfstring{Implemented\textsubscript{static}}{Implementedstatic} ist nicht gleich Execution observed}
 \label{sec:discussion_implemented_vs_verified}
 
-Die Diskrepanz zwischen Implemented\textsubscript{static} und Verified ist nicht als Qualitätsurteil über einzelne Branches zu lesen.
-Kapitel~6 betont, dass Verified ein Diagnosesignal innerhalb der eingesetzten Testmethodik ist.
-Für konfigurationssensitive Aufgaben kann Verified stark von Details des Endpunktvertrags und der Testannahmen abhängen.
-Ein fehlendes Verified-Signal kann daher bedeuten, dass eine Lösung heterogen, nur teilweise integriert oder nicht exakt testkonform ist.
+Die Diskrepanz zwischen Implemented\textsubscript{static} und Execution observed ist nicht als Qualitätsurteil über einzelne Branches zu lesen.
+Kapitel~6 betont, dass Execution observed ein Diagnosesignal innerhalb der eingesetzten Testmethodik ist.
+Für konfigurationssensitive Aufgaben kann Execution observed stark von Details des Endpunktvertrags und der Testannahmen abhängen.
+Ein fehlendes Execution observed-Signal kann daher bedeuten, dass eine Lösung heterogen, nur teilweise integriert oder nicht exakt testkonform ist.
 Es kann auch bedeuten, dass die Tests eine bestimmte Implementationsform voraussetzen, die nicht mit allen plausiblen Lösungen kompatibel ist.
 
-\subsection{Zur Einordnung von \texorpdfstring{Verified$=0$}{Verified=0}}
+\subsection{Zur Einordnung von \texorpdfstring{Execution observed (0 Vorkommen)}{Execution observed (0 Vorkommen)}}
 \label{sec:discussion_verified_zero}
 
 Kapitel~6 berichtet für bestimmte Integrationsaufgaben, dass testbasierte Bestätigung ausbleibt.
@@ -197,8 +486,8 @@ Im Kontext dieser Studie ist das als erwartbares Ergebnis eines strikten Zeitlim
 Gerade in einer Brownfield-Umgebung dürfte der Aufwand durch bestehende Konventionen, vorhandene Datenmodelle und implizite Vertragsannahmen steigen.
 Dies kann mit erhöhter kognitiver Belastung und Debugging-Aufwand einhergehen.
 Unter Automation Bias Perspektive ist zudem plausibel, dass scheinbar fertige Artefakte in einzelnen Fällen zu früh als ausreichend akzeptiert werden.
-Die Abwesenheit von Verified wird in dieser Arbeit daher nicht als Synonym für fehlendes Verständnis interpretiert, sondern kann als Signal für Integrationskosten und Validierungsengpässe gelesen werden.
-Verified$=0$ wird damit als test- und settinggebundenes Ergebnis unter Zeitlimit und Brownfield-Integrationskomplexität diskutiert.
+Die Abwesenheit von Execution observed wird in dieser Arbeit daher nicht als Synonym für fehlendes Verständnis interpretiert, sondern kann als Signal für Integrationskosten und Validierungsengpässe gelesen werden.
+Execution observed (0 Vorkommen) wird damit als test- und settinggebundenes Ergebnis unter Zeitlimit und Brownfield-Integrationskomplexität diskutiert.
 
 \section{Einordnung der Chat-Interaktionsmuster}
 \label{sec:discussion_chat}

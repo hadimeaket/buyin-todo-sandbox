@@ -1,17 +1,17 @@
-\chapter{Technische Realisierung der Testumgebung}
+\chapter{Technische Realisierung der Sandbox-Umgebung}
 \label{chap:implementierung}
 
-Dieses Kapitel dokumentiert die technische Implementierung der \emph{BuyIn Todo Sandbox}, die als experimentelle Plattform für diese Studie dient. Es erläutert, wie die Brownfield-Umgebung architektonisch aufgebaut ist, um realistische Unternehmensanforderungen zu simulieren. Zudem wird beschrieben, welche technischen Maßnahmen ergriffen wurden, um eine reproduzierbare Datenerhebung zu gewährleisten.
+Dieses Kapitel dokumentiert die technische Implementierung der BuyIn Todo Sandbox,~die\linebreak als Plattform für das standardisierte Laborsetting dieser Studie dient. Es erläutert, wie die Brownfield-Umgebung architektonisch aufgebaut ist, um realistische Anforderungen zu simulieren. Zudem wird beschrieben, welche technischen Maßnahmen ergriffen wurden, um eine reproduzierbare Datenerhebung zu gewährleisten.
 
 \section{Anforderungen an die Sandbox}
 
-Um valide Aussagen über Vibe-Coding in Unternehmenskontexten treffen zu können, musste die Testumgebung folgende Anforderungen erfüllen:
+Für nachvollziehbare Aussagen über Vibe-Coding in diesem Kontext wird die SandboxUmgebung entlang der folgenden Anforderungen beschrieben:
 
 \begin{enumerate}
-    \item  \textbf{Realismus (Brownfield):} Die Codebasis darf nicht leer sein (\enquote{Greenfield}), sondern soll bestehende Strukturen, technische Schulden und Konventionen enthalten, die das KI-Assistenzsystem und der Mensch verstehen sollen.
-    \item  \textbf{Komplexität:} Der Tech-Stack soll modern, aber komplex genug sein, um triviale Lösungen zu verhindern.
-    \item  \textbf{Isolierbarkeit:} Die Umgebung soll für jeden Teilnehmenden identisch zurückgesetzt werden können (Containerisierung).
-    \item  \textbf{Messbarkeit:} Das System soll automatisierte Tests bereitstellen, um den funktionalen Fortschritt standardisiert zu erfassen.
+    \item  \textbf{Realismus (Brownfield):} Die Codebasis ist nicht leer (\enquote{Greenfield}), sondern enthält bestehende Strukturen, technische Schulden und Konventionen, die im Arbeitsprozess zu berücksichtigen sind.
+    \item  \textbf{Komplexität:} Der Tech-Stack ist modern und hinreichend komplex, um triviale Lösungen zu vermeiden.
+    \item  \textbf{Isolierbarkeit:} Die Umgebung kann für jeden Teilnehmenden identisch zurückgesetzt werden (Containerisierung).
+    \item  \textbf{Messbarkeit:} Das System stellt automatisierte Ausführungsläufe bereit, um den funktionalen Fortschritt standardisiert zu erfassen.
 \end{enumerate}
 
 \section{Architektur und Tech-Stack: Kognitive Dimensionen}
@@ -22,15 +22,15 @@ Die Sandbox ist als klassische Full-Stack-Webanwendung konzipiert. Die Architekt
 Das Backend basiert auf Node.js mit dem Express-Framework und folgt einer strikten Schichtenarchitektur:
 \begin{itemize}
     \item  \textbf{Routes:} Definition der API-Endpunkte.
-    \item  \textbf{Controllers:} Verarbeitung der HTTP-Requests und Validierung.
+    \item  \textbf{Controllers:} Verarbeitung der HTTP-Requests und Eingabeprüfung.
     \item  \textbf{Services:} Kapselung der Geschäftslogik.
     \item  \textbf{Repositories:} Datenzugriffsschicht.
 \end{itemize}
-    \csname textbf\endcsname{Kognitive Dimension - Viscosity (Zähigkeit):} Diese Trennung erhöht die \emph{Viscosity} für Novizen, da Änderungen häufig an mehreren Stellen (Datei-Hopping) vorgenommen werden. Für Copilot hingegen ist diese Struktur vorteilhaft. Sie zieht klare semantische Grenzen, die das KI-Assistenzsystem über Dateinamen und Pfadkontext nutzen kann.
+    \csname textbf\endcsname{Kognitive Dimension - Viscosity (Zähigkeit):} Diese Trennung erhöht die \emph{Viscosity} für Novizen, da Änderungen häufig an mehreren Stellen (Datei-Hopping) vorgenommen werden. Für die Assistenzinteraktion ist die Struktur zugleich klar segmentiert: Dateinamen und Pfade bilden Kontexthinweise, die in Prompts referenziert werden können.
 
 \subsection{Frontend: React \& Vite}
 Das Frontend nutzt React mit TypeScript. Die Komponenten sind funktional aufgebaut und nutzen Hooks.
-    \csname textbf\endcsname{Kognitive Dimension - Hidden Dependencies:} Die Verwendung von \emph{Custom Hooks} und \emph{Context API} erzeugt \emph{Hidden Dependencies}. Low-Code-Teilnehmende sehen im UI-Code nicht sofort, woher die Daten kommen. Dies testet die Fähigkeit des KI-Assistenzsystems, diese Abhängigkeiten aufzulösen, sowie die Fähigkeit des Nutzers, dem KI-Assistenzsystem den passenden Kontext zu geben.
+    \csname textbf\endcsname{Kognitive Dimension - Hidden Dependencies:} Die Verwendung von \emph{Custom Hooks} und \emph{Context API} erzeugt \emph{Hidden Dependencies}. Low-Code-Teilnehmende sehen im UI-Code nicht sofort, woher die Daten kommen. Damit wird im Setting relevant, wie Abhängigkeiten im Projektkontext identifiziert und wie in der Assistenzinteraktion geeigneter Kontext bereitgestellt wird.
 
 \section{Technische Funktionsweise von Copilot in der Sandbox}
 
@@ -43,7 +43,7 @@ Copilot sendet nicht nur den Code vor dem Cursor an das Modell. Der \emph{Copilo
     \item  \textbf{Semantic Search:} Vektorisierte Suche im Projekt (bei neueren Versionen).
 \end{itemize}
 \begin{sloppypar}
-In der Sandbox sind die Aufgaben so gestaltet, dass die Lösung oft in einer \emph{anderen} Datei liegt (z.B. ist der Controller anzupassen, um den Service zu nutzen). Wenn der Nutzer diese Datei nicht öffnet, fehlt dem KI-Assistenzsystem der Kontext. Dadurch wird indirekt abgebildet, in welchem Maß Nutzende relevanten Kontext bereitstellen.
+In der Sandbox sind die Aufgaben so gestaltet, dass die Lösung oft in einer \emph{anderen} Datei liegt (z.B. ist der Controller anzupassen, um den Service zu nutzen). Wenn der Nutzer diese Datei nicht öffnet, ist der relevante Kontext in der Assistenzinteraktion typischerweise nicht verfügbar. Dadurch wird indirekt abgebildet, in welchem Maß Nutzende relevanten Kontext bereitstellen.
 \end{sloppypar}
 
 \subsection{Token Prediction und Ranking}
@@ -71,31 +71,31 @@ Die Aufgaben sind so gestaffelt, dass sie die kognitive Last sukzessive erhöhen
     8 & ICS-Export & Standard-Format, reines Mapping (Erholung). \\ \hline
     \end{tabular}
     \endgroup
-    \caption{Aufgaben-Design und kognitive Anforderungen}
+    \caption{Aufgaben-Design und kognitive Anforderungen (Abk.: JSON = JavaScript Object Notation; UI = User Interface; ICS = iCalendar).}
     \label{tab:task-design}
 \end{table}
 
-\section{Automatisierung der Evaluation}
+\section{Automatisierung der Auswertung}
 
-Um die Auswertung der Ergebnisse zu standardisieren, wurde ein Evaluations-Framework entwickelt.
+Um die Auswertung der Ergebnisse zu standardisieren, wurde ein Auswertungs-Framework entwickelt.
 
 \subsection{Das Analyse-Skript (\texttt{run.js})}
-Ein Node.js-Skript automatisiert die Prüfung der Lösungen. Es führt folgende Schritte aus:
+Ein Node.js-Skript automatisiert die Auswertung der Lösungen. Es führt folgende Schritte aus:
 \begin{enumerate}
-    \item  \textbf{Test-Execution:} Ausführung der Unit-Tests (Vitest) und End-to-End-Tests (Playwright).
-    \item  \textbf{Linting:} Prüfung auf Code-Style-Verletzungen mittels ESLint.
+    \item  \textbf{Ausführung:} Ausführung der Unit- und End-to-End-Läufe (Vitest, Playwright).
+    \item  \textbf{Linting:} Analyse von Code-Style-Verletzungen mittels ESLint.
     \item  \textbf{Report-Generierung:} Zusammenfassung der Ergebnisse in einer JSON-Datei.
 \end{enumerate}
 
 \subsection{Grenzen der LLM-gestützten Code-Analyse}
-Zusätzlich zur rein funktionalen Prüfung wird ein LLM-Prompt-Template verwendet, um qualitative Aspekte des Codes zu bewerten. Hierbei ist kritisch anzumerken, dass LLMs zu \emph{Halluzinationen} neigen können: Sie finden Fehler, die nicht existieren, oder übersehen echte Probleme. Der Score dient daher nur als Indikator und wird stichprobenartig manuell validiert.
+Zusätzlich zur rein funktionalen Auswertung wird ein LLM-Prompt-Template verwendet, um qualitative Aspekte des Codes einzuordnen. Dabei ist kritisch anzumerken, dass in der Literatur Halluzinationen beschrieben werden: Es werden Befunde berichtet, bei denen Fehler benannt werden, die nicht existieren, oder echte Probleme unentdeckt bleiben. Der Score dient daher nur als Indikator und wird stichprobenartig manuell nachgesehen.
 
 
 \section{Relevanz für den Unternehmenskontext (BuyIn)}
 
 Die gewählte Architektur und Methodik spiegelt reale Herausforderungen bei BuyIn wider:
 \begin{itemize}
-    \item  \textbf{Legacy-Integration:} Wie bei BuyIn arbeiten Entwickler häufig in gewachsenen Strukturen, die nicht perfekt dokumentiert sind. Vibe-Coding kann hier unterstützen, den „impliziten Kontext“ schneller zu erschließen.
+    \item  \textbf{Legacy-Integration:} Wie bei BuyIn arbeiten Entwickler häufig in gewachsenen Strukturen, die nicht perfekt dokumentiert sind. Vibe-Coding wird hier als Arbeitsmodus beschrieben, in dem „impliziter Kontext“ über iteratives Nachfragen, Zusammenfassen und Abgleichen erschlossen wird.
     \item  \textbf{Security \& Compliance:} Der Einsatz von Copilot in Enterprise-Umgebungen birgt Risiken (Datenabfluss, Lizenzverletzungen). Die Sandbox simuliert dies durch Aufgaben, bei denen sensible Daten (User-Accounts) behandelt werden.
     \item  \textbf{Skalierbarkeit:} Die modulare Struktur der Sandbox bildet einen Kontext, um den Einsatz von Copilot in stärker modularisierten Codebasen (z.B. größere Teams) im Kontrast zu kleinen Skript-Projekten einzuordnen.
 \end{itemize}
@@ -105,12 +105,12 @@ Die gewählte Architektur und Methodik spiegelt reale Herausforderungen bei BuyI
 Die gesamte Umgebung ist mittels Docker containerisiert. Dies stellt sicher, dass alle Teilnehmenden -- unabhängig von ihrem Betriebssystem -- unter identischen Bedingungen arbeiten und technische Störfaktoren (z.B. unterschiedliche Node-Versionen) reduziert werden.
 
 \subsection{Reproduzierbarkeit / Artefaktzugang}
-Die in dieser Arbeit berichteten quantitativen Ergebnisse (Tests, Linting und daraus abgeleitete Scores) sind aus dem Repository heraus nachvollziehbar reproduzierbar. Neben der containerisierten Sandbox liegen die zentralen Auswerteskripte sowie die genutzten Rohdaten (Chat- und Survey-Exporte) versioniert vor.
+Die in dieser Arbeit berichteten quantitativen Ergebnisse (Ausführungsläufe, Linting und daraus abgeleitete Scores) sind aus dem Repository heraus nachvollziehbar reproduzierbar. Neben der containerisierten Sandbox liegen die zentralen Auswerteskripte sowie die genutzten Rohdaten (Chat- und Survey-Exporte) versioniert vor.
 
 \paragraph{Ablage der relevanten Artefakte.}
 \begin{itemize}
-    \item \path{backend/}, \path{frontend/}: Anwendungscode inkl. Tests und ESLint-Konfiguration.
-    \item \path{evaluation/}: Ausführbare Evaluationsskripte und erzeugte Ergebnisdateien (z.B. \path{result.json}, \path{result.md}).
+    \item \path{backend/}, \path{frontend/}: Anwendungscode inkl. automatisierten Läufen und ESLintKonfiguration.
+    \item \path{evaluation/}: Ausführbare Auswerteskripte und erzeugte Ergebnisdateien (z.B. \path{result.json}, \path{result.md}).
     \item \path{thesis/chats/}: exportierte Chatverläufe mit dem KI-Assistenzsystem (\path{.docx}).
     \item \path{thesis/surveys/}: Survey-Export zur Kompetenz-Operationalisierung (\path{.xlsx}).
 \end{itemize}
@@ -120,7 +120,7 @@ Die in dieser Arbeit berichteten quantitativen Ergebnisse (Tests, Linting und da
 \begin{enumerate}
     \item Abhängigkeiten installieren: \texttt{npm ci --prefix backend}
     \item Abhängigkeiten installieren: \texttt{npm ci --prefix frontend}
-    \item Evaluation ausführen: \texttt{node} \path{evaluation/run.js}
+    \item Auswertung ausführen: \texttt{node} \path{evaluation/run.js}
     \item Ergebnisse einsehen: \path{evaluation/result.json}, \path{evaluation/result.md}.
     Zusätzlich (Detailartefakte):
     \begin{itemize}
@@ -140,7 +140,7 @@ Die Klassifikation basiert auf drei Evidenzstufen:
 \begin{itemize}
     \item \enquote{Attempted} aus Chat-Signalen
     \item \enquote{Implemented\textsubscript{static}} aus Code-Heuristiken
-    \item \enquote{Verified} durch Testausführung
+    \item \enquote{Execution observed} durch Integrationsläufe
 \end{itemize}
 Das Skript erzeugt u.a. \path{evaluation/task_pipeline_v3.json} und \path{evaluation/task_pipeline_v3.csv}.
 Die Survey-Zuordnung zu Branches liegt als erzeugtes Artefakt vor (\path{evaluation/survey_mapping.json}); die Neugenerierung via \texttt{node} \path{evaluation/map_survey.js} ist möglich.
@@ -160,10 +160,10 @@ Sie kann jedoch ggf. eine Anpassung der im Skript hinterlegten Dateipfade erford
     \path{backend/test-results.json} & Backend-Testergebnisse (Jest) als JSON-Report & \path{run.js} \\ \hline
     \path{frontend/test-results.json} & Frontend-Testergebnisse (Vitest) als JSON-Report & \path{run.js} \\ \hline
     \path{frontend/playwright-report.json} & E2E-Testergebnisse (Playwright) als JSON-Report & \path{run.js} \\ \hline
-    \path{evaluation/task_pipeline_v3.json} & Pipeline-Klassifikation je Branch (Attempted, Implemented und Verified) & \path{run_pipeline_v3.js} \\ \hline
+    \path{evaluation/task_pipeline_v3.json} & Pipeline-Klassifikation je Branch (Attempted, Implemented und Execution observed) & \path{run_pipeline_v3.js} \\ \hline
     \path{evaluation/survey_mapping.json} & Zuordnung: Branch -- Teilnehmende Person -- Kompetenzgruppe & \path{map_survey.js} \\ \hline
     \end{tabular}
     \endgroup
-    \caption{Zentrale Artefakte und ihre Erzeugung im Repository}
+    \caption{Zentrale Auswertungsartefakte (Dateipfade, Zweck und Erzeugung) im Repository; JSON-Reports sind maschinenlesbare Ergebnisartefakte, E2E steht f\"ur End-to-End-Tests.}
     \label{tab:artefakte-reproduzierbarkeit}
 \end{table}

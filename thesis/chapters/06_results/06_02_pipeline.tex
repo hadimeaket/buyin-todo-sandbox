@@ -1,34 +1,42 @@
 \section{Task-Pipeline-Analyse}
 \label{sec:results_pipeline}
 
-In diesem Abschnitt wird der Fortschritt der Probanden entlang der Aufgaben-Pipeline (T1--T5) dargestellt. Berichtete werden Häufigkeiten für Intention (Chat), Umsetzung (Code-Artefakte) und testbasierte Bestätigung (Integrationstests).
+In diesem Abschnitt wird der Fortschritt der Probanden entlang der Aufgaben-Pipeline (T1--T5) dargestellt. Berichtete werden Häufigkeiten für Intention (Chat), Umsetzung (Code-Artefakte) und den Statusausweis \textit{Execution observed} (Integrationsläufe).
 
 \subsection{Methodische Definitionen}
 Für die Auswertung werden drei Statuskategorien verwendet:
 \begin{itemize}
     \item  \textbf{Attempted (Versucht):} Ein Task gilt als  \textit{Attempted}, wenn er im Chat-Verlauf explizit als Ziel, Anforderung oder nächster Arbeitsschritt formuliert wurde. Die bloße Existenz von Dateien ohne entsprechenden Kontext im Chat genügt nicht.
     \item  \textbf{Implemented\textsubscript{static} (Umgesetzt, Artefakt/Heuristik):}\\
-    Ein Task gilt als  \textit{Implemented\textsubscript{static}}, wenn er in den Auswertungsartefakten als implementiert markiert ist (heuristische, statische Indikatoren; z.\,B.\ Feld \texttt{implemented} in \path{evaluation/task_pipeline_v3.json}\\
-    bzw.\ Implementationsklassen in \path{evaluation/deep_code_analysis.json}).
-    \item  \textbf{Verified (Testbasiert bestätigt):} Ein Task gilt als  \textit{Verified}, wenn die zugehörigen automatisierten Integrationstests erfolgreich durchlaufen wurden (Feld \texttt{verified} in \path{evaluation/task_pipeline_v3.json}).
+    Ein Task gilt als  \textit{Implemented\textsubscript{static}}, wenn er in den Auswertungsartefakten als implementiert markiert ist (heuristische, statische Indikatoren; z.\,B.\ Feld \texttt{implemented}\\
+    in \path{evaluation/task_pipeline_v3.json}\\
+    bzw.\ Implementationsklassen in \mbox{\path{evaluation/deep_code_analysis.json}}).
+    \item  \textbf{Execution observed (Statusausweis):} Ein Task gilt als  \textit{Execution observed}, wenn die zugehörigen automatisierten Integrationsläufe erfolgreich durchlaufen wurden (Feld \texttt{verified} in \path{evaluation/task_pipeline_v3.json}).
 \end{itemize}
 
-\noindent \textbf{Abgeleitete Evidenzstufe.} In Kapitel~6 wird eine abgeleitete Evidenzstufe  \textit{Implemented$^\ast$} verwendet:
+\noindent \textbf{Abgeleitete Evidenzstufe.} In Kapitel~6 wird eine abgeleitete Evidenzstufe\\
+\BeginAccSupp{unicode,method=pdfstringdef,ActualText={extitImplemented* verwendet:}}
+\csname textit\endcsname{Implemented$^\ast$} verwendet:
+\EndAccSupp{}
 \[
 \begin{aligned}
-    \csname textit\endcsname{Implemented$^\ast$} &:=  \textit{Attempted} \wedge (\textit{Implemented\textsubscript{static}} \vee  \textit{Verified}).
+    \csname textit\endcsname{Implemented$^\ast$} &:=  \textit{Attempted} \wedge (\textit{Implemented\textsubscript{static}} \vee  \textit{Execution observed}).
 \end{aligned}
 \]
-Damit gilt per Konstruktion:  \textit{Verified} $\subseteq$  \textit{Implemented$^\ast$}.  \textit{Verified} ist jedoch nicht notwendigerweise ein Subset von  \textit{Implemented\textsubscript{static}}:  \textit{Implemented\textsubscript{static}} basiert auf heuristischen, strukturellen Erkennungsregeln und kann funktionsfähige Implementationen übersehen (z.\,B. abweichende Benennungen, alternative Architekturpfade oder Implementationen außerhalb der erwarteten Muster).  \textit{Verified} ist ein testgebundenes Diagnose-Signal;  \textit{Implemented\textsubscript{static}} ist ein Artefakt-Signal.
+Damit gilt per Konstruktion:  \textit{Execution observed} $\subseteq$  \textit{Implemented$^\ast$}.  \textit{Execution observed} ist jedoch nicht notwendigerweise ein Subset von  \textit{Implemented\textsubscript{static}}:  \textit{Implemented\textsubscript{static}} basiert auf heuristischen, strukturellen Erkennungsregeln; unter den gegebenen Rahmenbedingungen ist es möglich, dass funktionsfähige Implementationen nicht als  \textit{Implemented\textsubscript{static}} erkannt werden (z.\,B. abweichende Benennungen, alternative Architekturpfade oder Implementationen außerhalb der erwarteten Muster).  \textit{Execution observed} ist ein methodengebundenes Diagnose-Signal;  \textit{Implemented\textsubscript{static}} ist ein Artefakt-Signal.
 
-\noindent \textbf{Hinweis zur Testmethodik.} Für die Pipeline-Auswertung wurden die Tests (insbesondere T2, sowie in Teilen T3--T5) als API-Integrationstests (\textit{Supertest} gegen Express) gestaltet. \textit{Verified} bedeutet in dieser Studie explizit: „besteht die aktuellen Tests“ \textendash{} nicht „fachlich vollständig korrekt gelöst“.
+\noindent \textbf{Hinweis zur Ausführungsmethodik.} Für die Pipeline-Auswertung wurden die automatisierten Integrationsläufe (insbesondere T2, sowie in Teilen T3--T5) als API-Integrationsläufe (\textit{Supertest} gegen Express) gestaltet. \textit{Execution observed} bedeutet in dieser Studie explizit: „durchläuft die aktuellen Integrationsläufe“ \textendash{} nicht „fachlich vollständig korrekt gelöst“.
 
 \subsection{Pipeline-Ergebnisse (T1--T5)}
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|c|c|c|}
+\begingroup
+\newcommand{\NoExtract}[1]{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}
+\newcommand{\ExtractOnly}[1]{\smash{\rlap{\BeginAccSupp{unicode,method=pdfstringdef,ActualText={#1}}\textcolor{white}{.}\EndAccSupp{}}}}
+\def\TaskPipelineTableActualText{Task^^JAttempted (𝑛) Implemented* (𝑛) Execution observed (𝑛)^^JT1: Persistenz^^J18 (100\%)^^J17 (94\%)^^J10 (56\%)^^JT2: Auth^^J18 (100\%)^^J17 (94\%)^^J4 (22\%)^^JT3: Kategorien^^J15 (83\%)^^J13 (72\%)^^J13 (72\%)^^JT4: Attachments^^J13 (72\%)^^J8 (44\%)^^J0 (0\%)^^JT5: Kalender^^J13 (72\%)^^J0 (0\%)^^J0 (0\%)^^J^^JTabelle 6.2: Task-Pipeline: Von der Intention zur testgebundenen Bestätigung (𝑁 = 18,^^J𝑛 = Anzahl Branches).^^JextitAttempted stammt aus Chat-Signalen. Implemented* ist definiert als: Attempted und^^J(Implementedstatic oder Execution observed). Execution observed stammt aus V3-Integrationsläufen^^J(V3 bezeichnet die für diese Studie definierte Integrationslauf-Konfiguration).}
+\NoExtract{\begin{tabular}{|l|c|c|c|}
 \hline
-    \csname textbf\endcsname{Task} &  \textbf{Attempted ($n$)} &  \textbf{Implemented$^\ast$ ($n$)} &  \textbf{Verified ($n$)} \\
+    \csname textbf\endcsname{Task} &  \textbf{Attempted ($n$)} &  \textbf{Implemented$^\ast$ ($n$)} &  \textbf{Execution observed ($n$)} \\
 \hline
 T1: Persistenz & 18 (100\%) & 17 (94\%) & 10 (56\%) \\
 T2: Auth & 18 (100\%) & 17 (94\%) & 4 (22\%) \\
@@ -36,14 +44,16 @@ T3: Kategorien & 15 (83\%) & 13 (72\%) & 13 (72\%) \\
 T4: Attachments & 13 (72\%) & 8 (44\%) & 0 (0\%) \\
 T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
 \hline
-\end{tabular}
-\caption{Task-Pipeline: Von der Intention zur testgebundenen Bestätigung ($N=18$).  \textit{Attempted} stammt aus Chat-Signalen;  \textit{Implemented$^\ast$} ist definiert als  \textit{Attempted} $\wedge$ (\textit{Implemented\textsubscript{static}} $\vee$  \textit{Verified});  \textit{Verified} stammt aus V3-Integrationstests.}
+\end{tabular}}
+\ExtractOnly{\TaskPipelineTableActualText}
+\NoExtract{\caption{Task-Pipeline: Von der Intention zur testgebundenen Bestätigung ($N = 18$, $n$ = Anzahl Branches). \textit{Attempted} stammt aus Chat-Signalen. \textit{Implemented$^\ast$} ist definiert als: \textit{Attempted} und (\textit{Implemented\textsubscript{static}} oder \textit{Execution observed}). \textit{Execution observed} stammt aus V3-Integrationsläufen (V3 bezeichnet die für diese Studie definierte Integrationslauf-Konfiguration).}}
 \label{tab:task_pipeline_v2}
+\endgroup
 \end{table}
 
-\noindent \textbf{Messung.} Berichtete werden je Task (T1--T5) die Häufigkeiten der Pipeline-Status \textit{Attempted} (Chat-Signal), \textit{Implemented$^\ast$} (kombinierte Evidenzstufe) und \textit{Verified} (testgebundenes Signal) über $N=18$ Branches.
-\noindent \textbf{Hauptbefund.} Für T1/T2 liegt \textit{Attempted} jeweils in 18/18 Branches vor, während \textit{Verified} für T4/T5 in 0/18 Branches erreicht wird.
-\noindent \textbf{RQ-Bezug.} Die Statushäufigkeiten bilden die deskriptive Ergebnisbasis für RQ1 und werden in Kapitel~7 für Hypothesenbewertung und Pipeline-Diskussion verwendet.
+\noindent \textbf{Messung.} Berichtete werden je Task (T1--T5) die Häufigkeiten der Pipeline-Status \textit{Attempted} (Chat-Signal), \textit{Implemented$^\ast$} (kombinierte Evidenzstufe) und \textit{Execution observed} (methodengebundenes Signal) über $N=18$ Branches.
+\noindent \textbf{Hauptbefund.} Für T1/T2 liegt \textit{Attempted} jeweils in 18/18 Branches vor, während \textit{Execution observed} für T4/T5 in 0/18 Branches erreicht wird.
+\noindent \textbf{RQ-Bezug.} Die Statushäufigkeiten bilden die deskriptive Ergebnisbasis für RQ1 und werden in Kapitel~7 für die Einordnung der Befunde und die Pipeline-Diskussion verwendet.
 
 \begin{figure}[ht]
 \centering
@@ -97,7 +107,7 @@ T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
     \addplot[fill=black!55, draw=black, line width=0.35pt, bar width=7pt, bar shift=0pt]
     coordinates {(17,T1: Persistenz) [17] (17,T2: Auth) [17] (13,T3: Kategorien) [13] (8,T4: Attachments) [8] (0,T5: Kalender) [{}]};
 
-    % Verified (dunkelgrau/schwarz; zusätzlich Schraffur)
+    % Execution observed (dunkelgrau/schwarz; zusätzlich Schraffur)
     \addplot[fill=black!85, draw=black, line width=0.4pt, pattern=north east lines, pattern color=black, bar shift=-9pt]
     coordinates {(10,T1: Persistenz) [10] (4,T2: Auth) [4] (13,T3: Kategorien) [13] (0,T4: Attachments) [{}] (0,T5: Kalender) [{}]};
 
@@ -107,36 +117,36 @@ T5: Kalender & 13 (72\%) & 0 (0\%) & 0 (0\%) \\
     \addplot[only marks, mark=x, mark size=3.0pt, draw=black, mark layer=foreground, forget plot, bar shift=-9pt]
     coordinates {(0,T4: Attachments) (0,T5: Kalender)};
 
-    \legend{Attempted, Implemented$^\ast$, Verified}
+    \legend{Attempted, Implemented$^\ast$, Execution observed}
 \end{axis}
 \end{tikzpicture}
 }%
-\caption{Pipeline-Ergebnisse für T1--T5 ($N=18$) als gruppierte Balken:  \textit{Attempted} (Chat-Signal),  \textit{Implemented$^\ast$} (definiert als  \textit{Attempted} $\wedge$ (\textit{Implemented\textsubscript{static}} $\vee$  \textit{Verified})) und  \textit{Verified} (testgebunden: bestandene V3-Integrationstests). Die Werte entsprechen Tabelle~\ref{tab:task_pipeline_v2}.}
+\caption{Pipeline-Ergebnisse für T1--T5 ($N=18$) als gruppierte Balken:  \textit{Attempted} (Chat-Signal),  \textit{Implemented$^\ast$} (definiert als:  \textit{Attempted} und (\textit{Implemented\textsubscript{static}} oder \textit{Execution observed})) und  \textit{Execution observed} (testgebunden: bestandene V3-Integrationsläufe). V3 bezeichnet die für diese Studie definierte Integrationslauf-Konfiguration; die Werte entsprechen Tabelle~\ref{tab:task_pipeline_v2}.}
 \label{fig:task_pipeline_funnel_t1_t5}
 \end{figure}
 
-\noindent \textbf{Messung.} Visualisiert werden die in Tabelle~\ref{tab:task_pipeline_v2} berichteten Statushäufigkeiten (\textit{Attempted}, \textit{Implemented$^\ast$}, \textit{Verified}) als Balken pro Task.
-\noindent \textbf{Hauptbefund.} Über T1--T5 liegen \textit{Implemented$^\ast$} und \textit{Verified} unter \textit{Attempted} und erreichen bei T4/T5 den Wert 0.
-\noindent \textbf{RQ-Bezug.} Die Abbildung ist eine komprimierte Darstellung der Pipeline-Ergebnisse und unterstützt die Ergebniszusammenfassung zu RQ1 in Kapitel~7.
+\noindent \textbf{Messung.} Visualisiert werden die in Tabelle~\ref{tab:task_pipeline_v2} berichteten Statushäufigkeiten (\textit{Attempted}, \textit{Implemented$^\ast$}, \textit{Execution observed}) als Balken pro Task.
+\noindent \textbf{Hauptbefund.} Über T1--T5 liegen \textit{Implemented$^\ast$} und \textit{Execution observed} unter \textit{Attempted} und erreichen bei T4/T5 den Wert 0.
+\noindent \textbf{RQ-Bezug.} Die Abbildung ist eine komprimierte Darstellung der Pipeline-Ergebnisse und ergänzt die Ergebniszusammenfassung zu RQ1 in Kapitel~7.
 
 \subsection{Kurzbefunde pro Task (T1--T5)}
-\noindent \textbf{T1 (Persistenz).} T1 ist in 18/18 Branches  \textit{Attempted}, in 17/18 Branches  \textit{Implemented$^\ast$} und in 10/18 Branches  \textit{Verified}.
+\noindent \textbf{T1 (Persistenz).} T1 ist in 18/18 Branches  \textit{Attempted}, in 17/18 Branches  \textit{Implemented$^\ast$} und in 10/18 Branches  \textit{Execution observed}.
 
-\noindent \textbf{T2 (User Accounts/Auth).} T2 ist in 18/18 Branches  \textit{Attempted}, in 17/18 Branches  \textit{Implemented$^\ast$} und in 4/18 Branches  \textit{Verified}.
+\noindent \textbf{T2 (User Accounts/Auth).} T2 ist in 18/18 Branches  \textit{Attempted}, in 17/18 Branches  \textit{Implemented$^\ast$} und in 4/18 Branches  \textit{Execution observed}.
 
-\noindent \textbf{T3 (Kategorien).} T3 ist in 15/18 Branches  \textit{Attempted}, in 13/18 Branches  \textit{Implemented$^\ast$} und in 13/18 Branches  \textit{Verified}. In \path{evaluation/task_pipeline_v3.json} ist T3 dabei in 7/18 Branches als \texttt{implemented} (\textit{Implemented\textsubscript{static}}) markiert.
+\noindent \textbf{T3 (Kategorien).} T3 ist in 15/18 Branches  \textit{Attempted}, in 13/18 Branches  \textit{Implemented$^\ast$} und in 13/18 Branches  \textit{Execution observed}. In \path{evaluation/task_pipeline_v3.json} ist T3 dabei in 7/18 Branches als \texttt{implemented} (\textit{Implemented\textsubscript{static}}) markiert.
 
-\noindent \textbf{T4 (Attachments).} T4 ist in 13/18 Branches  \textit{Attempted}, in 8/18 Branches  \textit{Implemented$^\ast$} und in 0/18 Branches  \textit{Verified}.
+\noindent \textbf{T4 (Attachments).} T4 ist in 13/18 Branches  \textit{Attempted}, in 8/18 Branches  \textit{Implemented$^\ast$} und in 0/18 Branches  \textit{Execution observed}.
 
-\noindent \textbf{T5 (Kalender/Multi-Day).} T5 ist in 13/18 Branches  \textit{Attempted}, in 0/18 Branches  \textit{Implemented$^\ast$} und in 0/18 Branches  \textit{Verified}.
+\noindent \textbf{T5 (Kalender/Multi-Day).} T5 ist in 13/18 Branches  \textit{Attempted}, in 0/18 Branches  \textit{Implemented$^\ast$} und in 0/18 Branches  \textit{Execution observed}.
 
 % DATENQUELLEN:
 % Chat-Logs (für "Attempted"-Status)
 % Code-Analyse (für "Implemented"-Status)
-% Test-Reports (für "Verified"-Status)
+% Test-Reports (für "Execution observed"-Status)
 %
 % HINWEISE:
 % Definition "Attempted": Explizite Erwähnung im Chat
 % Definition "Implemented": Code vorhanden
-% Definition "Verified": Tests bestanden
+% Definition "Execution observed": Tests bestanden
 % Fokus auf die Statushäufigkeiten über die Tasks hinweg

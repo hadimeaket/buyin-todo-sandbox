@@ -60,7 +60,7 @@ Task-Wechsel werden in diesem Unterkapitel als Strukturmerkmal der Interaktion b
  \textbf{Ergebnis.} 148 von 3390 Nutzerbeiträgen enthalten mindestens eine Task-Mention (4.4\%).
 In 8 von 18 Chats wird mindestens ein Wechsel der zuerst genannten Task-Nummer beobachtet. Über alle Chats hinweg wurden 74 solche Task-Wechsel gezählt.
 
-\subsection{Modelltypische Antwortmuster (Claude Sonnet~4.5)}
+\subsection{Beobachtete Antwortmuster in den Modellantworten (Claude Sonnet 4.5)}
 \label{sec:results_chat_model_patterns}
 
  \textbf{Messdefinition.} Für die Modellantworten wurden 335 erkannte Antworten aggregiert ausgewertet.
@@ -75,7 +75,7 @@ Architektur-/Strukturbegriffe (operationalisiert über Schlüsselwörter wie\lin
 \subsection{Beziehung zwischen Chat-Mustern und Task-Fortschritt (deskriptiv)}
 \label{sec:results_chat_vs_progress}
 
-	\csname textbf\endcsname{Messdefinition.} Für eine rein deskriptive Gegenüberstellung wird der Task-Fortschritt je Branch aus \texttt{evaluation/\allowbreak task\_pipeline\_v3.json} neben die Interaktionsmetriken gestellt. Dabei wird \texttt{implemented} als heuristisches, statisches Artefakt-Signal verstanden; dies wird im Folgenden als \textit{Implemented\textsubscript{static}} bezeichnet. \texttt{verified} bildet testgebundenes Verhalten ab. Die folgenden Aussagen beschreiben Ko-Vorkommen innerhalb derselben Branches; es werden keine Wirk- oder Kausalzusammenhänge abgeleitet.
+	\csname textbf\endcsname{Messdefinition.} Für eine rein deskriptive Gegenüberstellung wird der Task-Fortschritt je Branch aus \texttt{evaluation/\allowbreak task\_pipeline\_v3.json} neben die Interaktionsmetriken gestellt. Dabei wird \texttt{implemented} als heuristisches, statisches Artefakt-Signal verstanden; dies wird im Folgenden als \textit{Implemented\textsubscript{static}} bezeichnet. \texttt{verified} bildet den Statusausweis \textit{Execution observed} ab. Die folgenden Aussagen beschreiben Ko-Vorkommen innerhalb derselben Branches; es werden keine Wirk- oder Kausalzusammenhänge abgeleitet.
 
 	\csname textbf\endcsname{Ergebnis.} Über die 18 Branches hinweg liegen die \texttt{implemented}-Taskanzahlen (d.h. \textit{Implemented\textsubscript{static}}) zwischen 1 und 4 (T5 ist in \texttt{evaluation/\allowbreak task\_pipeline\_v3.json} in allen Branches nicht implementiert).
 

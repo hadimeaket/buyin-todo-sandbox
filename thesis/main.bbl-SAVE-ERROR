@@ -319,7 +319,7 @@
       \verb 10.1145/3454122
       \endverb
     \endentry
-    \entry{green1989cognitive}{book}{}
+    \entry{green1989cognitive}{incollection}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=fc6c7cb9a66734adc09db592aafd2220}{%
            family={Green},
@@ -538,8 +538,15 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{arXiv preprint arXiv:2210.14306}
+      \field{eprinttype}{arXiv}
       \field{title}{Reading Between the Lines: Modeling User Behavior and Costs in AI-Assisted Programming}
       \field{year}{2022}
+      \verb{doi}
+      \verb 10.48550/arXiv.2210.14306
+      \endverb
+      \verb{eprint}
+      \verb 2210.14306
+      \endverb
     \endentry
     \entry{nadi2022humaicollab}{article}{}
       \true{moreauthor}
@@ -609,7 +616,7 @@
       \verb 10.1177/0018720810376055
       \endverb
     \endentry
-    \entry{pearce2022asleep}{article}{}
+    \entry{pearce2022asleep}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
       \name{author}{1}{}{%
@@ -632,7 +639,7 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{IEEE Symposium on Security and Privacy}
+      \field{booktitle}{Proceedings of the IEEE Symposium on Security and Privacy (SP)}
       \field{title}{Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions}
       \field{year}{2022}
       \verb{doi}
