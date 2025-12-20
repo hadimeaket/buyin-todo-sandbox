@@ -1,14 +1,13 @@
 # Fdb version 4
-["biber main"] 1766177229.76676 "main.bcf" "main.bbl" "main" 1766177275.33779 0
-  "main.bcf" 1766177275.23257 109758 3f2c8186b0648b1b09d2867b4c4044bc "pdflatex"
-  "references.bib" 1766074623.04674 16869 c8a0460d9ad5f14c00a330d71ebe7f74 ""
+["biber main"] 1766188809.80895 "main.bcf" "main.bbl" "main" 1766188821.63296 0
+  "main.bcf" 1766188821.48132 109758 3f2c8186b0648b1b09d2867b4c4044bc "pdflatex"
+  "references.bib" 1766184389.79768 8083 e2042122718f7862c49bbb6d070df47f ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1766177272.07018 "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" "main.pdf" "main" 1766177275.33805 0
+["pdflatex"] 1766188817.95323 "main.tex" "main.pdf" "main" 1766188821.63321 0
   "/etc/texmf/web2c/texmf.cnf" 1764799012.48648 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" 1766141047.56681 2736 7af790c75ec639c708c149f22f1d9618 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1136768653 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
@@ -315,11 +314,11 @@
   "chapters/06_results/06_07_summary.tex" 1766177209.70713 5357 e078d2d5e068bc41ce097d788cac8143 ""
   "chapters/07_diskussion.tex" 1766177209.70713 58810 8555991608555a85c1d03af84d7ce2a9 ""
   "chapters/08_fazit.tex" 1766074623.03475 10589 33895a818266cdb7d075f612692ef2f6 ""
-  "main.aux" 1766177275.21264 98513 0c24f54ad3015d304dbd1c9356d2191f "pdflatex"
-  "main.bbl" 1766177230.4772 37744 63edaee01a4c1fdb50f7b750d13688be "biber main"
-  "main.run.xml" 1766177275.23257 2341 b52e31227361d5b9cd7ab762cbd59231 "pdflatex"
+  "main.aux" 1766188821.45322 98513 4db4e03b9e9a19d61334977e52c310f7 "pdflatex"
+  "main.bbl" 1766188810.63954 38328 c537bde2e1fcb8f7952631f8c2d96267 "biber main"
+  "main.run.xml" 1766188821.48533 2341 b52e31227361d5b9cd7ab762cbd59231 "pdflatex"
   "main.tex" 1766141047.56681 2736 7af790c75ec639c708c149f22f1d9618 ""
-  "main.toc" 1766177275.23257 14688 1f0409824bcfa51d4194e227f1a97350 "pdflatex"
+  "main.toc" 1766188821.48533 14688 1f0409824bcfa51d4194e227f1a97350 "pdflatex"
   "sources/h-brs_logo.jpg" 1765886549.57271 10109 d046cf28439ab94935951ba0ffaf7563 ""
   (generated)
   "main.aux"

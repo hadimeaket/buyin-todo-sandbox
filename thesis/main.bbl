@@ -163,7 +163,7 @@
       \verb 10.1016/j.jss.2024.111743
       \endverb
     \endentry
-    \entry{collins1989cognitive}{article}{}
+    \entry{collins1989cognitive}{incollection}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=f81dbc70a401559ebbd08b8d5f484286}{%
            family={Collins},
@@ -196,7 +196,7 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Knowing, Learning, and Instruction: Essays in Honor of Robert Glaser}
+      \field{booktitle}{Knowing, Learning, and Instruction: Essays in Honor of Robert Glaser}
       \field{title}{Cognitive Apprenticeship: Teaching the Crafts of Reading, Writing, and Mathematics}
       \field{year}{1989}
       \field{pages}{453\bibrangedash 494}
@@ -380,13 +380,25 @@
       \endverb
     \endentry
     \entry{iso25010}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0828a8408614177181026ea908d5594a}{%
+           family={{ISO/IEC}},
+           familyi={I\bibinitperiod}}}%
+      }
       \list{institution}{1}{%
         {International Organization for Standardization}%
       }
+      \strng{namehash}{0828a8408614177181026ea908d5594a}
+      \strng{fullhash}{0828a8408614177181026ea908d5594a}
+      \strng{bibnamehash}{0828a8408614177181026ea908d5594a}
+      \strng{authorbibnamehash}{0828a8408614177181026ea908d5594a}
+      \strng{authornamehash}{0828a8408614177181026ea908d5594a}
+      \strng{authorfullhash}{0828a8408614177181026ea908d5594a}
       \field{sortinit}{I}
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
+      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Standard}
       \field{title}{ISO/IEC 25010:2011 Systems and Software Engineering—{}System and Software Quality Models}
@@ -498,7 +510,7 @@
       \verb 10.1518/hfes.46.1.50
       \endverb
     \endentry
-    \entry{mozannar2022reading}{inproceedings}{}
+    \entry{mozannar2022reading}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=c420e0c2ee0a2a26a60347646b85e283}{%
            family={Mozannar},
@@ -537,8 +549,8 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{arXiv preprint arXiv:2210.14306}
       \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv preprint arXiv:2210.14306}
       \field{title}{Reading Between the Lines: Modeling User Behavior and Costs in AI-Assisted Programming}
       \field{year}{2022}
       \verb{doi}
@@ -780,7 +792,7 @@
       \verb 10.1145/3491102.3502031
       \endverb
     \endentry
-    \entry{vaswani2017attention}{article}{}
+    \entry{vaswani2017attention}{inproceedings}{}
       \name{author}{8}{}{%
         {{un=0,uniquepart=base,hash=7f28e84700536646dd6620a0db07ad09}{%
            family={Vaswani},
@@ -843,7 +855,7 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Advances in Neural Information Processing Systems}
+      \field{booktitle}{Advances in Neural Information Processing Systems}
       \field{title}{Attention Is All You Need}
       \field{volume}{30}
       \field{year}{2017}
