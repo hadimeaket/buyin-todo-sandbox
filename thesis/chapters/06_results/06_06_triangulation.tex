@@ -11,24 +11,24 @@ Bei Gruppierung nach \texttt{implemented}-Taskanzahl ergibt sich folgende Vertei
 
 \begin{sloppypar}
 {\bfseries Messdefinition.} Die Triangulation erfolgt pro Branch als gemeinsame Analyseeinheit.
-Der Pipeline-Fortschritt wird aus \path{evaluation/task\_pipeline\_v3.json} als Anzahl der pro Branch als \texttt{implemented} bzw. \texttt{verified} markierten Tasks (T1--T5) abgeleitet.
+Der Pipeline-Fortschritt wird aus \path{evaluation/task_pipeline_v3.json} als Anzahl der pro Branch als \texttt{implemented} bzw. \texttt{verified} markierten Tasks (T1--T5) abgeleitet.
 Dabei wird \texttt{implemented} als heuristisches, statisches Artefakt-Signal (\textit{Implemented\textsubscript{static}}) verstanden.
 Die in Abschnitt~6.2 eingeführte Evidenzstufe  \textit{Implemented}\,$^\ast$ wird in diesem Unterkapitel nicht als Gruppierungsvariable verwendet.
-Als ergänzende Strukturindikatoren (z.\,B. Persistenzvariante) und Test-Summen (\texttt{test\_pass}/\texttt{test\_fail}) wird \path{evaluation/deep\_code\_analysis.json} genutzt.
-Technische Metriken wie \texttt{tsFileCount}, \texttt{anyUsage} und \texttt{consoleUsage} stammen aus \path{evaluation/code\_quality\_metrics.json}.
-Survey-Merkmale (Kompetenzgruppe und Hürdenkategorie) werden aus dem Survey-Export (\path{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx}) übernommen und über das Mapping \path{evaluation/survey\_mapping.json} den Branches zugeordnet.
+Als ergänzende Strukturindikatoren (z.\,B. Persistenzvariante) und Test-Summen (\texttt{test\_pass}/\texttt{test\_fail}) wird \path{evaluation/deep_code_analysis.json} genutzt.
+Technische Metriken wie \texttt{tsFileCount}, \texttt{anyUsage} und \texttt{consoleUsage} stammen aus \path{evaluation/code_quality_metrics.json}.
+Survey-Merkmale (Kompetenzgruppe und Hürdenkategorie) werden aus dem Survey-Export (\path{thesis/surveys/Probanden-Einstufungsformular (Responses).xlsx}) übernommen und über das Mapping \path{evaluation/survey_mapping.json} den Branches zugeordnet.
 Chat-bezogene Metriken werden in diesem Unterkapitel nicht neu berechnet, sondern als die in Abschnitt~6.5 berichteten Werte (Extraktion aus \path{thesis/chats/}) übernommen.
 \end{sloppypar}
 
 {\bfseries Ergebnis.} Die Branches verteilen sich auf 1 bis 4 als \texttt{implemented} markierte Tasks (Verteilung: 1\,$\rightarrow$\,1 Branch, 2\,$\rightarrow$\,6 Branches, 3\,$\rightarrow$\,8 Branches, 4\,$\rightarrow$\,3 Branches).
 Für \texttt{verified} ergeben sich 0 bis 2 verifizierte Tasks je Branch (Verteilung: 0\,$\rightarrow$\,4 Branches, 1\,$\rightarrow$\,1 Branch, 2\,$\rightarrow$\,13 Branches).
-T5 ist in \path{evaluation/task\_pipeline\_v3.json} in allen Branches nicht implementiert und nicht verifiziert.
+T5 ist in \path{evaluation/task_pipeline_v3.json} in allen Branches nicht implementiert und nicht verifiziert.
 
 \subsection{Pipeline-Fortschritt und Implementationsmuster (Strukturindikatoren)}
 \label{sec:results_triangulation_strategies}
 
 \begin{sloppypar}
-{\bfseries Messdefinition.} Als Stellvertreter für ausgewählte Implementationsstrategien werden Strukturindikatoren aus \path{evaluation/deep\_code\_analysis.json} herangezogen.
+{\bfseries Messdefinition.} Als Stellvertreter für ausgewählte Implementationsstrategien werden Strukturindikatoren aus \path{evaluation/deep_code_analysis.json} herangezogen.
 Für T1 betrifft dies die klassifizierte Persistenzvariante (z.\,B. \emph{sqlite}, \emph{mongo}). Für T2--T4 werden Implementationsklassen (\texttt{implemented}/\texttt{none}) berichtet.
 \end{sloppypar}
 
@@ -36,8 +36,8 @@ Für T1 betrifft dies die klassifizierte Persistenzvariante (z.\,B. \emph{sqlite
 Bei Gruppierung nach \texttt{implemented}-Taskanzahl ergibt sich folgende Verteilung der Persistenzvarianten: bei 2 implementierten Tasks (n=6) \emph{sqlite} in 5/6 Fällen und \emph{postgres} in 1/6, bei 3 implementierten Tasks (n=8) \emph{sqlite} in 7/8 und \emph{mongo} in 1/8, bei 4 implementierten Tasks (n=3) \emph{sqlite} in 2/3 und \emph{json-file} in 1/3. Der einzelne Branch mit 1 implementiertem Task ist \emph{memory/other}.
 
 \begin{sloppypar}
-Für T2 wird in 17/18 Branches \texttt{implemented} ausgewiesen (Quelle: \path{evaluation/deep\_code\_analysis.json}). Konsistent dazu liegen in \path{evaluation/task\_pipeline\_v3.json} \texttt{implemented} für T2 in 17/18 Branches vor.
-Für T3 sind 7/18 Branches in \path{evaluation/task\_pipeline\_v3.json} als \texttt{implemented} (\textit{Implemented\textsubscript{static}}) markiert. Gleichzeitig ist T3 in 13/18 Branches \texttt{verified}.
+Für T2 wird in 17/18 Branches \texttt{implemented} ausgewiesen (Quelle: \path{evaluation/deep_code_analysis.json}). Konsistent dazu liegen in \path{evaluation/task_pipeline_v3.json} \texttt{implemented} für T2 in 17/18 Branches vor.
+Für T3 sind 7/18 Branches in \path{evaluation/task_pipeline_v3.json} als \texttt{implemented} (\textit{Implemented\textsubscript{static}}) markiert. Gleichzeitig ist T3 in 13/18 Branches \texttt{verified}.
 Für T4 sind 8/18 Branches als \texttt{implemented} markiert. \texttt{verified} ist bei T4 in allen Branches 0/18.
 \end{sloppypar}
 
@@ -45,7 +45,7 @@ Für T4 sind 8/18 Branches als \texttt{implemented} markiert. \texttt{verified} 
 \label{sec:results_triangulation_quality}
 
 \begin{sloppypar}
-{\bfseries Messdefinition.} Für eine deskriptive Gegenüberstellung werden pro Branch technische Metriken aus \path{evaluation/code\_quality\_metrics.json} (\texttt{tsFileCount}, \texttt{anyUsage}, \texttt{consoleUsage}) sowie Test-Summen aus \path{evaluation/deep\_code\_analysis.json} (\texttt{test\_pass}, \texttt{test\_fail}) neben die Anzahl \texttt{implemented} Tasks gestellt.
+{\bfseries Messdefinition.} Für eine deskriptive Gegenüberstellung werden pro Branch technische Metriken aus \path{evaluation/code_quality_metrics.json} (\texttt{tsFileCount}, \texttt{anyUsage}, \texttt{consoleUsage}) sowie Test-Summen aus \path{evaluation/deep_code_analysis.json} (\texttt{test\_pass}, \texttt{test\_fail}) neben die Anzahl \texttt{implemented} Tasks gestellt.
 \end{sloppypar}
 
 {\bfseries Ergebnis.} Über alle 18 Branches liegt \texttt{tsFileCount} zwischen 43 und 80 Dateien. \texttt{anyUsage} liegt zwischen 2 und 42 und \texttt{consoleUsage} zwischen 4 und 19.
@@ -63,13 +63,13 @@ Diese Gegenüberstellung beschreibt ausschließlich gemeinsame Verteilungen inne
 
 {\bfseries Messdefinition.} Als Chat-Metriken werden die in Abschnitt~6.5 definierten und berichteten Intensitäts- und Interaktionsindikatoren (Wortanzahl, Prompt-Antwort-Zyklen, Nutzerbeiträge, Fehlermarker-Iterationen) herangezogen.
 \begin{sloppypar}
-Für die Triangulation werden diese Werte neben die \texttt{implemented}- und \texttt{verified}-Taskanzahl aus \path{evaluation/task\_pipeline\_v3.json} gestellt.
+Für die Triangulation werden diese Werte neben die \texttt{implemented}- und \texttt{verified}-Taskanzahl aus \path{evaluation/task_pipeline_v3.json} gestellt.
 \end{sloppypar}
 
 {\bfseries Ergebnis.} In Abschnitt~6.5 wird bereits eine gruppierte Gegenüberstellung nach \texttt{implemented}-Taskanzahl berichtet.
 Dort liegen (a) in der Gruppe mit 2 implementierten Tasks (n=6) Wortanzahl und Zyklenzahl zwischen 4046--9190 Wörtern (Median: 6449) bzw. 12--20 Zyklen (Median: 14.5), (b) in der Gruppe mit 3 implementierten Tasks (n=8) zwischen 4863--26833 Wörtern (Median: 8865) bzw. 16--45 Zyklen (Median: 18) und (c) in der Gruppe mit 4 implementierten Tasks (n=3) zwischen 4764--6663 Wörtern (Median: 4919) bzw. 14--21 Zyklen (Median: 14).
 \begin{sloppypar}
-Über alle Gruppen hinweg liegt die verifizierte Taskanzahl in \path{evaluation/task\_pipeline\_v3.json} je Branch zwischen 0 und 2.
+Über alle Gruppen hinweg liegt die verifizierte Taskanzahl in \path{evaluation/task_pipeline_v3.json} je Branch zwischen 0 und 2.
 \end{sloppypar}
 
 \subsection{Pipeline-Fortschritt und Survey-Merkmale}
@@ -92,7 +92,7 @@ Mid-Code (n=5) & 0 & 1 & 2 & 2 \\
 High-Coder (n=4) & 0 & 2 & 2 & 0 \\
 \hline
 \end{tabular}
-\caption{Kompetenzgruppe (Survey) vs. Anzahl \texttt{implemented} (\textit{Implemented\textsubscript{static}}) Tasks pro Branch (\texttt{evaluation/\allowbreak task\_pipeline\_v3.json}, $N=18$).}
+\caption{Kompetenzgruppe (Survey) vs. Anzahl \texttt{implemented} (\textit{Implemented\textsubscript{static}}) Tasks pro Branch (\texttt{\detokenize{evaluation/task_pipeline_v3.json}}, $N=18$).}
 \label{tab:triangulation_competence_vs_impl}
 \end{table}
 

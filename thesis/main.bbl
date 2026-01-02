@@ -116,14 +116,28 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
       \field{journaltitle}{arXiv preprint arXiv:2207.14255}
       \field{title}{Efficient Training of Language Models to Fill in the Middle}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2022}
+      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.48550/arXiv.2207.14255
       \endverb
+      \verb{eprint}
+      \verb 2207.14255
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2207.14255
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2207.14255
+      \endverb
     \endentry
-    \entry{brandtner2024brownfield}{article}{}
+    \entry{brandtner2024brownfield}{unpublished}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=6ae765d41961ea7efbc0da21aecd9b02}{%
            family={Brandtner},
@@ -156,12 +170,9 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Systems and Software}
+      \field{note}{Unpublished manuscript}
       \field{title}{Challenges of Brownfield Software Modernization in Practice: A Systematic Review}
       \field{year}{2024}
-      \verb{doi}
-      \verb 10.1016/j.jss.2024.111743
-      \endverb
     \endentry
     \entry{collins1989cognitive}{incollection}{}
       \name{author}{3}{}{%
@@ -184,12 +195,25 @@
            giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod},
            givenun=0}}%
       }
+      \name{editor}{1}{}{%
+        {{hash=a6bb0eee32af1aa58a9f7bbe1d08543e}{%
+           family={Resnick},
+           familyi={R\bibinitperiod},
+           given={Lauren\bibnamedelima B.},
+           giveni={L\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Lawrence Erlbaum}%
+      }
       \strng{namehash}{3c82434ee80931b6eff56567f6bfb3d5}
       \strng{fullhash}{1d2afcd8a3247ee1900fda24d21b26a5}
       \strng{bibnamehash}{1d2afcd8a3247ee1900fda24d21b26a5}
       \strng{authorbibnamehash}{1d2afcd8a3247ee1900fda24d21b26a5}
       \strng{authornamehash}{3c82434ee80931b6eff56567f6bfb3d5}
       \strng{authorfullhash}{1d2afcd8a3247ee1900fda24d21b26a5}
+      \strng{editorbibnamehash}{a6bb0eee32af1aa58a9f7bbe1d08543e}
+      \strng{editornamehash}{a6bb0eee32af1aa58a9f7bbe1d08543e}
+      \strng{editorfullhash}{a6bb0eee32af1aa58a9f7bbe1d08543e}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{extradatescope}{labelyear}
@@ -235,7 +259,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-0395307878}
       \field{title}{Quasi-Experimentation: Design \& Analysis Issues for Field Settings}
       \field{year}{1979}
     \endentry
@@ -328,6 +351,21 @@
            giveni={T\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim G\bibinitperiod},
            givenun=0}}%
       }
+      \name{editor}{2}{}{%
+        {{hash=f470b9e6b42c259d9ab2926c870620a8}{%
+           family={Sutcliffe},
+           familyi={S\bibinitperiod},
+           given={Alistair},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6e616b9aa4243ed2d935f000dbfeba0c}{%
+           family={Macaulay},
+           familyi={M\bibinitperiod},
+           given={Linda},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
       \list{publisher}{1}{%
         {Cambridge University Press}%
       }
@@ -337,6 +375,9 @@
       \strng{authorbibnamehash}{fc6c7cb9a66734adc09db592aafd2220}
       \strng{authornamehash}{fc6c7cb9a66734adc09db592aafd2220}
       \strng{authorfullhash}{fc6c7cb9a66734adc09db592aafd2220}
+      \strng{editorbibnamehash}{f236d5e42302df75edcc7683111cb286}
+      \strng{editornamehash}{f236d5e42302df75edcc7683111cb286}
+      \strng{editorfullhash}{f236d5e42302df75edcc7683111cb286}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{extradatescope}{labelyear}
@@ -401,8 +442,19 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{note}{Standard}
-      \field{title}{ISO/IEC 25010:2011 Systems and Software Engineering—{}System and Software Quality Models}
+      \field{number}{ISO/IEC 25010:2011}
+      \field{title}{Systems and software engineering --- Systems and software Quality Requirements and Evaluation (SQuaRE) --- System and software quality models}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2011}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.iso.org/standard/35733.html
+      \endverb
+      \verb{url}
+      \verb https://www.iso.org/standard/35733.html
+      \endverb
     \endentry
     \entry{kahneman2011thinking}{book}{}
       \name{author}{1}{}{%
@@ -432,7 +484,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-0374275631}
       \field{title}{Thinking, Fast and Slow}
       \field{year}{2011}
     \endentry
@@ -552,12 +603,22 @@
       \field{eprinttype}{arXiv}
       \field{journaltitle}{arXiv preprint arXiv:2210.14306}
       \field{title}{Reading Between the Lines: Modeling User Behavior and Costs in AI-Assisted Programming}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2022}
+      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.48550/arXiv.2210.14306
       \endverb
       \verb{eprint}
       \verb 2210.14306
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2210.14306
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2210.14306
       \endverb
     \endentry
     \entry{nadi2022humaicollab}{article}{}
@@ -583,11 +644,25 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
       \field{journaltitle}{arXiv preprint arXiv:2206.01081}
       \field{title}{Human-AI Collaboration in Software Engineering: Challenges and Opportunities}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2022}
+      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.48550/arXiv.2206.01081
+      \endverb
+      \verb{eprint}
+      \verb 2206.01081
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2206.01081
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2206.01081
       \endverb
     \endentry
     \entry{parasuraman2010complacency}{article}{}
@@ -639,6 +714,9 @@
            giveni={H\bibinitperiod},
            givenun=0}}%
       }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
       \strng{namehash}{1405b2a521a9e8e6977fc88f3cf54c83}
       \strng{fullhash}{1405b2a521a9e8e6977fc88f3cf54c83}
       \strng{bibnamehash}{1405b2a521a9e8e6977fc88f3cf54c83}
@@ -654,8 +732,10 @@
       \field{booktitle}{Proceedings of the IEEE Symposium on Security and Privacy (SP)}
       \field{title}{Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions}
       \field{year}{2022}
+      \field{pages}{754\bibrangedash 768}
+      \range{pages}{15}
       \verb{doi}
-      \verb 10.1109/SP46214.2022.9833573
+      \verb 10.1109/SP46214.2022.9833571
       \endverb
     \endentry
     \entry{peng2023copilot}{article}{}
@@ -697,11 +777,25 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
       \field{journaltitle}{arXiv preprint arXiv:2302.06590}
       \field{title}{The impact of AI on developer productivity: Evidence from GitHub Copilot}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2023}
+      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.48550/arXiv.2302.06590
+      \endverb
+      \verb{eprint}
+      \verb 2302.06590
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2302.06590
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2302.06590
       \endverb
     \endentry
     \entry{saretsky1972johnhenry}{article}{}
@@ -761,6 +855,9 @@
       \field{year}{1988}
       \field{pages}{257\bibrangedash 285}
       \range{pages}{29}
+      \verb{doi}
+      \verb 10.1207/s15516709cog1202_4
+      \endverb
     \endentry
     \entry{vaithilingam2022codecompletion}{inproceedings}{}
       \true{moreauthor}
@@ -772,6 +869,9 @@
            given={Priyan},
            giveni={P\bibinitperiod},
            givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
       }
       \strng{namehash}{dd0fe51485f20df77cc749c1d2141f23}
       \strng{fullhash}{dd0fe51485f20df77cc749c1d2141f23}
@@ -788,6 +888,8 @@
       \field{booktitle}{CHI Conference on Human Factors in Computing Systems}
       \field{title}{Expectations vs. Reality: Evaluating Code Completion Tools in Realistic Settings}
       \field{year}{2022}
+      \field{pages}{1\bibrangedash 17}
+      \range{pages}{17}
       \verb{doi}
       \verb 10.1145/3491102.3502031
       \endverb
@@ -885,11 +987,25 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
       \field{journaltitle}{arXiv preprint arXiv:2308.10253}
       \field{title}{Context Windows and the Limits of AI-Assisted Programming}
+      \field{urlday}{2}
+      \field{urlmonth}{1}
+      \field{urlyear}{2026}
       \field{year}{2023}
+      \field{urldateera}{ce}
       \verb{doi}
       \verb 10.48550/arXiv.2308.10253
+      \endverb
+      \verb{eprint}
+      \verb 2308.10253
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2308.10253
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2308.10253
       \endverb
     \endentry
     \entry{wohlin2012experimentation}{book}{}
@@ -946,7 +1062,6 @@
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-3-642-29043-5}
       \field{title}{Experimentation in Software Engineering}
       \field{year}{2012}
       \verb{doi}
