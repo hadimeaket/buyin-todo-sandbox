@@ -1,0 +1,180 @@
+{
+  "branch": "goek-fadime-vibe",
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Persistent Todos",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 2,
+      "name": "User Accounts",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 3,
+      "name": "Categories",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 4,
+      "name": "Attachments",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 5,
+      "name": "Multi-day Calendar",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 6,
+      "name": "Email Verification",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 7,
+      "name": "Performance with 1000+ Todos",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    },
+    {
+      "id": 8,
+      "name": "ICS Export",
+      "backend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "frontend": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "e2e": {
+        "total": 0,
+        "failed": 0,
+        "passed": 0
+      },
+      "score": 0,
+      "passed": false
+    }
+  ],
+  "lint": {
+    "backendErrors": 0,
+    "frontendErrors": 0
+  },
+  "meta": {
+    "generatedAt": "2025-12-12T19:37:54.433Z"
+  }
+}

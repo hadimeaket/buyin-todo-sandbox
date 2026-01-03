@@ -605,6 +605,11 @@ INPUT ./chapters/08_fazit.tex
 INPUT ./chapters/08_fazit.tex
 INPUT chapters/08_fazit.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmcsc10.tfm
+INPUT ./chapters/09_anhang.tex
+INPUT ./chapters/09_anhang.tex
+INPUT ./chapters/09_anhang.tex
+INPUT ./chapters/09_anhang.tex
+INPUT chapters/09_anhang.tex
 INPUT main.aux
 INPUT main.run.xml
 OUTPUT main.run.xml

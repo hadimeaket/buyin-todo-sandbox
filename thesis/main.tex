@@ -86,6 +86,14 @@
 
 \begin{document}
 
+% --- Placeholder pages (Page 1 & 2) ---
+% These pages are intentionally blank, but still count in the page numbering.
+\pagenumbering{arabic}
+\setcounter{page}{1}
+{\thispagestyle{empty}\null\clearpage}
+{\thispagestyle{empty}\null\clearpage}
+
+
 \clearpage
 
 \input{chapters/00_abstract}
@@ -104,5 +112,7 @@
 \input{chapters/08_fazit}
 
 \printbibliography
+
+\input{chapters/09_anhang}
 
 \end{document}

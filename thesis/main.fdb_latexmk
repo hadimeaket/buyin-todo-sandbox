@@ -1,14 +1,14 @@
 # Fdb version 4
-["biber main"] 1767390554.25566 "main.bcf" "main.bbl" "main" 1767390617.27108 0
-  "main.bcf" 1767390617.15728 109901 4a9e83bc40d9c0cb5fec42a16a023769 "pdflatex"
-  "references.bib" 1767389942.03275 9047 f8ab0059d8b5acd46a77536fd9f6522c ""
+["biber main"] 1767396232.6312 "main.bcf" "main.bbl" "main" 1767396243.68101 0
+  "main.bcf" 1767396243.57899 109901 4a9e83bc40d9c0cb5fec42a16a023769 "pdflatex"
+  "references.bib" 1767390666.57804 9047 f8ab0059d8b5acd46a77536fd9f6522c ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1767390613.1816 "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" "main.pdf" "main" 1767390617.27135 0
+["pdflatex"] 1767396240.33471 "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" "main.pdf" "main" 1767396243.68128 0
   "/etc/texmf/web2c/texmf.cnf" 1764799012.48648 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" 1767387518.63738 2766 088ebe51c6b3061a7c53058b961d4353 ""
+  "/home/cgoek/Studium/BA/buyin-todo-sandbox/thesis/main.tex" 1767395608.88882 3037 601fbfad0673e9b6ef22dcd3e740a4bb ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1136768653 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
@@ -313,17 +313,18 @@
   "chapters/06_results/06_01_context.tex" 1766177209.70713 5769 30b1ae0b093b74cad206f348c872fe8d ""
   "chapters/06_results/06_02_pipeline.tex" 1766177209.70713 10738 ade2a33dc113415219dd05893215523d ""
   "chapters/06_results/06_03_strategies.tex" 1766177209.70713 8712 c1f376dfc0f840f8ebfa528ad22d11ea ""
-  "chapters/06_results/06_04_code_quality.tex" 1767387718.95857 7803 5c9cb0bb40dffb22847d775ac53a78f0 ""
-  "chapters/06_results/06_05_chat_patterns.tex" 1767387758.87089 9313 4bd11232965079b63f184fbce3412f67 ""
-  "chapters/06_results/06_06_triangulation.tex" 1767387824.98688 10821 9273afc3c0001274c5beaf665dee3483 ""
+  "chapters/06_results/06_04_code_quality.tex" 1767390666.57804 7803 5c9cb0bb40dffb22847d775ac53a78f0 ""
+  "chapters/06_results/06_05_chat_patterns.tex" 1767390666.57804 9313 4bd11232965079b63f184fbce3412f67 ""
+  "chapters/06_results/06_06_triangulation.tex" 1767390666.57804 10821 9273afc3c0001274c5beaf665dee3483 ""
   "chapters/06_results/06_07_summary.tex" 1766177209.70713 5357 e078d2d5e068bc41ce097d788cac8143 ""
   "chapters/07_diskussion.tex" 1766177209.70713 58810 8555991608555a85c1d03af84d7ce2a9 ""
   "chapters/08_fazit.tex" 1766074623.03475 10589 33895a818266cdb7d075f612692ef2f6 ""
-  "main.aux" 1767390617.13561 98683 906e70b54dcb841c0493718c105510a4 "pdflatex"
-  "main.bbl" 1767390555.20128 41666 c54873caef8d21671f21f04cab56328c "biber main"
-  "main.run.xml" 1767390617.15728 2341 b52e31227361d5b9cd7ab762cbd59231 "pdflatex"
-  "main.tex" 1767387518.63738 2766 088ebe51c6b3061a7c53058b961d4353 ""
-  "main.toc" 1767390617.15728 14686 a33d663035b1ed2072d23beebe8cf400 "pdflatex"
+  "chapters/09_anhang.tex" 1767396220.19227 1556 c634c021bb55fadf382fbb43f9dc5593 ""
+  "main.aux" 1767396243.55299 101618 73170cb1bbae5e0f0159dd8fa6bc30ac "pdflatex"
+  "main.bbl" 1767396233.36019 41666 c54873caef8d21671f21f04cab56328c "biber main"
+  "main.run.xml" 1767396243.57899 2341 b52e31227361d5b9cd7ab762cbd59231 "pdflatex"
+  "main.tex" 1767395608.88882 3037 601fbfad0673e9b6ef22dcd3e740a4bb ""
+  "main.toc" 1767396243.57899 15149 5a938a917604d7de79d90d3396f367a6 "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"
